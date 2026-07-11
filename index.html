@@ -173,7 +173,7 @@ footer{padding:2.5rem 0 3.5rem;color:var(--dim);font-size:.84rem;border-top:1px 
     <button class="btn" type="submit" id="scanbtn">Scan my website →</button>
   </form>
   <div class="err" id="urlerr" aria-live="polite"></div>
-  <p class="tiny">Live scan of your real site · 12 automated checks + 4 you confirm · Prioritized fix list</p>
+  <p class="tiny">Live scan of your real site · 13 automated checks + 6 you confirm · Prioritized fix list</p>
 </div></header>
 
 <div class="stats wrap" style="padding:0">
@@ -187,9 +187,9 @@ footer{padding:2.5rem 0 3.5rem;color:var(--dim);font-size:.84rem;border-top:1px 
   <h2>Sixty seconds to the truth</h2>
   <div class="steps">
     <div class="stepc"><b class="n">1</b><h3>We scan your site — live</h3>
-      <p>Your homepage, robots.txt and llms.txt, checked for the 12 machine-readability signals AI
+      <p>Your homepage, robots.txt and llms.txt, checked for the 13 machine-readability signals AI
       engines actually use: schema markup, crawler access, content structure, pricing, booking.</p></div>
-    <div class="stepc"><b class="n">2</b><h3>You confirm 4 things robots can't see</h3>
+    <div class="stepc"><b class="n">2</b><h3>You confirm 6 things robots can't see</h3>
       <p>Your Google Business Profile, reviews, and two live ChatGPT tests — the checks that need a human.</p></div>
     <div class="stepc"><b class="n">3</b><h3>Get your score & fix list</h3>
       <p>A 0–100 AI Visibility Score with your gaps ranked by impact, so you know the exact next move.</p></div>
@@ -204,7 +204,7 @@ footer{padding:2.5rem 0 3.5rem;color:var(--dim);font-size:.84rem;border-top:1px 
 
 <section id="manual"><div class="wrap narrow">
   <p class="kicker">Part 2 of 2</p>
-  <h2>Four checks robots can't run</h2>
+  <h2>Six checks robots can't run</h2>
   <p class="dim">Answer honestly — “Not sure” is fine.</p>
   <div id="quiz"></div>
 </div></section>
@@ -406,6 +406,14 @@ async function runScan(rawUrl){
     "Add an llms.txt file — a short markdown index of your business and key pages for AI agents. 20 minutes, cheap insurance.");
   upd(l, hasLlms ? "ok" : "warn", hasLlms ? "llms.txt found" : "No llms.txt (minor)");
 
+  l = log("run", `Checking ${origin}/sitemap.xml …`);
+  const sm = await relayFetch(origin + "/sitemap.xml");
+  const hasSm = sm.ok && sm.status < 400 && /<(urlset|sitemapindex)/i.test(sm.text);
+  add("code", 3, "sitemap.xml present (feeds Google AND Bing→ChatGPT)", hasSm,
+    hasSm ? "Sitemap found" : "No sitemap.xml found at the standard location",
+    "Add a sitemap.xml and submit it to Google Search Console AND Bing Webmaster Tools (bing.com/webmasters) — ~87% of ChatGPT search citations come from Bing's index, and most businesses never claim it.");
+  upd(l, hasSm ? "ok" : "warn", hasSm ? "sitemap.xml found" : "No sitemap.xml");
+
   const jsOnly = bodyText.length < 400;
   add("code", 6, "Content readable without JavaScript", !jsOnly,
     jsOnly ? `Only ${bodyText.length} characters of visible text in raw HTML — AI crawlers likely see a blank page` : `${Math.round(bodyText.length/100)/10}k characters of machine-readable text`,
@@ -477,6 +485,12 @@ const MQS = [
  {p:"entity", w:5, t:"Have you received (and responded to) reviews in the last 30 days?",
    h:"Volume, recency, and responses are core AI trust signals.",
    fix:"Set up a review ask after every sale and respond to every review — recent, answered reviews are a core AI trust signal."},
+ {p:"entity", w:5, t:"Have you claimed Bing Places AND Apple Business (formerly Business Connect)?",
+   h:"Bing Places feeds Microsoft Copilot and Alexa; Apple Business is the ONLY source Siri checks.",
+   fix:"Claim both free profiles: bingplaces.com (feeds Copilot + Alexa + ChatGPT's ecosystem) and business.apple.com (the only data source Siri and Apple Intelligence check for local businesses)."},
+ {p:"entity", w:4, t:"Is your business listed with current info on Yelp (or your industry's main review site)?",
+   h:"Alexa+ pulls local business data primarily from Yelp; Perplexity uses it for local answers too.",
+   fix:"Claim your free Yelp listing at biz.yelp.com and keep hours/services current — it's the primary local data source for Alexa+ and a key one for Perplexity."},
  {p:"agents", w:6, t:"Live test: ask 2–3 AI assistants (ChatGPT, Gemini, Claude, Grok…) “What is [your business name]?” — do they answer accurately?",
    h:"Copy that prompt into a couple of them right now. Accurate = yes. Wrong or “I don't know” = no.",
    fix:"The machines haven't formed an entity for you yet. Fix profiles, schema and consistency, then re-test monthly across ChatGPT, Gemini, Claude, Perplexity, Copilot and Grok."},
