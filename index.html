@@ -452,7 +452,7 @@ async function runScan(rawUrl){
   const socials = [...new Set(links.map(h => (h.match(/(instagram|facebook|linkedin|youtube|tiktok|yelp|x)\.com/)||[])[1]).filter(Boolean))];
   add("entity", 5, "Linked profiles (socials, review sites)", socials.length >= 2,
     socials.length ? `Linked: ${socials.join(", ")}` : "No profile links found on the homepage",
-    "Link your Google, LinkedIn, social and review profiles from your site (and list them in schema sameAs). It's how machines confirm all your profiles are one entity.");
+    "Link your Google, LinkedIn company page, social and review profiles from your site and list them in schema sameAs — LinkedIn is Microsoft-owned, ranks in Bing (which feeds ChatGPT and Copilot), and is how machines confirm all your profiles are one entity.");
 
   const tel = links.some(h => h.startsWith("tel:")) || ld.some(o => o.telephone) || /\(\d{3}\)\s?\d{3}[- ]\d{4}|\+\d{7,}/.test(bodyText);
   add("entity", 4, "Machine-readable contact info", tel,
