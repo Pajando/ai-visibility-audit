@@ -310,8 +310,19 @@ function extractJsonLd(doc){
   return out;
 }
 
+const ENGINE_BOTS = {
+  "ChatGPT / OpenAI": ["gptbot","oai-searchbot","chatgpt-user"],
+  "Claude / Anthropic": ["claudebot","claude-user","claude-searchbot","anthropic-ai"],
+  "Gemini / Google AI": ["google-extended"],
+  "Perplexity": ["perplexitybot","perplexity-user"],
+  "Meta AI": ["meta-externalagent","facebookbot"],
+  "Apple Intelligence / Siri": ["applebot-extended"],
+  "Amazon Alexa+": ["amazonbot"],
+  "DuckDuckGo AI": ["duckassistbot"],
+  "Model training (Common Crawl)": ["ccbot"],
+  "ByteDance / Doubao": ["bytespider"],
+};
 function robotsBlocks(txt){
-  const bots = ["gptbot","oai-searchbot","claudebot","perplexitybot","google-extended"];
   const lines = txt.split(/\r?\n/).map(l => l.replace(/#.*$/,"").trim()).filter(Boolean);
   const groups = {}; let current = [];
   lines.forEach(l => {
@@ -320,12 +331,15 @@ function robotsBlocks(txt){
     const d = l.match(/^disallow:\s*(.*)$/i);
     if(d && current.length) current.forEach(a => groups[a].push(d[1].trim()));
   });
-  const blocked = [];
-  bots.forEach(b => {
-    const rules = groups[b] !== undefined ? groups[b] : groups["*"];
-    if(rules && rules.some(r => r === "/")) blocked.push(b);
+  const blockedEngines = [];
+  Object.entries(ENGINE_BOTS).forEach(([engine, bots]) => {
+    const hit = bots.some(b => {
+      const rules = groups[b] !== undefined ? groups[b] : groups["*"];
+      return rules && rules.some(r => r === "/");
+    });
+    if(hit) blockedEngines.push(engine);
   });
-  return blocked;
+  return blockedEngines;
 }
 
 async function runScan(rawUrl){
@@ -379,10 +393,10 @@ async function runScan(rawUrl){
   const robots = await relayFetch(origin + "/robots.txt");
   let blocked = [];
   if(robots.ok && /user-agent/i.test(robots.text)) blocked = robotsBlocks(robots.text);
-  add("code", 6, "AI crawlers allowed (GPTBot, ClaudeBot, PerplexityBot…)", blocked.length === 0,
-    blocked.length ? `robots.txt blocks: ${blocked.join(", ")}` : "No AI-crawler blocks detected",
-    "Remove the blocks on GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot and Google-Extended in robots.txt. Blocking them removes you from those AI answers entirely.");
-  upd(l, blocked.length ? "bad" : "ok", blocked.length ? `robots.txt blocks AI crawlers: ${blocked.join(", ")}` : "AI crawlers are not blocked");
+  add("code", 6, "All major AI engines allowed to read your site", blocked.length === 0,
+    blocked.length ? `robots.txt blocks: ${blocked.join(" · ")}` : `Open to all ${Object.keys(ENGINE_BOTS).length} AI ecosystems we check: ChatGPT, Claude, Gemini, Perplexity, Meta AI, Apple Intelligence, Alexa+, DuckDuckGo, and model-training crawlers`,
+    "Unblock the AI crawlers in robots.txt (GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot, Google-Extended, Meta-ExternalAgent, Applebot-Extended, Amazonbot and friends). Every blocked engine is a whole audience of AI answers you can never appear in.");
+  upd(l, blocked.length ? "bad" : "ok", blocked.length ? `robots.txt blocks AI engines: ${blocked.join(", ")}` : `All ${Object.keys(ENGINE_BOTS).length} major AI ecosystems can read this site`);
 
   l = log("run", `Checking ${origin}/llms.txt …`);
   const llms = await relayFetch(origin + "/llms.txt");
@@ -463,12 +477,12 @@ const MQS = [
  {p:"entity", w:5, t:"Have you received (and responded to) reviews in the last 30 days?",
    h:"Volume, recency, and responses are core AI trust signals.",
    fix:"Set up a review ask after every sale and respond to every review — recent, answered reviews are a core AI trust signal."},
- {p:"agents", w:6, t:"Live test: ask ChatGPT “What is [your business name]?” — does it answer accurately?",
-   h:"Copy that into ChatGPT right now. Accurate = yes. Wrong or “I don't know” = no.",
-   fix:"The machines haven't formed an entity for you yet. Fix profiles, schema and consistency, then re-test monthly."},
- {p:"agents", w:5, t:"Live test: ask ChatGPT or Perplexity “best [your category] in [your area]” — are you mentioned?",
-   h:"This is the money question your customers already ask.",
-   fix:"You're losing the recommendation moment. Work the full system — entity, answer-first content, schema, reviews — and re-run monthly."},
+ {p:"agents", w:6, t:"Live test: ask 2–3 AI assistants (ChatGPT, Gemini, Claude, Grok…) “What is [your business name]?” — do they answer accurately?",
+   h:"Copy that prompt into a couple of them right now. Accurate = yes. Wrong or “I don't know” = no.",
+   fix:"The machines haven't formed an entity for you yet. Fix profiles, schema and consistency, then re-test monthly across ChatGPT, Gemini, Claude, Perplexity, Copilot and Grok."},
+ {p:"agents", w:5, t:"Live test: ask ChatGPT, Perplexity or Google AI Mode “best [your category] in [your area]” — are you mentioned?",
+   h:"This is the money question your customers already ask, on every AI platform.",
+   fix:"You're losing the recommendation moment. Work the full system — entity, answer-first content, schema, reviews — and re-run monthly on each major engine."},
 ];
 const manswers = new Array(MQS.length).fill(null);
 
@@ -592,18 +606,43 @@ document.getElementById("gateform").addEventListener("submit", e => {
   btn.disabled = true; btn.textContent = "Unlocking…";
   const {score, per} = computeScore();
   const failed = auto.filter(a => !a.pass).map(a => a.label).join(" · ") || "none";
+  const gname = document.getElementById("g-name").value.trim();
+  const [g] = grade(score);
+  const pillarsTxt = PILLARS.map(pl => `${pl.name} ${per[pl.id].max?Math.round(per[pl.id].got/per[pl.id].max*100):0}%`).join(" · ");
+  const wins = [...auto.filter(a => !a.pass).sort((a,b) => b.w - a.w),
+                ...MQS.map((q,i) => manswers[i] !== "yes" ? {label:q.t.replace("Live test: ",""), fix:q.fix, w:q.w} : null).filter(Boolean)]
+               .slice(0,3);
+  const autoreply =
+`Hi ${gname || "there"},
+
+Here is your AI Visibility snapshot for ${scannedUrl.replace(/^https?:\/\//,"")}:
+
+SCORE: ${score}/100 — ${g}
+PILLARS: ${pillarsTxt}
+
+Your 3 fastest wins:
+${wins.map((f,n) => `${n+1}. ${f.fix}`).join("\n")}
+
+Your full illustrated AI Visibility Report — every finding explained, charts, and your prioritized 30-day fix plan — is being prepared now and will arrive in this inbox within 48 hours.
+
+Talk soon,
+Alejandro
+Be the Answer — AI Visibility`;
   fetch(LEAD_ENDPOINT, {
     method:"POST",
     headers:{"Content-Type":"application/json","Accept":"application/json"},
     body: JSON.stringify({
-      name: document.getElementById("g-name").value.trim(),
+      name: gname,
       email,
       website: scannedUrl,
       score: String(score),
-      pillars: PILLARS.map(pl => `${pl.name} ${per[pl.id].max?Math.round(per[pl.id].got/per[pl.id].max*100):0}%`).join(" · "),
+      grade: g,
+      pillars: pillarsTxt,
       failed_checks: failed,
+      next_action: "Send their full PDF report within 48 hours",
       _subject: `AI Visibility Audit lead — ${scannedUrl.replace(/^https?:\/\//,"")} scored ${score}`,
-      _template: "table"
+      _template: "table",
+      _autoresponse: autoreply
     })
   }).catch(()=>{}).finally(() => {
     btn.disabled = false; btn.textContent = "Send it & unlock my report";
