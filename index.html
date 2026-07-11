@@ -111,8 +111,12 @@ p{max-width:65ch}
 .opts button.sel-ns{background:#4d3c12;border-color:#4d3c12;color:#fff}
 
 /* gate + results */
-.gate{max-width:30rem;margin:2.2rem auto 0;background:var(--panel);border:1px solid var(--teal-deep);
-  border-radius:14px;padding:2rem;text-align:center}
+#r-wrap{position:relative}
+#r-content.locked{filter:blur(14px);pointer-events:none;user-select:none}
+.gateover{position:absolute;inset:0;z-index:10;display:flex;justify-content:center;
+  align-items:flex-start;padding:4.5rem 1rem 0}
+.gate{max-width:30rem;width:100%;background:#101f2ef2;border:1px solid var(--teal-deep);
+  box-shadow:0 20px 60px #00000088;border-radius:14px;padding:2rem;text-align:center}
 .gate h3{margin:0 0 .4rem;font-size:1.4rem}
 .gate p{margin:.3rem auto 1.2rem;color:var(--dim);font-size:.95rem}
 .gate input{width:100%;padding:.85rem 1rem;margin:.4rem 0;border-radius:6px;border:1px solid var(--line);
@@ -202,22 +206,10 @@ footer{padding:2.5rem 0 3.5rem;color:var(--dim);font-size:.84rem;border-top:1px 
   <h2>Four checks robots can't run</h2>
   <p class="dim">Answer honestly — “Not sure” is fine.</p>
   <div id="quiz"></div>
-  <div class="gate" id="gate" hidden>
-    <h3>Your score is ready.</h3>
-    <p>Enter your details to unlock your full scorecard and prioritized fix list — we'll email you a
-    copy so you don't lose it.</p>
-    <form id="gateform" novalidate>
-      <input type="text" id="g-name" name="name" placeholder="First name" autocomplete="given-name">
-      <input type="email" id="g-email" name="email" placeholder="Email address" autocomplete="email" required>
-      <div class="err" id="gerr" aria-live="polite"></div>
-      <button class="btn" type="submit" id="gbtn">Unlock my results</button>
-      <p class="tiny" style="margin:.8rem 0 0">We'll send your scorecard and occasional practical
-      AI-visibility tips. No spam, unsubscribe anytime.</p>
-    </form>
-  </div>
 </div></section>
 
-<section id="results"><div class="wrap narrow">
+<section id="results"><div class="wrap narrow" id="r-wrap">
+  <div id="r-content">
   <p class="kicker">Your results</p>
   <h2 id="r-head">Your AI Visibility Score</h2>
   <div class="scorecard">
@@ -241,6 +233,22 @@ footer{padding:2.5rem 0 3.5rem;color:var(--dim);font-size:.84rem;border-top:1px 
     (and at the founding price). Watch your inbox.</span></p>
   </div>
   <p class="tiny">Made fixes? <a href="#" id="reset">Re-scan your site</a> — scores update in real time.</p>
+  </div>
+  <div class="gateover" id="gate" hidden>
+    <div class="gate">
+      <h3>Your report is ready.</h3>
+      <p>We pulled everything AI can (and can't) see about your website. Where should we send your
+      full report and fix list?</p>
+      <form id="gateform" novalidate>
+        <input type="text" id="g-name" name="name" placeholder="First name" autocomplete="given-name">
+        <input type="email" id="g-email" name="email" placeholder="Email address" autocomplete="email" required>
+        <div class="err" id="gerr" aria-live="polite"></div>
+        <button class="btn" type="submit" id="gbtn">Send it & unlock my report</button>
+        <p class="tiny" style="margin:.8rem 0 0">We'll send your scorecard and occasional practical
+        AI-visibility tips. No spam, unsubscribe anytime.</p>
+      </form>
+    </div>
+  </div>
 </div></section>
 
 <footer><div class="wrap">
@@ -472,23 +480,20 @@ function buildQuiz(){
       <button type="button" data-v="no">No</button>
       <button type="button" data-v="ns">Not sure</button>
     </div></div>`).join("");
-  quiz.addEventListener("click", e => {
+  quiz.onclick = e => {
     const btn = e.target.closest("button[data-v]");
     if(!btn) return;
     const qEl = btn.closest(".q"); const i = +qEl.dataset.i;
     manswers[i] = btn.dataset.v;
     qEl.querySelectorAll("button").forEach(b => b.className = "");
     btn.className = "sel-" + btn.dataset.v;
-    if(manswers.every(a => a !== null)){
-      const gate = document.getElementById("gate");
-      gate.hidden = false;
-      gate.scrollIntoView({behavior:"smooth", block:"center"});
-    }
-  });
+    if(manswers.every(a => a !== null) && !unlocked) showResults(true);
+  };
 }
 
 /* ---------- scoring & results ---------- */
 let scannedUrl = "";
+let unlocked = false;
 function computeScore(){
   let got = 0, max = 0;
   const per = {}; PILLARS.forEach(pl => per[pl.id] = {got:0, max:0, name:pl.name});
@@ -502,7 +507,7 @@ function grade(s){
   if(s >= 40) return ["Half-invisible","You exist to machines, but they can't confidently cite or transact with you. The fixes below change that fast."];
   return ["Invisible to AI","Right now, AI engines can't see, verify, or recommend you — every AI answer in your category goes to someone else. The good news: everything below is fixable in weeks."];
 }
-function showResults(){
+function showResults(locked){
   const {score, per} = computeScore();
   const [g, verdict] = grade(score);
   document.getElementById("r-head").textContent = `AI Visibility Score for ${scannedUrl.replace(/^https?:\/\//,"")}`;
@@ -535,6 +540,10 @@ function showResults(){
       `<div class="fix"><b>${n+1}. ${q.ns?"Verify: ":""}${q.t}</b><p>${q.fix}</p></div>`).join("");
   if(BUY_URL){ const b = document.getElementById("buybtn"); b.href = BUY_URL; b.hidden = false; }
   else { document.getElementById("buysoon").hidden = false; }
+  const rc = document.getElementById("r-content");
+  const gate = document.getElementById("gate");
+  if(locked){ rc.classList.add("locked"); gate.hidden = false; }
+  else { unlocked = true; rc.classList.remove("locked"); gate.hidden = true; }
   document.getElementById("results").scrollIntoView({behavior:"smooth"});
 }
 
@@ -552,6 +561,7 @@ document.getElementById("scanform").addEventListener("submit", async e => {
   document.getElementById("manual").style.display = "none";
   document.getElementById("gate").hidden = true;
   manswers.fill(null);
+  unlocked = false;
   document.getElementById("scanpanel").scrollIntoView({behavior:"smooth"});
   const res = await runScan(raw);
   btn.disabled = false; btn.textContent = "Scan my website →";
@@ -566,11 +576,9 @@ document.getElementById("scanform").addEventListener("submit", async e => {
     scannedUrl = res.url;
     document.getElementById("scantitle").textContent = "Scan complete";
   }
-  if(auto.length){
-    buildQuiz();
-    document.getElementById("manual").style.display = "block";
-    setTimeout(() => document.getElementById("manual").scrollIntoView({behavior:"smooth"}), 600);
-  }
+  buildQuiz();
+  document.getElementById("manual").style.display = "block";
+  setTimeout(() => document.getElementById("manual").scrollIntoView({behavior:"smooth"}), 600);
 });
 
 document.getElementById("gateform").addEventListener("submit", e => {
@@ -597,8 +605,8 @@ document.getElementById("gateform").addEventListener("submit", e => {
       _template: "table"
     })
   }).catch(()=>{}).finally(() => {
-    document.getElementById("gate").hidden = true;
-    showResults();
+    btn.disabled = false; btn.textContent = "Send it & unlock my report";
+    showResults(false);
   });
 });
 
