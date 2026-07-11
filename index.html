@@ -168,6 +168,8 @@ footer{padding:2.5rem 0 3.5rem;color:var(--dim);font-size:.84rem;border-top:1px 
   schema, AI-crawler access, content signals, agent-readiness — and score your visibility in about
   60 seconds.</p>
   <form class="urlbox" id="scanform">
+    <input type="text" id="bizname" placeholder="Business name" autocomplete="organization"
+      aria-label="Your business name" style="flex:1 1 100%">
     <input type="text" id="url" placeholder="yourbusiness.com" autocomplete="url"
       aria-label="Your website address" inputmode="url">
     <button class="btn" type="submit" id="scanbtn">Scan my website →</button>
@@ -522,6 +524,7 @@ function buildQuiz(){
 
 /* ---------- scoring & results ---------- */
 let scannedUrl = "";
+let scannedBiz = "";
 let unlocked = false;
 function computeScore(){
   let got = 0, max = 0;
@@ -539,7 +542,8 @@ function grade(s){
 function showResults(locked){
   const {score, per} = computeScore();
   const [g, verdict] = grade(score);
-  document.getElementById("r-head").textContent = `AI Visibility Score for ${scannedUrl.replace(/^https?:\/\//,"")}`;
+  document.getElementById("r-head").textContent =
+    `AI Visibility Score for ${scannedBiz || scannedUrl.replace(/^https?:\/\//,"")}`;
   document.getElementById("results").style.display = "block";
   document.getElementById("r-score").textContent = score;
   document.getElementById("r-grade").textContent = g;
@@ -580,6 +584,7 @@ function showResults(locked){
 document.getElementById("scanform").addEventListener("submit", async e => {
   e.preventDefault();
   const raw = document.getElementById("url").value.trim();
+  scannedBiz = document.getElementById("bizname").value.trim();
   const err = document.getElementById("urlerr");
   if(!raw || !raw.includes(".")){ err.textContent = "Enter your website address — like yourbusiness.com"; return; }
   err.textContent = "";
@@ -629,7 +634,7 @@ document.getElementById("gateform").addEventListener("submit", e => {
   const autoreply =
 `Hi ${gname || "there"},
 
-Here is your AI Visibility snapshot for ${scannedUrl.replace(/^https?:\/\//,"")}:
+Here is your AI Visibility snapshot for ${scannedBiz || scannedUrl.replace(/^https?:\/\//,"")} (${scannedUrl.replace(/^https?:\/\//,"")}):
 
 SCORE: ${score}/100 — ${g}
 PILLARS: ${pillarsTxt}
@@ -648,13 +653,14 @@ Be the Answer — AI Visibility`;
     body: JSON.stringify({
       name: gname,
       email,
+      business: scannedBiz || "(not given)",
       website: scannedUrl,
       score: String(score),
       grade: g,
       pillars: pillarsTxt,
       failed_checks: failed,
       next_action: "Send their full PDF report within 48 hours",
-      _subject: `AI Visibility Audit lead — ${scannedUrl.replace(/^https?:\/\//,"")} scored ${score}`,
+      _subject: `AI Visibility Audit lead — ${scannedBiz || scannedUrl.replace(/^https?:\/\//,"")} scored ${score}`,
       _template: "table",
       _autoresponse: autoreply
     })
