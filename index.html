@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Visibility Audit — Is Your Business Invisible to ChatGPT, Gemini & AI Agents?</title>
+<meta name="description" content="Free 3-minute AI visibility audit. Find out if ChatGPT, Gemini, Perplexity, and AI agents can see, cite, and recommend your business — and exactly what to fix first. Updated July 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    { "@type": "WebSite",
+      "name": "AI Visibility Audit",
+      "url": "https://pajando.github.io/ai-visibility-audit/",
+      "description": "Free 3-minute audit that scores how visible a business is to AI engines (ChatGPT, Gemini, Perplexity, Google AI Mode) and AI agents, with a prioritized fix list." },
+    { "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question",
+          "name": "What is an AI visibility audit?",
+          "acceptedAnswer": { "@type": "Answer", "text": "An AI visibility audit measures whether AI engines like ChatGPT, Gemini, Perplexity, and Google AI Mode can find, understand, cite, and recommend your business — and whether AI agents can complete a booking or purchase with you. This free audit checks 16 factors across four pillars (Entity, Content, Code, Agents) in about 3 minutes and returns a 0–100 score with a prioritized fix list." } },
+        { "@type": "Question",
+          "name": "Why does AI visibility matter for my business?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Google's AI Mode has over one billion monthly users, AI Overviews answer many searches before anyone clicks, and agents now book services and buy products on customers' behalf. Businesses that are ambiguous or unstructured to machines don't get penalized — they simply never come up in the answer." } },
+        { "@type": "Question",
+          "name": "Is the audit really free?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. The 16-point audit and your personalized fix list are free. You enter your email to receive your results and scorecard. The complete step-by-step playbook for fixing every gap is a paid PDF." } }
+      ] }
+  ]
+}
+</script>
+<style>
+:root{
+  --bg:#0B1622; --bg2:#0F1D2C; --panel:#14243677; --ink:#E7EEF5; --dim:#8CA0B3;
+  --teal:#22B899; --teal-deep:#0E7C66; --amber:#F5A623; --red:#E86A5B; --line:#1E3143;
+  --max:64rem;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"IBM Plex Sans",system-ui,sans-serif;line-height:1.65;font-size:1.02rem}
+h1,h2,h3{font-family:"Bricolage Grotesque","IBM Plex Sans",sans-serif;line-height:1.08;text-wrap:balance}
+a{color:var(--teal)}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 1.4rem}
+.narrow{max-width:46rem}
+
+.hero{padding:5rem 0 3.5rem;
+  background:radial-gradient(1100px 550px at 85% -10%, #12314055, transparent)}
+.eyebrow{color:var(--teal);font-weight:600;letter-spacing:.16em;text-transform:uppercase;font-size:.78rem;margin:0 0 1.1rem}
+.hero h1{font-size:clamp(2.2rem,6vw,3.9rem);font-weight:800;margin:0 0 1.1rem;max-width:22ch}
+.hero h1 em{color:var(--teal);font-style:normal}
+.hero p.sub{color:var(--dim);font-size:1.13rem;max-width:48ch;margin:0 0 1.8rem}
+.btn{display:inline-block;background:var(--teal);color:#04110D;font-weight:600;border:0;
+  padding:.85rem 1.7rem;border-radius:6px;text-decoration:none;font-size:1rem;cursor:pointer;
+  font-family:"IBM Plex Sans",sans-serif}
+.btn:hover{filter:brightness(1.1)}
+.btn:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.btn.big{font-size:1.1rem;padding:1rem 2.2rem}
+.tiny{color:var(--dim);font-size:.84rem}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:1px;background:var(--line);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stat{background:var(--bg2);padding:1.4rem}
+.stat b{display:block;font-family:"Bricolage Grotesque",sans-serif;font-size:1.9rem;color:var(--teal);font-variant-numeric:tabular-nums}
+.stat span{color:var(--dim);font-size:.88rem}
+
+section{padding:3.6rem 0}
+.kicker{color:var(--teal);font-weight:600;letter-spacing:.14em;text-transform:uppercase;font-size:.75rem;margin:0 0 .5rem}
+section h2{font-size:clamp(1.6rem,3.2vw,2.3rem);font-weight:800;margin:0 0 1rem}
+p{max-width:65ch}
+.dim{color:var(--dim)}
+
+.steps{display:grid;gap:1.2rem;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));margin-top:1.6rem}
+.step{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:1.3rem}
+.step b.n{display:inline-grid;place-items:center;width:2rem;height:2rem;border-radius:50%;
+  background:var(--teal-deep);color:#fff;font-family:"Bricolage Grotesque",sans-serif;margin-bottom:.6rem}
+.step h3{margin:.1rem 0 .4rem;font-size:1.05rem}
+.step p{font-size:.92rem;color:var(--dim);margin:0}
+
+/* audit */
+.audit{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.pillar{margin:2.2rem 0 0}
+.pillar h3{color:var(--teal);font-size:1.05rem;letter-spacing:.06em;text-transform:uppercase;margin:0 0 .3rem}
+.pillar p.pd{color:var(--dim);font-size:.9rem;margin:0 0 1rem}
+.q{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:1rem 1.2rem;margin:.7rem 0}
+.q .qt{font-weight:600;margin:0 0 .2rem}
+.q .qh{color:var(--dim);font-size:.86rem;margin:0 0 .7rem}
+.q .qh code{font-family:"IBM Plex Mono",monospace;font-size:.8rem;background:#081019;padding:.1rem .4rem;border-radius:4px}
+.opts{display:flex;gap:.6rem;flex-wrap:wrap}
+.opts button{background:transparent;border:1px solid var(--line);color:var(--dim);border-radius:6px;
+  padding:.45rem 1.1rem;cursor:pointer;font:600 .9rem "IBM Plex Sans",sans-serif}
+.opts button:hover{border-color:var(--teal)}
+.opts button.sel-yes{background:var(--teal-deep);border-color:var(--teal-deep);color:#fff}
+.opts button.sel-no{background:#5b2620;border-color:#5b2620;color:#fff}
+.opts button.sel-ns{background:#4d3c12;border-color:#4d3c12;color:#fff}
+.progress{position:sticky;top:0;z-index:5;background:#0B1622EE;backdrop-filter:blur(4px);
+  border-bottom:1px solid var(--line);padding:.6rem 0}
+.progress .wrap{display:flex;align-items:center;gap:1rem}
+.bar{flex:1;height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;width:0%;background:var(--teal);border-radius:99px;transition:width .25s}
+.progress span{font-size:.85rem;color:var(--dim);font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* gate + results */
+.gate{max-width:30rem;margin:2.5rem auto 0;background:var(--panel);border:1px solid var(--teal-deep);
+  border-radius:14px;padding:2rem;text-align:center}
+.gate h3{margin:0 0 .4rem;font-size:1.4rem}
+.gate p{margin:.3rem auto 1.2rem;color:var(--dim);font-size:.95rem}
+.gate input{width:100%;padding:.85rem 1rem;margin:.4rem 0;border-radius:6px;border:1px solid var(--line);
+  background:#0B1622;color:var(--ink);font:400 1rem "IBM Plex Sans",sans-serif}
+.gate input:focus-visible{outline:2px solid var(--teal)}
+.gate .btn{width:100%;margin-top:.6rem}
+.err{color:var(--red);font-size:.85rem;min-height:1.2rem;margin:.3rem 0 0}
+
+#results{display:none}
+.scorecard{display:grid;gap:1.5rem;grid-template-columns:auto 1fr;align-items:center;
+  background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:2rem;margin:1.5rem 0}
+.ring{width:9.5rem;height:9.5rem;border-radius:50%;display:grid;place-items:center;
+  background:conic-gradient(var(--teal) 0deg, var(--line) 0deg)}
+.ring b{background:var(--bg);width:7.6rem;height:7.6rem;border-radius:50%;display:grid;place-items:center;
+  font-family:"Bricolage Grotesque",sans-serif;font-size:2.3rem;font-variant-numeric:tabular-nums}
+.grade{font-family:"Bricolage Grotesque",sans-serif;font-size:1.5rem;margin:0 0 .3rem}
+.pbars{margin-top:1rem}
+.pbar{display:grid;grid-template-columns:7.5rem 1fr 3rem;gap:.8rem;align-items:center;margin:.45rem 0;font-size:.88rem}
+.pbar .bar{height:10px}
+.pbar span:last-child{text-align:right;font-variant-numeric:tabular-nums;color:var(--dim)}
+.fixes{margin:2rem 0}
+.fix{border-left:3px solid var(--amber);background:#181307;border-radius:0 8px 8px 0;padding:.9rem 1.2rem;margin:.8rem 0}
+.fix b{color:var(--amber)}
+.fix p{margin:.2rem 0 0;font-size:.92rem;color:var(--dim)}
+.upsell{background:linear-gradient(135deg,#0d2a22,#122334);border:1px solid var(--teal-deep);
+  border-radius:14px;padding:2rem;margin:2.5rem 0;text-align:center}
+.upsell h3{font-size:1.5rem;margin:0 0 .5rem}
+.upsell p{margin:0 auto 1.3rem;color:var(--dim)}
+
+footer{padding:2.5rem 0 3.5rem;color:var(--dim);font-size:.84rem;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+
+<header class="hero"><div class="wrap">
+  <p class="eyebrow">Free 3-minute audit · Updated July 2026</p>
+  <h1>Is your business <em>invisible</em> to AI?</h1>
+  <p class="sub">A billion people now search with Google's AI Mode. ChatGPT recommends businesses and
+  checks out for shoppers. Agents call and book on customers' behalf. Find out — in 3 minutes — whether
+  the machines can see you, and exactly what to fix first.</p>
+  <a class="btn big" href="#audit">Get my AI Visibility Score →</a>
+  <p class="tiny" style="margin-top:1rem">16 checks · No jargon · Your prioritized fix list at the end</p>
+</div></header>
+
+<div class="stats wrap" style="padding:0">
+  <div class="stat"><b>1B+</b><span>monthly users on Google AI Mode</span></div>
+  <div class="stat"><b>3.2×</b><span>more AI citations for machine-readable sites</span></div>
+  <div class="stat"><b>0</b><span>times AI recommends a business it can't verify</span></div>
+</div>
+
+<section><div class="wrap">
+  <p class="kicker">How it works</p>
+  <h2>Three minutes to the truth</h2>
+  <div class="steps">
+    <div class="step"><b class="n">1</b><h3>Answer 16 quick checks</h3>
+      <p>Across the four pillars machines judge you on: Entity, Content, Code, and Agents. Two of them
+      are live tests you run in ChatGPT right now.</p></div>
+    <div class="step"><b class="n">2</b><h3>Get your score</h3>
+      <p>A 0–100 AI Visibility Score, broken down by pillar, benchmarked against what AI engines
+      actually reward.</p></div>
+    <div class="step"><b class="n">3</b><h3>Fix what matters first</h3>
+      <p>Your gaps, ranked by impact — so you know the exact next move instead of guessing.</p></div>
+  </div>
+</div></section>
+
+<div class="progress" id="progressbar" hidden><div class="wrap">
+  <div class="bar"><i id="pfill"></i></div><span id="ptext">0 / 16 answered</span>
+</div></div>
+
+<section class="audit" id="audit"><div class="wrap narrow">
+  <p class="kicker">The audit</p>
+  <h2>Run your audit</h2>
+  <p class="dim">Answer honestly — “Not sure” is a fine answer (we'll tell you how to check).
+  Nothing is sent anywhere until you choose to get your results.</p>
+  <div id="quiz"></div>
+
+  <div class="gate" id="gate" hidden>
+    <h3>Your score is ready.</h3>
+    <p>Enter your details and we'll unlock your full scorecard and prioritized fix list — and email
+    you a copy so you don't lose it.</p>
+    <form id="gateform" novalidate>
+      <input type="text" id="g-name" name="name" placeholder="First name" autocomplete="given-name">
+      <input type="text" id="g-biz" name="business" placeholder="Business name (optional)" autocomplete="organization">
+      <input type="email" id="g-email" name="email" placeholder="Email address" autocomplete="email" required>
+      <div class="err" id="gerr" aria-live="polite"></div>
+      <button class="btn" type="submit" id="gbtn">Unlock my results</button>
+      <p class="tiny" style="margin:.8rem 0 0">We'll send your scorecard and occasional practical AI-visibility
+      tips. No spam, unsubscribe anytime.</p>
+    </form>
+  </div>
+</div></section>
+
+<section id="results"><div class="wrap narrow">
+  <p class="kicker">Your results</p>
+  <h2 id="r-head">Your AI Visibility Score</h2>
+  <div class="scorecard">
+    <div class="ring" id="ring"><b id="r-score">0</b></div>
+    <div>
+      <p class="grade" id="r-grade"></p>
+      <p class="dim" id="r-verdict" style="font-size:.95rem"></p>
+      <div class="pbars" id="r-pillars"></div>
+    </div>
+  </div>
+  <div class="fixes" id="r-fixes"></div>
+  <div class="upsell">
+    <h3>Every gap above has a step-by-step fix.</h3>
+    <p><strong>Be the Answer — The AI-Search Authority Playbook</strong> walks you through all of it:
+    the schema templates to copy-paste, the answer-first content format, the agent-readiness checklist,
+    and a 30-day sprint that takes you from invisible to recommended.</p>
+    <a class="btn big" id="buybtn" href="#" hidden>Get the Playbook →</a>
+    <p id="buysoon" hidden><strong style="color:var(--teal)">You're on the list.</strong>
+    <span class="dim">The playbook launches this week — as an early subscriber you'll get it first
+    (and at the founding price). Watch your inbox.</span></p>
+  </div>
+  <p class="tiny">Want to re-run the audit after making fixes? <a href="#" id="reset">Start over</a>.</p>
+</div></section>
+
+<footer><div class="wrap">
+  <p>AI Visibility Audit · Based on July 2026 research: Google I/O 2026 announcements, the Stripe/OpenAI
+  Agentic Commerce Protocol, SE Ranking citation studies, and the 10,000-query GEO research.</p>
+  <p>This site practices what it preaches — view source for the JSON-LD, <a href="robots.txt">robots.txt</a>,
+  <a href="llms.txt">llms.txt</a>.</p>
+</div></footer>
+
+<script>
+/* ====== CONFIG ====== */
+const LEAD_ENDPOINT = "https://formsubmit.co/ajax/mediaojeda@gmail.com"; // email delivery
+const BUY_URL = ""; // paste your Gumroad/Payhip product URL here to activate the buy button
+/* ==================== */
+
+const PILLARS = [
+  { id:"entity", name:"Entity", desc:"Can machines identify your business as one clear, trusted thing?" },
+  { id:"content", name:"Content", desc:"Do your pages hand AI a quotable answer?" },
+  { id:"code", name:"Code", desc:"Is your site machine-readable?" },
+  { id:"agents", name:"Agents", desc:"Could an AI complete a transaction with you?" },
+];
+const QS = [
+ {p:"entity", w:7, t:"Is your Google Business Profile (or LinkedIn page, if online-only) claimed and 100% filled out?",
+   h:"Every empty field is a question machines can't answer.",
+   fix:"Claim and complete your Google Business Profile today — every field, categories, services, photos. It feeds Google's AI answers directly."},
+ {p:"entity", w:6, t:"Is your business name, one-line description, address and phone identical everywhere online?",
+   h:"Site, Google, socials, directories — exact same wording.",
+   fix:"Standardize your name, description and contact info everywhere. Inconsistency makes machines see two fuzzy businesses instead of one strong one."},
+ {p:"entity", w:6, t:"Have you received (and responded to) reviews in the last 30 days?",
+   h:"Volume, recency, and responses all count as trust signals.",
+   fix:"Set up a simple review ask after every sale, and respond to every review. Recent, answered reviews are a core AI trust signal."},
+ {p:"entity", w:6, t:"Has your business been mentioned on Reddit, YouTube, podcasts, or press in the last 6 months?",
+   h:"AI engines cite these platforms constantly — unlinked mentions count.",
+   fix:"Show up where AI reads: answer questions in your niche's communities, get on niche podcasts, publish one original statistic others will cite."},
+ {p:"content", w:7, t:"Do your key pages answer the visitor's question in the first 200 words?",
+   h:"Not a warm-up story — the actual answer, immediately.",
+   fix:"Retrofit your top 5 pages: put the complete answer in the first 200 words, then elaborate. Retrieval engines judge you on your opening."},
+ {p:"content", w:6, t:"Are your prices (or price ranges) published on your website?",
+   h:"“Contact us for pricing” = the AI quotes your competitor instead.",
+   fix:"Publish prices or honest ranges. Transparent pricing pages are among the most-cited business pages in AI answers."},
+ {p:"content", w:6, t:"Do you have an FAQ page built from real customer questions?",
+   h:"Pre-chunked Q&A is the easiest content for AI to quote.",
+   fix:"Write a FAQ page from the 10 questions customers actually ask, and mark it up with FAQPage schema — the highest-impact schema type."},
+ {p:"content", w:6, t:"Do your pages show visible dates or “updated 2026” freshness signals?",
+   h:"AI engines prefer quoting provably-current content.",
+   fix:"Add visible published/updated dates and a current-year section to key pages. Freshness is a citation factor."},
+ {p:"code", w:7, t:"Does your site have JSON-LD schema markup (Organization or LocalBusiness)?",
+   h:"Check free: paste your URL at <code>validator.schema.org</code>.",
+   fix:"Add Organization/LocalBusiness JSON-LD with a sameAs list of all your profiles. Sites with clean structured data get cited up to 3.2× more."},
+ {p:"code", w:6, t:"Does your robots.txt allow AI crawlers (GPTBot, ClaudeBot, PerplexityBot)?",
+   h:"Check: visit <code>yourdomain.com/robots.txt</code> — any “Disallow: /” under those names?",
+   fix:"Allow GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot and Google-Extended in robots.txt. Blocking them removes you from AI answers entirely."},
+ {p:"code", w:6, t:"Is your content visible in the raw HTML (not only after JavaScript runs)?",
+   h:"Check: right-click → View Page Source → can you find your actual text?",
+   fix:"Make sure your text exists in the raw HTML (static pages or server-side rendering). Most AI crawlers don't run JavaScript — a JS-only site looks blank to them."},
+ {p:"code", w:6, t:"Was your Google Business Profile updated (post or photo) in the last 30 days?",
+   h:"Profiles inactive 30+ days show measurable impression drops in 2026.",
+   fix:"Post to your Google Business Profile 1–2× per week — updates, photos, offers. Activity keeps you in Gemini-powered local answers."},
+ {p:"agents", w:7, t:"Can someone book or buy from you online without messaging you first?",
+   h:"A real booking link or checkout — machine-completable end to end.",
+   fix:"Add a real booking link (Calendly or your industry platform) or checkout. Agents route to businesses whose calendars and carts they can act on."},
+ {p:"agents", w:6, t:"Does your phone greeting/voicemail state your services, hours, and service area?",
+   h:"Google's agents now call businesses on customers' behalf.",
+   fix:"Rewrite your greeting to state services, hours, and area, and brief your team: a stilted robotic caller may be a real customer's agent."},
+ {p:"agents", w:6, t:"Live test: ask ChatGPT “What is [your business name]?” — does it give a roughly accurate answer?",
+   h:"Copy that prompt into ChatGPT right now. Accurate = yes. Wrong or “I don't know” = no.",
+   fix:"The machines haven't formed an entity for you yet. Fix your profiles, schema, and consistency (Pillar 1) — then re-test monthly."},
+ {p:"agents", w:6, t:"Live test: ask ChatGPT or Perplexity “best [your category] in [your area]” — are you mentioned?",
+   h:"This is the money question your customers are already asking.",
+   fix:"You're losing the recommendation moment. Work the full system — entity, answer-first content, schema, reviews — and re-run this test every month."},
+];
+
+const quiz = document.getElementById("quiz");
+const answers = new Array(QS.length).fill(null);
+let unlocked = false;
+
+let html = "";
+PILLARS.forEach(pl => {
+  html += `<div class="pillar"><h3>Pillar: ${pl.name}</h3><p class="pd">${pl.desc}</p>`;
+  QS.forEach((q,i) => {
+    if(q.p !== pl.id) return;
+    html += `<div class="q" data-i="${i}">
+      <p class="qt">${q.t}</p>
+      <p class="qh">${q.h}</p>
+      <div class="opts">
+        <button type="button" data-v="yes">Yes</button>
+        <button type="button" data-v="no">No</button>
+        <button type="button" data-v="ns">Not sure</button>
+      </div></div>`;
+  });
+  html += `</div>`;
+});
+quiz.innerHTML = html;
+
+const pbarEl = document.getElementById("progressbar");
+const pfill = document.getElementById("pfill");
+const ptext = document.getElementById("ptext");
+
+quiz.addEventListener("click", e => {
+  const btn = e.target.closest("button[data-v]");
+  if(!btn) return;
+  const qEl = btn.closest(".q");
+  const i = +qEl.dataset.i;
+  answers[i] = btn.dataset.v;
+  qEl.querySelectorAll("button").forEach(b => b.className = "");
+  btn.className = "sel-" + btn.dataset.v;
+  const done = answers.filter(a => a !== null).length;
+  pbarEl.hidden = false;
+  pfill.style.width = (done/QS.length*100) + "%";
+  ptext.textContent = `${done} / ${QS.length} answered`;
+  if(done === QS.length && !unlocked){
+    document.getElementById("gate").hidden = false;
+    document.getElementById("gate").scrollIntoView({behavior:"smooth", block:"center"});
+  }
+});
+
+function computeScore(){
+  let total = 0, max = 0;
+  const per = {};
+  PILLARS.forEach(pl => per[pl.id] = {got:0, max:0, name:pl.name});
+  QS.forEach((q,i) => {
+    max += q.w; per[q.p].max += q.w;
+    if(answers[i] === "yes"){ total += q.w; per[q.p].got += q.w; }
+  });
+  return { score: Math.round(total/max*100), per };
+}
+
+function grade(s){
+  if(s >= 85) return ["Agent-ready", "You're ahead of ~99% of businesses. Protect the lead — this landscape shifts quarterly."];
+  if(s >= 65) return ["Visible, with gaps", "Machines can find you, but you're losing citations and agent-driven revenue at specific, fixable points."];
+  if(s >= 40) return ["Half-invisible", "You exist to machines, but they can't confidently cite or transact with you. The fixes below change that fast."];
+  return ["Invisible to AI", "Right now, AI engines can't see, verify, or recommend you — which means every AI answer in your category goes to someone else. The good news: everything below is fixable in weeks."];
+}
+
+function showResults(){
+  unlocked = true;
+  const {score, per} = computeScore();
+  const [g, verdict] = grade(score);
+  document.getElementById("results").style.display = "block";
+  document.getElementById("r-score").textContent = score;
+  document.getElementById("r-grade").textContent = g;
+  document.getElementById("r-verdict").textContent = verdict;
+  document.getElementById("ring").style.background =
+    `conic-gradient(${score>=65?"var(--teal)":score>=40?"var(--amber)":"var(--red)"} ${score*3.6}deg, var(--line) 0deg)`;
+  document.getElementById("r-pillars").innerHTML = PILLARS.map(pl => {
+    const p = per[pl.id]; const pct = Math.round(p.got/p.max*100);
+    return `<div class="pbar"><span>${p.name}</span>
+      <div class="bar"><i style="width:${pct}%;background:${pct>=65?"var(--teal)":pct>=40?"var(--amber)":"var(--red)"}"></i></div>
+      <span>${pct}%</span></div>`;
+  }).join("");
+  const missed = QS.map((q,i) => ({...q, i, a:answers[i]}))
+    .filter(q => q.a !== "yes").sort((a,b) => b.w - a.w).slice(0,5);
+  document.getElementById("r-fixes").innerHTML =
+    missed.length === 0
+    ? `<h3>No critical gaps found. Seriously impressive.</h3><p class="dim">Re-audit monthly — AI surfaces change fast.</p>`
+    : `<h3>Fix these first (highest impact)</h3>` + missed.map((q,n) =>
+      `<div class="fix"><b>${n+1}. ${q.a==="ns" ? "Verify: " : ""}${q.t.replace("Live test: ","")}</b><p>${q.fix}</p></div>`).join("");
+  if(BUY_URL){ const b = document.getElementById("buybtn"); b.href = BUY_URL; b.hidden = false; }
+  else { document.getElementById("buysoon").hidden = false; }
+  document.getElementById("results").scrollIntoView({behavior:"smooth"});
+}
+
+document.getElementById("gateform").addEventListener("submit", e => {
+  e.preventDefault();
+  const email = document.getElementById("g-email").value.trim();
+  const err = document.getElementById("gerr");
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ err.textContent = "Please enter a valid email address."; return; }
+  err.textContent = "";
+  const btn = document.getElementById("gbtn");
+  btn.disabled = true; btn.textContent = "Unlocking…";
+  const {score, per} = computeScore();
+  const payload = {
+    name: document.getElementById("g-name").value.trim(),
+    business: document.getElementById("g-biz").value.trim(),
+    email,
+    score: String(score),
+    pillars: PILLARS.map(pl => `${pl.name} ${Math.round(per[pl.id].got/per[pl.id].max*100)}%`).join(" · "),
+    _subject: `AI Visibility Audit lead — score ${score}`,
+    _template: "table"
+  };
+  fetch(LEAD_ENDPOINT, {
+    method:"POST",
+    headers:{ "Content-Type":"application/json", "Accept":"application/json" },
+    body: JSON.stringify(payload)
+  }).catch(()=>{}).finally(() => {
+    document.getElementById("gate").hidden = true;
+    showResults();
+  });
+});
+
+document.getElementById("reset").addEventListener("click", e => {
+  e.preventDefault(); location.reload();
+});
+</script>
+</body>
+</html>
