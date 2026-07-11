@@ -180,8 +180,8 @@ footer{padding:2.5rem 0 3.5rem;color:var(--dim);font-size:.84rem;border-top:1px 
 
 <div class="stats wrap" style="padding:0">
   <div class="stat"><b>1B+</b><span>monthly users on Google AI Mode</span></div>
-  <div class="stat"><b>3.2×</b><span>more AI citations for machine-readable sites</span></div>
-  <div class="stat"><b>0</b><span>times AI recommends a business it can't verify</span></div>
+  <div class="stat"><b>3.2×</b><span>more AI citations for machine-readable sites (industry studies)</span></div>
+  <div class="stat"><b>9 in 10</b><span>websites still have no AI instructions file — the field is wide open</span></div>
 </div>
 
 <section id="how"><div class="wrap">
@@ -375,7 +375,7 @@ async function runScan(rawUrl){
   const types = [...new Set(ld.map(o => o["@type"]).flat().filter(Boolean))];
   add("code", 7, "JSON-LD structured data present", ld.length > 0,
     ld.length ? `Found: ${types.slice(0,6).join(", ")}` : "No machine-readable schema found on the homepage",
-    "Add JSON-LD structured data. It's how you speak to machines in their native language — sites with clean schema get cited up to 3.2× more.");
+    "Add JSON-LD structured data. It's how you speak to machines in their native language — industry studies find sites with clean schema get cited up to 3.2× more.");
   upd(l, ld.length ? "ok" : "bad", ld.length ? `Schema found: ${types.slice(0,6).join(", ")}` : "No JSON-LD schema found");
 
   const hasOrg = types.some(t => /organization|localbusiness|store|restaurant|professionalservice|medicalbusiness|homeandconstructionbusiness|legalservice|dentist|physician|autorepair|realestateagent/i.test(String(t)));
@@ -413,7 +413,7 @@ async function runScan(rawUrl){
   const hasSm = sm.ok && sm.status < 400 && /<(urlset|sitemapindex)/i.test(sm.text);
   add("code", 3, "sitemap.xml present (feeds Google AND Bing→ChatGPT)", hasSm,
     hasSm ? "Sitemap found" : "No sitemap.xml found at the standard location",
-    "Add a sitemap.xml and submit it to Google Search Console AND Bing Webmaster Tools (bing.com/webmasters) — ~87% of ChatGPT search citations come from Bing's index, and most businesses never claim it.");
+    "Add a sitemap.xml and submit it to Google Search Console AND Bing Webmaster Tools (bing.com/webmasters) — analyses find the large majority (~87% in one 2026 study) of ChatGPT search citations come from Bing's index, and most businesses never claim it.");
   upd(l, hasSm ? "ok" : "warn", hasSm ? "sitemap.xml found" : "No sitemap.xml");
 
   const jsOnly = bodyText.length < 400;
