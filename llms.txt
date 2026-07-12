@@ -1,20 +1,28 @@
-# AI Visibility Audit
+# The AO Audit — Answer Optimization
 
-> A free 3-minute interactive audit that scores how visible a business is to AI
-> engines (ChatGPT, Gemini, Perplexity, Google AI Mode) and AI agents. Sixteen
-> checks across four pillars — Entity, Content, Code, Agents — returning a 0-100
-> score and a prioritized fix list. Companion tool to the paid guide "Be the
-> Answer: The AI-Search Authority Playbook." Updated July 2026.
+> The AO Audit is a free interactive Answer Optimization (AO) audit that scores
+> how visible a business is to AI engines (ChatGPT, Gemini, Perplexity, Google
+> AI Mode) and AI agents. Nineteen checks across four pillars — Entity, Content,
+> Code, Agents — returning a 0-100 AO Score and a prioritized fix list.
+> Companion tool to the paid guide "Be the Answer: The AI-Search Authority
+> Playbook." Updated July 2026.
 
 ## Core content
 
-- [The audit](https://pajando.github.io/ai-visibility-audit/): run the 16-point
-  AI visibility audit and get a scored, prioritized fix list.
+- [The AO Audit](https://aoaudit.com/): run the audit and get your AO Score
+  with a scored, prioritized fix list.
+- [Sample AO Report](https://aoaudit.com/sample-report.pdf): a real example of
+  the full report, no email required.
 
 ## Key facts
 
-- An AI visibility audit measures whether AI engines can find, understand, cite,
-  and recommend a business, and whether AI agents can transact with it.
-- Sites with clean structured data are cited up to 3.2x more often in AI answers.
-- Businesses that are ambiguous or unstructured to machines are not penalized by
-  AI engines - they are simply never mentioned.
+- Answer Optimization (AO) is the practice of making a business the answer AI
+  engines give: findable, understandable, trustworthy, and transactable to
+  machines.
+- The AO Score measures whether AI engines can find, understand, cite, and
+  recommend a business, and whether AI agents can complete a booking or
+  purchase with it.
+- Industry studies find sites with clean structured data are cited up to 3.2x
+  more often in AI answers.
+- Businesses that are ambiguous or unstructured to machines are not penalized
+  by AI engines - they are simply never mentioned.

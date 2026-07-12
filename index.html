@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AI Visibility Audit — Enter Your Website, See What AI Can Actually See</title>
-<meta name="description" content="Free instant AI visibility audit: enter your business website and we scan it live — schema markup, AI-crawler access, llms.txt, pricing signals, booking links and more — then score how visible you are to ChatGPT, Gemini, Perplexity, and AI agents. Updated July 2026.">
+<title>The AO Audit — What's Your AO Score? See What AI Actually Sees</title>
+<meta name="description" content="The AO Audit — free Answer Optimization audit: enter your business website and we scan it live — schema markup, AI-crawler access, llms.txt, pricing signals, booking links and more — then get your AO Score: how visible you are to ChatGPT, Gemini, Perplexity, and AI agents. Updated July 2026.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
@@ -13,9 +13,9 @@
   "@context": "https://schema.org",
   "@graph": [
     { "@type": "WebSite",
-      "name": "AI Visibility Audit",
-      "url": "https://pajando.github.io/ai-visibility-audit/",
-      "description": "Free instant audit that scans a business website live and scores how visible it is to AI engines (ChatGPT, Gemini, Perplexity, Google AI Mode) and AI agents, with a prioritized fix list." },
+      "name": "The AO Audit",
+      "url": "https://aoaudit.com/",
+      "description": "The AO Audit (Answer Optimization) scans a business website live and scores how visible it is to AI engines (ChatGPT, Gemini, Perplexity, Google AI Mode) and AI agents — your AO Score — with a prioritized fix list." },
     { "@type": "FAQPage",
       "mainEntity": [
         { "@type": "Question",
@@ -175,7 +175,7 @@ footer{padding:2.5rem 0 3.5rem;color:var(--dim);font-size:.84rem;border-top:1px 
   <h1>Enter your website. See what AI <em>actually sees.</em></h1>
   <p class="sub">A billion people now search with Google's AI Mode. ChatGPT recommends businesses and
   checks out for shoppers. Agents call and book on customers' behalf. We'll scan your site live —
-  schema, AI-crawler access, content signals, agent-readiness — and score your visibility in about
+  schema, AI-crawler access, content signals, agent-readiness — and get your AO Score in about
   60 seconds.</p>
   <form class="urlbox" id="scanform">
     <input type="text" id="bizname" placeholder="Business name" autocomplete="organization"
@@ -204,8 +204,8 @@ footer{padding:2.5rem 0 3.5rem;color:var(--dim);font-size:.84rem;border-top:1px 
       engines actually use: schema markup, crawler access, content structure, pricing, booking.</p></div>
     <div class="stepc"><b class="n">2</b><h3>You confirm 6 things robots can't see</h3>
       <p>Your Google Business Profile, reviews, and two live ChatGPT tests — the checks that need a human.</p></div>
-    <div class="stepc"><b class="n">3</b><h3>Get your score & fix list</h3>
-      <p>A 0–100 AI Visibility Score with your gaps ranked by impact, so you know the exact next move.</p></div>
+    <div class="stepc"><b class="n">3</b><h3>Get your AO Score & fix list</h3>
+      <p>Your 0–100 AO Score with your gaps ranked by impact, so you know the exact next move.</p></div>
   </div>
 </div></section>
 
@@ -225,7 +225,7 @@ footer{padding:2.5rem 0 3.5rem;color:var(--dim);font-size:.84rem;border-top:1px 
 <section id="results"><div class="wrap narrow" id="r-wrap">
   <div id="r-content">
   <p class="kicker">Your results</p>
-  <h2 id="r-head">Your AI Visibility Score</h2>
+  <h2 id="r-head">Your AO Score</h2>
   <div class="scorecard">
     <div class="ring" id="ring"><b id="r-score">0</b></div>
     <div>
@@ -304,7 +304,7 @@ footer{padding:2.5rem 0 3.5rem;color:var(--dim);font-size:.84rem;border-top:1px 
 </div></section>
 
 <footer><div class="wrap">
-  <p>AI Visibility Audit · Based on July 2026 research: Google I/O 2026 announcements, the Stripe/OpenAI
+  <p>The AO Audit · Answer Optimization (AO) · aoaudit.com · Based on July 2026 research: Google I/O 2026 announcements, the Stripe/OpenAI
   Agentic Commerce Protocol, SE Ranking citation studies, and the 10,000-query GEO research.</p>
   <p>This site practices what it preaches — view source for the JSON-LD, <a href="robots.txt">robots.txt</a>,
   <a href="llms.txt">llms.txt</a>. We scan only the address you submit, when you submit it.</p>
@@ -594,7 +594,7 @@ function showResults(locked){
   const {score, per} = computeScore();
   const [g, verdict] = grade(score);
   document.getElementById("r-head").textContent =
-    `AI Visibility Score for ${scannedBiz || scannedUrl.replace(/^https?:\/\//,"")}`;
+    `AO Score for ${scannedBiz || scannedUrl.replace(/^https?:\/\//,"")}`;
   document.getElementById("results").style.display = "block";
   document.getElementById("r-score").textContent = score;
   document.getElementById("r-grade").textContent = g;
@@ -686,7 +686,7 @@ document.getElementById("gateform").addEventListener("submit", e => {
   const autoreply =
 `Hi ${gname || "there"},
 
-Here is your AI Visibility snapshot for ${scannedBiz || scannedUrl.replace(/^https?:\/\//,"")} (${scannedUrl.replace(/^https?:\/\//,"")}):
+Here is your AO snapshot (Answer Optimization) for ${scannedBiz || scannedUrl.replace(/^https?:\/\//,"")} (${scannedUrl.replace(/^https?:\/\//,"")}):
 
 SCORE: ${score}/100 — ${g}
 PILLARS: ${pillarsTxt}
@@ -694,11 +694,11 @@ PILLARS: ${pillarsTxt}
 Your 3 fastest wins:
 ${wins.map((f,n) => `${n+1}. ${f.fix}`).join("\n")}
 
-Your full illustrated AI Visibility Report — every finding explained, charts, and your prioritized 30-day fix plan — is being prepared now and will arrive in this inbox within 48 hours.
+Your full illustrated AO Report — every finding explained, charts, and your prioritized 30-day fix plan — is being prepared now and will arrive in this inbox within 48 hours.
 
 Talk soon,
 Alejandro
-Be the Answer — AI Visibility`;
+Be the Answer — aoaudit.com`;
   fetch(LEAD_ENDPOINT, {
     method:"POST",
     headers:{"Content-Type":"application/json","Accept":"application/json"},
@@ -728,7 +728,7 @@ Be the Answer — AI Visibility`;
                   ? {t:q.t.replace("Live test: ",""), f:q.fix, w:q.w} : null).filter(Boolean)]
                .sort((a,b) => b.w - a.w).slice(0,5)
       }),
-      _subject: `AI Visibility Audit lead — ${scannedBiz || scannedUrl.replace(/^https?:\/\//,"")} scored ${score}`,
+      _subject: `AO Audit lead — ${scannedBiz || scannedUrl.replace(/^https?:\/\//,"")} scored ${score}`,
       _template: "table",
       _autoresponse: autoreply
     })
