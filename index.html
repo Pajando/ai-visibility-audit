@@ -12,9 +12,20 @@
 {
   "@context": "https://schema.org",
   "@graph": [
+    { "@type": "Organization",
+      "@id": "https://aoaudit.com/#org",
+      "name": "The AO Audit",
+      "alternateName": "AO — Answer Optimization",
+      "url": "https://aoaudit.com/",
+      "description": "Answer Optimization (AO): making businesses the answer AI engines give. Free AO Score audits, the Be the Answer playbook, and done-for-you AO Sprints.",
+      "founder": { "@type": "Person", "name": "Alejandro Ojeda" },
+      "sameAs": [
+        "https://aoaudit.gumroad.com"
+      ] },
     { "@type": "WebSite",
       "name": "The AO Audit",
       "url": "https://aoaudit.com/",
+      "publisher": { "@id": "https://aoaudit.com/#org" },
       "description": "The AO Audit (Answer Optimization) scans a business website live and scores how visible it is to AI engines (ChatGPT, Gemini, Perplexity, Google AI Mode) and AI agents — your AO Score — with a prioritized fix list." },
     { "@type": "FAQPage",
       "mainEntity": [
