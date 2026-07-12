@@ -1,0 +1,11 @@
+name: Ping IndexNow on deploy
+on:
+  push:
+    branches: [main]
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          sleep 90  # let Pages finish deploying
+          curl -s "https://api.indexnow.org/indexnow?url=https://aoaudit.com/&key=6a4a62df61505caa89ffd7a7bb584b47" -o /dev/null -w "IndexNow ping: HTTP %{http_code}\n"
