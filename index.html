@@ -690,7 +690,7 @@ PILLARS: ${pillarsTxt}
 Your 3 fastest wins:
 ${wins.map((f,n) => `${n+1}. ${f.fix}`).join("\n")}
 
-Your full illustrated AI Visibility Report — every finding explained, charts, and your prioritized 30-day fix plan — is being prepared now and will arrive in this inbox within 24 hours.
+Your full illustrated AI Visibility Report — every finding explained, charts, and your prioritized 30-day fix plan — is being prepared now and will arrive in this inbox within 48 hours.
 
 Talk soon,
 Alejandro
@@ -707,7 +707,7 @@ Be the Answer — AI Visibility`;
       grade: g,
       pillars: pillarsTxt,
       failed_checks: failed,
-      next_action: "Send their full PDF report within 24 hours",
+      next_action: "Send their full PDF report within 48 hours",
       _subject: `AI Visibility Audit lead — ${scannedBiz || scannedUrl.replace(/^https?:\/\//,"")} scored ${score}`,
       _template: "table",
       _autoresponse: autoreply
