@@ -443,6 +443,7 @@ async function runScan(rawUrl){
   const robots = await relayFetch(origin + "/robots.txt");
   let blocked = [];
   if(robots.ok && /user-agent/i.test(robots.text)) blocked = robotsBlocks(robots.text);
+  lastBlocked = blocked;
   add("code", 6, "All major AI engines allowed to read your site", blocked.length === 0,
     blocked.length ? `robots.txt blocks: ${blocked.join(" · ")}` : `Open to all ${Object.keys(ENGINE_BOTS).length} AI ecosystems we check: ChatGPT, Claude, Gemini, Perplexity, Meta AI, Apple Intelligence, Alexa+, DuckDuckGo, and model-training crawlers`,
     "Unblock the AI crawlers in robots.txt (GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot, Google-Extended, Meta-ExternalAgent, Applebot-Extended, Amazonbot and friends). Every blocked engine is a whole audience of AI answers you can never appear in.");
@@ -573,6 +574,7 @@ function buildQuiz(){
 /* ---------- scoring & results ---------- */
 let scannedUrl = "";
 let scannedBiz = "";
+let lastBlocked = [];
 let unlocked = false;
 function computeScore(){
   let got = 0, max = 0;
@@ -708,6 +710,22 @@ Be the Answer — AI Visibility`;
       pillars: pillarsTxt,
       failed_checks: failed,
       next_action: "Send their full PDF report within 48 hours",
+      report_json: JSON.stringify({
+        business: scannedBiz, site: scannedUrl.replace(/^https?:\/\//,"").replace(/\/$/,""),
+        name: gname, score, grade: g,
+        pillars: Object.fromEntries(PILLARS.map(pl =>
+          [pl.name, per[pl.id].max ? Math.round(per[pl.id].got/per[pl.id].max*100) : 0])),
+        blocked: lastBlocked,
+        findings: [
+          ...auto.map(a => [a.label, a.pass ? "pass" : "fail", a.detail]),
+          ...MQS.map((q,i) => [q.t.replace("Live test: ",""),
+            manswers[i]==="yes" ? "pass" : manswers[i]==="no" ? "fail" : "verify", q.h])
+        ],
+        fixes: [...auto.filter(a => !a.pass).map(a => ({t:a.label, f:a.fix, w:a.w})),
+                ...MQS.map((q,i) => manswers[i] !== "yes"
+                  ? {t:q.t.replace("Live test: ",""), f:q.fix, w:q.w} : null).filter(Boolean)]
+               .sort((a,b) => b.w - a.w).slice(0,5)
+      }),
       _subject: `AI Visibility Audit lead — ${scannedBiz || scannedUrl.replace(/^https?:\/\//,"")} scored ${score}`,
       _template: "table",
       _autoresponse: autoreply
