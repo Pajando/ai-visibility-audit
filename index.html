@@ -185,7 +185,7 @@ footer{padding:2.5rem 0 3.5rem;color:var(--dim);font-size:.84rem;border-top:1px 
     <button class="btn" type="submit" id="scanbtn">Scan my website →</button>
   </form>
   <div class="err" id="urlerr" aria-live="polite"></div>
-  <p class="tiny">Live scan of your real site · 13 automated checks + 6 you confirm · Prioritized fix list</p>
+  <p class="tiny">Live scan of your real site · 15 automated checks + 6 you confirm · Prioritized fix list</p>
   <p class="tiny" style="margin-top:.5rem">Not ready? <a href="sample-report.pdf">See a real sample report first</a> — no email needed.</p>
 </div></header>
 
@@ -200,7 +200,7 @@ footer{padding:2.5rem 0 3.5rem;color:var(--dim);font-size:.84rem;border-top:1px 
   <h2>Sixty seconds to the truth</h2>
   <div class="steps">
     <div class="stepc"><b class="n">1</b><h3>We scan your site — live</h3>
-      <p>Your homepage, robots.txt and llms.txt, checked for the 13 machine-readability signals AI
+      <p>Your homepage, robots.txt and llms.txt, checked for the 15 machine-readability signals AI
       engines actually use: schema markup, crawler access, content structure, pricing, booking.</p></div>
     <div class="stepc"><b class="n">2</b><h3>You confirm 6 things robots can't see</h3>
       <p>Your Google Business Profile, reviews, and two live ChatGPT tests — the checks that need a human.</p></div>
@@ -261,18 +261,10 @@ footer{padding:2.5rem 0 3.5rem;color:var(--dim);font-size:.84rem;border-top:1px 
         <input type="text" id="g-name" name="name" placeholder="First name" autocomplete="given-name">
         <input type="email" id="g-email" name="email" placeholder="Email address" autocomplete="email" required>
         <div class="err" id="gerr" aria-live="polite"></div>
-        <button class="btn" type="submit" id="gbtn">Email me my unlock code</button>
-        <p class="tiny" style="margin:.8rem 0 0">We'll send your scorecard and occasional practical
-        AI-visibility tips. No spam, unsubscribe anytime.</p>
-      </form>
-      <form id="codeform" novalidate hidden>
-        <p class="tiny" id="codesent" style="margin:0 0 .5rem"></p>
-        <input type="text" id="g-code" inputmode="numeric" autocomplete="one-time-code"
-          placeholder="4-digit code" maxlength="4" style="text-align:center;letter-spacing:.4em;font-size:1.3rem">
-        <div class="err" id="cerr" aria-live="polite"></div>
-        <button class="btn" type="submit" id="cbtn">Verify & unlock my report</button>
-        <p class="tiny" style="margin:.8rem 0 0">No email after a minute? Check spam, or
-        <a href="#" id="resend">resend the code</a>.</p>
+        <button class="btn" type="submit" id="gbtn">Send it & unlock my report</button>
+        <p class="tiny" style="margin:.8rem 0 0">Your full report is emailed to this address —
+        a typo here means no report. We'll also send occasional practical AI-visibility tips.
+        No spam, unsubscribe anytime.</p>
       </form>
     </div>
   </div>
@@ -653,8 +645,6 @@ document.getElementById("scanform").addEventListener("submit", async e => {
   document.getElementById("results").style.display = "none";
   document.getElementById("manual").style.display = "none";
   document.getElementById("gate").hidden = true;
-  document.getElementById("gateform").hidden = false;
-  document.getElementById("codeform").hidden = true;
   manswers.fill(null);
   unlocked = false;
   document.getElementById("scanpanel").scrollIntoView({behavior:"smooth"});
@@ -676,67 +666,15 @@ document.getElementById("scanform").addEventListener("submit", async e => {
   setTimeout(() => document.getElementById("manual").scrollIntoView({behavior:"smooth"}), 600);
 });
 
-let unlockCode = "", leadName = "", leadEmail = "";
-
-function sendCode(){
-  unlockCode = String(Math.floor(1000 + Math.random()*9000));
-  return fetch(LEAD_ENDPOINT, {
-    method:"POST",
-    headers:{"Content-Type":"application/json","Accept":"application/json"},
-    body: JSON.stringify({
-      email: leadEmail,
-      website: scannedUrl,
-      status: "unlock code requested (not yet verified)",
-      _subject: `Unlock code requested — ${scannedBiz || scannedUrl.replace(/^https?:\/\//,"")}`,
-      _template: "table",
-      _autoresponse:
-`Your AI Visibility Report unlock code: ${unlockCode}
-
-Enter it on the audit page to open your results for ${scannedBiz || scannedUrl.replace(/^https?:\/\//,"")}.
-Your full illustrated report follows within 48 hours.
-
-— Alejandro, Be the Answer — AI Visibility`
-    })
-  });
-}
-
 document.getElementById("gateform").addEventListener("submit", e => {
   e.preventDefault();
-  leadEmail = document.getElementById("g-email").value.trim();
-  leadName = document.getElementById("g-name").value.trim();
-  const err = document.getElementById("gerr");
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(leadEmail)){ err.textContent = "Please enter a valid email address."; return; }
-  err.textContent = "";
+  const email = document.getElementById("g-email").value.trim();
+  const gerr = document.getElementById("gerr");
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ gerr.textContent = "Please enter a valid email address."; return; }
+  gerr.textContent = "";
+  const leadName = document.getElementById("g-name").value.trim();
   const btn = document.getElementById("gbtn");
-  btn.disabled = true; btn.textContent = "Sending your code…";
-  sendCode().then(() => {
-    document.getElementById("gateform").hidden = true;
-    document.getElementById("codeform").hidden = false;
-    document.getElementById("codesent").textContent = `We emailed a 4-digit code to ${leadEmail}.`;
-    document.getElementById("g-code").focus();
-  }).catch(() => {
-    err.textContent = "Couldn't send the code — check your connection and try again.";
-  }).finally(() => { btn.disabled = false; btn.textContent = "Email me my unlock code"; });
-});
-
-document.getElementById("resend").addEventListener("click", e => {
-  e.preventDefault();
-  sendCode().then(() => {
-    document.getElementById("codesent").textContent = `New code sent to ${leadEmail} — use the newest email.`;
-  });
-});
-
-document.getElementById("codeform").addEventListener("submit", e => {
-  e.preventDefault();
-  const cerr = document.getElementById("cerr");
-  if(document.getElementById("g-code").value.trim() !== unlockCode){
-    cerr.textContent = "That code doesn't match — check the newest email (and spam).";
-    return;
-  }
-  cerr.textContent = "";
-  const btn = document.getElementById("cbtn");
   btn.disabled = true; btn.textContent = "Unlocking…";
-  const email = leadEmail;
   const {score, per} = computeScore();
   const failed = auto.filter(a => !a.pass).map(a => a.label).join(" · ") || "none";
   const gname = leadName;
@@ -795,7 +733,7 @@ Be the Answer — AI Visibility`;
       _autoresponse: autoreply
     })
   }).catch(()=>{}).finally(() => {
-    btn.disabled = false; btn.textContent = "Verify & unlock my report";
+    btn.disabled = false; btn.textContent = "Send it & unlock my report";
     showResults(false);
   });
 });
