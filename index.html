@@ -118,7 +118,7 @@ p{max-width:65ch}
 /* manual questions */
 #manual{display:none}
 .q{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:1rem 1.2rem;margin:.7rem 0}
-.q .qt{font-weight:600;margin:0 0 .2rem}
+.q .qt,.qt{font-weight:600;margin:0 0 .2rem;font-size:1.02rem;font-family:"IBM Plex Sans",sans-serif}
 .q .qh{color:var(--dim);font-size:.86rem;margin:0 0 .7rem}
 .opts{display:flex;gap:.6rem;flex-wrap:wrap}
 .opts button{background:transparent;border:1px solid var(--line);color:var(--dim);border-radius:6px;
@@ -284,28 +284,28 @@ footer{padding:2.5rem 0 3.5rem;color:var(--dim);font-size:.84rem;border-top:1px 
 <section id="objections"><div class="wrap narrow">
   <p class="kicker">Still on the fence?</p>
   <h2>Let's clear that up</h2>
-  <div class="q"><p class="qt">“Is this real, or just AI hype?”</p>
+  <div class="q"><h3 class="qt">“Is this real, or just AI hype?”</h3>
     <ul class="objs">
       <li>Every claim in your report cites its source — platform documentation and published studies, not our own marketing.</li>
       <li><a href="sample-report.pdf">See a real sample report</a> before you give us anything.</li>
       <li>The scan runs on <strong>your actual website, live</strong> — not a template.</li>
     </ul></div>
-  <div class="q"><p class="qt">“I've been burned by SEO people before.”</p>
+  <div class="q"><h3 class="qt">“I've been burned by SEO people before.”</h3>
     <ul class="objs">
       <li>The audit and your full report are <strong>free</strong> — you see exactly what we know before spending a cent.</li>
       <li>No contracts, no retainers, no black box: the report lists every fix in plain English.</li>
       <li>The playbook is $39 with a 30-day no-questions refund.</li>
     </ul></div>
-  <div class="q"><p class="qt">“I'm not technical.”</p>
+  <div class="q"><h3 class="qt">“I'm not technical.”</h3>
     <ul class="objs">
       <li>Every fix is copy-paste with step-by-step instructions; most take under an hour with free tools.</li>
       <li>Don't want to touch it? The Sprint: we implement everything for you in 14 days.</li>
     </ul></div>
-  <div class="q"><p class="qt">“I don't have time to manage this.”</p>
+  <div class="q"><h3 class="qt">“I don't have time to manage this.”</h3>
     <ul class="objs">
       <li>That's the Sprint — reply to your report email and it's handled: every fix live in 14 days, $497, or it's free.</li>
     </ul></div>
-  <div class="q"><p class="qt">“Will this work for my industry?”</p>
+  <div class="q"><h3 class="qt">“Will this work for my industry?”</h3>
     <ul class="objs">
       <li>If a customer might ever ask an AI “what's the best [what you do] near me” — yes.</li>
       <li>The checks are the same ones every AI engine runs on every business.</li>
@@ -317,6 +317,7 @@ footer{padding:2.5rem 0 3.5rem;color:var(--dim);font-size:.84rem;border-top:1px 
 <footer><div class="wrap">
   <p>The AO Audit · Answer Optimization (AO) · aoaudit.com · Based on July 2026 research: Google I/O 2026 announcements, the Stripe/OpenAI
   Agentic Commerce Protocol, SE Ranking citation studies, and the 10,000-query GEO research.</p>
+  <p>Want the full system? <a href="https://aoaudit.gumroad.com/l/playbook">Buy now: Be the Answer — The AI-Search Authority Playbook, $39</a>.</p>
   <p>This site practices what it preaches — view source for the JSON-LD, <a href="robots.txt">robots.txt</a>,
   <a href="llms.txt">llms.txt</a>. We scan only the address you submit, when you submit it.</p>
 </div></footer>
@@ -566,7 +567,7 @@ const manswers = new Array(MQS.length).fill(null);
 function buildQuiz(){
   const quiz = document.getElementById("quiz");
   quiz.innerHTML = MQS.map((q,i) => `<div class="q" data-i="${i}">
-    <p class="qt">${q.t}</p><p class="qh">${q.h}</p>
+    <h3 class="qt">${q.t}</h3><p class="qh">${q.h}</p>
     <div class="opts">
       <button type="button" data-v="yes">Yes</button>
       <button type="button" data-v="no">No</button>
