@@ -19,14 +19,20 @@
     { "@type": "FAQPage",
       "mainEntity": [
         { "@type": "Question",
-          "name": "What is an AI visibility audit?",
-          "acceptedAnswer": { "@type": "Answer", "text": "An AI visibility audit measures whether AI engines like ChatGPT, Gemini, Perplexity, and Google AI Mode can find, understand, cite, and recommend your business. This free audit scans your actual website live — checking schema markup, AI-crawler access in robots.txt, llms.txt, content structure, pricing transparency, and booking capability — then returns a 0–100 score with a prioritized fix list." } },
+          "name": "Is this real, or just AI hype?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Every claim in your report cites its source — platform documentation and published studies, not our own marketing. You can view a real sample report before providing anything, and the scan runs live on your actual website, not a template." } },
         { "@type": "Question",
-          "name": "Why does AI visibility matter for my business?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Google's AI Mode has over one billion monthly users, AI Overviews answer many searches before anyone clicks, and agents now book services and buy products on customers' behalf. Businesses that are ambiguous or unstructured to machines don't get penalized — they simply never come up in the answer." } },
+          "name": "I've been burned by SEO people before.",
+          "acceptedAnswer": { "@type": "Answer", "text": "The audit and your full report are free — you see exactly what we know before spending a cent. No contracts, no retainers, no black box: the report lists every fix in plain English. The playbook is $39 with a 30-day no-questions refund." } },
         { "@type": "Question",
-          "name": "Is the audit really free?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Yes. The live website scan and your personalized fix list are free. You enter your email to receive your results and scorecard. The complete step-by-step playbook for fixing every gap is a paid PDF." } }
+          "name": "I'm not technical. Can I still do this?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Every fix is copy-paste with step-by-step instructions, and most take under an hour with free tools. If you'd rather not touch it, the Sprint service implements everything for you in 14 days." } },
+        { "@type": "Question",
+          "name": "I don't have time to manage this.",
+          "acceptedAnswer": { "@type": "Answer", "text": "That's what the Sprint is for — reply to your report email and it's handled: every fix live in 14 days for $497, or it's free." } },
+        { "@type": "Question",
+          "name": "Will this work for my industry?",
+          "acceptedAnswer": { "@type": "Answer", "text": "If a customer might ever ask an AI 'what's the best [what you do] near me' — yes. The checks are the same ones every AI engine runs on every business." } }
       ] }
   ]
 }
@@ -110,6 +116,10 @@ p{max-width:65ch}
 .opts button.sel-yes{background:var(--teal-deep);border-color:var(--teal-deep);color:#fff}
 .opts button.sel-no{background:#5b2620;border-color:#5b2620;color:#fff}
 .opts button.sel-ns{background:#4d3c12;border-color:#4d3c12;color:#fff}
+.objs{list-style:none;padding-left:.2rem;margin:.5rem 0 0}
+.objs li{margin:.4rem 0;font-size:.95rem;color:var(--dim);padding-left:1.3rem;position:relative}
+.objs li::before{content:"✓";color:var(--teal);position:absolute;left:0;font-weight:700}
+.objs li strong,.objs li a{color:var(--ink)}
 
 /* gate + results */
 #r-wrap{position:relative}
@@ -176,6 +186,7 @@ footer{padding:2.5rem 0 3.5rem;color:var(--dim);font-size:.84rem;border-top:1px 
   </form>
   <div class="err" id="urlerr" aria-live="polite"></div>
   <p class="tiny">Live scan of your real site · 13 automated checks + 6 you confirm · Prioritized fix list</p>
+  <p class="tiny" style="margin-top:.5rem">Not ready? <a href="sample-report.pdf">See a real sample report first</a> — no email needed.</p>
 </div></header>
 
 <div class="stats wrap" style="padding:0">
@@ -234,6 +245,10 @@ footer{padding:2.5rem 0 3.5rem;color:var(--dim);font-size:.84rem;border-top:1px 
     <p id="buysoon" hidden><strong style="color:var(--teal)">You're on the list.</strong>
     <span class="dim">The playbook launches this week — as an early subscriber you'll get it first
     (and at the founding price). Watch your inbox.</span></p>
+    <p class="tiny" style="margin-top:1.1rem">Playbook: $39 · 30-day no-questions refund.
+    Prefer done-for-you? <strong>The Sprint</strong> — every fix in your report live in 14 days,
+    $497, <em>or it's free</em>. Reply to your report email to claim a spot.
+    (For scale: a traditional SEO agency runs $3,000+/month.)</p>
   </div>
   <p class="tiny">Made fixes? <a href="#" id="reset">Re-scan your site</a> — scores update in real time.</p>
   </div>
@@ -252,6 +267,39 @@ footer{padding:2.5rem 0 3.5rem;color:var(--dim);font-size:.84rem;border-top:1px 
       </form>
     </div>
   </div>
+</div></section>
+
+<section id="objections"><div class="wrap narrow">
+  <p class="kicker">Still on the fence?</p>
+  <h2>Let's clear that up</h2>
+  <div class="q"><p class="qt">“Is this real, or just AI hype?”</p>
+    <ul class="objs">
+      <li>Every claim in your report cites its source — platform documentation and published studies, not our own marketing.</li>
+      <li><a href="sample-report.pdf">See a real sample report</a> before you give us anything.</li>
+      <li>The scan runs on <strong>your actual website, live</strong> — not a template.</li>
+    </ul></div>
+  <div class="q"><p class="qt">“I've been burned by SEO people before.”</p>
+    <ul class="objs">
+      <li>The audit and your full report are <strong>free</strong> — you see exactly what we know before spending a cent.</li>
+      <li>No contracts, no retainers, no black box: the report lists every fix in plain English.</li>
+      <li>The playbook is $39 with a 30-day no-questions refund.</li>
+    </ul></div>
+  <div class="q"><p class="qt">“I'm not technical.”</p>
+    <ul class="objs">
+      <li>Every fix is copy-paste with step-by-step instructions; most take under an hour with free tools.</li>
+      <li>Don't want to touch it? The Sprint: we implement everything for you in 14 days.</li>
+    </ul></div>
+  <div class="q"><p class="qt">“I don't have time to manage this.”</p>
+    <ul class="objs">
+      <li>That's the Sprint — reply to your report email and it's handled: every fix live in 14 days, $497, or it's free.</li>
+    </ul></div>
+  <div class="q"><p class="qt">“Will this work for my industry?”</p>
+    <ul class="objs">
+      <li>If a customer might ever ask an AI “what's the best [what you do] near me” — yes.</li>
+      <li>The checks are the same ones every AI engine runs on every business.</li>
+    </ul></div>
+  <p style="margin-top:1.5rem"><strong>The only risk is staying invisible — the scan is free.</strong>
+  <a class="btn" href="#audit" style="margin-left:1rem">Scan my website →</a></p>
 </div></section>
 
 <footer><div class="wrap">
