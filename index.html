@@ -335,15 +335,18 @@ const PILLARS = [
 /* ---------- fetch through CORS relays ---------- */
 async function relayFetch(url){
   const targets = [
+    u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
     u => `https://api.allorigins.win/get?url=${encodeURIComponent(u)}`,
     u => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(u)}`,
   ];
   for(const t of targets){
     try{
-      const r = await fetch(t(url), {signal: AbortSignal.timeout(20000)});
+      const turl = t(url);
+      const r = await fetch(turl, {signal: AbortSignal.timeout(25000)});
+      if(r.status === 404 && turl.includes("/raw?")) return {ok:false, status:404, text:""};
       if(!r.ok) continue;
       const ct = r.headers.get("content-type") || "";
-      if(ct.includes("application/json") && t === targets[0]){
+      if(ct.includes("application/json") && turl.includes("/get?")){
         const j = await r.json();
         const code = j.status && j.status.http_code;
         if(code && code >= 400) return {ok:false, status:code, text:""};
