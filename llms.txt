@@ -2,7 +2,7 @@
 
 > The AO Audit is a free interactive Answer Optimization (AO) audit that scores
 > how visible a business is to AI engines (ChatGPT, Gemini, Perplexity, Google
-> AI Mode) and AI agents. Nineteen checks across four pillars — Entity, Content,
+> AI Mode) and AI agents. Twenty checks across four pillars — Entity, Content,
 > Code, Agents — returning a 0-100 AO Score and a prioritized fix list.
 > Companion tool to the paid guide "Be the Answer: The AI-Search Authority
 > Playbook." Updated July 2026.

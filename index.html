@@ -484,6 +484,15 @@ async function runScan(rawUrl){
     "Add a sitemap.xml and submit it to Google Search Console AND Bing Webmaster Tools (bing.com/webmasters) — analyses find the large majority (~87% in one 2026 study) of ChatGPT search citations come from Bing's index, and most businesses never claim it.");
   upd(l, hasSm ? "ok" : "warn", hasSm ? "sitemap.xml found" : "No sitemap.xml");
 
+  const metaRobots = (doc.querySelector('meta[name="robots"]')||{content:""}).content || "";
+  const noindex = /noindex/i.test(metaRobots);
+  const hasCanonical = !!doc.querySelector('link[rel="canonical"]');
+  add("code", 6, "Indexable — no noindex tag", !noindex,
+    noindex ? "A noindex meta tag is telling EVERY search engine and AI to ignore this page" :
+      (hasCanonical ? "No noindex; canonical URL set" : "No noindex (tip: add a canonical link tag)"),
+    "Remove the noindex meta tag — it tells every search engine and AI engine to skip the page entirely. Then set a canonical link tag so machines know the one true address of each page.");
+  log(noindex ? "bad" : "ok", noindex ? "CRITICAL: noindex tag found — invisible to all engines" : "Indexable — no noindex tag");
+
   const jsOnly = bodyText.length < 400;
   add("code", 6, "Content readable without JavaScript", !jsOnly,
     jsOnly ? `Only ${bodyText.length} characters of visible text in raw HTML — AI crawlers likely see a blank page` : `${Math.round(bodyText.length/100)/10}k characters of machine-readable text`,
@@ -551,10 +560,10 @@ async function runScan(rawUrl){
 const MQS = [
  {p:"entity", w:6, t:"Is your Google Business Profile claimed, 100% complete, and updated in the last 30 days?",
    h:"It feeds Google's AI answers directly; inactive profiles lose impressions.",
-   fix:"Claim and complete your Google Business Profile and post 1–2× per week — it feeds Gemini-powered answers directly."},
+   fix:"Claim and complete your Google Business Profile and post 1–2× per week — it feeds Gemini-powered answers directly. And get your primary category exactly right: local-ranking studies rate it the #1 positive factor, and the wrong one the #1 negative."},
  {p:"entity", w:5, t:"Have you received (and responded to) reviews in the last 30 days?",
    h:"Volume, recency, and responses are core AI trust signals.",
-   fix:"Set up a review ask after every sale and respond to every review — recent, answered reviews are a core AI trust signal."},
+   fix:"Set up a review ask after every sale and respond to every review — recent, answered reviews are a core AI trust signal. Local-ranking studies (Sterling Sky) find rankings dip after ~3 weeks without a fresh review, so build the habit, not a blitz."},
  {p:"entity", w:5, t:"Have you claimed Bing Places AND Apple Business (formerly Business Connect)?",
    h:"Bing Places feeds Microsoft Copilot and Alexa; Apple Business is the ONLY source Siri checks.",
    fix:"Claim both free profiles: bingplaces.com (feeds Copilot + Alexa + ChatGPT's ecosystem) and business.apple.com (the only data source Siri and Apple Intelligence check for local businesses)."},
