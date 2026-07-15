@@ -337,8 +337,10 @@ const PILLARS = [
 ];
 
 /* ---------- fetch through CORS relays ---------- */
+const PRIVATE_RELAY = ""; // when set (https://ao-relay.<name>.workers.dev), it becomes the primary
 async function relayFetch(url){
   const targets = [
+    ...(PRIVATE_RELAY ? [u => `${PRIVATE_RELAY}/?url=${encodeURIComponent(u)}`] : []),
     u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
     u => `https://api.allorigins.win/get?url=${encodeURIComponent(u)}`,
     u => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(u)}`,
@@ -346,7 +348,7 @@ async function relayFetch(url){
   for(const t of targets){
     try{
       const turl = t(url);
-      const r = await fetch(turl, {signal: AbortSignal.timeout(25000)});
+      const r = await fetch(turl, {signal: AbortSignal.timeout(12000)});
       if(r.status === 404 && turl.includes("/raw?")) return {ok:false, status:404, text:""};
       if(!r.ok) continue;
       const ct = r.headers.get("content-type") || "";
@@ -426,6 +428,13 @@ async function runScan(rawUrl){
   let l = log("run", `Fetching ${url} …`);
   const page = await relayFetch(url);
   if(!page.ok || page.text.length < 100){
+    // Control check: can we reach a site that is never down? If not, OUR relay is the problem — never blame their site.
+    const control = await relayFetch("https://example.com/");
+    if(!control.ok){
+      upd(l, "bad", "Our scanning service is briefly overloaded — this is on our side, not yours.");
+      log("warn", "Answer the quick questions below anyway: leave your email and we'll run your full scan ourselves and send your AO Score in the report.");
+      return {fatal:"unreachable", relayDown:true, origin, url};
+    }
     upd(l, "bad", `Couldn't fetch ${url} — the site may be down, or it blocks automated readers entirely.`);
     log("warn", "Ironically, that's itself a finding: if we can't read it, many AI crawlers can't either.");
     return {fatal:"unreachable", origin, url};
@@ -634,6 +643,7 @@ function buildQuiz(){
 
 /* ---------- scoring & results ---------- */
 let scannedUrl = "";
+let relayOutage = false;
 let scannedBiz = "";
 let lastBlocked = [];
 let unlocked = false;
@@ -710,9 +720,12 @@ document.getElementById("scanform").addEventListener("submit", async e => {
   document.getElementById("scanpanel").scrollIntoView({behavior:"smooth"});
   const res = await runScan(raw);
   btn.disabled = false; btn.textContent = "Scan my website →";
+  relayOutage = !!res.relayDown;
   if(res.fatal === "unreachable"){
     scannedUrl = res.url || raw;
-    document.getElementById("scantitle").textContent = "We couldn't read your site";
+    document.getElementById("scantitle").textContent = relayOutage
+      ? "Our scanner is briefly busy — we'll run your scan for you"
+      : "We couldn't read your site";
   } else if(res.fatal){
     err.textContent = res.fatal;
     document.getElementById("scanpanel").style.display = "none";
@@ -771,10 +784,12 @@ Be the Answer — aoaudit.com`;
       grade: g,
       pillars: pillarsTxt,
       failed_checks: failed,
-      next_action: "Send their full PDF report within 48 hours",
+      next_action: relayOutage
+        ? "RELAY OUTAGE during their scan — automated checks are missing. Run the full scan manually, then send their PDF report within 48 hours"
+        : "Send their full PDF report within 48 hours",
       report_json: JSON.stringify({
         business: scannedBiz, site: scannedUrl.replace(/^https?:\/\//,"").replace(/\/$/,""),
-        name: gname, email, score, grade: g,
+        name: gname, email, score, grade: g, relay_outage: relayOutage,
         pillars: Object.fromEntries(PILLARS.map(pl =>
           [pl.name, per[pl.id].max ? Math.round(per[pl.id].got/per[pl.id].max*100) : 0])),
         blocked: lastBlocked,
