@@ -436,6 +436,35 @@ async function runScan(rawUrl){
   const bodyText = (doc.body ? doc.body.textContent : "").replace(/\s+/g," ").trim();
   const htmlLower = page.text.toLowerCase();
 
+  /* Loop deeper: follow up to 2 key interior pages so pricing/FAQ/booking claims
+     are verified against more than the homepage. */
+  l = log("run", "Scanning key interior pages\u2026");
+  const wantedLink = /(pricing|prices|price-list|rates|visit|tasting|experience|menu|services|faq|book|shop|wines|store)/i;
+  const seenPages = new Set(); const candidates = [];
+  for(const a of doc.querySelectorAll("a")){
+    const h = a.getAttribute("href") || "";
+    if(!wantedLink.test(h)) continue;
+    let u; try{ u = new URL(h, url).href; }catch(e){ continue; }
+    if(!u.startsWith(origin)) continue;
+    const key = u.replace(/[#?].*$/,"").replace(/\/$/,"");
+    if(!key || seenPages.has(key) || key === url.replace(/\/$/,"")) continue;
+    seenPages.add(key); candidates.push(key);
+    if(candidates.length >= 2) break;
+  }
+  const interior = [];
+  if(candidates.length){
+    const rs = await Promise.all(candidates.map(u => relayFetch(u)));
+    rs.forEach((r,i) => { if(r.ok && r.text.length > 300)
+      interior.push({u: candidates[i], d: new DOMParser().parseFromString(r.text, "text/html")}); });
+  }
+  const pageDocs = [{u: url, d: doc}, ...interior];
+  const pathOf = x => { try{ return new URL(x).pathname || "/"; }catch(e){ return x; } };
+  const textOf = d => (d.body ? d.body.textContent : "").replace(/\s+/g," ");
+  upd(l, "ok", interior.length
+    ? `Also scanned ${interior.length} interior page(s): ${interior.map(p=>pathOf(p.u)).join(", ")}`
+    : "No key interior pages reachable \u2014 judging from the homepage");
+
+
   /* CODE pillar */
   l = log("run", "Checking structured data (JSON-LD schema)…");
   const ld = extractJsonLd(doc);
@@ -452,7 +481,8 @@ async function runScan(rawUrl){
     "Add Organization or LocalBusiness JSON-LD with name, description, contact info, and a sameAs array linking every profile (Google, LinkedIn, socials, Yelp).");
   log(hasOrg ? "ok" : "bad", hasOrg ? "Business identity schema present" : "No Organization/LocalBusiness schema");
 
-  const hasFaq = types.some(t => String(t).toLowerCase() === "faqpage");
+  const hasFaq = pageDocs.some(p => extractJsonLd(p.d).some(o =>
+    String(o["@type"]).toLowerCase().includes("faqpage")));
   add("code", 5, "FAQPage schema (highest-impact type for AI answers)", hasFaq,
     hasFaq ? "FAQ schema found — pre-chunked answers machines love" : "No FAQPage schema",
     "Build a FAQ page from your 10 most-asked customer questions and mark it up with FAQPage schema — the single highest-impact schema for AI answers.");
@@ -507,7 +537,7 @@ async function runScan(rawUrl){
     `Title: ${title ? '"' + title.slice(0,60) + '"' : "missing"} · Description: ${desc ? desc.length + " chars" : "missing"}`,
     "Write a specific title and 120–160 character meta description that state what you do, for whom, where — the first thing retrieval engines read.");
 
-  const heads = [...doc.querySelectorAll("h1,h2,h3")].map(h => h.textContent.trim()).filter(Boolean);
+  const heads = pageDocs.flatMap(p => [...p.d.querySelectorAll("h1,h2,h3")].map(h => h.textContent.trim())).filter(Boolean);
   const qHeads = heads.filter(h => /\?|^(how|what|why|when|where|who|which|can|should|do|does|is|are)\b/i.test(h));
   add("content", 5, "Question-style headings (answer-ready structure)", qHeads.length >= 1,
     qHeads.length ? `${qHeads.length} question-style heading(s), e.g. "${qHeads[0].slice(0,60)}"` : `${heads.length} headings found, none phrased as customer questions`,
@@ -519,9 +549,11 @@ async function runScan(rawUrl){
     fresh ? "Current-year or dated content detected" : "No visible dates or current-year references found",
     "Add visible published/updated dates and current-year references. AI engines prefer quoting provably-current content.");
 
-  const price = /\$\s?\d|€\s?\d|£\s?\d/.test(bodyText) || /pricing|price list|our prices|rates\b/i.test(bodyText) || [...doc.querySelectorAll("a")].some(a => /pricing|prices|rates/i.test(a.getAttribute("href")||""));
+  const priceRe = /\$\s?\d|€\s?\d|£\s?\d|pricing|price list|our prices|rates\b/i;
+  const pricePage = pageDocs.find(p => priceRe.test(textOf(p.d)));
+  const price = !!pricePage || [...doc.querySelectorAll("a")].some(a => /pricing|prices|rates/i.test(a.getAttribute("href")||""));
   add("content", 5, "Pricing transparency", price,
-    price ? "Price information detected" : "No prices or pricing page detected",
+    price ? (pricePage ? `Price information found on ${pathOf(pricePage.u)}` : "Pricing page linked from your homepage") : `No prices found on your homepage${interior.length ? " or " + interior.map(p=>pathOf(p.u)).join(", ") : ""}`,
     "Publish prices or honest ranges. “Contact us for pricing” means the AI quotes your competitor's transparent page instead — and the agent books them.");
   upd(l, "ok", "Content signals analyzed");
 
@@ -541,7 +573,8 @@ async function runScan(rawUrl){
 
   /* AGENTS pillar */
   l = log("run", "Checking agent-readiness…");
-  const bookish = links.some(h => /calendly|acuity|booksy|squareup|square\.site|setmore|appointlet|bookings?|schedule|checkout|cart|shop|store|buy|order|reserv/i.test(h)) || /book (now|online|an appointment)|add to cart|buy now|order online|reserve/i.test(bodyText);
+  const bookRe = /book (now|online|an appointment)|add to cart|buy now|order online|reserve/i;
+  const bookish = links.some(h => /calendly|acuity|booksy|squareup|square\.site|setmore|appointlet|bookings?|schedule|checkout|cart|shop|store|buy|order|reserv/i.test(h)) || pageDocs.some(p => bookRe.test(textOf(p.d)));
   add("agents", 6, "Online booking / purchase path", bookish,
     bookish ? "Booking or purchase path detected" : "No booking link, cart, or ordering path found",
     "Add a real booking link (Calendly or your industry's platform) or online checkout. Agents route to businesses whose calendars and carts they can act on.");
