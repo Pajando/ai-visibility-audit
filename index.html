@@ -337,7 +337,7 @@ const PILLARS = [
 ];
 
 /* ---------- fetch through CORS relays ---------- */
-const PRIVATE_RELAY = ""; // when set (https://ao-relay.<name>.workers.dev), it becomes the primary
+const PRIVATE_RELAY = "https://ao-relay.aojedamedia.workers.dev"; // our own Cloudflare Worker — primary relay
 async function relayFetch(url){
   const targets = [
     ...(PRIVATE_RELAY ? [u => `${PRIVATE_RELAY}/?url=${encodeURIComponent(u)}`] : []),
