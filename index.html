@@ -50,8 +50,11 @@
 </script>
 <style>
 :root{
-  --bg:#0B1622; --bg2:#0F1D2C; --panel:#14243677; --ink:#E7EEF5; --dim:#8CA0B3;
-  --teal:#22B899; --teal-deep:#0E7C66; --amber:#F5A623; --red:#E86A5B; --line:#1E3143;
+  /* light theme: white ground, black ink, Claude terracotta for actions, steel blue for structure */
+  --bg:#FFFFFF; --bg2:#FAF9F5; --panel:#FAF9F5; --ink:#191919; --dim:#5A554B;
+  --orange:#D97757; --orange-deep:#B4552D; --blue:#2F6B9A; --blue-deep:#24557C;
+  /* legacy names still used by the scan JS (score ring + pillar bars): good=blue, mid=orange, poor=red */
+  --teal:#2F6B9A; --teal-deep:#24557C; --amber:#D97757; --red:#C0392B; --line:#E7E1D6;
   --max:64rem;
 }
 *{box-sizing:border-box}
@@ -61,25 +64,25 @@ html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);
   font-family:"IBM Plex Sans",system-ui,sans-serif;line-height:1.65;font-size:1.02rem}
 h1,h2,h3{font-family:"Bricolage Grotesque","IBM Plex Sans",sans-serif;line-height:1.08;text-wrap:balance}
-a{color:var(--teal)}
+a{color:var(--orange-deep)}
 .wrap{max-width:var(--max);margin:0 auto;padding:0 1.4rem}
 .narrow{max-width:46rem}
 
 .hero{padding:4.5rem 0 3.2rem;
-  background:radial-gradient(1100px 550px at 85% -10%, #12314055, transparent)}
-.eyebrow{color:var(--teal);font-weight:600;letter-spacing:.16em;text-transform:uppercase;font-size:.78rem;margin:0 0 1.1rem}
+  background:radial-gradient(1100px 550px at 85% -10%, #F3E7DC88, transparent)}
+.eyebrow{color:var(--blue);font-weight:600;letter-spacing:.16em;text-transform:uppercase;font-size:.78rem;margin:0 0 1.1rem}
 .hero h1{font-size:clamp(2.1rem,5.6vw,3.7rem);font-weight:800;margin:0 0 1rem;max-width:24ch}
-.hero h1 em{color:var(--teal);font-style:normal}
+.hero h1 em{color:var(--orange);font-style:normal}
 .hero p.sub{color:var(--dim);font-size:1.12rem;max-width:50ch;margin:0 0 1.8rem}
 .urlbox{display:flex;gap:.6rem;flex-wrap:wrap;max-width:36rem}
 .urlbox input{flex:1;min-width:14rem;padding:1rem 1.1rem;border-radius:8px;border:1px solid var(--line);
-  background:#0F1D2C;color:var(--ink);font:400 1.05rem "IBM Plex Sans",sans-serif}
-.urlbox input:focus-visible{outline:2px solid var(--teal)}
-.btn{display:inline-block;background:var(--teal);color:#04110D;font-weight:600;border:0;
+  background:#fff;color:var(--ink);font:400 1.05rem "IBM Plex Sans",sans-serif}
+.urlbox input:focus-visible{outline:2px solid var(--orange)}
+.btn{display:inline-block;background:var(--orange);color:#fff;font-weight:600;border:0;
   padding:.9rem 1.7rem;border-radius:8px;text-decoration:none;font-size:1.02rem;cursor:pointer;
   font-family:"IBM Plex Sans",sans-serif}
-.btn:hover{filter:brightness(1.1)}
-.btn:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.btn:hover{filter:brightness(.92)}
+.btn:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
 .btn[disabled]{opacity:.6;cursor:wait}
 .tiny{color:var(--dim);font-size:.84rem}
 .err{color:var(--red);font-size:.9rem;min-height:1.3rem;margin:.5rem 0 0}
@@ -87,11 +90,11 @@ a{color:var(--teal)}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:1px;background:var(--line);
   border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .stat{background:var(--bg2);padding:1.4rem}
-.stat b{display:block;font-family:"Bricolage Grotesque",sans-serif;font-size:1.9rem;color:var(--teal);font-variant-numeric:tabular-nums}
+.stat b{display:block;font-family:"Bricolage Grotesque",sans-serif;font-size:1.9rem;color:var(--blue);font-variant-numeric:tabular-nums}
 .stat span{color:var(--dim);font-size:.88rem}
 
 section{padding:3.4rem 0}
-.kicker{color:var(--teal);font-weight:600;letter-spacing:.14em;text-transform:uppercase;font-size:.75rem;margin:0 0 .5rem}
+.kicker{color:var(--blue);font-weight:600;letter-spacing:.14em;text-transform:uppercase;font-size:.75rem;margin:0 0 .5rem}
 section h2{font-size:clamp(1.6rem,3.2vw,2.3rem);font-weight:800;margin:0 0 1rem}
 p{max-width:65ch}
 .dim{color:var(--dim)}
@@ -105,15 +108,15 @@ p{max-width:65ch}
 
 /* scan console */
 #scanpanel{display:none;background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.console{background:#081019;border:1px solid var(--line);border-radius:10px;padding:1.2rem 1.4rem;
+.console{background:#211D18;color:#EDE8DE;border:1px solid #3A352C;border-radius:10px;padding:1.2rem 1.4rem;
   font-family:"IBM Plex Mono",monospace;font-size:.86rem;line-height:1.9;min-height:12rem}
 .console div{opacity:0;animation:fadein .3s forwards}
 @keyframes fadein{to{opacity:1}}
-.console .ok::before{content:"✓ ";color:var(--teal)}
-.console .bad::before{content:"✗ ";color:var(--red)}
-.console .warn::before{content:"! ";color:var(--amber)}
-.console .run::before{content:"… ";color:var(--dim)}
-.console .info::before{content:"→ ";color:var(--dim)}
+.console .ok::before{content:"✓ ";color:#85B9E2}
+.console .bad::before{content:"✗ ";color:#EC8B72}
+.console .warn::before{content:"! ";color:#E5A05F}
+.console .run::before{content:"… ";color:#A29C90}
+.console .info::before{content:"→ ";color:#A29C90}
 
 /* manual questions */
 #manual{display:none}
@@ -123,13 +126,13 @@ p{max-width:65ch}
 .opts{display:flex;gap:.6rem;flex-wrap:wrap}
 .opts button{background:transparent;border:1px solid var(--line);color:var(--dim);border-radius:6px;
   padding:.45rem 1.1rem;cursor:pointer;font:600 .9rem "IBM Plex Sans",sans-serif}
-.opts button:hover{border-color:var(--teal)}
-.opts button.sel-yes{background:var(--teal-deep);border-color:var(--teal-deep);color:#fff}
-.opts button.sel-no{background:#5b2620;border-color:#5b2620;color:#fff}
-.opts button.sel-ns{background:#4d3c12;border-color:#4d3c12;color:#fff}
+.opts button:hover{border-color:var(--orange)}
+.opts button.sel-yes{background:var(--blue);border-color:var(--blue);color:#fff}
+.opts button.sel-no{background:#C0392B;border-color:#C0392B;color:#fff}
+.opts button.sel-ns{background:#C07A2E;border-color:#C07A2E;color:#fff}
 .objs{list-style:none;padding-left:.2rem;margin:.5rem 0 0}
 .objs li{margin:.4rem 0;font-size:.95rem;color:var(--dim);padding-left:1.3rem;position:relative}
-.objs li::before{content:"✓";color:var(--teal);position:absolute;left:0;font-weight:700}
+.objs li::before{content:"✓";color:var(--blue);position:absolute;left:0;font-weight:700}
 .objs li strong,.objs li a{color:var(--ink)}
 
 /* gate + results */
@@ -137,13 +140,13 @@ p{max-width:65ch}
 #r-content.locked{filter:blur(14px);pointer-events:none;user-select:none}
 .gateover{position:absolute;inset:0;z-index:10;display:flex;justify-content:center;
   align-items:flex-start;padding:4.5rem 1rem 0}
-.gate{max-width:30rem;width:100%;background:#101f2ef2;border:1px solid var(--teal-deep);
-  box-shadow:0 20px 60px #00000088;border-radius:14px;padding:2rem;text-align:center}
+.gate{max-width:30rem;width:100%;background:#FFFFFFFA;border:1px solid var(--blue);
+  box-shadow:0 20px 60px #00000022;border-radius:14px;padding:2rem;text-align:center}
 .gate h3{margin:0 0 .4rem;font-size:1.4rem}
 .gate p{margin:.3rem auto 1.2rem;color:var(--dim);font-size:.95rem}
 .gate input{width:100%;padding:.85rem 1rem;margin:.4rem 0;border-radius:6px;border:1px solid var(--line);
-  background:#0B1622;color:var(--ink);font:400 1rem "IBM Plex Sans",sans-serif}
-.gate input:focus-visible{outline:2px solid var(--teal)}
+  background:#fff;color:var(--ink);font:400 1rem "IBM Plex Sans",sans-serif}
+.gate input:focus-visible{outline:2px solid var(--orange)}
 .gate .btn{width:100%;margin-top:.6rem}
 
 #results{display:none}
@@ -168,10 +171,10 @@ p{max-width:65ch}
 .finding.check .fi{color:var(--amber)}
 .finding .fd{color:var(--dim);font-size:.85rem}
 .fixes{margin:2rem 0}
-.fix{border-left:3px solid var(--amber);background:#181307;border-radius:0 8px 8px 0;padding:.9rem 1.2rem;margin:.8rem 0}
-.fix b{color:var(--amber)}
+.fix{border-left:3px solid var(--orange);background:#FBF1E9;border-radius:0 8px 8px 0;padding:.9rem 1.2rem;margin:.8rem 0}
+.fix b{color:var(--orange-deep)}
 .fix p{margin:.2rem 0 0;font-size:.92rem;color:var(--dim)}
-.upsell{background:linear-gradient(135deg,#0d2a22,#122334);border:1px solid var(--teal-deep);
+.upsell{background:linear-gradient(135deg,#FBF3ED,#EEF3F8);border:1px solid var(--blue);
   border-radius:14px;padding:2rem;margin:2.5rem 0;text-align:center}
 .upsell h3{font-size:1.5rem;margin:0 0 .5rem}
 .upsell p{margin:0 auto 1.3rem;color:var(--dim)}
@@ -500,28 +503,41 @@ async function runScan(rawUrl){
   l = log("run", `Checking ${origin}/robots.txt for AI-crawler blocks…`);
   const robots = await relayFetch(origin + "/robots.txt");
   let blocked = [];
-  if(robots.ok && /user-agent/i.test(robots.text)) blocked = robotsBlocks(robots.text);
-  lastBlocked = blocked;
-  add("code", 6, "All major AI engines allowed to read your site", blocked.length === 0,
-    blocked.length ? `robots.txt blocks: ${blocked.join(" · ")}` : `Open to all ${Object.keys(ENGINE_BOTS).length} AI ecosystems we check: ChatGPT, Claude, Gemini, Perplexity, Meta AI, Apple Intelligence, Alexa+, DuckDuckGo, and model-training crawlers`,
-    "Unblock the AI crawlers in robots.txt (GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot, Google-Extended, Meta-ExternalAgent, Applebot-Extended, Amazonbot and friends). Every blocked engine is a whole audience of AI answers you can never appear in.");
-  upd(l, blocked.length ? "bad" : "ok", blocked.length ? `robots.txt blocks AI engines: ${blocked.join(", ")}` : `All ${Object.keys(ENGINE_BOTS).length} major AI ecosystems can read this site`);
+  if(!robots.ok && robots.status === 0){
+    // relay failed — we did NOT read their robots.txt; never guess pass or fail
+    upd(l, "warn", "Couldn't reach robots.txt this run — check not counted");
+  } else {
+    if(robots.ok && /user-agent/i.test(robots.text)) blocked = robotsBlocks(robots.text);
+    lastBlocked = blocked;
+    add("code", 6, "All major AI engines allowed to read your site", blocked.length === 0,
+      blocked.length ? `robots.txt blocks: ${blocked.join(" · ")}` : `Open to all ${Object.keys(ENGINE_BOTS).length} AI ecosystems we check: ChatGPT, Claude, Gemini, Perplexity, Meta AI, Apple Intelligence, Alexa+, DuckDuckGo, and model-training crawlers`,
+      "Unblock the AI crawlers in robots.txt (GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot, Google-Extended, Meta-ExternalAgent, Applebot-Extended, Amazonbot and friends). Every blocked engine is a whole audience of AI answers you can never appear in.");
+    upd(l, blocked.length ? "bad" : "ok", blocked.length ? `robots.txt blocks AI engines: ${blocked.join(", ")}` : `All ${Object.keys(ENGINE_BOTS).length} major AI ecosystems can read this site`);
+  }
 
   l = log("run", `Checking ${origin}/llms.txt …`);
   const llms = await relayFetch(origin + "/llms.txt");
-  const hasLlms = llms.ok && llms.status < 400 && llms.text.trim().length > 20 && !/^\s*</.test(llms.text.trim());
-  add("code", 3, "llms.txt present", hasLlms,
-    hasLlms ? "Found — nice bonus signal for AI agents" : "Not found (a 20-minute nice-to-have, not a crisis)",
-    "Add an llms.txt file — a short markdown index of your business and key pages for AI agents. 20 minutes, cheap insurance.");
-  upd(l, hasLlms ? "ok" : "warn", hasLlms ? "llms.txt found" : "No llms.txt (minor)");
+  if(!llms.ok && llms.status === 0){
+    upd(l, "warn", "Couldn't reach llms.txt this run — check not counted");
+  } else {
+    const hasLlms = llms.ok && llms.status < 400 && llms.text.trim().length > 20 && !/^\s*</.test(llms.text.trim());
+    add("code", 3, "llms.txt present", hasLlms,
+      hasLlms ? "Found — nice bonus signal for AI agents" : "Not found (a 20-minute nice-to-have, not a crisis)",
+      "Add an llms.txt file — a short markdown index of your business and key pages for AI agents. 20 minutes, cheap insurance.");
+    upd(l, hasLlms ? "ok" : "warn", hasLlms ? "llms.txt found" : "No llms.txt (minor)");
+  }
 
   l = log("run", `Checking ${origin}/sitemap.xml …`);
   const sm = await relayFetch(origin + "/sitemap.xml");
-  const hasSm = sm.ok && sm.status < 400 && /<(urlset|sitemapindex)/i.test(sm.text);
-  add("code", 3, "sitemap.xml present (feeds Google AND Bing→ChatGPT)", hasSm,
-    hasSm ? "Sitemap found" : "No sitemap.xml found at the standard location",
-    "Add a sitemap.xml and submit it to Google Search Console AND Bing Webmaster Tools (bing.com/webmasters) — analyses find the large majority (~87% in one 2026 study) of ChatGPT search citations come from Bing's index, and most businesses never claim it.");
-  upd(l, hasSm ? "ok" : "warn", hasSm ? "sitemap.xml found" : "No sitemap.xml");
+  if(!sm.ok && sm.status === 0){
+    upd(l, "warn", "Couldn't reach sitemap.xml this run — check not counted");
+  } else {
+    const hasSm = sm.ok && sm.status < 400 && /<(urlset|sitemapindex)/i.test(sm.text);
+    add("code", 3, "sitemap.xml present (feeds Google AND Bing→ChatGPT)", hasSm,
+      hasSm ? "Sitemap found" : "No sitemap.xml found at the standard location",
+      "Add a sitemap.xml and submit it to Google Search Console AND Bing Webmaster Tools (bing.com/webmasters) — analyses find the large majority (~87% in one 2026 study) of ChatGPT search citations come from Bing's index, and most businesses never claim it.");
+    upd(l, hasSm ? "ok" : "warn", hasSm ? "sitemap.xml found" : "No sitemap.xml");
+  }
 
   const metaRobots = (doc.querySelector('meta[name="robots"]')||{content:""}).content || "";
   const noindex = /noindex/i.test(metaRobots);
