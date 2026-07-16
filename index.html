@@ -501,7 +501,7 @@ async function runScan(rawUrl){
   /* Loop deeper: follow up to 2 key interior pages so pricing/FAQ/booking claims
      are verified against more than the homepage. */
   l = log("run", "Scanning key interior pages\u2026");
-  const wantedLink = /(pricing|prices|price-list|rates|visit|tasting|experience|menu|services|faq|book|shop|wines|store)/i;
+  const wantedLink = /(pricing|prices|price-list|rates|visit|tasting|experience|menu|services|faq|book|shop|wines|store|about|story|roots|team|contact|events|club|gallery)/i;
   const seenPages = new Set(); const candidates = [];
   for(const a of doc.querySelectorAll("a")){
     const h = a.getAttribute("href") || "";
@@ -511,7 +511,7 @@ async function runScan(rawUrl){
     const key = u.replace(/[#?].*$/,"").replace(/\/$/,"");
     if(!key || seenPages.has(key) || key === url.replace(/\/$/,"")) continue;
     seenPages.add(key); candidates.push(key);
-    if(candidates.length >= 2) break;
+    if(candidates.length >= 5) break;
   }
   const interior = [];
   if(candidates.length){
