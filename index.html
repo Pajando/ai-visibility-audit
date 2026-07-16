@@ -546,7 +546,7 @@ async function runScan(rawUrl){
     String(o["@type"]).toLowerCase().includes("faqpage")));
   add("code", 5, "FAQPage schema (highest-impact type for AI answers)", hasFaq,
     hasFaq ? "FAQ schema found — pre-chunked answers machines love" : "No FAQPage schema",
-    "Build a FAQ page from your 10 most-asked customer questions and mark it up with FAQPage schema — the single highest-impact schema for AI answers.");
+    "Find the real questions your customers ask — Google's 'People also ask', your reviews, what people actually email and call about — then answer the top 10 on a FAQ page with FAQPage schema. The single highest-impact schema for AI answers.");
   log(hasFaq ? "ok" : "warn", hasFaq ? "FAQPage schema present" : "No FAQPage schema found");
 
   l = log("run", `Checking ${origin}/robots.txt for AI-crawler blocks…`);
