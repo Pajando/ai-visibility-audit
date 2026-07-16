@@ -47,7 +47,7 @@
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "Any (web browser)",
       "provider": { "@id": "https://aoaudit.com/#org" },
-      "description": "Enter any business website and get an AO Score in about 60 seconds: 19 automated machine-readability checks (schema, AI-crawler access, content signals, agent-readiness) plus 6 guided manual checks, followed by a free personalized PDF report.",
+      "description": "Enter any business website and get an AO Score in about 60 seconds: 20 automated machine-readability checks (schema, AI-crawler access, content signals, agent-readiness) plus 6 guided manual checks, followed by a free personalized PDF report.",
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" } },
     { "@type": "Product",
       "@id": "https://aoaudit.com/#playbook",
@@ -247,7 +247,7 @@ footer{padding:2.5rem 0 3.5rem;color:var(--dim);font-size:.84rem;border-top:1px 
     <button class="btn" type="submit" id="scanbtn">Scan my website →</button>
   </form>
   <div class="err" id="urlerr" aria-live="polite"></div>
-  <p class="tiny">Live scan of your real site · 19 automated checks + 6 you confirm · Prioritized fix list</p>
+  <p class="tiny">Live scan of your real site · 20 automated checks + 6 you confirm · Prioritized fix list</p>
   <p class="tiny" style="margin-top:.5rem">Not ready? <a href="sample-report.pdf">See a real sample report first</a> — no email needed.</p>
 </div></header>
 
@@ -262,7 +262,7 @@ footer{padding:2.5rem 0 3.5rem;color:var(--dim);font-size:.84rem;border-top:1px 
   <h2>Sixty seconds to the truth</h2>
   <div class="steps">
     <div class="stepc"><b class="n">1</b><h3>We scan your site — live</h3>
-      <p>Your homepage, robots.txt and llms.txt, checked for the 19 machine-readability signals AI
+      <p>Your homepage, robots.txt and llms.txt, checked for the 20 machine-readability signals AI
       engines actually use: schema markup, crawler access, content structure, pricing, booking.</p></div>
     <div class="stepc"><b class="n">2</b><h3>You confirm 6 things robots can't see</h3>
       <p>Your Google Business Profile, reviews, and two live ChatGPT tests — the checks that need a human.</p></div>
@@ -539,7 +539,7 @@ async function runScan(rawUrl){
   const sameAs = ld.some(o => Array.isArray(o.sameAs) && o.sameAs.length >= 2);
   add("code", 6, "Organization / LocalBusiness identity schema", hasOrg,
     hasOrg ? (sameAs ? "Identity schema with sameAs profile links — excellent" : "Identity schema found, but add a sameAs list of your profiles") : "Machines have no structured 'ID card' for your business",
-    "Add Organization or LocalBusiness JSON-LD with name, description, contact info, and a sameAs array linking every profile (Google, LinkedIn, socials, Yelp).");
+    "Add Organization or LocalBusiness JSON-LD with name, description, contact info, and a sameAs array linking every profile (Google, LinkedIn, socials, Yelp). Google's rule: structured data must match your visible page text — never mark up facts the page doesn't show.");
   log(hasOrg ? "ok" : "bad", hasOrg ? "Business identity schema present" : "No Organization/LocalBusiness schema");
 
   const hasFaq = pageDocs.some(p => extractJsonLd(p.d).some(o =>
@@ -571,8 +571,8 @@ async function runScan(rawUrl){
   } else {
     const hasLlms = llms.ok && llms.status < 400 && llms.text.trim().length > 20 && !/^\s*</.test(llms.text.trim());
     add("code", 3, "llms.txt present", hasLlms,
-      hasLlms ? "Found — nice bonus signal for AI agents" : "Not found (a 20-minute nice-to-have, not a crisis)",
-      "Add an llms.txt file — a short markdown index of your business and key pages for AI agents. 20 minutes, cheap insurance.");
+      hasLlms ? "Found — read by some AI agent tools (note: Google says its Search ignores llms.txt)" : "Not found — a 20-minute nice-to-have for AI agent tools; Google's Search ignores it either way",
+      "Add an llms.txt file — a short markdown index of your business for AI agent tools. Honest note: Google states its Search ignores llms.txt; this is for the other agents. 20 minutes, cheap insurance.");
     upd(l, hasLlms ? "ok" : "warn", hasLlms ? "llms.txt found" : "No llms.txt (minor)");
   }
 
@@ -596,6 +596,13 @@ async function runScan(rawUrl){
       (hasCanonical ? "No noindex; canonical URL set" : "No noindex (tip: add a canonical link tag)"),
     "Remove the noindex meta tag — it tells every search engine and AI engine to skip the page entirely. Then set a canonical link tag so machines know the one true address of each page.");
   log(noindex ? "bad" : "ok", noindex ? "CRITICAL: noindex tag found — invisible to all engines" : "Indexable — no noindex tag");
+
+  const snippetBlocked = /nosnippet/i.test(metaRobots) || /max-snippet\s*:\s*0(?!\d)/i.test(metaRobots);
+  add("code", 4, "Snippet-eligible (AI Overviews kill switch off)", !snippetBlocked,
+    snippetBlocked ? "A nosnippet or max-snippet:0 directive is set — by Google's own rules this makes the page INELIGIBLE for AI Overviews and AI Mode" :
+      "No nosnippet/max-snippet restrictions — eligible for AI answers per Google's documentation",
+    "Remove nosnippet / max-snippet:0 from your robots meta tag. Google's documentation: a page must be eligible to show with a snippet to appear in AI Overviews or AI Mode.");
+  log(snippetBlocked ? "bad" : "ok", snippetBlocked ? "CRITICAL: snippet controls block AI Overviews eligibility" : "Snippet-eligible — no AI Overviews kill switch");
 
   const jsOnly = bodyText.length < 400;
   add("code", 6, "Content readable without JavaScript", !jsOnly,
