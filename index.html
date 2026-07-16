@@ -52,9 +52,9 @@
 :root{
   /* light theme: white ground, black ink, Claude terracotta for actions, steel blue for structure */
   --bg:#FFFFFF; --bg2:#FAF9F5; --panel:#FAF9F5; --ink:#191919; --dim:#5A554B;
-  --orange:#D97757; --orange-deep:#B4552D; --blue:#27808E; --blue-deep:#1D6470;
-  /* legacy names still used by the scan JS (score ring + pillar bars): good=blue, mid=orange, poor=red */
-  --teal:#27808E; --teal-deep:#1D6470; --amber:#D97757; --red:#C0392B; --line:#E7E1D6;
+  --orange:#D97757; --orange-deep:#B4552D; --blue:#1E8468; --blue-deep:#176350;
+  /* legacy names still used by the scan JS (score ring + pillar bars): good=teal-green, mid=orange, poor=red */
+  --teal:#1E8468; --teal-deep:#176350; --amber:#D97757; --red:#C0392B; --line:#E7E1D6;
   --max:64rem;
 }
 *{box-sizing:border-box}
@@ -112,7 +112,7 @@ p{max-width:65ch}
   font-family:"IBM Plex Mono",monospace;font-size:.86rem;line-height:1.9;min-height:12rem}
 .console div{opacity:0;animation:fadein .3s forwards}
 @keyframes fadein{to{opacity:1}}
-.console .ok::before{content:"✓ ";color:#7EC4CD}
+.console .ok::before{content:"✓ ";color:#7FCBB4}
 .console .bad::before{content:"✗ ";color:#EC8B72}
 .console .warn::before{content:"! ";color:#E5A05F}
 .console .run::before{content:"… ";color:#A29C90}
@@ -174,7 +174,7 @@ p{max-width:65ch}
 .fix{border-left:3px solid var(--orange);background:#FBF1E9;border-radius:0 8px 8px 0;padding:.9rem 1.2rem;margin:.8rem 0}
 .fix b{color:var(--orange-deep)}
 .fix p{margin:.2rem 0 0;font-size:.92rem;color:var(--dim)}
-.upsell{background:linear-gradient(135deg,#FBF3ED,#EBF4F5);border:1px solid var(--blue);
+.upsell{background:linear-gradient(135deg,#FBF3ED,#EBF5F1);border:1px solid var(--blue);
   border-radius:14px;padding:2rem;margin:2.5rem 0;text-align:center}
 .upsell h3{font-size:1.5rem;margin:0 0 .5rem}
 .upsell p{margin:0 auto 1.3rem;color:var(--dim)}
