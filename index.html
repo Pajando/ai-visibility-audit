@@ -5,6 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The AO Audit — What's Your AO Score? See What AI Actually Sees</title>
 <meta name="description" content="The AO Audit — free Answer Optimization audit: enter your business website and we scan it live — schema markup, AI-crawler access, llms.txt, pricing signals, booking links and more — then get your AO Score: how visible you are to ChatGPT, Gemini, Perplexity, and AI agents. Updated July 2026.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The AO Audit">
+<meta property="og:title" content="The AO Audit — What's Your AO Score? See What AI Actually Sees">
+<meta property="og:description" content="Free instant scan: enter your website and get your AO Score in about 60 seconds — how visible your business is to ChatGPT, Gemini, Claude, Perplexity and AI agents, plus the exact fixes.">
+<meta property="og:url" content="https://aoaudit.com/">
+<meta property="og:image" content="https://aoaudit.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The AO Audit — What's Your AO Score?">
+<meta name="twitter:description" content="Free instant scan: your AO Score in about 60 seconds — how visible you are to ChatGPT, Gemini, Claude, Perplexity and AI agents.">
+<meta name="twitter:image" content="https://aoaudit.com/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
@@ -34,7 +46,7 @@
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "Any (web browser)",
       "provider": { "@id": "https://aoaudit.com/#org" },
-      "description": "Enter any business website and get an AO Score in about 60 seconds: 16 automated machine-readability checks (schema, AI-crawler access, content signals, agent-readiness) plus 6 guided manual checks, followed by a free personalized PDF report.",
+      "description": "Enter any business website and get an AO Score in about 60 seconds: 19 automated machine-readability checks (schema, AI-crawler access, content signals, agent-readiness) plus 6 guided manual checks, followed by a free personalized PDF report.",
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" } },
     { "@type": "Product",
       "@id": "https://aoaudit.com/#playbook",
@@ -234,7 +246,7 @@ footer{padding:2.5rem 0 3.5rem;color:var(--dim);font-size:.84rem;border-top:1px 
     <button class="btn" type="submit" id="scanbtn">Scan my website →</button>
   </form>
   <div class="err" id="urlerr" aria-live="polite"></div>
-  <p class="tiny">Live scan of your real site · 16 automated checks + 6 you confirm · Prioritized fix list</p>
+  <p class="tiny">Live scan of your real site · 19 automated checks + 6 you confirm · Prioritized fix list</p>
   <p class="tiny" style="margin-top:.5rem">Not ready? <a href="sample-report.pdf">See a real sample report first</a> — no email needed.</p>
 </div></header>
 
@@ -249,7 +261,7 @@ footer{padding:2.5rem 0 3.5rem;color:var(--dim);font-size:.84rem;border-top:1px 
   <h2>Sixty seconds to the truth</h2>
   <div class="steps">
     <div class="stepc"><b class="n">1</b><h3>We scan your site — live</h3>
-      <p>Your homepage, robots.txt and llms.txt, checked for the 16 machine-readability signals AI
+      <p>Your homepage, robots.txt and llms.txt, checked for the 19 machine-readability signals AI
       engines actually use: schema markup, crawler access, content structure, pricing, booking.</p></div>
     <div class="stepc"><b class="n">2</b><h3>You confirm 6 things robots can't see</h3>
       <p>Your Google Business Profile, reviews, and two live ChatGPT tests — the checks that need a human.</p></div>
@@ -596,6 +608,24 @@ async function runScan(rawUrl){
   add("content", 4, "Title & meta description", title.length >= 15 && desc.length >= 60,
     `Title: ${title ? '"' + title.slice(0,60) + '"' : "missing"} · Description: ${desc ? desc.length + " chars" : "missing"}`,
     "Write a specific title and 120–160 character meta description that state what you do, for whom, where — the first thing retrieval engines read.");
+
+  const h1s = [...doc.querySelectorAll("h1")].map(h => h.textContent.trim()).filter(Boolean);
+  add("content", 3, "Clear H1 headline", h1s.length >= 1,
+    h1s.length ? `H1: "${h1s[0].slice(0,70)}"` : "No H1 heading — the page never states its main topic in the strongest signal position",
+    "Add one H1 that says what you do, for whom, where — it's the heading search and AI engines weight most.");
+
+  const imgs = [...doc.querySelectorAll("img")];
+  const noAlt = imgs.filter(im => !(im.getAttribute("alt")||"").trim()).length;
+  add("content", 2, "Images described for machines (alt text)", imgs.length === 0 || noAlt <= imgs.length * 0.2,
+    imgs.length === 0 ? "No images on the page — nothing to describe" :
+      noAlt === 0 ? `All ${imgs.length} images have alt text` :
+      `${noAlt} of ${imgs.length} images have no alt text — invisible to AI and screen readers`,
+    "Give every meaningful image a short, specific alt description. Machines can't see your photos — alt text is how they know what's there.");
+
+  const hasOg = !!doc.querySelector('meta[property^="og:"]');
+  add("code", 2, "Open Graph tags (link previews & social signals)", hasOg,
+    hasOg ? "Open Graph tags present" : "No Open Graph tags — links to your site show bare, title-less previews when shared",
+    "Add og:title, og:description, og:url and an og:image (1200×630). Every share of your link becomes a proper card instead of a bare URL.");
 
   const heads = pageDocs.flatMap(p => [...p.d.querySelectorAll("h1,h2,h3")].map(h => h.textContent.trim())).filter(Boolean);
   const qHeads = heads.filter(h => /\?|^(how|what|why|when|where|who|which|can|should|do|does|is|are)\b/i.test(h));
