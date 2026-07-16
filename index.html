@@ -658,9 +658,10 @@ async function runScan(rawUrl){
     "Link your Google, LinkedIn company page, social and review profiles from your site and list them in schema sameAs — LinkedIn is Microsoft-owned, ranks in Bing (which feeds ChatGPT and Copilot), and is how machines confirm all your profiles are one entity.");
 
   const tel = links.some(h => h.startsWith("tel:")) || ld.some(o => o.telephone) || /\(\d{3}\)\s?\d{3}[- ]\d{4}|\+\d{7,}/.test(bodyText);
-  add("entity", 4, "Machine-readable contact info", tel,
-    tel ? "Phone/contact detected" : "No clickable phone or structured contact info found",
-    "Add a clickable tel: phone link and put contact details in your LocalBusiness schema — agents verify businesses they can contact.");
+  const mail = links.some(h => h.startsWith("mailto:")) || ld.some(o => o.email);
+  add("entity", 4, "Machine-readable contact info", tel || mail,
+    tel ? "Phone/contact detected" : mail ? "Clickable email contact detected" : "No clickable phone or email, and no contact info in your schema",
+    "Add a clickable tel: phone link (or mailto: email) and put contact details in your schema — agents verify businesses they can contact.");
   upd(l, "ok", "Entity signals checked");
 
   /* AGENTS pillar */
