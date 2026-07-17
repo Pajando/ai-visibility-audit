@@ -440,7 +440,7 @@ function extractJsonLd(doc){
 const ENGINE_BOTS = {
   "ChatGPT / OpenAI": ["gptbot","oai-searchbot","chatgpt-user"],
   "Claude / Anthropic": ["claudebot","claude-user","claude-searchbot","anthropic-ai"],
-  "Gemini / Google AI": ["google-extended"],
+  "Gemini (apps & training)": ["google-extended"],
   "Perplexity": ["perplexitybot","perplexity-user"],
   "Meta AI": ["meta-externalagent","facebookbot"],
   "Apple Intelligence / Siri": ["applebot-extended"],
@@ -539,13 +539,13 @@ async function runScan(rawUrl){
       .map(el => (el.getAttribute("itemtype")||"").split("/").pop()).filter(Boolean))];
   const rdfa = doc.querySelector("[typeof]") !== null;
   const legacyNote = microTypes.length
-      ? `Legacy microdata found instead (${microTypes.slice(0,4).join(", ")}) — Google and Bing can still parse it, but modern AI pipelines extract JSON-LD and will miss it. The facts are already written: converting takes ~20 minutes.`
-      : (rdfa ? "Legacy RDFa markup found instead — Google and Bing can still parse it, but modern AI pipelines extract JSON-LD and will miss it. Convert (~20 minutes)."
-              : "No machine-readable schema found on the homepage — not modern JSON-LD, not legacy microdata. (If your website builder injects schema with JavaScript, know that most AI crawlers read raw HTML and won't see it either — that's the problem to fix.)");
+      ? `Legacy microdata found instead (${microTypes.slice(0,4).join(", ")}) — valid microdata works fine for Google (their docs: all three formats are equally fine), but Google recommends JSON-LD as easier to maintain, and most third-party AI tooling extracts JSON-LD blocks. The facts are already written: converting takes ~20 minutes.`
+      : (rdfa ? "Legacy RDFa markup found instead — valid RDFa works for Google, but Google recommends JSON-LD and most third-party AI tooling extracts JSON-LD blocks. Convert (~20 minutes)."
+              : "No machine-readable schema found on the homepage — not modern JSON-LD, not legacy microdata. (If your website builder injects schema with JavaScript, know that most non-Google AI crawlers read raw HTML and won't see it either — that's the problem to fix.)");
   add("code", 7, "JSON-LD structured data present", ld.length > 0,
     ld.length ? `Found: ${types.slice(0,6).join(", ")}` : legacyNote,
     (microTypes.length || rdfa)
-      ? "Convert your existing legacy markup to JSON-LD — same facts, the format Google recommends and AI pipelines actually read. Validate free at validator.schema.org."
+      ? "Convert your existing legacy markup to JSON-LD — same facts, the format Google officially recommends (easier to maintain) and the one third-party AI tooling actually extracts. Validate free at validator.schema.org."
       : "Add JSON-LD structured data. It's how you speak to machines in their native language — industry studies find sites with clean schema get cited up to 3.2× more.");
   upd(l, ld.length ? "ok" : "bad", ld.length ? `Schema found: ${types.slice(0,6).join(", ")}`
       : (microTypes.length || rdfa) ? "Only LEGACY schema (microdata/RDFa) — convert to JSON-LD" : "No JSON-LD schema found");
@@ -576,7 +576,7 @@ async function runScan(rawUrl){
     lastBlocked = blocked;
     add("code", 6, "All major AI engines allowed to read your site", blocked.length === 0,
       blocked.length ? `robots.txt blocks: ${blocked.join(" · ")}` : `Open to all ${Object.keys(ENGINE_BOTS).length} AI ecosystems we check: ChatGPT, Claude, Gemini, Perplexity, Meta AI, Apple Intelligence, Alexa+, DuckDuckGo, and model-training crawlers`,
-      "Unblock the AI crawlers in robots.txt (GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot, Google-Extended, Meta-ExternalAgent, Applebot-Extended, Amazonbot and friends). Every blocked engine is a whole audience of AI answers you can never appear in.");
+      "Unblock the AI crawlers in robots.txt (GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot, Google-Extended, Meta-ExternalAgent, Applebot-Extended, Amazonbot and friends). Every blocked engine is an audience you can never appear in. (Precision note: Google-Extended governs Gemini apps and model training — Google Search\u2019s own AI answers ride the normal Googlebot.)");
     upd(l, blocked.length ? "bad" : "ok", blocked.length ? `robots.txt blocks AI engines: ${blocked.join(", ")}` : `All ${Object.keys(ENGINE_BOTS).length} major AI ecosystems can read this site`);
   }
 
@@ -602,7 +602,7 @@ async function runScan(rawUrl){
     const hasSm = sm.ok && sm.status < 400 && /<(urlset|sitemapindex)/i.test(sm.text);
     add("code", 3, "sitemap.xml present (feeds Google AND Bing→ChatGPT)", hasSm,
       hasSm ? "Sitemap found" : "No sitemap.xml found at the standard location",
-      "Add a sitemap.xml and submit it to Google Search Console AND Bing Webmaster Tools (bing.com/webmasters) — analyses find the large majority (~87% in one 2026 study) of ChatGPT search citations come from Bing's index, and most businesses never claim it.");
+      "Add a sitemap.xml and submit it to Google Search Console AND Bing Webmaster Tools (bing.com/webmasters) — analyses find the large majority (~87% in one 2026 study) of ChatGPT search citations come from Bing's index, and most businesses never claim it. (Google notes small, well-linked sites may not strictly need one — the Bing submission is the prize most skip.)");
     upd(l, hasSm ? "ok" : "warn", hasSm ? "sitemap.xml found" : "No sitemap.xml");
   }
 
