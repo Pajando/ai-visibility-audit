@@ -531,10 +531,21 @@ async function runScan(rawUrl){
   l = log("run", "Checking structured data (JSON-LD schema)…");
   const ld = extractJsonLd(doc);
   const types = [...new Set(ld.map(o => o["@type"]).flat().filter(Boolean))];
+  // legacy formats: microdata (itemtype attrs) and RDFa (typeof attrs) — Google/Bing parse them, most AI pipelines don't
+  const microTypes = [...new Set([...doc.querySelectorAll("[itemtype]")]
+      .map(el => (el.getAttribute("itemtype")||"").split("/").pop()).filter(Boolean))];
+  const rdfa = doc.querySelector("[typeof]") !== null;
+  const legacyNote = microTypes.length
+      ? `Legacy microdata found instead (${microTypes.slice(0,4).join(", ")}) — Google and Bing can still parse it, but modern AI pipelines extract JSON-LD and will miss it. The facts are already written: converting takes ~20 minutes.`
+      : (rdfa ? "Legacy RDFa markup found instead — Google and Bing can still parse it, but modern AI pipelines extract JSON-LD and will miss it. Convert (~20 minutes)."
+              : "No machine-readable schema found on the homepage — not modern JSON-LD, not legacy microdata.");
   add("code", 7, "JSON-LD structured data present", ld.length > 0,
-    ld.length ? `Found: ${types.slice(0,6).join(", ")}` : "No machine-readable schema found on the homepage",
-    "Add JSON-LD structured data. It's how you speak to machines in their native language — industry studies find sites with clean schema get cited up to 3.2× more.");
-  upd(l, ld.length ? "ok" : "bad", ld.length ? `Schema found: ${types.slice(0,6).join(", ")}` : "No JSON-LD schema found");
+    ld.length ? `Found: ${types.slice(0,6).join(", ")}` : legacyNote,
+    (microTypes.length || rdfa)
+      ? "Convert your existing legacy markup to JSON-LD — same facts, the format Google recommends and AI pipelines actually read. Validate free at validator.schema.org."
+      : "Add JSON-LD structured data. It's how you speak to machines in their native language — industry studies find sites with clean schema get cited up to 3.2× more.");
+  upd(l, ld.length ? "ok" : "bad", ld.length ? `Schema found: ${types.slice(0,6).join(", ")}`
+      : (microTypes.length || rdfa) ? "Only LEGACY schema (microdata/RDFa) — convert to JSON-LD" : "No JSON-LD schema found");
 
   const hasOrg = types.some(t => /organization|localbusiness|store|restaurant|professionalservice|medicalbusiness|homeandconstructionbusiness|legalservice|dentist|physician|autorepair|realestateagent/i.test(String(t)));
   const sameAs = ld.some(o => Array.isArray(o.sameAs) && o.sameAs.length >= 2);
