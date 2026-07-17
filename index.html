@@ -47,7 +47,7 @@
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "Any (web browser)",
       "provider": { "@id": "https://aoaudit.com/#org" },
-      "description": "Enter any business website and get an AO Score in about 60 seconds: 20 automated machine-readability checks (schema, AI-crawler access, content signals, agent-readiness) plus 6 guided manual checks, followed by a free personalized PDF report.",
+      "description": "Enter any business website and get an AO Score in about 60 seconds: 21 automated machine-readability checks (schema, AI-crawler access, content signals, agent-readiness) plus 6 guided manual checks, followed by a free personalized PDF report.",
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" } },
     { "@type": "Product",
       "@id": "https://aoaudit.com/#playbook",
@@ -247,7 +247,7 @@ footer{padding:2.5rem 0 3.5rem;color:var(--dim);font-size:.84rem;border-top:1px 
     <button class="btn" type="submit" id="scanbtn">Scan my website →</button>
   </form>
   <div class="err" id="urlerr" aria-live="polite"></div>
-  <p class="tiny">Live scan of your real site · 20 automated checks + 6 you confirm · Prioritized fix list</p>
+  <p class="tiny">Live scan of your real site · 21 automated checks + 6 you confirm · Prioritized fix list</p>
   <p class="tiny" style="margin-top:.5rem">Not ready? <a href="sample-report.pdf">See a real sample report first</a> — no email needed.</p>
 </div></header>
 
@@ -263,7 +263,7 @@ footer{padding:2.5rem 0 3.5rem;color:var(--dim);font-size:.84rem;border-top:1px 
   <h2>Sixty seconds to the truth</h2>
   <div class="steps">
     <div class="stepc"><b class="n">1</b><h3>We scan your site — live</h3>
-      <p>Your homepage, robots.txt and llms.txt, checked for the 20 machine-readability signals AI
+      <p>Your homepage, robots.txt and llms.txt, checked for the 21 machine-readability signals AI
       engines actually use: schema markup, crawler access, content structure, pricing, booking.</p></div>
     <div class="stepc"><b class="n">2</b><h3>You confirm 6 things robots can't see</h3>
       <p>Your Google Business Profile, reviews, and two live ChatGPT tests — the checks that need a human.</p></div>
@@ -620,7 +620,18 @@ async function runScan(rawUrl){
     snippetBlocked ? "A nosnippet or max-snippet:0 directive is set — by Google's own rules this makes the page INELIGIBLE for AI Overviews and AI Mode" :
       "No nosnippet/max-snippet restrictions — eligible for AI answers per Google's documentation",
     "Remove nosnippet / max-snippet:0 from your robots meta tag. Google's documentation: a page must be eligible to show with a snippet to appear in AI Overviews or AI Mode.");
-  log(snippetBlocked ? "bad" : "ok", snippetBlocked ? "CRITICAL: snippet controls block AI Overviews eligibility" : "Snippet-eligible — no AI Overviews kill switch");
+  log(snippetBlocked ? "bad" : "ok", snippetBlocked ? "CRITICAL: snippet controls block AI Overviews eligibility" : "Snippet-eligible — no AI Overviews kill switch (Google)");
+
+  const msBlocked = /noarchive/i.test(metaRobots);
+  const msLimited = /nocache/i.test(metaRobots);
+  add("code", 4, "Copilot-eligible (Microsoft's AI kill switch off)", !msBlocked,
+    msBlocked ? "A noarchive tag is set — by Microsoft's rules this EXCLUDES your content from Copilot answers entirely (not even a link). Many older sites carry this tag innocently: for 20 years it just hid the 'Cached' link. Now it erases you from Microsoft's AI." :
+      msLimited ? "A nocache tag limits Copilot to your URL, title and snippet only — partial visibility in Microsoft's AI answers" :
+      "No noarchive/nocache restrictions — fully eligible for Copilot answers per Microsoft's rules",
+    "Remove the legacy noarchive meta tag (it once merely hid the 'Cached' link; today Microsoft's rules make it a total Copilot exclusion). This is for BING and COPILOT — the index that also feeds most of ChatGPT's search citations.");
+  log(msBlocked ? "bad" : msLimited ? "warn" : "ok",
+    msBlocked ? "CRITICAL: noarchive tag erases this site from Copilot (Microsoft)" :
+    msLimited ? "nocache limits Copilot to snippet-only (Microsoft)" : "Copilot-eligible — no Microsoft AI kill switch");
 
   const jsOnly = bodyText.length < 400;
   add("code", 6, "Content readable without JavaScript", !jsOnly,
@@ -634,12 +645,12 @@ async function runScan(rawUrl){
   const desc = (doc.querySelector('meta[name="description"]')||{content:""}).content || "";
   add("content", 4, "Title & meta description", title.length >= 15 && desc.length >= 60,
     `Title: ${title ? '"' + title.slice(0,60) + '"' : "missing"} · Description: ${desc ? desc.length + " chars" : "missing"}`,
-    "Write a specific title and 120–160 character meta description that state what you do, for whom, where — the first thing retrieval engines read.");
+    "Write a specific title and 120–160 character meta description that state what you do, for whom, where — the first thing retrieval engines read. This is for EVERY engine: Google, Bing (→ChatGPT and Copilot), and the LLM crawlers all read it first.");
 
   const h1s = [...doc.querySelectorAll("h1")].map(h => h.textContent.trim()).filter(Boolean);
   add("content", 3, "Clear H1 headline", h1s.length >= 1,
     h1s.length ? `H1: "${h1s[0].slice(0,70)}"` : "No H1 heading — the page never states its main topic in the strongest signal position",
-    "Add one H1 that says what you do, for whom, where — it's the heading search and AI engines weight most.");
+    "Add one H1 that says what you do, for whom, where — it's the heading search and AI engines weight most. For EVERY engine — and Google's Essentials names keywords in headings as a top-impact practice.");
 
   const imgs = [...doc.querySelectorAll("img")];
   const noAlt = imgs.filter(im => !(im.getAttribute("alt")||"").trim()).length;
@@ -647,12 +658,12 @@ async function runScan(rawUrl){
     imgs.length === 0 ? "No images on the page — nothing to describe" :
       noAlt === 0 ? `All ${imgs.length} images have alt text` :
       `${noAlt} of ${imgs.length} images have no alt text — invisible to AI and screen readers`,
-    "Give every meaningful image a short, specific alt description. Machines can't see your photos — alt text is how they know what's there.");
+    "Give every meaningful image a short, specific alt description. Machines can't see your photos — alt text is how they know what's there. For Google (their Essentials names alt text explicitly), accessibility law, and multimodal AI.");
 
   const hasOg = !!doc.querySelector('meta[property^="og:"]');
   add("code", 2, "Open Graph tags (link previews & social signals)", hasOg,
     hasOg ? "Open Graph tags present" : "No Open Graph tags — links to your site show bare, title-less previews when shared",
-    "Add og:title, og:description, og:url and an og:image (1200×630). Every share of your link becomes a proper card instead of a bare URL.");
+    "Add og:title, og:description, og:url and an og:image (1200×630). Every share of your link becomes a proper card instead of a bare URL. For link previews everywhere: Messages, WhatsApp, Slack, social — and the AI assistants that share links.");
 
   const heads = pageDocs.flatMap(p => [...p.d.querySelectorAll("h1,h2,h3")].map(h => h.textContent.trim())).filter(Boolean);
   const qHeads = heads.filter(h => /\?|^(how|what|why|when|where|who|which|can|should|do|does|is|are)\b/i.test(h));
