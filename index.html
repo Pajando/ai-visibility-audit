@@ -422,6 +422,9 @@ async function relayFetch(url){
 /* ---------- scan logic ---------- */
 const auto = []; // {id,p,w,label,pass,detail,fix}
 function add(p,w,label,pass,detail,fix){ auto.push({p,w,label,pass,detail,fix}); }
+function skipCheck(p,label,what){ auto.push({p, w:0, skip:true, pass:false, label,
+  detail:`NOT READABLE this run — our scanner couldn't fetch ${what} (a hiccup on our side, not yours). It may well exist; this check was NOT counted against your score, and we verify it by hand before your full report.`,
+  fix:""}); }
 
 function extractJsonLd(doc){
   const out = [];
@@ -538,7 +541,7 @@ async function runScan(rawUrl){
   const legacyNote = microTypes.length
       ? `Legacy microdata found instead (${microTypes.slice(0,4).join(", ")}) — Google and Bing can still parse it, but modern AI pipelines extract JSON-LD and will miss it. The facts are already written: converting takes ~20 minutes.`
       : (rdfa ? "Legacy RDFa markup found instead — Google and Bing can still parse it, but modern AI pipelines extract JSON-LD and will miss it. Convert (~20 minutes)."
-              : "No machine-readable schema found on the homepage — not modern JSON-LD, not legacy microdata.");
+              : "No machine-readable schema found on the homepage — not modern JSON-LD, not legacy microdata. (If your website builder injects schema with JavaScript, know that most AI crawlers read raw HTML and won't see it either — that's the problem to fix.)");
   add("code", 7, "JSON-LD structured data present", ld.length > 0,
     ld.length ? `Found: ${types.slice(0,6).join(", ")}` : legacyNote,
     (microTypes.length || rdfa)
@@ -567,6 +570,7 @@ async function runScan(rawUrl){
   if(!robots.ok && robots.status === 0){
     // relay failed — we did NOT read their robots.txt; never guess pass or fail
     upd(l, "warn", "Couldn't reach robots.txt this run — check not counted");
+    skipCheck("code", "All major AI engines allowed to read your site", "your robots.txt");
   } else {
     if(robots.ok && /user-agent/i.test(robots.text)) blocked = robotsBlocks(robots.text);
     lastBlocked = blocked;
@@ -580,6 +584,7 @@ async function runScan(rawUrl){
   const llms = await relayFetch(origin + "/llms.txt");
   if(!llms.ok && llms.status === 0){
     upd(l, "warn", "Couldn't reach llms.txt this run — check not counted");
+    skipCheck("code", "llms.txt present", "your llms.txt");
   } else {
     const hasLlms = llms.ok && llms.status < 400 && llms.text.trim().length > 20 && !/^\s*</.test(llms.text.trim());
     add("code", 3, "llms.txt present", hasLlms,
@@ -592,6 +597,7 @@ async function runScan(rawUrl){
   const sm = await relayFetch(origin + "/sitemap.xml");
   if(!sm.ok && sm.status === 0){
     upd(l, "warn", "Couldn't reach sitemap.xml this run — check not counted");
+    skipCheck("code", "sitemap.xml present (feeds Google AND Bing→ChatGPT)", "your sitemap.xml");
   } else {
     const hasSm = sm.ok && sm.status < 400 && /<(urlset|sitemapindex)/i.test(sm.text);
     add("code", 3, "sitemap.xml present (feeds Google AND Bing→ChatGPT)", hasSm,
@@ -781,12 +787,12 @@ function showResults(locked){
       <span>${pct}%</span></div>`;
   }).join("");
   document.getElementById("r-findings").innerHTML = "<h3>What the scan found</h3>" +
-    auto.map(a => `<div class="finding ${a.pass?"pass":"fail"}"><span class="fi">${a.pass?"✓":"✗"}</span>
+    auto.map(a => `<div class="finding ${a.skip?"check":a.pass?"pass":"fail"}"><span class="fi">${a.skip?"?":a.pass?"✓":"✗"}</span>
       <span>${a.label}<br><span class="fd">${a.detail}</span></span></div>`).join("") +
     MQS.map((q,i) => `<div class="finding ${manswers[i]==="yes"?"pass":manswers[i]==="no"?"fail":"check"}">
       <span class="fi">${manswers[i]==="yes"?"✓":manswers[i]==="no"?"✗":"?"}</span>
       <span>${q.t.replace("Live test: ","")}</span></div>`).join("");
-  const missedAuto = auto.filter(a => !a.pass).map(a => ({w:a.w, t:a.label, fix:a.fix, ns:false}));
+  const missedAuto = auto.filter(a => !a.pass && !a.skip).map(a => ({w:a.w, t:a.label, fix:a.fix, ns:false}));
   const missedMan = MQS.map((q,i) => ({w:q.w, t:q.t.replace("Live test: ",""), fix:q.fix, ns:manswers[i]==="ns", a:manswers[i]}))
     .filter(q => q.a !== "yes");
   const missed = [...missedAuto, ...missedMan].sort((a,b) => b.w - a.w).slice(0,5);
@@ -852,11 +858,11 @@ document.getElementById("gateform").addEventListener("submit", e => {
   const btn = document.getElementById("gbtn");
   btn.disabled = true; btn.textContent = "Unlocking…";
   const {score, per} = computeScore();
-  const failed = auto.filter(a => !a.pass).map(a => a.label).join(" · ") || "none";
+  const failed = auto.filter(a => !a.pass && !a.skip).map(a => a.label).join(" · ") || "none";
   const gname = leadName;
   const [g] = grade(score);
   const pillarsTxt = PILLARS.map(pl => `${pl.name} ${per[pl.id].max?Math.round(per[pl.id].got/per[pl.id].max*100):0}%`).join(" · ");
-  const wins = [...auto.filter(a => !a.pass).sort((a,b) => b.w - a.w),
+  const wins = [...auto.filter(a => !a.pass && !a.skip).sort((a,b) => b.w - a.w),
                 ...MQS.map((q,i) => manswers[i] !== "yes" ? {label:q.t.replace("Live test: ",""), fix:q.fix, w:q.w} : null).filter(Boolean)]
                .slice(0,3);
   const autoreply =
@@ -897,11 +903,11 @@ Be the Answer — aoaudit.com`;
           [pl.name, per[pl.id].max ? Math.round(per[pl.id].got/per[pl.id].max*100) : 0])),
         blocked: lastBlocked,
         findings: [
-          ...auto.map(a => [a.label, a.pass ? "pass" : "fail", a.detail]),
+          ...auto.map(a => [a.label, a.skip ? "verify" : a.pass ? "pass" : "fail", a.detail]),
           ...MQS.map((q,i) => [q.t.replace("Live test: ",""),
             manswers[i]==="yes" ? "pass" : manswers[i]==="no" ? "fail" : "verify", q.h])
         ],
-        fixes: [...auto.filter(a => !a.pass).map(a => ({t:a.label, f:a.fix, w:a.w})),
+        fixes: [...auto.filter(a => !a.pass && !a.skip).map(a => ({t:a.label, f:a.fix, w:a.w})),
                 ...MQS.map((q,i) => manswers[i] !== "yes"
                   ? {t:q.t.replace("Live test: ",""), f:q.fix, w:q.w} : null).filter(Boolean)]
                .sort((a,b) => b.w - a.w).slice(0,5)
