@@ -3,6 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YG4SL7CCMS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-YG4SL7CCMS');
+</script>
 <title>The AO Audit — What's Your AO Score? See What AI Actually Sees</title>
 <meta name="description" content="The AO Audit — free Answer Optimization audit: enter your business website and we scan it live — schema markup, AI-crawler access, llms.txt, pricing signals, booking links and more — then get your AO Score: how visible you are to ChatGPT, Gemini, Perplexity, and AI agents. Updated July 2026.">
 <meta property="og:type" content="website">
@@ -374,7 +382,7 @@ footer{padding:2.5rem 0 3.5rem;color:var(--dim);font-size:.84rem;border-top:1px 
   Agentic Commerce Protocol, SE Ranking citation studies, and the 10,000-query GEO research.</p>
   <p>Want the full system? <a href="https://aoaudit.gumroad.com/l/playbook">Buy now: Be the Answer — The AI-Search Authority Playbook, $39</a>.</p>
   <p>This site practices what it preaches — view source for the JSON-LD, <a href="robots.txt">robots.txt</a>,
-  <a href="llms.txt">llms.txt</a>. We scan only the address you submit, when you submit it.</p>
+  <a href="llms.txt">llms.txt</a>. We scan only the address you submit, when you submit it. Google Analytics measures visits.</p>
   <p>Questions? Email <a href="mailto:aojedamedia@gmail.com">aojedamedia@gmail.com</a> — a human (Alejandro) answers.</p>
   <p>From our logs: <a href="self-audit.html">We scanned our own product and published the failing grade — twice</a> ·
   <a href="free-infrastructure.html">The night both free services died — and our scanner blamed the wrong people</a>.</p>
@@ -840,6 +848,7 @@ document.getElementById("scanform").addEventListener("submit", async e => {
   manswers.fill(null);
   unlocked = false;
   document.getElementById("scanpanel").scrollIntoView({behavior:"smooth"});
+  if(typeof gtag === "function") gtag("event", "scan_started", {});
   const res = await runScan(raw);
   btn.disabled = false; btn.textContent = "Scan my website →";
   relayOutage = !!res.relayDown;
@@ -867,6 +876,7 @@ document.getElementById("gateform").addEventListener("submit", e => {
   const gerr = document.getElementById("gerr");
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ gerr.textContent = "Please enter a valid email address."; return; }
   gerr.textContent = "";
+  if(typeof gtag === "function") gtag("event", "generate_lead", {method: "report_gate"});
   const leadName = document.getElementById("g-name").value.trim();
   const btn = document.getElementById("gbtn");
   btn.disabled = true; btn.textContent = "Unlocking…";
