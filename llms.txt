@@ -26,3 +26,7 @@
   more often in AI answers.
 - Businesses that are ambiguous or unstructured to machines are not penalized
   by AI engines - they are simply never mentioned.
+
+## From our logs (original data)
+- [We scanned our own product and published the failing grade](https://aoaudit.com/self-audit.html)
+- [The night both free services died](https://aoaudit.com/free-infrastructure.html)
