@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Night Both Free Services Died — and Our Scanner Blamed the Wrong People | The AO Audit</title>
+<meta name="description" content="On July 15, 2026, both free services our website scanner depended on went down worldwide at the same time — and for a few hours our error message blamed our customers' websites. Here's what we proved, what we rebuilt, and the rule we adopted.">
+<link rel="canonical" href="https://aoaudit.com/free-infrastructure.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Night Both Free Services Died — and Our Scanner Blamed the Wrong People">
+<meta property="og:description" content="Both free dependencies down worldwide, at once — proved with outside probes, fixed in one night, and one error message we'll never write again.">
+<meta property="og:url" content="https://aoaudit.com/free-infrastructure.html">
+<meta property="og:image" content="https://aoaudit.com/og-card.png">
+<script type="application/ld+json">
+{ "@context": "https://schema.org", "@type": "Article",
+  "headline": "The Night Both Free Services Died — and Our Scanner Blamed the Wrong People",
+  "datePublished": "2026-07-18", "dateModified": "2026-07-18",
+  "author": { "@type": "Person", "name": "Alejandro Ojeda" },
+  "publisher": { "@id": "https://aoaudit.com/#org" },
+  "description": "Both free services our scanner depended on went down worldwide at once. What we proved with outside probes, what we rebuilt overnight, and the honesty rule we adopted." }
+</script>
+<style>
+:root{--bg:#F4F1EC;--card:#fff;--ink:#191919;--dim:#5A554B;--green:#1E8468;--orange:#D97757;--orange-deep:#B4552D;--line:#DDD6CA}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;line-height:1.7;font-size:1.04rem}
+.band{height:.5rem;background:var(--green)} .strip{height:.18rem;background:var(--orange)}
+.wrap{max-width:44rem;margin:0 auto;padding:2.5rem 1.4rem 4rem}
+.kicker{color:var(--green);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.78rem;margin:0 0 .6rem}
+h1{font-size:clamp(1.7rem,4.5vw,2.5rem);line-height:1.15;margin:0 0 .6rem}
+h2{font-size:1.35rem;margin:2.2rem 0 .6rem}
+.byline{color:var(--dim);font-size:.9rem;margin:0 0 1.8rem}
+.card{background:var(--card);border-left:4px solid var(--green);border-radius:0 10px 10px 0;padding:1rem 1.3rem;margin:1.4rem 0}
+.num{color:var(--orange-deep);font-weight:700}
+a{color:var(--orange-deep)} .cta{display:inline-block;background:var(--orange);color:#fff;font-weight:600;padding:.85rem 1.6rem;border-radius:8px;text-decoration:none;margin-top:.6rem}
+footer{border-top:1px solid var(--line);margin-top:3rem;padding-top:1.2rem;color:var(--dim);font-size:.85rem}
+</style>
+</head>
+<body>
+<div class="band"></div><div class="strip"></div>
+<div class="wrap">
+<p class="kicker">The AO Audit · Published July 18, 2026</p>
+<h1>The Night Both Free Services Died — and Our Scanner Blamed the Wrong People</h1>
+<p class="byline">By Alejandro Ojeda · Be the Answer · Timestamps from our own logs, July 15–16, 2026.</p>
+
+<p>Our free scanner reads websites the way AI crawlers do. To do that from a browser, it depended on two free public relay services — infrastructure run by strangers, for free, forever. You can guess where this is going.</p>
+
+<h2>What actually happened on July 15?</h2>
+<p>Both relays went down. Not flaky — down, <em>at the same time</em>, returning error <span class="num">522</span>. And here's the part that made it a lesson instead of just a bad night: we couldn't tell at first whether the outage was global or just our corner of the internet. So we proved it — we ran probes from a completely different network, on servers far from ours. Same 522s from there. Worldwide, simultaneous, both suppliers.</p>
+
+<h2>What did our scanner tell customers during the outage?</h2>
+<div class="card"><p style="margin:0"><strong>The wrong thing.</strong> Our error message said: "Couldn't fetch your site — it may be down, or it blocks automated readers." Healthy websites. Real business owners. Being told <em>their</em> site was the problem, because <em>our</em> supplier was down. That message had seemed reasonable when we wrote it. It took an outage to see it was an accusation.</p></div>
+
+<h2>What did we change?</h2>
+<p>Three things, that same night. First, the scanner now runs a control test when a fetch fails — it checks a site that is never down, and if that fails too, the message says the truth: <em>"this is on our side, not yours."</em> Second, any check we couldn't run is labeled <strong>NOT READABLE — not counted against your score</strong>, instead of quietly failing you for our problem. Third, we stopped renting our foundation: we built our own relay, which answered in <span class="num">0.113 seconds</span> from an outside network while both free services were still down. The free ones are backups now.</p>
+
+<h2>What's the rule we took away?</h2>
+<p>Every "free" tool you depend on is someone else's uptime, someone else's budget, someone else's Tuesday. That's fine — until your error messages start blaming your customers for it. The rule we adopted, now printed in every report we send: <em>anything we couldn't read gets labeled as ours to explain — never counted against you, never silently skipped.</em> An audit is only worth what its worst moment tells the truth about.</p>
+
+<p><strong>Want to see what our scanner says about your site?</strong> Free, about a minute, every check shown — including any we couldn't run.</p>
+<p><a class="cta" href="https://aoaudit.com/">Scan my website →</a></p>
+
+<footer>The AO Audit · Answer Optimization · <a href="https://aoaudit.com/">aoaudit.com</a> · More from our logs: <a href="self-audit.html">we scanned our own product and published the failing grade</a>.</footer>
+</div>
+</body>
+</html>
