@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>We Scanned Our Own Product and Published the Failing Grade — Twice | The AO Audit</title>
+<meta name="description" content="Our AI-visibility scanner graded our own website: 69/100 on July 15, 71/100 on July 17 — and the score that looked like progress wasn't. Every check, every failure, and the false pass we caught, published.">
+<link rel="canonical" href="https://aoaudit.com/self-audit.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="We Scanned Our Own Product and Published the Failing Grade — Twice">
+<meta property="og:description" content="69/100, then 71/100 — and why the +2 wasn't progress. A free AI-visibility tool grades itself in public.">
+<meta property="og:url" content="https://aoaudit.com/self-audit.html">
+<meta property="og:image" content="https://aoaudit.com/og-card.png">
+<script type="application/ld+json">
+{ "@context": "https://schema.org", "@type": "Article",
+  "headline": "We Scanned Our Own Product and Published the Failing Grade — Twice",
+  "datePublished": "2026-07-18", "dateModified": "2026-07-18",
+  "author": { "@type": "Person", "name": "Alejandro Ojeda" },
+  "publisher": { "@id": "https://aoaudit.com/#org" },
+  "description": "Our AI-visibility scanner graded our own website: 69/100, then 71/100 — and the score that looked like progress wasn't. Every check, every failure, and the false pass we caught." }
+</script>
+<style>
+:root{--bg:#F4F1EC;--card:#fff;--ink:#191919;--dim:#5A554B;--green:#1E8468;--green-deep:#176350;--orange:#D97757;--orange-deep:#B4552D;--line:#DDD6CA}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;line-height:1.7;font-size:1.04rem}
+.band{height:.5rem;background:var(--green)} .strip{height:.18rem;background:var(--orange)}
+.wrap{max-width:44rem;margin:0 auto;padding:2.5rem 1.4rem 4rem}
+.kicker{color:var(--green);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.78rem;margin:0 0 .6rem}
+h1{font-size:clamp(1.7rem,4.5vw,2.5rem);line-height:1.15;margin:0 0 .6rem}
+h2{font-size:1.35rem;margin:2.2rem 0 .6rem;color:var(--ink)}
+.byline{color:var(--dim);font-size:.9rem;margin:0 0 1.8rem}
+.card{background:var(--card);border-left:4px solid var(--green);border-radius:0 10px 10px 0;padding:1rem 1.3rem;margin:1.4rem 0}
+.num{color:var(--orange-deep);font-weight:700}
+a{color:var(--orange-deep)} .cta{display:inline-block;background:var(--orange);color:#fff;font-weight:600;padding:.85rem 1.6rem;border-radius:8px;text-decoration:none;margin-top:.6rem}
+footer{border-top:1px solid var(--line);margin-top:3rem;padding-top:1.2rem;color:var(--dim);font-size:.85rem}
+</style>
+</head>
+<body>
+<div class="band"></div><div class="strip"></div>
+<div class="wrap">
+<p class="kicker">The AO Audit · Published July 18, 2026</p>
+<h1>We Scanned Our Own Product and Published the Failing Grade — Twice</h1>
+<p class="byline">By Alejandro Ojeda · Be the Answer · Every number below comes from our own scan logs.</p>
+
+<p>Our free tool at <a href="https://aoaudit.com/">aoaudit.com</a> grades how visible a website is to AI engines — ChatGPT, Gemini, Claude, Perplexity, Copilot. On July 15, 2026, we pointed it at our own website. It scored us <span class="num">69 out of 100</span>. We published that. Two days later a fresh scan said <span class="num">71</span>. We published that too — along with the reason the +2 wasn't real progress.</p>
+
+<h2>Why wasn't 69 to 71 an improvement?</h2>
+<p>Because the ruler changed, not just the site. Between the two scans we added two new checks to the scanner — both of which our site happened to pass — so the score rose partly because the test grew. Our report says this in print: <em>"treat this as the new baseline, not a +2 trend."</em> Scores only mean something when the ruler holds still. Most tools quietly change their scoring and let you feel the progress. We flag it, because a number you can't trust is worse than no number.</p>
+
+<h2>What did our own scanner catch us failing?</h2>
+<p>The same thing both times: <span class="num">zero linked profiles</span>. No YouTube channel, no LinkedIn, no X. Twenty of twenty-one automated checks pass — the schema, the crawler access, both AI "kill switches" verified off — and the one failure is the one that requires a human to go build something real. The machines can read us perfectly. They just have almost nothing else on the internet to verify us against. (Our own reports tell clients this exact thing weekly. It stings correctly.)</p>
+
+<h2>What went wrong in the middle?</h2>
+<div class="card"><p style="margin:0">For about four minutes on July 17, our scanner said we passed <strong>21 of 21</strong>. A perfect score — and false. The check that looks for social-profile links had matched the words "youtube" and "facebook" <em>inside the scanner's own code</em>, not actual links on the page. We caught it by re-checking against real links, published the honest 20-of-21, and rebuilt the check. If we'd shipped that false pass to a customer, every score after it would be worth less.</p></div>
+
+<h2>Why publish any of this?</h2>
+<p>Because our whole product is built on one promise: <em>we verify everything the machines read, we test what the machines actually say, and we don't fake the parts nobody can measure.</em> A grading tool that won't grade itself in public is asking you for trust it won't spend on itself. Here's ours, spent: 71, one failing check, one caught false-positive, one honest asterisk on the trend line.</p>
+
+<p><strong>Want your own number?</strong> The scan is free, takes about a minute, and shows every check — including the ones you fail.</p>
+<p><a class="cta" href="https://aoaudit.com/">Scan my website →</a></p>
+
+<footer>The AO Audit · Answer Optimization · <a href="https://aoaudit.com/">aoaudit.com</a> · Questions? <a href="mailto:aojedamedia@gmail.com">aojedamedia@gmail.com</a></footer>
+</div>
+</body>
+</html>
