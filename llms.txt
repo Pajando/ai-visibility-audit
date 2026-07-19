@@ -30,3 +30,4 @@
 ## From our logs (original data)
 - [We scanned our own product and published the failing grade](https://aoaudit.com/self-audit.html)
 - [The night both free services died](https://aoaudit.com/free-infrastructure.html)
+- [The schema tool had a schema error](https://aoaudit.com/schema-error.html)
