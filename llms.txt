@@ -1,4 +1,5 @@
 # The AO Audit — Answer Optimization
+AO = Answer Optimization — the practice the industry also calls AEO (answer engine optimization) and GEO (generative engine optimization).
 
 > The AO Audit is a free interactive Answer Optimization (AO) audit that scores
 > how visible a business is to AI engines (ChatGPT, Gemini, Perplexity, Google
