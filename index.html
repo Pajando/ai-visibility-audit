@@ -590,6 +590,11 @@ async function runScan(rawUrl){
   } else {
     if(robots.ok && /user-agent/i.test(robots.text)) blocked = robotsBlocks(robots.text);
     lastBlocked = blocked;
+    // classic-crawler safety net: a by-name Googlebot/Bingbot block is catastrophic and easy to miss
+    const classicBlocked = ["googlebot","bingbot"].filter(b =>
+      new RegExp("user-agent:\\s*" + b + "[\\s\\S]{0,80}?disallow:\\s*/\\s*($|\\n)", "i").test(robots.text));
+    if(classicBlocked.length)
+      log("bad", `CRITICAL: robots.txt blocks ${classicBlocked.join(" and ")} by name — that removes you from ${classicBlocked.includes("googlebot") ? "Google Search AND its AI features" : ""}${classicBlocked.length === 2 ? " plus " : ""}${classicBlocked.includes("bingbot") ? "Bing, Copilot, and most of ChatGPT's search" : ""}. Fix this before anything else in this report.`);
     add("code", 6, "All major AI engines allowed to read your site", blocked.length === 0,
       blocked.length ? `robots.txt blocks: ${blocked.join(" · ")}` : `Open to all ${Object.keys(ENGINE_BOTS).length} AI ecosystems we check: ChatGPT, Claude, Gemini, Perplexity, Meta AI, Apple Intelligence, Alexa+, DuckDuckGo, and model-training crawlers`,
       "Unblock the AI crawlers in robots.txt (GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot, Google-Extended, Meta-ExternalAgent, Applebot-Extended, Amazonbot and friends). Every blocked engine is an audience you can never appear in. (Precision note: Google-Extended governs Gemini apps and model training — Google Search\u2019s own AI answers ride the normal Googlebot.)");
