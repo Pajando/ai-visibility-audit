@@ -400,11 +400,12 @@ let scannedBiz = "";
 let lastBlocked = [];
 let unlocked = false;
 function computeScore(){
+  // AO Score counts ONLY verified automated checks — never self-reported answers,
+  // and never penalizes a check we couldn't read (skips excluded from the denominator).
   let got = 0, max = 0;
   const per = {}; PILLARS.forEach(pl => per[pl.id] = {got:0, max:0, name:pl.name});
-  auto.forEach(a => { max += a.w; per[a.p].max += a.w; if(a.pass){ got += a.w; per[a.p].got += a.w; } });
-  MQS.forEach((q,i) => { max += q.w; per[q.p].max += q.w; if(manswers[i] === "yes"){ got += q.w; per[q.p].got += q.w; } });
-  return {score: Math.round(got/max*100), per};
+  auto.forEach(a => { if(a.skip) return; max += a.w; per[a.p].max += a.w; if(a.pass){ got += a.w; per[a.p].got += a.w; } });
+  return {score: max ? Math.round(got/max*100) : 0, per};
 }
 function grade(s){
   if(s >= 85) return ["Agent-ready","You're ahead of ~99% of businesses. Protect the lead — this landscape shifts quarterly."];
@@ -429,21 +430,22 @@ function showResults(locked){
       <div class="bar"><i style="width:${pct}%;background:${pct>=65?"var(--teal)":pct>=40?"var(--amber)":"var(--red)"}"></i></div>
       <span>${pct}%</span></div>`;
   }).join("");
-  document.getElementById("r-findings").innerHTML = "<h3>What the scan found</h3>" +
+  document.getElementById("r-findings").innerHTML = "<h3>What the scan verified</h3>" +
     auto.map(a => `<div class="finding ${a.skip?"check":a.pass?"pass":"fail"}"><span class="fi">${a.skip?"?":a.pass?"✓":"✗"}</span>
       <span>${a.label}<br><span class="fd">${a.detail}</span></span></div>`).join("") +
+    `<h3 style="margin-top:1.5rem">Your self-assessment <span style="font-weight:400;font-size:.78rem;color:var(--dim)">— you told us these; they don't affect your verified score. We confirm them in your full audit.</span></h3>` +
     MQS.map((q,i) => `<div class="finding ${manswers[i]==="yes"?"pass":manswers[i]==="no"?"fail":"check"}">
       <span class="fi">${manswers[i]==="yes"?"✓":manswers[i]==="no"?"✗":"?"}</span>
-      <span>${q.t.replace("Live test: ","")}</span></div>`).join("");
-  const missedAuto = auto.filter(a => !a.pass && !a.skip).map(a => ({w:a.w, t:a.label, fix:a.fix, ns:false}));
-  const missedMan = MQS.map((q,i) => ({w:q.w, t:q.t.replace("Live test: ",""), fix:q.fix, ns:manswers[i]==="ns", a:manswers[i]}))
+      <span>${q.t.replace("Live test: ","")} <span class="fd">(self-reported)</span></span></div>`).join("");
+  const missedAuto = auto.filter(a => !a.pass && !a.skip).map(a => ({w:a.w, t:a.label, fix:a.fix, self:false}));
+  const missedMan = MQS.map((q,i) => ({w:q.w, t:q.t.replace("Live test: ",""), fix:q.fix, a:manswers[i], self:true}))
     .filter(q => q.a !== "yes");
   const missed = [...missedAuto, ...missedMan].sort((a,b) => b.w - a.w).slice(0,5);
   document.getElementById("r-fixes").innerHTML =
     missed.length === 0
-    ? `<h3>No critical gaps found. Seriously impressive.</h3><p class="dim">Re-audit monthly — AI surfaces change fast.</p>`
+    ? `<h3>No verified gaps found. Seriously impressive.</h3><p class="dim">Re-audit monthly — AI surfaces change fast.</p>`
     : `<h3>Fix these first (highest impact)</h3>` + missed.map((q,n) =>
-      `<div class="fix"><b>${n+1}. ${q.ns?"Verify: ":""}${q.t}</b><p>${q.fix}</p></div>`).join("");
+      `<div class="fix"><b>${n+1}. ${q.t}${q.self?' <span style="font-weight:400;font-size:.72rem;color:var(--dim)">(self-reported \u2014 we verify this in your audit)</span>':""}</b><p>${q.fix}</p></div>`).join("");
   if(BUY_URL){ const b = document.getElementById("buybtn"); b.href = BUY_URL; b.hidden = false; }
   else { document.getElementById("buysoon").hidden = false; }
   const rc = document.getElementById("r-content");
@@ -507,9 +509,7 @@ document.getElementById("gateform").addEventListener("submit", e => {
   const gname = leadName;
   const [g] = grade(score);
   const pillarsTxt = PILLARS.map(pl => `${pl.name} ${per[pl.id].max?Math.round(per[pl.id].got/per[pl.id].max*100):0}%`).join(" · ");
-  const wins = [...auto.filter(a => !a.pass && !a.skip).sort((a,b) => b.w - a.w),
-                ...MQS.map((q,i) => manswers[i] !== "yes" ? {label:q.t.replace("Live test: ",""), fix:q.fix, w:q.w} : null).filter(Boolean)]
-               .slice(0,3);
+  const wins = [...auto.filter(a => !a.pass && !a.skip).sort((a,b) => b.w - a.w)].slice(0,3);
   const autoreply =
 `Hi ${gname || "there"},
 
@@ -519,7 +519,7 @@ SCORE: ${score}/100 — ${g}
 PILLARS: ${pillarsTxt}
 
 Your 3 fastest wins:
-${wins.map((f,n) => `${n+1}. ${f.fix}`).join("\n")}
+${wins.length ? wins.map((f,n) => `${n+1}. ${f.fix}`).join("\n") : "Your verified on-page checks all pass \u2014 the full report focuses on the profile, review, and AI-mention items we confirm with you directly."}
 
 Your full illustrated AO Report — every finding explained, charts, and your prioritized 30-day fix plan — is being prepared now and will arrive in this inbox within 48 hours.
 
@@ -548,13 +548,11 @@ Be the Answer — aoaudit.com`;
           [pl.name, per[pl.id].max ? Math.round(per[pl.id].got/per[pl.id].max*100) : 0])),
         blocked: lastBlocked,
         findings: [
-          ...auto.map(a => [a.label, a.skip ? "verify" : a.pass ? "pass" : "fail", a.detail]),
-          ...MQS.map((q,i) => [q.t.replace("Live test: ",""),
-            manswers[i]==="yes" ? "pass" : manswers[i]==="no" ? "fail" : "verify", q.h])
+          ...auto.map(a => [a.label, a.skip ? "verify" : a.pass ? "pass" : "fail", a.detail])
         ],
-        fixes: [...auto.filter(a => !a.pass && !a.skip).map(a => ({t:a.label, f:a.fix, w:a.w})),
-                ...MQS.map((q,i) => manswers[i] !== "yes"
-                  ? {t:q.t.replace("Live test: ",""), f:q.fix, w:q.w} : null).filter(Boolean)]
+        self_reported: MQS.map((q,i) => [q.t.replace("Live test: ",""),
+          manswers[i]==="yes" ? "yes" : manswers[i]==="no" ? "no" : "unsure", q.h, q.fix]),
+        fixes: [...auto.filter(a => !a.pass && !a.skip).map(a => ({t:a.label, f:a.fix, w:a.w}))]
                .sort((a,b) => b.w - a.w).slice(0,5)
       }),
       _subject: `AO Audit lead — ${scannedBiz || scannedUrl.replace(/^https?:\/\//,"")} scored ${score}`,
