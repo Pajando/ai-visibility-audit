@@ -78,13 +78,18 @@ function robotsBlocks(txt){
     const d = l.match(/^disallow:\s*(.*)$/i);
     if(d && current.length) current.forEach(a => groups[a].push(d[1].trim()));
   });
+  // training-class tokens: blocking these costs future model knowledge, NOT today's live answers
+  const TRAINING_ONLY = new Set(["gptbot","claudebot","anthropic-ai","google-extended","ccbot","bytespider","meta-externalagent","applebot-extended"]);
   const blockedEngines = [];
   Object.entries(ENGINE_BOTS).forEach(([engine, bots]) => {
-    const hit = bots.some(b => {
+    const hitBots = bots.filter(b => {
       const rules = groups[b] !== undefined ? groups[b] : groups["*"];
       return rules && rules.some(r => r === "/");
     });
-    if(hit) blockedEngines.push(engine);
+    if(hitBots.length){
+      const trainingOnly = hitBots.every(b => TRAINING_ONLY.has(b));
+      blockedEngines.push(engine + (trainingOnly ? " (training-only — affects future model knowledge, not today's answers)" : " (LIVE answer/search bots — costs you answers today)"));
+    }
   });
   return blockedEngines;
 }
@@ -245,6 +250,8 @@ async function runScan(rawUrl){
     snippetBlocked ? "A nosnippet or max-snippet:0 directive is set — by Google's own rules this makes the page INELIGIBLE for AI Overviews and AI Mode" :
       "No nosnippet/max-snippet restrictions — eligible for AI answers per Google's documentation",
     "Remove nosnippet / max-snippet:0 from your robots meta tag. Google's documentation: a page must be eligible to show with a snippet to appear in AI Overviews or AI Mode.");
+  const dns = (htmlLower.match(/data-nosnippet/g) || []).length;
+  if(dns) log("warn", `data-nosnippet found on ${dns} element${dns>1?"s":""} — that content is invisible to Google's AI answers (fine if intentional; costly if it wraps prices, hours, or your best answers)`);
   log(snippetBlocked ? "bad" : "ok", snippetBlocked ? "CRITICAL: snippet controls block AI Overviews eligibility" : "Snippet-eligible — no AI Overviews kill switch (Google)");
 
   const msBlocked = /noarchive/i.test(metaRobots);
