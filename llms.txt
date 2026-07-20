@@ -1,6 +1,7 @@
 # The AO Audit — Answer Optimization
 AO = Answer Optimization — the practice the industry also calls AEO (answer engine optimization) and GEO (generative engine optimization).
 Pricing: free scan · $39 playbook · $497 The Answer (done-for-you) · $249/mo AO Care — https://aoaudit.com/pricing.html
+Versión en español / Spanish landing page: https://aoaudit.com/es.html
 
 > The AO Audit is a free interactive Answer Optimization (AO) audit that scores
 > how visible a business is to AI engines (ChatGPT, Gemini, Perplexity, Google
