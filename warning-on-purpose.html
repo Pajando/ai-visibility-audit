@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Schema Warning We Left On Purpose — Why We Won't Fake a Rating on Our Own Site | The AO Audit</title>
+<meta name="description" content="After fixing our schema error, Google offered an easy way to clear a warning: add a fake rating. We refused. Generative engine optimization (GEO), done honestly.">
+<link rel="canonical" href="https://aoaudit.com/warning-on-purpose.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Schema Warning We Left On Purpose">
+<meta property="og:description" content="Google offered us an easy way to clear a schema warning — add a rating. We have no reviews. So we left it yellow. Here's why that's the right call.">
+<meta property="og:url" content="https://aoaudit.com/warning-on-purpose.html">
+<meta property="og:image" content="https://aoaudit.com/og-card2.png">
+<script type="application/ld+json">
+{ "@context": "https://schema.org", "@type": "Article",
+  "headline": "The Schema Warning We Left On Purpose",
+  "datePublished": "2026-07-20", "dateModified": "2026-07-20",
+  "author": { "@type": "Person", "name": "Alejandro Ojeda" },
+  "publisher": { "@id": "https://aoaudit.com/#org" },
+  "description": "After fixing the real schema error on aoaudit.com, Google offered an easy way to clear a leftover warning: add a rating. With no reviews yet, we refused — and here's why faking it would have been the real mistake." }
+</script>
+<style>
+:root{--bg:#F4F1EC;--card:#fff;--ink:#191919;--dim:#5A554B;--green:#1E8468;--orange:#D97757;--orange-deep:#B4552D;--line:#DDD6CA}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;line-height:1.7;font-size:1.04rem}
+.band{height:.5rem;background:var(--green)} .strip{height:.18rem;background:var(--orange)}
+.wrap{max-width:44rem;margin:0 auto;padding:2.5rem 1.4rem 4rem}
+.kicker{color:var(--green);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.78rem;margin:0 0 .6rem}
+h1{font-size:clamp(1.7rem,4.5vw,2.5rem);line-height:1.15;margin:0 0 .6rem}
+h2{font-size:1.35rem;margin:2.2rem 0 .6rem}
+.byline{color:var(--dim);font-size:.9rem;margin:0 0 1.8rem}
+.card{background:var(--card);border-left:4px solid var(--green);border-radius:0 10px 10px 0;padding:1rem 1.3rem;margin:1.4rem 0}
+code{background:#211D18;color:#EDE8DE;padding:.12rem .4rem;border-radius:4px;font-size:.88em}
+.num{color:var(--orange-deep);font-weight:700}
+a{color:var(--orange-deep)} .cta{display:inline-block;background:var(--orange);color:#fff;font-weight:600;padding:.85rem 1.6rem;border-radius:8px;text-decoration:none;margin-top:.6rem}
+footer{border-top:1px solid var(--line);margin-top:3rem;padding-top:1.2rem;color:var(--dim);font-size:.85rem}
+</style>
+</head>
+<body>
+<div class="band"></div><div class="strip"></div>
+<nav style="position:sticky;top:0;z-index:50;background:#F4F1EC;border-bottom:1px solid #DDD6CA;display:flex;justify-content:space-between;align-items:center;padding:.7rem 1.4rem;font-family:'IBM Plex Sans',system-ui,sans-serif">
+  <a href="https://aoaudit.com/" style="font-weight:800;color:#191919;text-decoration:none;font-size:1.05rem">&#8592; The AO Audit</a>
+  <a href="https://aoaudit.com/#scanform" style="background:#D97757;color:#fff;font-weight:600;padding:.5rem 1.1rem;border-radius:7px;text-decoration:none;font-size:.92rem">Scan my website &#8594;</a>
+</nav>
+<div class="wrap">
+<p class="kicker">The AO Audit · Published July 20, 2026</p>
+<h1>The Schema Warning We Left On Purpose</h1>
+<p class="byline">By Alejandro Ojeda · Be the Answer · The sequel to fixing our own schema error &mdash; and the more important half.</p>
+
+<p><em>File this under <strong>generative engine optimization (GEO)</strong> ethics — or as we call it, <strong>Answer Optimization (AO)</strong>: the fastest way to lose AI visibility is to lie to the machines.</em></p>
+
+<p>Yesterday we <a href="https://aoaudit.com/schema-error.html">published the schema error Google found on our own site</a> and fixed it. But fixing the red error revealed something more interesting underneath: a set of yellow "warnings," and one of them came with a very tempting one-click cure. We didn't take it. Here's why that refusal matters more than the fix.</p>
+
+<h2>What did Google offer us?</h2>
+<p>Once the real error cleared, Google Search Console still listed a few optional warnings on our product. The headline one: <strong>Missing field "aggregateRating."</strong> In plain terms, Google was saying: <em>add a star rating and this product could show ⭐ 4.8 right in the search result.</em> Star ratings lift click-through. Clearing the warning is one short block of code. Every incentive pointed at adding it.</p>
+
+<div class="card"><p style="margin:0">There was exactly one problem: <span class="num">our playbook has no reviews yet.</span> To show a rating, we'd have to invent one. A number with nothing real behind it, dressed up as customer feedback.</p></div>
+
+<h2>So why not just add one?</h2>
+<p>Because a fabricated rating isn't a growth hack &mdash; it's a landmine. Google's structured-data rules are explicit: <em>don't mark up content that isn't visible to users, even if it's accurate</em> &mdash; and a rating we made up isn't even accurate. Sites that fake review markup don't get a small ding; they get manual actions that pull them out of rich results entirely, sometimes out of Search. The "easy win" is how businesses quietly torch the trust they spent years building. We tell clients this every week. We're not going to do the opposite in our own code.</p>
+
+<h2>The tell to watch for in anyone you hire</h2>
+<p>If a tool or an agency ever tells you to add a rating, a review, or a "trust badge" you didn't earn to clear a schema warning &mdash; that is the moment to end the conversation. They're optimizing your warnings, not your business, and they're handing you the risk. The honest move with an empty rating field is to leave it empty until real reviews fill it. Ours will fill the day our first real buyers leave feedback, with their true numbers &mdash; not a second sooner.</p>
+
+<h2>What "clean schema" actually means</h2>
+<p>It doesn't mean zero yellow. It means <strong>valid and true</strong>. Our product schema is valid, its every field is something a customer can verify, and the warnings that remain are honest ones: no reviews yet (so no rating), and a digital download (so no shipping to describe). "All green" is easy if you're willing to lie. We'd rather show you a couple of honest yellows &mdash; and be the one company grading schema that you can actually check.</p>
+
+<p><strong>Want to see what the machines say about your site &mdash; the real version?</strong> The scan is free, about a minute, and every finding cites its source.</p>
+<p><a class="cta" href="https://aoaudit.com/#scanform">Scan my website &#8594;</a></p>
+
+<footer>The AO Audit · Answer Optimization (AO) · <a href="https://aoaudit.com/">aoaudit.com</a> · More from our logs: <a href="schema-error.html">the schema tool had a schema error</a> · <a href="self-audit.html">we published our own failing grade</a> · <a href="free-infrastructure.html">the night both free services died</a>.</footer>
+</div>
+</body>
+</html>
