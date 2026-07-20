@@ -99,7 +99,7 @@ async function runScan(rawUrl){
   let url = rawUrl.trim();
   if(!/^https?:\/\//i.test(url)) url = "https://" + url;
   let origin;
-  try{ origin = new URL(url).origin; }catch(e){ return {fatal:"That doesn't look like a valid address — try something like yourbusiness.com"}; }
+  try{ origin = new URL(url).origin; }catch(e){ return {fatal:"That doesn't look like a valid address — try something like website.com"}; }
 
   const con = document.getElementById("console");
   con.innerHTML = "";
@@ -461,7 +461,7 @@ document.getElementById("scanform").addEventListener("submit", async e => {
   const raw = document.getElementById("url").value.trim();
   scannedBiz = document.getElementById("bizname").value.trim();
   const err = document.getElementById("urlerr");
-  if(!raw || !raw.includes(".")){ err.textContent = "Enter your website address — like yourbusiness.com"; return; }
+  if(!raw || !raw.includes(".")){ err.textContent = "Enter your website address — like website.com"; return; }
   err.textContent = "";
   const btn = document.getElementById("scanbtn");
   btn.disabled = true; btn.textContent = "Scanning…";
