@@ -142,6 +142,18 @@ a{color:var(--orange-deep)}
 .hero h1{font-size:clamp(2.1rem,5.6vw,3.7rem);font-weight:800;margin:0 0 1rem;max-width:24ch}
 .hero h1 em{color:var(--orange);font-style:normal}
 .hero p.sub{color:var(--dim);font-size:1.12rem;max-width:50ch;margin:0 0 1.8rem}
+.hero-cols{display:flex;gap:2.6rem;align-items:center;flex-wrap:wrap}
+.hero-left{flex:1 1 32rem;min-width:0}
+.hero-right{flex:0 1 20rem;display:flex;justify-content:center}
+.gauge{text-align:center}
+.gauge svg{max-width:100%;height:auto}
+.gpills{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center;margin:.7rem 0 0}
+.gpills span{font-size:.72rem;color:var(--teal,#1E8468);border:1px solid var(--line,#DDD6CA);border-radius:20px;padding:.2rem .65rem;background:#fff}
+.gcap{font-size:.8rem;color:var(--dim,#5A554B);margin:.75rem 0 0}
+.gcap a{color:var(--orange-deep,#B4552D);font-weight:600}
+@keyframes fillring{from{stroke-dashoffset:502.65}to{stroke-dashoffset:185.98}}
+.gauge .prog{stroke-dasharray:502.65;stroke-dashoffset:502.65;animation:fillring 1.7s cubic-bezier(.2,.8,.2,1) .35s forwards}
+@media(max-width:840px){.hero-right{display:none}}
 .urlbox{display:flex;gap:.6rem;flex-wrap:wrap;max-width:36rem}
 .urlbox input{flex:1;min-width:14rem;padding:1rem 1.1rem;border-radius:8px;border:1px solid var(--line);
   background:#fff;color:var(--ink);font:400 1.05rem "IBM Plex Sans",sans-serif}
@@ -256,7 +268,7 @@ footer{padding:2.5rem 0 3.5rem;color:var(--dim);font-size:.84rem;border-top:1px 
 
 <header class="hero"><div class="wrap">
   <p style="text-align:right;margin:0 0 .5rem"><a href="es.html" style="display:inline-block;color:#1E8468;text-decoration:none;font-weight:700;font-size:.9rem;border:1.5px solid #1E8468;padding:.32rem .95rem;border-radius:20px">Español &#8594;</a></p>
-  <p class="eyebrow">Free instant scan · AO = Answer Optimization · Updated July 2026</p>
+  <div class="hero-cols"><div class="hero-left"><p class="eyebrow">Free instant scan · AO = Answer Optimization · Updated July 2026</p>
   <h1>Enter your website. See what AI <em>actually sees.</em></h1>
   <p class="sub"><strong>AO stands for Answer Optimization</strong> — making your business the answer AI engines give (the industry also calls it <strong>AEO</strong> or <strong>GEO</strong>). The goal, in three words: <strong>BE THE ANSWER</strong> — to your specific customer, at the exact moment they ask. A billion people now search with Google's AI Mode. ChatGPT recommends businesses and
   checks out for shoppers. Agents call and book on customers' behalf. We'll scan your site live —
@@ -271,7 +283,16 @@ footer{padding:2.5rem 0 3.5rem;color:var(--dim);font-size:.84rem;border-top:1px 
   </form>
   <div class="err" id="urlerr" aria-live="polite"></div>
   <p class="tiny">Live scan of your real site · 21 automated checks + 6 you confirm · Prioritized fix list</p>
-  <p class="tiny" style="margin-top:.5rem">Not ready? <a href="sample-report.pdf" target="_blank" rel="noopener">See a real sample report first</a> (opens in a new tab) — no email needed.</p>
+  <p class="tiny" style="margin-top:.5rem">Not ready? <a href="sample-report.pdf" target="_blank" rel="noopener">See a real sample report first</a> (opens in a new tab) — no email needed.</p></div><div class="hero-right"><div class="gauge">
+<svg viewBox="0 0 200 200" width="240" height="240" role="img" aria-label="Sample AO Score gauge">
+  <circle cx="100" cy="100" r="80" fill="none" stroke="#DDD6CA" stroke-width="15"/>
+  <circle class="prog" cx="100" cy="100" r="80" fill="none" stroke="#D97757" stroke-width="15" stroke-linecap="round" transform="rotate(-90 100 100)"/>
+  <text x="100" y="97" text-anchor="middle" font-size="54" font-weight="800" fill="#191919" font-family="'IBM Plex Sans',system-ui,sans-serif"><tspan id="gaugeNum">0</tspan></text>
+  <text x="100" y="124" text-anchor="middle" font-size="14" fill="#5A554B" font-family="'IBM Plex Sans',system-ui,sans-serif">AO Score / 100</text>
+</svg>
+<div class="gpills"><span>Entity</span><span>Content</span><span>Code</span><span>Agents</span></div>
+<p class="gcap">Sample score — <a href="#scanform">get your real one in 60 sec &#8593;</a></p>
+</div></div></div>
 </div></header>
 
 <div class="stats wrap" style="padding:0">
@@ -406,5 +427,6 @@ footer{padding:2.5rem 0 3.5rem;color:var(--dim);font-size:.84rem;border-top:1px 
 </div></footer>
 
 <script src="scanner.js" defer></script>
+<script>(function(){var el=document.getElementById("gaugeNum");if(!el)return;setTimeout(function(){var t=63,c=0,iv=setInterval(function(){c+=2;if(c>=t){c=t;clearInterval(iv);}el.textContent=c;},45);},400);})();</script>
 </body>
 </html>
