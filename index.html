@@ -287,7 +287,7 @@ footer{padding:2.5rem 0 3.5rem;color:var(--dim);font-size:.84rem;border-top:1px 
 <svg viewBox="0 0 200 200" width="240" height="240" role="img" aria-label="Sample AO Score gauge">
   <circle cx="100" cy="100" r="80" fill="none" stroke="#DDD6CA" stroke-width="15"/>
   <circle class="prog" cx="100" cy="100" r="80" fill="none" stroke="#D97757" stroke-width="15" stroke-linecap="round" transform="rotate(-90 100 100)"/>
-  <text x="100" y="97" text-anchor="middle" font-size="54" font-weight="800" fill="#191919" font-family="'IBM Plex Sans',system-ui,sans-serif"><tspan id="gaugeNum">0</tspan></text>
+  <text x="100" y="97" text-anchor="middle" font-size="54" font-weight="800" fill="#191919" font-family="'IBM Plex Sans',system-ui,sans-serif"><tspan>63</tspan></text>
   <text x="100" y="124" text-anchor="middle" font-size="14" fill="#5A554B" font-family="'IBM Plex Sans',system-ui,sans-serif">AO Score / 100</text>
 </svg>
 <div class="gpills"><span>Entity</span><span>Content</span><span>Code</span><span>Agents</span></div>
@@ -427,6 +427,5 @@ footer{padding:2.5rem 0 3.5rem;color:var(--dim);font-size:.84rem;border-top:1px 
 </div></footer>
 
 <script src="scanner.js" defer></script>
-<script>(function(){var el=document.getElementById("gaugeNum");if(!el)return;setTimeout(function(){var t=63,c=0,iv=setInterval(function(){c+=2;if(c>=t){c=t;clearInterval(iv);}el.textContent=c;},45);},400);})();</script>
 </body>
 </html>
