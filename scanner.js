@@ -501,6 +501,7 @@ document.getElementById("gateform").addEventListener("submit", e => {
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ gerr.textContent = "Please enter a valid email address."; return; }
   gerr.textContent = "";
   if(typeof gtag === "function") gtag("event", "generate_lead", {method: "report_gate"});
+  if(typeof fbq === "function") fbq("track", "Lead");
   const leadName = document.getElementById("g-name").value.trim();
   const btn = document.getElementById("gbtn");
   btn.disabled = true; btn.textContent = "Unlocking…";
