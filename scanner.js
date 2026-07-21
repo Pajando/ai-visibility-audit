@@ -357,7 +357,7 @@ const MQS = [
    fix:"Claim and complete your Google Business Profile and post 1–2× per week — it feeds Gemini-powered answers directly. And get your primary category exactly right: local-ranking studies rate it the #1 positive factor, and the wrong one the #1 negative."},
  {p:"entity", w:5, t:"Have you received (and responded to) reviews in the last 30 days?",
    h:"Volume, recency, and responses are core AI trust signals.",
-   fix:"Set up a review ask after every sale and respond to every review — recent, answered reviews are a core AI trust signal. Local-ranking studies (Sterling Sky) find rankings dip after ~3 weeks without a fresh review, so build the habit, not a blitz."},
+   fix:"Set up a Google-review ask after every sale and respond to every review — recent, answered reviews are a core AI trust signal. (Ask on Google; Yelp prohibits soliciting reviews.) Local-ranking studies (Sterling Sky) find rankings dip after ~3 weeks without a fresh review, so build the habit, not a blitz."},
  {p:"entity", w:5, t:"Have you claimed Bing Places AND Apple Business (formerly Business Connect)?",
    h:"Bing Places feeds Microsoft Copilot and Alexa; Apple Business is what Siri checks for local businesses (Siri's harder questions hand off to ChatGPT — fed by Bing).",
    fix:"Claim both free profiles: bingplaces.com (feeds Copilot + Alexa + ChatGPT's ecosystem) and business.apple.com (the only data source Siri and Apple Intelligence check for local businesses)."},
