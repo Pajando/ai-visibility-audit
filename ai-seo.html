@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI SEO: How to Show Up in ChatGPT, Gemini &amp; Perplexity</title>
+<meta name="description" content="AI SEO from real scan logs: where ChatGPT, Gemini and Perplexity actually get their answers, the failures we see most on real business websites, and the fix order that works.">
+<link rel="canonical" href="https://aoaudit.com/ai-seo.html">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AI SEO: How to Show Up in ChatGPT, Gemini &amp; Perplexity">
+<meta property="og:description" content="Where each AI engine actually gets its answers, the failures we see most in real scans, and the fix order that works — from the team behind the free AO Audit.">
+<meta property="og:url" content="https://aoaudit.com/ai-seo.html">
+<meta property="og:image" content="https://aoaudit.com/og-card2.png">
+<script type="application/ld+json">
+{ "@context": "https://schema.org", "@graph": [
+  { "@type": "Article",
+    "headline": "AI SEO: How to Show Up in ChatGPT, Gemini and Perplexity — from real scan logs",
+    "datePublished": "2026-07-20", "dateModified": "2026-07-20",
+    "author": { "@type": "Person", "name": "Alejandro Ojeda" },
+    "publisher": { "@id": "https://aoaudit.com/#org" },
+    "description": "Where ChatGPT, Gemini and Perplexity actually get their answers, the machine-readability failures most common in real business scans, and the fix order that works." },
+  { "@type": "FAQPage", "mainEntity": [
+    { "@type": "Question", "name": "What is AI SEO?",
+      "acceptedAnswer": { "@type": "Answer", "text": "AI SEO is optimizing your website and business profiles so AI engines — ChatGPT, Gemini, Perplexity, Claude, Google AI Mode — can find, verify, and recommend your business in their answers. It builds on classic SEO (crawlable pages, clear structure) and adds what AI engines specifically need: structured data (schema markup), AI-crawler access, an llms.txt file, published prices, and consistent business profiles. The practice is also called Answer Optimization (AO), AEO, or GEO." } },
+    { "@type": "Question", "name": "How do I show up in ChatGPT recommendations?",
+      "acceptedAnswer": { "@type": "Answer", "text": "ChatGPT's web answers lean heavily on Bing's index — published citation research traces roughly 87% of ChatGPT search citations to Bing. So the practical moves are: make sure Bing can crawl your site, claim your Bing Places business listing, allow OpenAI's crawlers (OAI-SearchBot, GPTBot) in robots.txt, and publish machine-readable facts (schema, prices, FAQ) that the engine can quote." } },
+    { "@type": "Question", "name": "Does Bing really matter for AI visibility?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes — more than most businesses realize. Because ChatGPT's search citations trace overwhelmingly to Bing's index, a business invisible on Bing is largely invisible to ChatGPT's web answers. Claiming your free Bing Places listing is one of the highest-leverage, least-done moves in AI SEO." } },
+    { "@type": "Question", "name": "How is AI SEO different from regular SEO?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Regular SEO competes for a ranked list of links; AI SEO competes to be the answer itself. The fundamentals overlap — if a search crawler can't read your site, an AI can't either — but AI SEO adds machine-readability layers most SEO checklists skip: schema markup AI can parse, explicit AI-crawler permissions, llms.txt, and facts (prices, hours, services) stated in text a bot can verify rather than hidden behind 'call us.'" } },
+    { "@type": "Question", "name": "How do I check if AI engines can read my website?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Run the free AO Audit at aoaudit.com — it scans your site live for the machine-readability signals AI engines use (schema, AI-crawler access in robots.txt, llms.txt, content structure, pricing and booking signals) and returns an AO Score from 0 to 100 with your gaps ranked by impact, in about 60 seconds." } }
+  ] }
+] }
+</script>
+<style>
+:root{--bg:#F4F1EC;--card:#fff;--ink:#191919;--dim:#5A554B;--green:#1E8468;--orange:#D97757;--orange-deep:#B4552D;--line:#DDD6CA}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;line-height:1.7;font-size:1.04rem}
+.band{height:.5rem;background:var(--green)} .strip{height:.18rem;background:var(--orange)}
+.wrap{max-width:44rem;margin:0 auto;padding:2.5rem 1.4rem 4rem}
+.kicker{color:var(--green);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.78rem;margin:0 0 .6rem}
+h1{font-size:clamp(1.7rem,4.5vw,2.5rem);line-height:1.15;margin:0 0 .6rem}
+h2{font-size:1.35rem;margin:2.2rem 0 .6rem}
+h3{font-size:1.08rem;margin:1.6rem 0 .3rem}
+.byline{color:var(--dim);font-size:.9rem;margin:0 0 1.8rem}
+.card{background:var(--card);border-left:4px solid var(--green);border-radius:0 10px 10px 0;padding:1rem 1.3rem;margin:1.4rem 0}
+.warn{background:var(--card);border-left:4px solid var(--orange);border-radius:0 10px 10px 0;padding:1rem 1.3rem;margin:1.4rem 0}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;margin:1.2rem 0;background:var(--card);font-size:.95rem}
+th,td{border:1px solid var(--line);padding:.6rem .8rem;text-align:left;vertical-align:top}
+th{background:#EFEBE2}
+a{color:var(--orange-deep)} .cta{display:inline-block;background:var(--orange);color:#fff;font-weight:600;padding:.85rem 1.6rem;border-radius:8px;text-decoration:none;margin-top:.6rem}
+footer{border-top:1px solid var(--line);margin-top:3rem;padding-top:1.2rem;color:var(--dim);font-size:.85rem}
+</style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1034023492870678');fbq('track','PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1034023492870678&ev=PageView&noscript=1"/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+<div class="band"></div><div class="strip"></div>
+<nav style="position:sticky;top:0;z-index:50;background:#F4F1EC;border-bottom:1px solid #DDD6CA;display:flex;justify-content:space-between;align-items:center;padding:.7rem 1.4rem;font-family:'IBM Plex Sans',system-ui,sans-serif">
+  <a href="https://aoaudit.com/" style="font-weight:800;color:#191919;text-decoration:none;font-size:1.05rem">&#8592; The AO Audit</a>
+  <a href="https://aoaudit.com/#scanform" style="background:#D97757;color:#fff;font-weight:600;padding:.5rem 1.1rem;border-radius:7px;text-decoration:none;font-size:.92rem">Scan my website &#8594;</a>
+</nav>
+<div class="wrap">
+<p class="kicker">The AO Audit · From the scan logs · July 20, 2026</p>
+<h1>AI SEO: how to show up in ChatGPT, Gemini and Perplexity — what we actually see in the scans</h1>
+<p class="byline">By Alejandro Ojeda · Be the Answer · aoaudit.com</p>
+
+<div class="card"><p style="margin:0"><strong>The short version:</strong> <strong>AI SEO</strong> is optimizing your website and profiles so AI engines can <strong>find, verify, and recommend</strong> your business. It isn't a bag of tricks &mdash; each engine answers from an index it can read, so the work is making your business <em>readable</em>: crawler access, schema markup, published prices, consistent profiles. We call the full practice <a href="what-is-answer-optimization.html">Answer Optimization (AO)</a>.</p></div>
+
+<p>Most articles about &ldquo;AI SEO&rdquo; are rewrites of each other. This one comes from a different place: we run a <a href="https://aoaudit.com/">free scanner</a> that checks real business websites for the machine-readability signals AI engines use, and we've already <a href="self-audit.html">published our own failing grade</a> from it. What follows is what the scans keep showing us &mdash; where the engines look, what most sites get wrong, and the order to fix it in.</p>
+
+<h2>Where each engine actually gets its answers</h2>
+<div class="tablewrap">
+<table>
+<tr><th>Engine</th><th>Answers from</th><th>What that means for you</th></tr>
+<tr><td><strong>ChatGPT</strong></td><td>Web answers lean on <strong>Bing's index</strong> &mdash; citation research traces ~87% of its search citations to Bing</td><td>If Bing can't see you, ChatGPT mostly can't either. Claim <strong>Bing Places</strong>; allow <strong>OAI-SearchBot / GPTBot</strong></td></tr>
+<tr><td><strong>Gemini / Google AI Mode</strong></td><td>Google's index + your <strong>Google Business Profile</strong></td><td>Classic Google hygiene still pays; your GBP is now an AI data source, not just a map pin</td></tr>
+<tr><td><strong>Perplexity</strong></td><td>Its own crawler (<strong>PerplexityBot</strong>) + cited sources</td><td>It quotes pages that state facts plainly &mdash; publish answers, not brochures</td></tr>
+</table>
+</div>
+<p>Sources for the Bing figure and citation behavior: the SE Ranking citation studies and the 10,000-query GEO research we cite across this site (see footer). The rest of the table is engine-documented crawler behavior.</p>
+
+<h2>The failures we actually see, in order of frequency</h2>
+<p>These come from scanning real local-business websites, not from theory:</p>
+
+<h3>1. No AI instructions at all</h3>
+<p>Industry-wide, <strong>9 in 10 websites still have no AI instructions file</strong> &mdash; no llms.txt, no explicit crawler policy. Our scans match that: the single most common result is a site that has simply never told AI engines anything. The field is wide open, which is exactly why moving early works.</p>
+
+<h3>2. The site looks fine to humans and reads blank to bots</h3>
+<p>The most expensive failure we find. Some site builders render everything with JavaScript in a way that leaves a crawler a nearly empty page &mdash; we've scanned a business whose homepage served bots a few hundred characters of nothing. The owner had no idea; the site looked great in a browser. Machine-readable sites earn <strong>3.2&times; more AI citations</strong> in the industry studies we track, and this failure is why: an engine can't cite what it can't read.</p>
+
+<h3>3. Schema markup missing or broken</h3>
+<p>Structured data is how you state your name, services, prices, and hours in the format engines parse directly. Most local sites have none. Some have it and it's broken &mdash; <a href="schema-error.html">including, at one point, ours</a>. Valid schema is the cheapest authority signal available.</p>
+
+<h3>4. Prices and answers hidden behind &ldquo;call us&rdquo;</h3>
+<p>Customers ask AI full questions: &ldquo;how much does a fade cost,&rdquo; &ldquo;do they take walk-ins.&rdquo; An engine can only quote what's published. Sites that publish real prices and a real FAQ give the AI something to say about them; sites that hide everything give it nothing &mdash; so it names a competitor who didn't hide.</p>
+
+<h3>5. Profiles that disagree with each other</h3>
+<p>Engines cross-check your website against Google, Bing, Apple, and Yelp. Different hours or an old phone number across those sources reads as unreliable &mdash; and unreliable doesn't get recommended.</p>
+
+<h2>The fix order that works</h2>
+<p>From the gaps above, in leverage order: <strong>(1)</strong> unblock and invite the crawlers (robots.txt + llms.txt), <strong>(2)</strong> install valid schema markup, <strong>(3)</strong> claim Bing Places and complete your Google Business Profile, <strong>(4)</strong> publish prices and a genuine FAQ, <strong>(5)</strong> make every profile agree. That's the spine of every report our audit produces &mdash; your specific gaps and order come from your own scan.</p>
+
+<div class="warn"><p style="margin:0"><strong>What nobody can honestly promise:</strong> you can't buy a mention, and no one controls what an AI says on a given day &mdash; answers vary by user, session, and engine. Anyone guaranteeing &ldquo;#1 in ChatGPT&rdquo; is selling weather. What you <em>can</em> control is whether every engine can read, verify, and quote you &mdash; that's the part we measure, and <a href="score-you-cant-game.html">our score counts only what we can verify</a>.</p></div>
+
+<h2>See your own gaps in 60 seconds</h2>
+<p>The free <strong>AO Audit</strong> runs these checks on your site live and hands you an AO Score with your fastest fixes ranked. No account, no card.</p>
+<p style="text-align:center"><a class="cta" href="https://aoaudit.com/#scanform">Scan my website free &#8594;</a></p>
+
+<footer>The AO Audit · Answer Optimization (AO) · <a href="https://aoaudit.com/">aoaudit.com</a> · Research base: SE Ranking citation studies, the 10,000-query GEO research, and July 2026 platform documentation. · Start here: <a href="what-is-answer-optimization.html">what is Answer Optimization (AO)?</a> · More from our logs: <a href="self-audit.html">our own failing grade</a> · <a href="score-you-cant-game.html">the score you can't game</a> · <a href="schema-error.html">the schema tool had a schema error</a>.</footer>
+</div>
+</body>
+</html>
