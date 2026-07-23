@@ -293,7 +293,9 @@ fbq('init','1034023492870678');fbq('track','PageView');
       aria-label="Your business name" style="flex:1 1 100%">
     <input type="text" id="url" placeholder="website.com" autocomplete="url"
       aria-label="Your website address" inputmode="url">
-    <button class="btn" type="submit" id="scanbtn">Scan my website →</button>
+    <input type="text" id="industry" placeholder="Industry (optional)" autocomplete="off"
+      aria-label="Your industry (optional)" style="flex:0 1 9rem;min-width:7rem;padding:.7rem .8rem;font-size:.88rem;opacity:.85">
+    <button class="btn" type="submit" id="scanbtn" style="flex:1 1 100%">Scan my website →</button>
   </form>
   <div class="err" id="urlerr" aria-live="polite"></div>
   <p class="tiny">Live scan of your real site · 21 automated checks + 6 you confirm · Prioritized fix list</p>

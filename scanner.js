@@ -397,6 +397,7 @@ function buildQuiz(){
 let scannedUrl = "";
 let relayOutage = false;
 let scannedBiz = "";
+let scannedIndustry = "";
 let lastBlocked = [];
 let unlocked = false;
 function computeScore(){
@@ -436,9 +437,9 @@ function showResults(locked){
     `<h3 style="margin-top:1.5rem">Your self-assessment <span style="font-weight:400;font-size:.78rem;color:var(--dim)">— you told us these; they don't affect your verified score. We confirm them in your full audit.</span></h3>` +
     MQS.map((q,i) => `<div class="finding ${manswers[i]==="yes"?"pass":manswers[i]==="no"?"fail":"check"}">
       <span class="fi">${manswers[i]==="yes"?"✓":manswers[i]==="no"?"✗":"?"}</span>
-      <span>${q.t.replace("Live test: ","")} <span class="fd">(self-reported)</span></span></div>`).join("");
+      <span>${q.t.replace("Live test: ","").replace("[your category]", scannedIndustry || "[your category]")} <span class="fd">(self-reported)</span></span></div>`).join("");
   const missedAuto = auto.filter(a => !a.pass && !a.skip).map(a => ({w:a.w, t:a.label, fix:a.fix, self:false}));
-  const missedMan = MQS.map((q,i) => ({w:q.w, t:q.t.replace("Live test: ",""), fix:q.fix, a:manswers[i], self:true}))
+  const missedMan = MQS.map((q,i) => ({w:q.w, t:q.t.replace("Live test: ","").replace("[your category]", scannedIndustry || "[your category]"), fix:q.fix, a:manswers[i], self:true}))
     .filter(q => q.a !== "yes");
   const missed = [...missedAuto, ...missedMan].sort((a,b) => b.w - a.w).slice(0,5);
   document.getElementById("r-fixes").innerHTML =
@@ -460,6 +461,7 @@ document.getElementById("scanform").addEventListener("submit", async e => {
   e.preventDefault();
   const raw = document.getElementById("url").value.trim();
   scannedBiz = document.getElementById("bizname").value.trim();
+  scannedIndustry = document.getElementById("industry").value.trim();
   const err = document.getElementById("urlerr");
   if(!raw || !raw.includes(".")){ err.textContent = "Enter your website address — like website.com"; return; }
   err.textContent = "";
@@ -535,6 +537,7 @@ Be the Answer — aoaudit.com`;
       email,
       business: scannedBiz || "(not given)",
       website: scannedUrl,
+      industry: scannedIndustry || "(not given)",
       score: String(score),
       grade: g,
       pillars: pillarsTxt,
