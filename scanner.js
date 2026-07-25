@@ -360,7 +360,7 @@ const MQS = [
    fix:"Set up a Google-review ask after every sale and respond to every review — recent, answered reviews are a core AI trust signal. (Ask on Google; Yelp prohibits soliciting reviews.) Local-ranking studies (Sterling Sky) find rankings dip after ~3 weeks without a fresh review, so build the habit, not a blitz."},
  {p:"entity", w:5, t:"Have you claimed Bing Places AND Apple Business (formerly Business Connect)?",
    h:"Bing Places feeds Microsoft Copilot and Alexa; Apple Business is what Siri checks for local businesses (Siri's harder questions hand off to ChatGPT — fed by Bing).",
-   fix:"Claim both free profiles: bingplaces.com (feeds Copilot + Alexa + ChatGPT's ecosystem) and business.apple.com (the only data source Siri and Apple Intelligence check for local businesses)."},
+   fix:"Claim both free profiles: Bing Places at bing.com/forbusiness (feeds Copilot + Alexa + ChatGPT's ecosystem) and business.apple.com (the only data source Siri and Apple Intelligence check for local businesses)."},
  {p:"entity", w:4, t:"Is your business listed with current info on Yelp (or your industry's main review site)?",
    h:"Alexa+ pulls local business data primarily from Yelp; Perplexity uses it for local answers too.",
    fix:"Claim your free Yelp listing at biz.yelp.com and keep hours/services current — it's the primary local data source for Alexa+ and a key one for Perplexity."},
