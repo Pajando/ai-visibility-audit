@@ -8,4 +8,9 @@ jobs:
     steps:
       - run: |
           sleep 90  # let Pages finish deploying
-          curl -s "https://api.indexnow.org/indexnow?url=https://aoaudit.com/&key=6a4a62df61505caa89ffd7a7bb584b47" -o /dev/null -w "IndexNow ping: HTTP %{http_code}\n"
+          urls=$(curl -s https://aoaudit.com/sitemap.xml | grep -o '<loc>[^<]*</loc>' | sed 's/<[^>]*>//g' | sed 's/.*/"&"/' | paste -sd, -)
+          echo "Pinging IndexNow with URLs: ${urls}"
+          curl -s -X POST "https://api.indexnow.org/indexnow" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d "{\"host\":\"aoaudit.com\",\"key\":\"6a4a62df61505caa89ffd7a7bb584b47\",\"urlList\":[${urls}]}" \
+            -o /dev/null -w "IndexNow bulk ping: HTTP %{http_code}\n"
