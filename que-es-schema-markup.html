@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>¿Qué es Schema Markup? Y Cómo Hacer tu Sitio Amigable para IA</title>
+<meta name="description" content="Schema markup son datos estructurados que le dicen a las máquinas qué es tu negocio. Aquí está la diferencia entre LocalBusiness y Organization que casi nadie explica, con ejemplos reales.">
+<link rel="canonical" href="https://aoaudit.com/que-es-schema-markup.html">
+<meta name="robots" content="index,follow">
+<link rel="alternate" hreflang="en" href="https://aoaudit.com/ai-friendly-website.html">
+<link rel="alternate" hreflang="es" href="https://aoaudit.com/que-es-schema-markup.html">
+<link rel="alternate" hreflang="x-default" href="https://aoaudit.com/ai-friendly-website.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="¿Qué es Schema Markup? Y Cómo Hacer tu Sitio Amigable para IA">
+<meta property="og:description" content="Datos estructurados explicados con ejemplos reales — incluida la diferencia entre LocalBusiness y Organization que casi ninguna guía menciona.">
+<meta property="og:url" content="https://aoaudit.com/que-es-schema-markup.html">
+<meta property="og:image" content="https://aoaudit.com/og-card2.png">
+<script type="application/ld+json">
+{ "@context": "https://schema.org", "@graph": [
+  { "@type": "Article",
+    "headline": "¿Qué es Schema Markup? Y Cómo Hacer tu Sitio Amigable para IA",
+    "datePublished": "2026-08-06", "dateModified": "2026-08-06",
+    "author": { "@type": "Person", "name": "Alejandro Ojeda" },
+    "publisher": { "@id": "https://aoaudit.com/#org" },
+    "about": { "@id": "https://aoaudit.com/what-is-answer-optimization.html#ao" },
+    "inLanguage": "es",
+    "description": "Qué es el schema markup (datos estructurados), por qué el tipo LocalBusiness no siempre es el correcto, y cómo revisar si los rastreadores de IA pueden acceder a tu sitio — con el robots.txt real de este sitio como ejemplo." },
+  { "@type": "FAQPage", "mainEntity": [
+    { "@type": "Question", "name": "¿Qué es schema markup?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Un bloque de código, normalmente JSON-LD, colocado en la sección head de una página, que indica los datos de tu negocio en un formato que las máquinas leen directamente en vez de adivinar a partir de párrafos de texto — tu nombre, dirección, teléfono, horario y categoría." } },
+    { "@type": "Question", "name": "¿Cuál es la diferencia entre datos estructurados LocalBusiness y Organization?",
+      "acceptedAnswer": { "@type": "Answer", "text": "LocalBusiness es el tipo correcto solo cuando existe una presencia física o de área de servicio real — un local, una oficina, un radio de entrega. Un negocio puramente en línea no tiene eso, y forzar LocalBusiness ahí es técnicamente incorrecto, no solo innecesario. Este mismo sitio es el ejemplo: The AO Audit opera completamente remoto, sin ubicación que un cliente visite, así que usa el tipo Organization en vez de LocalBusiness — y esa es la decisión correcta, no un error." } },
+    { "@type": "Question", "name": "¿Cómo sé si los rastreadores de IA pueden acceder a mi sitio web?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Abre tusitio.com/robots.txt en un navegador. Si está vacío o no existe, los rastreadores tienen acceso por defecto. Si lista reglas, revisa específicamente si GPTBot, ClaudeBot, PerplexityBot y Google-Extended están bloqueados — algunos constructores de sitios web y plugins de seguridad los bloquean sin avisar. Un AO Audit gratuito revisa esto automáticamente, junto con el schema y la legibilidad del contenido, en unos 60 segundos." } },
+    { "@type": "Question", "name": "¿Necesito un desarrollador para agregar datos estructurados?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Para la mayoría de los sitios de negocios pequeños, no. Es un bloque de código que se pega directamente en el HTML de la página — copiar, ajustar los datos reales, y pegar. La parte que sí requiere cuidado es elegir el tipo correcto (LocalBusiness, Organization, ProfessionalService, etc.) según lo que el negocio realmente es." } }
+  ] }
+] }
+</script>
+<style>
+:root{--bg:#F4F1EC;--card:#fff;--ink:#191919;--dim:#5A554B;--green:#1E8468;--orange:#D97757;--orange-deep:#B4552D;--line:#DDD6CA}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;line-height:1.7;font-size:1.04rem}
+.band{height:.5rem;background:var(--green)} .strip{height:.18rem;background:var(--orange)}
+.wrap{max-width:44rem;margin:0 auto;padding:2.5rem 1.4rem 4rem}
+.kicker{color:var(--green);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.78rem;margin:0 0 .6rem}
+h1{font-size:clamp(1.7rem,4.5vw,2.5rem);line-height:1.15;margin:0 0 .6rem}
+h2{font-size:1.35rem;margin:2.2rem 0 .6rem}
+h3{font-size:1.08rem;margin:1.6rem 0 .3rem}
+.byline{color:var(--dim);font-size:.9rem;margin:0 0 1.8rem}
+.card{background:var(--card);border-left:4px solid var(--green);border-radius:0 10px 10px 0;padding:1rem 1.3rem;margin:1.4rem 0}
+pre{background:#211D18;color:#EDE8DE;border-radius:8px;padding:1.1rem 1.3rem;overflow-x:auto;font-family:"IBM Plex Mono",monospace;font-size:.82rem;line-height:1.6}
+a{color:var(--orange-deep)} .cta{display:inline-block;background:var(--orange);color:#fff;font-weight:600;padding:.85rem 1.6rem;border-radius:8px;text-decoration:none;margin-top:.6rem}
+footer{border-top:1px solid var(--line);margin-top:3rem;padding-top:1.2rem;color:var(--dim);font-size:.85rem}
+</style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1034023492870678');fbq('track','PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1034023492870678&ev=PageView&noscript=1"/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+<div class="band"></div><div class="strip"></div>
+<nav style="position:sticky;top:0;z-index:50;background:#F4F1EC;border-bottom:1px solid #DDD6CA;display:flex;justify-content:space-between;align-items:center;padding:.7rem 1.4rem;font-family:'IBM Plex Sans',system-ui,sans-serif">
+  <a href="https://aoaudit.com/es.html" style="font-weight:800;color:#191919;text-decoration:none;font-size:1.05rem">&#8592; The AO Audit</a>
+  <a href="https://aoaudit.com/es.html#scanform" style="background:#D97757;color:#fff;font-weight:600;padding:.5rem 1.1rem;border-radius:7px;text-decoration:none;font-size:.92rem">Escanear mi sitio &#8594;</a>
+</nav>
+<div class="wrap">
+<p class="kicker">Tres cosas, no una sensación</p>
+<h1>¿Qué es schema markup, y cómo hace tu sitio amigable para IA?</h1>
+<p class="byline">Por Alejandro Ojeda · The AO Audit · 6 de agosto de 2026</p>
+
+<div class="card"><p style="margin:0">Schema markup son datos estructurados: un bloque de código, normalmente JSON-LD, que le dice a una máquina exactamente qué es tu negocio, dónde está y qué ofrece — sin que tenga que adivinar leyendo párrafos. Es una de tres cosas que hacen amigable un sitio para IA. Las otras dos: que los rastreadores de IA puedan realmente entrar, y que el contenido mismo sea legible sin adivinar — precios reales, horario real, preguntas frecuentes reales.</p></div>
+
+<p>La mayoría de las guías sobre esto se detienen en "agrega schema markup" y ya. Es un consejo incompleto, porque se salta un detalle que sí importa: no todos los negocios deberían usar el mismo tipo de schema, y usar el incorrecto es su propio pequeño problema de credibilidad.</p>
+
+<h2>La diferencia que casi nadie explica: LocalBusiness contra Organization</h2>
+<p>Un ejemplo mínimo de datos estructurados, para un negocio con local físico real:</p>
+<pre>{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Panadería Ejemplo",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Calle Principal 123",
+    "addressLocality": "Napa",
+    "addressRegion": "CA"
+  },
+  "telephone": "+1-707-555-0100",
+  "openingHours": "Lu-Sa 07:00-16:00"
+}</pre>
+<p><strong>LocalBusiness</strong> es el tipo correcto solo cuando existe una presencia física o de área de servicio real — un local, una oficina, un radio de entrega. Un negocio puramente en línea no tiene eso, y forzar LocalBusiness ahí es técnicamente incorrecto, no solo innecesario. Este mismo sitio es el ejemplo: The AO Audit opera completamente remoto — los escaneos y reportes, todo — sin ninguna ubicación que un cliente visite, así que su propio schema usa <strong>Organization</strong>, no LocalBusiness. Esa es la decisión correcta, no un hueco en la configuración.</p>
+
+<h2>La otra mitad: ¿pueden los rastreadores de IA llegar hasta ti?</h2>
+<p>El schema no sirve de nada si los rastreadores que lo leerían están bloqueados. Abre <code>tusitio.com/robots.txt</code> en un navegador — si está vacío o no existe, todo está permitido por defecto, lo cual está bien. Si lista reglas, revisa específicamente GPTBot, ClaudeBot, PerplexityBot y Google-Extended; algunos constructores de sitios y plugins de seguridad los bloquean por defecto sin mencionarlo nunca. Como referencia, aquí está el robots.txt real de este sitio, sin editar:</p>
+<pre>User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: *
+Allow: /
+
+Sitemap: https://aoaudit.com/sitemap.xml</pre>
+<p>Cada rastreador de IA nombrado explícitamente, cada uno permitido, más un comodín que cubre todo lo demás. Nada exótico — el archivo completo son nueve líneas haciendo un trabajo real.</p>
+
+<p>Acertar en estas dos cosas — ser alcanzable, y ser legible en un formato estructurado — es la mayor parte de lo que "amigable para IA" significa en la práctica. No hay garantía de que un motor de IA específico cite una página específica en un día específico; lo que estos arreglos controlan es si eso es siquiera posible.</p>
+
+<p><a class="cta" href="https://aoaudit.com/es.html#scanform">Revisa ambas cosas en tu propio sitio — AO Audit gratis, 60 segundos &#8594;</a></p>
+
+<h2>Preguntas frecuentes</h2>
+<h3>¿Qué es schema markup?</h3>
+<p>Un bloque de código, normalmente JSON-LD, colocado en la sección head de una página, que indica los datos de tu negocio en un formato que las máquinas leen directamente en vez de adivinar a partir de párrafos de texto — tu nombre, dirección, teléfono, horario y categoría.</p>
+<h3>¿Cuál es la diferencia entre datos estructurados LocalBusiness y Organization?</h3>
+<p>LocalBusiness es el tipo correcto solo cuando existe una presencia física o de área de servicio real — un local, una oficina, un radio de entrega. Un negocio puramente en línea no tiene eso, y forzar LocalBusiness ahí es técnicamente incorrecto, no solo innecesario. Este mismo sitio es el ejemplo: The AO Audit opera completamente remoto, sin ubicación que un cliente visite, así que usa el tipo Organization en vez de LocalBusiness — y esa es la decisión correcta, no un error.</p>
+<h3>¿Cómo sé si los rastreadores de IA pueden acceder a mi sitio web?</h3>
+<p>Abre tusitio.com/robots.txt en un navegador. Si está vacío o no existe, los rastreadores tienen acceso por defecto. Si lista reglas, revisa específicamente si GPTBot, ClaudeBot, PerplexityBot y Google-Extended están bloqueados — algunos constructores de sitios web y plugins de seguridad los bloquean sin avisar. Un AO Audit gratuito revisa esto automáticamente, junto con el schema y la legibilidad del contenido, en unos 60 segundos.</p>
+<h3>¿Necesito un desarrollador para agregar datos estructurados?</h3>
+<p>Para la mayoría de los sitios de negocios pequeños, no. Es un bloque de código que se pega directamente en el HTML de la página — copiar, ajustar los datos reales, y pegar. La parte que sí requiere cuidado es elegir el tipo correcto (LocalBusiness, Organization, ProfessionalService, etc.) según lo que el negocio realmente es.</p>
+
+<footer>The AO Audit · Optimización de Respuestas (AO) · <a href="https://aoaudit.com/es.html">aoaudit.com/es</a> · Empieza aquí: <a href="what-is-answer-optimization.html">¿qué es Answer Optimization (AO)?</a> · Relacionado: <a href="archivo-llms-txt.html">llms.txt, explicado con un ejemplo real</a> · <a href="https://aoaudit.com/es.html">Sé la respuesta</a>.</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to Make Your Website AI-Friendly</title>
+<meta name="description" content="AI-friendly means three checkable things: AI crawlers can reach you, structured data tells them what you are, and your content is machine-readable. The honest nuance on LocalBusiness schema most guides skip.">
+<link rel="canonical" href="https://aoaudit.com/ai-friendly-website.html">
+<meta name="robots" content="index,follow">
+<link rel="alternate" hreflang="es" href="https://aoaudit.com/que-es-schema-markup.html">
+<link rel="alternate" hreflang="en" href="https://aoaudit.com/ai-friendly-website.html">
+<link rel="alternate" hreflang="x-default" href="https://aoaudit.com/ai-friendly-website.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to Make Your Website AI-Friendly">
+<meta property="og:description" content="Three checkable things, not a vibe: crawler access, structured data, machine-readable content. Includes the LocalBusiness-schema nuance most guides skip.">
+<meta property="og:url" content="https://aoaudit.com/ai-friendly-website.html">
+<meta property="og:image" content="https://aoaudit.com/og-card2.png">
+<script type="application/ld+json">
+{ "@context": "https://schema.org", "@graph": [
+  { "@type": "Article",
+    "headline": "How to Make Your Website AI-Friendly",
+    "datePublished": "2026-08-06", "dateModified": "2026-08-06",
+    "author": { "@type": "Person", "name": "Alejandro Ojeda" },
+    "publisher": { "@id": "https://aoaudit.com/#org" },
+    "about": { "@id": "https://aoaudit.com/what-is-answer-optimization.html#ao" },
+    "description": "What actually makes a website AI-friendly: crawler access, structured data, and machine-readable content — plus the honest nuance on which schema type fits which business, using this site's own real robots.txt and schema as examples." },
+  { "@type": "FAQPage", "mainEntity": [
+    { "@type": "Question", "name": "How do you make a website AI-friendly?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Three checkable things. AI crawlers need to actually be allowed in — check your robots.txt for GPTBot, ClaudeBot, and PerplexityBot specifically, not just Googlebot. Structured data (schema markup) needs to state plainly what you are, where you are, and what you offer. And your content needs to be readable without guessing — real prices, real hours, a real FAQ, not vague marketing copy. None of these require a developer for most small business sites." } },
+    { "@type": "Question", "name": "What is structured data for a local business?",
+      "acceptedAnswer": { "@type": "Answer", "text": "A block of code (usually JSON-LD, placed in the page's head) that states your business facts in a format machines can parse directly instead of guessing from paragraphs — your name, address, phone, hours, and category. Most guides tell every business to use the LocalBusiness schema type, but that's not always right: a business without a storefront, like a purely online consultancy, often fits Organization or ProfessionalService better. The type should match what the business actually is." } },
+    { "@type": "Question", "name": "Does my business need LocalBusiness schema specifically?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Only if you actually have a physical or service-area presence customers interact with — a storefront, an office, a service radius. This site is a working example of the alternative: The AO Audit runs the scans and reports remotely with no physical location customers visit, so it uses Organization schema instead of LocalBusiness, and that's the correct choice, not a missing feature." } },
+    { "@type": "Question", "name": "How do I check if AI crawlers can reach my website?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Open yoursite.com/robots.txt in a browser. If it's blank or missing, crawlers are allowed by default. If it lists rules, check whether GPTBot, ClaudeBot, PerplexityBot, and Google-Extended are explicitly disallowed — some website builders block them without telling you. A free AO Audit checks this automatically, along with schema and content readability, in about 60 seconds." } }
+  ] }
+] }
+</script>
+<style>
+:root{--bg:#F4F1EC;--card:#fff;--ink:#191919;--dim:#5A554B;--green:#1E8468;--orange:#D97757;--orange-deep:#B4552D;--line:#DDD6CA}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;line-height:1.7;font-size:1.04rem}
+.band{height:.5rem;background:var(--green)} .strip{height:.18rem;background:var(--orange)}
+.wrap{max-width:44rem;margin:0 auto;padding:2.5rem 1.4rem 4rem}
+.kicker{color:var(--green);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.78rem;margin:0 0 .6rem}
+h1{font-size:clamp(1.7rem,4.5vw,2.5rem);line-height:1.15;margin:0 0 .6rem}
+h2{font-size:1.35rem;margin:2.2rem 0 .6rem}
+h3{font-size:1.08rem;margin:1.6rem 0 .3rem}
+.byline{color:var(--dim);font-size:.9rem;margin:0 0 1.8rem}
+.card{background:var(--card);border-left:4px solid var(--green);border-radius:0 10px 10px 0;padding:1rem 1.3rem;margin:1.4rem 0}
+pre{background:#211D18;color:#EDE8DE;border-radius:8px;padding:1.1rem 1.3rem;overflow-x:auto;font-family:"IBM Plex Mono",monospace;font-size:.82rem;line-height:1.6}
+a{color:var(--orange-deep)} .cta{display:inline-block;background:var(--orange);color:#fff;font-weight:600;padding:.85rem 1.6rem;border-radius:8px;text-decoration:none;margin-top:.6rem}
+footer{border-top:1px solid var(--line);margin-top:3rem;padding-top:1.2rem;color:var(--dim);font-size:.85rem}
+</style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1034023492870678');fbq('track','PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1034023492870678&ev=PageView&noscript=1"/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+<div class="band"></div><div class="strip"></div>
+<nav style="position:sticky;top:0;z-index:50;background:#F4F1EC;border-bottom:1px solid #DDD6CA;display:flex;justify-content:space-between;align-items:center;padding:.7rem 1.4rem;font-family:'IBM Plex Sans',system-ui,sans-serif">
+  <a href="https://aoaudit.com/" style="font-weight:800;color:#191919;text-decoration:none;font-size:1.05rem">&#8592; The AO Audit</a>
+  <a href="https://aoaudit.com/#scanform" style="background:#D97757;color:#fff;font-weight:600;padding:.5rem 1.1rem;border-radius:7px;text-decoration:none;font-size:.92rem">Scan my website &#8594;</a>
+</nav>
+<div class="wrap">
+<p class="kicker">Three things, not a vibe</p>
+<h1>How do you make a website AI-friendly?</h1>
+<p class="byline">By Alejandro Ojeda · The AO Audit · August 6, 2026</p>
+
+<div class="card"><p style="margin:0">Three checkable things, none of which need a developer for most small business sites. AI crawlers need to actually be let in — GPTBot, ClaudeBot, and PerplexityBot specifically, not just Googlebot. Structured data needs to state plainly what you are, where you are, and what you offer, in a format a machine can parse without guessing. And the content itself needs to be readable without guessing either — real prices, real hours, a real FAQ, not vague marketing copy dressed up as a homepage.</p></div>
+
+<p>Most "AI-friendly website" checklists stop at "add schema markup" and move on. That's incomplete advice, and it skips a nuance that actually matters: not every business should use the same schema type, and getting it wrong is its own small credibility problem.</p>
+
+<h2>Structured data: the nuance most guides skip</h2>
+<p>Structured data is a block of code, usually JSON-LD, sitting in a page's head, stating your business facts in a format machines read directly instead of inferring from paragraphs of copy. A minimal example, for a business with a real storefront:</p>
+<pre>{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Example Bakery",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "123 Main St",
+    "addressLocality": "Napa",
+    "addressRegion": "CA"
+  },
+  "telephone": "+1-707-555-0100",
+  "openingHours": "Mo-Sa 07:00-16:00"
+}</pre>
+<p>Here's the part almost nobody says out loud: <strong>LocalBusiness</strong> is the right type only when there's an actual physical or service-area presence — a storefront, an office, a delivery radius. A purely online business doesn't have one of those, and forcing LocalBusiness onto it is technically inaccurate, not just unnecessary. This site is the example: The AO Audit runs entirely remote — scans, reports, everything — with no location a customer visits, so its own schema uses <strong>Organization</strong>, not LocalBusiness. That's the correct call, not a gap in the setup.</p>
+
+<h2>The other half: can AI crawlers even reach you?</h2>
+<p>Schema is wasted if the crawlers that would read it are blocked. Open <code>yoursite.com/robots.txt</code> in a browser — if it's blank or missing, everything is allowed by default, which is fine. If it lists rules, check specifically for GPTBot, ClaudeBot, PerplexityBot, and Google-Extended; some site builders and security plugins block these by default without ever mentioning it. For reference, here's this site's actual robots.txt, unedited:</p>
+<pre>User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: *
+Allow: /
+
+Sitemap: https://aoaudit.com/sitemap.xml</pre>
+<p>Every AI crawler explicitly named, every one allowed, plus a wildcard covering everything else. Nothing exotic — the whole file is nine lines doing real work.</p>
+
+<p>Getting these two things right — reachable, and readable in a structured format — is most of what "AI-friendly" actually means in practice. There's no guarantee any specific AI engine cites a specific page on a specific day; what these fixes control is whether it's even possible.</p>
+
+<p><a class="cta" href="https://aoaudit.com/#scanform">Check both on your own site — free AO Audit, 60 seconds &#8594;</a></p>
+
+<h2>FAQ</h2>
+<h3>How do you make a website AI-friendly?</h3>
+<p>Three checkable things. AI crawlers need to actually be allowed in — check your robots.txt for GPTBot, ClaudeBot, and PerplexityBot specifically, not just Googlebot. Structured data (schema markup) needs to state plainly what you are, where you are, and what you offer. And your content needs to be readable without guessing — real prices, real hours, a real FAQ, not vague marketing copy. None of these require a developer for most small business sites.</p>
+<h3>What is structured data for a local business?</h3>
+<p>A block of code (usually JSON-LD, placed in the page's head) that states your business facts in a format machines can parse directly instead of guessing from paragraphs — your name, address, phone, hours, and category. Most guides tell every business to use the LocalBusiness schema type, but that's not always right: a business without a storefront, like a purely online consultancy, often fits Organization or ProfessionalService better. The type should match what the business actually is.</p>
+<h3>Does my business need LocalBusiness schema specifically?</h3>
+<p>Only if you actually have a physical or service-area presence customers interact with — a storefront, an office, a service radius. This site is a working example of the alternative: The AO Audit runs the scans and reports remotely with no physical location customers visit, so it uses Organization schema instead of LocalBusiness, and that's the correct choice, not a missing feature.</p>
+<h3>How do I check if AI crawlers can reach my website?</h3>
+<p>Open yoursite.com/robots.txt in a browser. If it's blank or missing, crawlers are allowed by default. If it lists rules, check whether GPTBot, ClaudeBot, PerplexityBot, and Google-Extended are explicitly disallowed — some website builders block them without telling you. A free AO Audit checks this automatically, along with schema and content readability, in about 60 seconds.</p>
+
+<footer>The AO Audit · Answer Optimization (AO) · <a href="https://aoaudit.com/">aoaudit.com</a> · Start here: <a href="what-is-answer-optimization.html">what is Answer Optimization (AO)?</a> · Related: <a href="llms-txt-file.html">llms.txt, explained with a real example</a> · <a href="ai-visibility.html">check your AI visibility free</a> · From our logs: <a href="self-audit.html">our own failing grade</a>.</footer>
+</div>
+</body>
+</html>
