@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What Is Video SEO? Why AI Engines Are Starting to Cite YouTube</title>
+<meta name="description" content="Video SEO means optimizing titles, captions, and schema so both video search and AI systems can understand your video — because AI reads transcripts, not pixels. Here's the mechanics, and the honest limit on the YouTube-citation stat everyone's repeating.">
+<link rel="canonical" href="https://aoaudit.com/video-seo.html">
+<meta name="robots" content="index,follow">
+<link rel="alternate" hreflang="es" href="https://aoaudit.com/seo-para-videos.html">
+<link rel="alternate" hreflang="en" href="https://aoaudit.com/video-seo.html">
+<link rel="alternate" hreflang="x-default" href="https://aoaudit.com/video-seo.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="What Is Video SEO? Why AI Engines Are Starting to Cite YouTube">
+<meta property="og:description" content="AI can't watch a video — it reads the transcript. That single fact explains what actually matters for video SEO now, and why we're admitting our own channel isn't set up yet.">
+<meta property="og:url" content="https://aoaudit.com/video-seo.html">
+<meta property="og:image" content="https://aoaudit.com/og-card2.png">
+<script type="application/ld+json">
+{ "@context": "https://schema.org", "@graph": [
+  { "@type": "Article",
+    "headline": "What Is Video SEO? Why AI Engines Are Starting to Cite YouTube",
+    "datePublished": "2026-08-09", "dateModified": "2026-08-09",
+    "author": { "@type": "Person", "name": "Alejandro Ojeda" },
+    "publisher": { "@id": "https://aoaudit.com/#org" },
+    "about": { "@id": "https://aoaudit.com/what-is-answer-optimization.html#ao" },
+    "description": "What video SEO actually means for AI visibility (transcripts and VideoObject schema, not video quality alone), the real mechanic behind why AI engines cite YouTube, and an honest label on the specific citation-share statistic being repeated everywhere." },
+  { "@type": "FAQPage", "mainEntity": [
+    { "@type": "Question", "name": "What is video SEO?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Optimizing a video so search engines and AI systems can understand what's in it — accurate titles and descriptions, real captions or a transcript, chapter timestamps, and VideoObject structured data (schema.org markup naming the video, its thumbnail, upload date, and duration). None of that changes the video itself. It changes whether a machine that can't watch it can still tell what it's about." } },
+    { "@type": "Question", "name": "Why do AI engines cite YouTube specifically?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Because YouTube videos come with transcripts, and an AI system can't watch video — it reads text. A transcript turns a video into something a language model can actually process, the same way a web page's text does. Google's AI Overviews and Gemini also have direct integration with YouTube, since both are Google products, which reinforces the pattern." } },
+    { "@type": "Question", "name": "Is it true that YouTube is now cited more than Reddit in AI answers?",
+      "acceptedAnswer": { "@type": "Answer", "text": "That specific claim — 16% of LLM answers citing YouTube versus 10% for Reddit — traces to a single company's data (Bluefish), reported by Adweek without a disclosed methodology: no sample size, no named AI engines, no time-period detail beyond \"the past six months.\" The direction is plausible and mechanically sound. The precise percentage should be treated as one vendor's estimate, not a verified industry figure." } },
+    { "@type": "Question", "name": "Does this site have a YouTube channel set up for AI visibility?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Not yet, and that's worth saying plainly rather than skipping. Our own self-audit flags a missing linked video profile as the one open gap in our own AI-readiness — we have unpublished video already recorded, just not live with proper captions and schema. Writing about this topic honestly means admitting we haven't finished it either." } }
+  ] }
+] }
+</script>
+<style>
+:root{--bg:#F4F1EC;--card:#fff;--ink:#191919;--dim:#5A554B;--green:#1E8468;--orange:#D97757;--orange-deep:#B4552D;--line:#DDD6CA}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;line-height:1.7;font-size:1.04rem}
+.band{height:.5rem;background:var(--green)} .strip{height:.18rem;background:var(--orange)}
+.wrap{max-width:44rem;margin:0 auto;padding:2.5rem 1.4rem 4rem}
+.kicker{color:var(--green);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.78rem;margin:0 0 .6rem}
+h1{font-size:clamp(1.7rem,4.5vw,2.5rem);line-height:1.15;margin:0 0 .6rem}
+h2{font-size:1.35rem;margin:2.2rem 0 .6rem}
+h3{font-size:1.08rem;margin:1.6rem 0 .3rem}
+.byline{color:var(--dim);font-size:.9rem;margin:0 0 1.8rem}
+.card{background:var(--card);border-left:4px solid var(--green);border-radius:0 10px 10px 0;padding:1rem 1.3rem;margin:1.4rem 0}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;margin:1.2rem 0;background:var(--card);font-size:.95rem}
+th,td{border:1px solid var(--line);padding:.6rem .8rem;text-align:left;vertical-align:top}
+th{background:#EFEBE2}
+pre{background:#211D18;color:#EDE8DE;border-radius:8px;padding:1.1rem 1.3rem;overflow-x:auto;font-family:"IBM Plex Mono",monospace;font-size:.82rem;line-height:1.6}
+a{color:var(--orange-deep)} .cta{display:inline-block;background:var(--orange);color:#fff;font-weight:600;padding:.85rem 1.6rem;border-radius:8px;text-decoration:none;margin-top:.6rem}
+footer{border-top:1px solid var(--line);margin-top:3rem;padding-top:1.2rem;color:var(--dim);font-size:.85rem}
+</style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1034023492870678');fbq('track','PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1034023492870678&ev=PageView&noscript=1"/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+<div class="band"></div><div class="strip"></div>
+<nav style="position:sticky;top:0;z-index:50;background:#F4F1EC;border-bottom:1px solid #DDD6CA;display:flex;justify-content:space-between;align-items:center;padding:.7rem 1.4rem;font-family:'IBM Plex Sans',system-ui,sans-serif">
+  <a href="https://aoaudit.com/" style="font-weight:800;color:#191919;text-decoration:none;font-size:1.05rem">&#8592; The AO Audit</a>
+  <a href="https://aoaudit.com/#scanform" style="background:#D97757;color:#fff;font-weight:600;padding:.5rem 1.1rem;border-radius:7px;text-decoration:none;font-size:.92rem">Scan my website &#8594;</a>
+</nav>
+<div class="wrap">
+<p class="kicker">AI can't watch a video</p>
+<h1>What is video SEO? Why AI engines are starting to cite YouTube</h1>
+<p class="byline">By Alejandro Ojeda · The AO Audit · August 9, 2026</p>
+
+<div class="card"><p style="margin:0">Video SEO is optimizing a video so machines that can't watch it can still understand what's in it — accurate titles and descriptions, real captions or a transcript, chapter timestamps, and VideoObject structured data naming the video, its thumbnail, upload date, and duration. That last point explains almost everything else on this page: an AI system reads text. A video with no transcript and no schema is, to a language model, close to invisible — regardless of how good the video actually is.</p></div>
+
+<p>That single mechanic is also the honest explanation for why YouTube keeps coming up in conversations about AI visibility. It's not that YouTube videos are inherently more trustworthy or better. It's that YouTube ships every video with a transcript, which is exactly the format a language model already knows how to read.</p>
+
+<h2>What actually makes a video machine-readable</h2>
+<div class="tablewrap"><table>
+<tr><th>Element</th><th>Why it matters to AI specifically</th></tr>
+<tr><td><strong>Transcript / captions</strong></td><td>The only part of the video an AI system can directly process — no transcript effectively means no content, from a machine's perspective</td></tr>
+<tr><td><strong>VideoObject schema</strong></td><td>States the video's name, description, thumbnail, upload date, and duration in a format a machine parses directly instead of guessing</td></tr>
+<tr><td><strong>Chapter timestamps</strong></td><td>Lets an AI system point to and quote a specific segment instead of the whole video</td></tr>
+</table></div>
+<p>A minimal VideoObject example, the actual fields that matter:</p>
+<pre>{
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "How the AO Audit Scan Works",
+  "description": "A 90-second walkthrough of the 60-second AI-visibility scan.",
+  "thumbnailUrl": "https://aoaudit.com/video-thumb.jpg",
+  "uploadDate": "2026-08-09",
+  "duration": "PT1M30S"
+}</pre>
+
+<h2>The trend claim, and its actual limit</h2>
+<p>The specific number circulating right now — that YouTube is cited in 16% of AI answers versus 10% for Reddit, overtaking it as the top social citation source — traces back to one company's proprietary data (Bluefish), reported by Adweek. Adweek is a real trade publication, which puts this a step above the anonymous blog-farm claims we've flagged elsewhere on this site. But the methodology behind the number isn't disclosed anywhere we could find: no sample size, no named AI engines, no detail beyond "the past six months." The underlying mechanic — transcripts make video parseable, so AI engines cite it more than they used to — is sound and plausible. The precise 16%-versus-10% figure is one vendor's estimate, not something we'd repeat as a settled industry fact.</p>
+
+<div class="card"><p style="margin:0">Worth admitting directly: our own self-audit already flags a missing linked video profile as the one open gap in our own machine-readability. We have unpublished video recorded, sitting unused, without captions or schema attached yet. Writing about this honestly means saying we haven't finished it either — not just telling you to.</p></div>
+
+<p><a class="cta" href="https://aoaudit.com/#scanform">Check what's machine-readable on your own site — free AO Audit, 60 seconds &#8594;</a></p>
+
+<h2>FAQ</h2>
+<h3>What is video SEO?</h3>
+<p>Optimizing a video so search engines and AI systems can understand what's in it — accurate titles and descriptions, real captions or a transcript, chapter timestamps, and VideoObject structured data (schema.org markup naming the video, its thumbnail, upload date, and duration). None of that changes the video itself. It changes whether a machine that can't watch it can still tell what it's about.</p>
+<h3>Why do AI engines cite YouTube specifically?</h3>
+<p>Because YouTube videos come with transcripts, and an AI system can't watch video — it reads text. A transcript turns a video into something a language model can actually process, the same way a web page's text does. Google's AI Overviews and Gemini also have direct integration with YouTube, since both are Google products, which reinforces the pattern.</p>
+<h3>Is it true that YouTube is now cited more than Reddit in AI answers?</h3>
+<p>That specific claim — 16% of LLM answers citing YouTube versus 10% for Reddit — traces to a single company's data (Bluefish), reported by Adweek without a disclosed methodology: no sample size, no named AI engines, no time-period detail beyond "the past six months." The direction is plausible and mechanically sound. The precise percentage should be treated as one vendor's estimate, not a verified industry figure.</p>
+<h3>Does this site have a YouTube channel set up for AI visibility?</h3>
+<p>Not yet, and that's worth saying plainly rather than skipping. Our own self-audit flags a missing linked video profile as the one open gap in our own AI-readiness — we have unpublished video already recorded, just not live with proper captions and schema. Writing about this topic honestly means admitting we haven't finished it either.</p>
+
+<footer>The AO Audit · Answer Optimization (AO) · <a href="https://aoaudit.com/">aoaudit.com</a> · Start here: <a href="what-is-answer-optimization.html">what is Answer Optimization (AO)?</a> · Related: <a href="does-ai-marketing-work.html">does AI marketing actually work? we fact-checked it</a> · <a href="what-is-geo.html">what is GEO, explained by the research</a> · From our logs: <a href="self-audit.html">our own failing grade</a>.</footer>
+</div>
+</body>
+</html>
