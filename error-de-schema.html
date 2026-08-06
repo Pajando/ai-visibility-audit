@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La Herramienta de Schema Tenía un Error de Schema — Lo que Google Search Console Encontró en Nuestro Propio Sitio</title>
+<meta name="description" content="Construimos una herramienta que revisa si el schema de un sitio está limpio. Así que había exactamente una pantalla que no esperábamos ver en rojo: la nuestra. La historia completa, con el arreglo.">
+<link rel="canonical" href="https://aoaudit.com/error-de-schema.html">
+<meta name="robots" content="index,follow">
+<link rel="alternate" hreflang="en" href="https://aoaudit.com/schema-error.html">
+<link rel="alternate" hreflang="es" href="https://aoaudit.com/error-de-schema.html">
+<link rel="alternate" hreflang="x-default" href="https://aoaudit.com/schema-error.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="La Herramienta de Schema Tenía un Error de Schema — Lo que Google Search Console Encontró en Nuestro Propio Sitio">
+<meta property="og:description" content="Construimos una herramienta que revisa si el schema de un sitio está limpio. Así que había exactamente una pantalla que no esperábamos ver en rojo: la nuestra. La historia completa, con el arreglo.">
+<meta property="og:url" content="https://aoaudit.com/error-de-schema.html">
+<meta property="og:image" content="https://aoaudit.com/og-card2.png">
+<script type="application/ld+json">
+{ "@context": "https://schema.org", "@type": "Article",
+  "headline": "La herramienta de schema tenía un error de schema",
+  "datePublished": "2026-08-09", "dateModified": "2026-08-09",
+  "author": { "@type": "Person", "name": "Alejandro Ojeda" },
+  "publisher": { "@id": "https://aoaudit.com/#org" },
+  "inLanguage": "es",
+  "description": "Construimos una herramienta que revisa si el schema de un sitio está limpio. Así que había exactamente una pantalla que no esperábamos ver en rojo: la nuestra. La historia completa, con el arreglo." }
+</script>
+<style>
+:root{--bg:#F4F1EC;--card:#fff;--ink:#191919;--dim:#5A554B;--green:#1E8468;--orange:#D97757;--orange-deep:#B4552D;--line:#DDD6CA}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;line-height:1.7;font-size:1.04rem}
+.band{height:.5rem;background:var(--green)} .strip{height:.18rem;background:var(--orange)}
+.wrap{max-width:44rem;margin:0 auto;padding:2.5rem 1.4rem 4rem}
+.kicker{color:var(--green);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.78rem;margin:0 0 .6rem}
+h1{font-size:clamp(1.7rem,4.5vw,2.5rem);line-height:1.15;margin:0 0 .6rem}
+h2{font-size:1.35rem;margin:2.2rem 0 .6rem}
+.byline{color:var(--dim);font-size:.9rem;margin:0 0 1.8rem}
+.card{background:var(--card);border-left:4px solid var(--green);border-radius:0 10px 10px 0;padding:1rem 1.3rem;margin:1.4rem 0}
+.num{color:var(--orange-deep);font-weight:700}
+pre{background:#211D18;color:#EDE8DE;border-radius:8px;padding:1.1rem 1.3rem;overflow-x:auto;font-family:"IBM Plex Mono",monospace;font-size:.82rem;line-height:1.6}
+a{color:var(--orange-deep)} .cta{display:inline-block;background:var(--orange);color:#fff;font-weight:600;padding:.85rem 1.6rem;border-radius:8px;text-decoration:none;margin-top:.6rem}
+footer{border-top:1px solid var(--line);margin-top:3rem;padding-top:1.2rem;color:var(--dim);font-size:.85rem}
+</style>
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1034023492870678');fbq('track','PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1034023492870678&ev=PageView&noscript=1"/></noscript>
+</head>
+<body>
+<div class="band"></div><div class="strip"></div>
+<nav style="position:sticky;top:0;z-index:50;background:#F4F1EC;border-bottom:1px solid #DDD6CA;display:flex;justify-content:space-between;align-items:center;padding:.7rem 1.4rem;font-family:'IBM Plex Sans',system-ui,sans-serif">
+  <a href="https://aoaudit.com/es.html" style="font-weight:800;color:#191919;text-decoration:none;font-size:1.05rem">&#8592; The AO Audit</a>
+  <a href="https://aoaudit.com/es.html#scanform" style="background:#D97757;color:#fff;font-weight:600;padding:.5rem 1.1rem;border-radius:7px;text-decoration:none;font-size:.92rem">Escanear mi sitio &#8594;</a>
+</nav>
+<div class="wrap">
+<p class="kicker">De nuestros registros</p>
+<h1>La herramienta de schema tenía un error de schema</h1>
+<p class="byline">Por Alejandro Ojeda · The AO Audit · Tomado directamente de nuestro propio Google Search Console.</p>
+
+<p>Los datos estructurados (schema) son la columna vertebral de la Optimización de Respuestas. Lo cual hace esta historia más vergonzosa — y más útil.</p>
+<p>Construimos The AO Audit para revisar, entre otras cosas, si los datos estructurados de un sitio web están limpios. Así que hay exactamente una pantalla que no esperábamos ver en rojo: nuestro propio Google Search Console, marcando <span class="num">1 elemento no válido</span> en el schema de aoaudit.com. La herramienta que califica schema tenía un error de schema. Aquí está todo.</p>
+
+<h2>¿Qué marcó Google exactamente?</h2>
+<p>En la sección de Mejoras de Search Console, el reporte de "Fichas de comerciante" mostró 1 elemento no válido detectado. El elemento era nuestro schema de Producto — los datos estructurados que describen la guía de $39. Google lee un Producto con precio e intenta hacerlo elegible para las superficies de compras, y esas superficies tienen un requisito duro: un producto necesita una imagen. El nuestro no tenía. Un campo faltante, un error rojo.</p>
+<p>La parte honesta: llevaba días publicado así. Nuestra página estaba indexada y bien, nuestra visibilidad ante la IA no se vio afectada — una imagen de producto faltante no daña nada de eso. Pero era un error real y válido sentado en la consola de una empresa que vende "schema limpio, cero errores". Eso no es algo que se deja en rojo.</p>
+
+<h2>¿Cuál fue el arreglo?</h2>
+<p>Agregar el campo requerido, más la política de devoluciones que Google recomienda para productos (de verdad ofrecemos devolución de 30 días, así que es cierto declararlo):</p>
+<pre>"image": "https://aoaudit.com/og-card2.png",
+"offers": {
+  "@type": "Offer",
+  "price": "39.00", "priceCurrency": "USD",
+  "availability": "https://schema.org/InStock",
+  "hasMerchantReturnPolicy": {
+    "@type": "MerchantReturnPolicy",
+    "applicableCountry": "US",
+    "returnPolicyCategory": ".../MerchantReturnFiniteReturnWindow",
+    "merchantReturnDays": 30 } }</pre>
+<p>Tiempo total del arreglo: unos tres minutos. Google vuelve a leer la página en su siguiente rastreo (pedimos indexación para acelerarlo), y el rojo se limpia.</p>
+
+<h2>¿Por qué publicarlo en vez de parcharlo en silencio?</h2>
+<p>Porque "revisamos tu schema" no significa nada viniendo de una empresa que no te muestra el suyo. <strong>El error es la credencial.</strong> Cualquiera puede afirmar que sus datos estructurados son perfectos; nosotros podemos mostrarte el momento exacto en que los nuestros no lo eran, nombrar el campo que faltaba, y mostrar el arreglo — lo cual vale más que una afirmación de perfección, porque puedes revisar cada palabra.</p>
+<p>Y hay una lección ahí para ti: una imagen de producto faltante es uno de los errores de schema más comunes en sitios de negocios reales, y silenciosamente te deja fuera de las fichas de compras gratuitas de Google. Si vendes algo, revisa hoy que tu schema de Producto tenga el campo de imagen.</p>
+
+<p><a class="cta" href="https://aoaudit.com/es.html#scanform">Escanear mi sitio gratis &#8594;</a></p>
+
+<footer>The AO Audit · Optimización de Respuestas (AO) · <a href="https://aoaudit.com/es.html">aoaudit.com/es</a> · In English: <a href="schema-error.html">The Schema Tool Had a Schema Error</a> · Empieza aquí: <a href="seo-para-ia.html">¿qué es el SEO para IA?</a> · <a href="por-que-existimos.html">por qué existimos</a> · Más de nuestros registros: <a href="advertencia-a-proposito.html">la advertencia que dejamos a propósito</a> · <a href="nuestra-calificacion-reprobatoria.html">nuestra calificación reprobatoria</a>.</footer>
+</div>
+</body>
+</html>
