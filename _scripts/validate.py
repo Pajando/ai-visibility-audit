@@ -26,6 +26,7 @@ Lives in _scripts/ because Jekyll excludes underscore folders from the
 built site, so this file is never served publicly.
 """
 
+import html as _html
 import json
 import os
 import re
@@ -59,7 +60,8 @@ def warn(page, msg):
 
 
 def strip_tags(s):
-    return re.sub(r"<[^>]+>", "", s).strip()
+    """Drop tags and decode entities so &amp; compares equal to &."""
+    return _html.unescape(re.sub(r"<[^>]+>", "", s)).strip()
 
 
 def page_files():
@@ -110,13 +112,30 @@ def visible_faq_pairs(html):
         return out
 
     parts = re.split(
-        r"<h2>(?:FAQ|Common questions|Questions about pricing|"
+        r"<h2[^>]*>(?:FAQ|Common questions|Questions about pricing|"
         r"Preguntas frecuentes|Preguntas sobre precios)</h2>",
         html,
     )
-    if len(parts) < 2:
-        return []
-    return re.findall(r"<h3>(.*?)</h3>\s*<p>(.*?)</p>", parts[-1], re.S)
+    if len(parts) >= 2:
+        return re.findall(r"<h3[^>]*>(.*?)</h3>\s*<p[^>]*>(.*?)</p>", parts[-1], re.S)
+    return []
+
+
+def faq_by_heading(html, questions):
+    """
+    Fallback layout: the question is a standalone heading somewhere on the
+    page (any level, attributes allowed) and the answer is the next <p>.
+    Used by es.html, where a single Q&A sits in a card rather than a list.
+    """
+    pairs = []
+    for q in questions:
+        pat = (r"<h[1-6][^>]*>\s*" + re.escape(q).replace(r"\ ", r"\s+")
+               + r"\s*</h[1-6]>\s*<p[^>]*>(.*?)</p>")
+        m = re.search(pat, html, re.S)
+        if not m:
+            return []
+        pairs.append((q, m.group(1)))
+    return pairs
 
 
 def check_faq(page, html, parsed):
@@ -134,6 +153,9 @@ def check_faq(page, html, parsed):
     for faq in faqs:
         qs = faq.get("mainEntity", [])
         if not pairs:
+            names = [_html.unescape(q.get("name", "")).strip() for q in qs]
+            pairs = faq_by_heading(html, names)
+        if not pairs:
             err(page, "has FAQPage schema but no visible Q&A block "
                       "(schema claims FAQ content the reader cannot see)")
             return
@@ -142,8 +164,8 @@ def check_faq(page, html, parsed):
                 % (len(qs), len(pairs)))
             return
         for i, q in enumerate(qs):
-            want_q = q.get("name", "").strip()
-            want_a = q.get("acceptedAnswer", {}).get("text", "").strip()
+            want_q = _html.unescape(q.get("name", "")).strip()
+            want_a = _html.unescape(q.get("acceptedAnswer", {}).get("text", "")).strip()
             got_q = strip_tags(pairs[i][0])
             got_a = strip_tags(pairs[i][1])
             if want_q != got_q:
