@@ -4,5 +4,5 @@ This is aoaudit.com (GitHub Pages). Full operating manual: ~/Documents/BeTheAnsw
 - After adding a page: sitemap.xml entry + hreflang ES twin (Spanish-everything rule) + cross-links (hub what-is-answer-optimization.html + siblings) + GSC sitemap resubmit + Alejandro clicks Request Indexing.
 - Article template: copy an existing article page (kicker, direct-answer .card first, tables, honest-limit card, FAQ + FAQPage schema matching visible text, footer point-back). Meta Pixel + brand CSS vars stay intact.
 - Verify JSON-LD parses before pushing; verify live with curl after (never declare done unverified).
-- Palette: cream #F4F1EC, ink #191919, green #1E8468 (structure), terracotta #D97757 (single CTA per page).
+- Palette (white/blues, Alejandro's directive 2026-08-09 — supersedes the old cream/green): bg #f7f9fc, cards #fff, ink #0f2137, dim #5b6b7f, structure/deep blue #12459c, CTA vivid blue #1d6ceb (single CTA per page), links #1a5fd0, lines #e3eaf3, pale tint #e8f0fe. Scanner STATUS colors (pass green/fail red/warn amber) are semantic and stay unchanged.
 - Never: fabricated stats, "SE Ranking" for the 87% stat (it's Seer Interactive Feb 2025), bingplaces.com (dead — bing.com/forbusiness), keyword stuffing, city pages without real scan data.

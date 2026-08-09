@@ -144,10 +144,10 @@
 <style>
 :root{
   /* light theme: white ground, black ink, Claude terracotta for actions, steel blue for structure */
-  --bg:#FFFFFF; --bg2:#FAF9F5; --panel:#FAF9F5; --ink:#191919; --dim:#5A554B;
-  --orange:#D97757; --orange-deep:#B4552D; --blue:#1E8468; --blue-deep:#176350;
+  --bg:#FFFFFF; --bg2:#fbfcfe; --panel:#fbfcfe; --ink:#0f2137; --dim:#5b6b7f;
+  --orange:#1d6ceb; --orange-deep:#1a5fd0; --blue:#12459c; --blue-deep:#0d3474;
   /* legacy names still used by the scan JS (score ring + pillar bars): good=teal-green, mid=orange, poor=red */
-  --teal:#1E8468; --teal-deep:#176350; --amber:#D97757; --red:#C0392B; --line:#E7E1D6;
+  --teal:#12459c; --teal-deep:#0d3474; --amber:#1d6ceb; --red:#C0392B; --line:#e3eaf3;
   --max:64rem;
 }
 *{box-sizing:border-box}
@@ -173,9 +173,9 @@ a{color:var(--orange-deep)}
 .gauge{text-align:center}
 .gauge svg{max-width:100%;height:auto}
 .gpills{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center;margin:.7rem 0 0}
-.gpills span{font-size:.72rem;color:var(--teal,#1E8468);border:1px solid var(--line,#DDD6CA);border-radius:20px;padding:.2rem .65rem;background:#fff}
-.gcap{font-size:.8rem;color:var(--dim,#5A554B);margin:.75rem 0 0}
-.gcap a{color:var(--orange-deep,#B4552D);font-weight:600}
+.gpills span{font-size:.72rem;color:var(--teal,#12459c);border:1px solid var(--line,#e3eaf3);border-radius:20px;padding:.2rem .65rem;background:#fff}
+.gcap{font-size:.8rem;color:var(--dim,#5b6b7f);margin:.75rem 0 0}
+.gcap a{color:var(--orange-deep,#1a5fd0);font-weight:600}
 @keyframes radarspin{to{transform:rotate(360deg)}}
 @keyframes ballpulse{0%,100%{transform:scale(1)}50%{transform:scale(.84)}}
 @keyframes cqfade{0%{opacity:0}4%{opacity:1}28%{opacity:1}33%{opacity:0}100%{opacity:0}}
@@ -223,15 +223,15 @@ p{max-width:65ch}
 
 /* scan console */
 #scanpanel{display:none;background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.console{background:#211D18;color:#EDE8DE;border:1px solid #3A352C;border-radius:10px;padding:1.2rem 1.4rem;
+.console{background:#0b1a2d;color:#dce7f5;border:1px solid #22364f;border-radius:10px;padding:1.2rem 1.4rem;
   font-family:"IBM Plex Mono",monospace;font-size:.86rem;line-height:1.9;min-height:12rem}
 .console div{opacity:0;animation:fadein .3s forwards}
 @keyframes fadein{to{opacity:1}}
 .console .ok::before{content:"✓ ";color:#7FCBB4}
 .console .bad::before{content:"✗ ";color:#EC8B72}
 .console .warn::before{content:"! ";color:#E5A05F}
-.console .run::before{content:"… ";color:#A29C90}
-.console .info::before{content:"→ ";color:#A29C90}
+.console .run::before{content:"… ";color:#8595a8}
+.console .info::before{content:"→ ";color:#8595a8}
 
 /* manual questions */
 #manual{display:none}
@@ -286,10 +286,10 @@ p{max-width:65ch}
 .finding.check .fi{color:var(--amber)}
 .finding .fd{color:var(--dim);font-size:.85rem}
 .fixes{margin:2rem 0}
-.fix{border-left:3px solid var(--orange);background:#FBF1E9;border-radius:0 8px 8px 0;padding:.9rem 1.2rem;margin:.8rem 0}
+.fix{border-left:3px solid var(--orange);background:#e8f0fe;border-radius:0 8px 8px 0;padding:.9rem 1.2rem;margin:.8rem 0}
 .fix b{color:var(--orange-deep)}
 .fix p{margin:.2rem 0 0;font-size:.92rem;color:var(--dim)}
-.upsell{background:linear-gradient(135deg,#FBF3ED,#EBF5F1);border:1px solid var(--blue);
+.upsell{background:linear-gradient(135deg,#f0f5fd,#e8f0fe);border:1px solid var(--blue);
   border-radius:14px;padding:2rem;margin:2.5rem 0;text-align:center}
 .upsell h3{font-size:1.5rem;margin:0 0 .5rem}
 .upsell p{margin:0 auto 1.3rem;color:var(--dim)}
@@ -309,7 +309,7 @@ fbq('init','1034023492870678');fbq('track','PageView');
 <body>
 
 <header class="hero"><div class="wrap">
-  <p style="text-align:right;margin:0 0 .5rem"><a href="es.html" style="display:inline-block;color:#1E8468;text-decoration:none;font-weight:700;font-size:.9rem;border:1.5px solid #1E8468;padding:.32rem .95rem;border-radius:20px">Español &#8594;</a></p>
+  <p style="text-align:right;margin:0 0 .5rem"><a href="es.html" style="display:inline-block;color:#12459c;text-decoration:none;font-weight:700;font-size:.9rem;border:1.5px solid #12459c;padding:.32rem .95rem;border-radius:20px">Español &#8594;</a></p>
   <div class="hero-cols"><div class="hero-left"><p class="eyebrow"><span id="three-accent" aria-hidden="true"></span>Free instant scan · AO = Answer Optimization · Updated July 2026</p>
   <h1>Free AI-visibility audit: see what AI <em>actually sees.</em></h1>
   <p class="sub"><strong>The AO Audit is a free 60-second scan that shows local businesses exactly what AI engines can see, verify, and recommend about them. That means ChatGPT, Gemini, Perplexity and Google AI Mode.</strong> Enter your website, get your <strong>AO Score</strong> (0–100) and your fastest fixes. <strong><a href="what-is-answer-optimization.html" style="color:inherit">AO stands for Answer Optimization</a></strong>. Making your business the answer AI gives (the industry also calls it <strong>AEO</strong> or <strong>GEO</strong>). The goal, in three words: <strong>BE THE ANSWER</strong>. To your specific customer, at the exact moment they ask. A billion people now search with Google's AI Mode. ChatGPT recommends businesses by name and sends shoppers to their sites to buy. Agents call and book on customers' behalf. The scan runs live. It checks classic <strong>SEO</strong> fundamentals plus schema, AI-crawler access, content signals and agent-readiness.</p>
@@ -326,25 +326,25 @@ fbq('init','1034023492870678');fbq('track','PageView');
   <p class="tiny">Live scan of your real site · 21 automated checks + 6 you confirm · Prioritized fix list</p>
   <p class="tiny" style="margin-top:.5rem">Not ready? <a href="sample-report.pdf" target="_blank" rel="noopener">See a real sample report first</a> (opens in a new tab). No email needed.</p></div><div class="hero-right"><div class="gauge">
 <svg viewBox="0 0 300 250" width="270" height="225" role="img" aria-label="The AI engines deciding who to recommend your business">
-  <circle cx="150" cy="125" r="92" fill="none" stroke="#DDD6CA" stroke-width="1.5"/>
-  <circle cx="150" cy="125" r="62" fill="none" stroke="#E4DECF" stroke-width="1.5"/>
-  <circle cx="150" cy="125" r="32" fill="none" stroke="#E4DECF" stroke-width="1.5"/>
-  <g class="sweep"><path d="M150 125 L150 33 A92 92 0 0 1 215 60 Z" fill="#1E8468" opacity="0.12"/><line x1="150" y1="125" x2="150" y2="33" stroke="#1E8468" stroke-width="2"/></g>
+  <circle cx="150" cy="125" r="92" fill="none" stroke="#e3eaf3" stroke-width="1.5"/>
+  <circle cx="150" cy="125" r="62" fill="none" stroke="#dbe4f0" stroke-width="1.5"/>
+  <circle cx="150" cy="125" r="32" fill="none" stroke="#dbe4f0" stroke-width="1.5"/>
+  <g class="sweep"><path d="M150 125 L150 33 A92 92 0 0 1 215 60 Z" fill="#12459c" opacity="0.12"/><line x1="150" y1="125" x2="150" y2="33" stroke="#12459c" stroke-width="2"/></g>
   <g class="pulse">
-    <circle cx="150" cy="33" r="6" fill="#D97757"/>
-    <circle cx="237" cy="96" r="6" fill="#1E8468"/>
-    <circle cx="204" cy="199" r="6" fill="#D97757"/>
-    <circle cx="96" cy="199" r="6" fill="#1E8468"/>
-    <circle cx="63" cy="96" r="6" fill="#D97757"/>
+    <circle cx="150" cy="33" r="6" fill="#1d6ceb"/>
+    <circle cx="237" cy="96" r="6" fill="#12459c"/>
+    <circle cx="204" cy="199" r="6" fill="#1d6ceb"/>
+    <circle cx="96" cy="199" r="6" fill="#12459c"/>
+    <circle cx="63" cy="96" r="6" fill="#1d6ceb"/>
   </g>
-  <text x="150" y="18" text-anchor="middle" font-size="11" font-weight="600" fill="#191919" font-family="'IBM Plex Sans',system-ui,sans-serif">ChatGPT</text>
-  <text x="256" y="92" text-anchor="middle" font-size="11" font-weight="600" fill="#191919" font-family="'IBM Plex Sans',system-ui,sans-serif">Gemini</text>
-  <text x="216" y="222" text-anchor="middle" font-size="11" font-weight="600" fill="#191919" font-family="'IBM Plex Sans',system-ui,sans-serif">Perplexity</text>
-  <text x="84" y="222" text-anchor="middle" font-size="11" font-weight="600" fill="#191919" font-family="'IBM Plex Sans',system-ui,sans-serif">Claude</text>
-  <text x="44" y="92" text-anchor="middle" font-size="11" font-weight="600" fill="#191919" font-family="'IBM Plex Sans',system-ui,sans-serif">Siri</text>
-  <text class="cq a" text-anchor="middle" font-size="12.5" font-weight="700" fill="#191919" font-family="'IBM Plex Sans',system-ui,sans-serif"><tspan x="150" y="120">Will they pick</tspan><tspan x="150" y="137">your business?</tspan></text>
-  <text class="cq b" text-anchor="middle" font-size="12.5" font-weight="700" fill="#191919" font-family="'IBM Plex Sans',system-ui,sans-serif"><tspan x="150" y="120">Will AI</tspan><tspan x="150" y="137">recommend you?</tspan></text>
-  <text class="cq c" text-anchor="middle" font-size="12.5" font-weight="700" fill="#191919" font-family="'IBM Plex Sans',system-ui,sans-serif"><tspan x="150" y="120">Will they</tspan><tspan x="150" y="137">see you first?</tspan></text>
+  <text x="150" y="18" text-anchor="middle" font-size="11" font-weight="600" fill="#0f2137" font-family="'IBM Plex Sans',system-ui,sans-serif">ChatGPT</text>
+  <text x="256" y="92" text-anchor="middle" font-size="11" font-weight="600" fill="#0f2137" font-family="'IBM Plex Sans',system-ui,sans-serif">Gemini</text>
+  <text x="216" y="222" text-anchor="middle" font-size="11" font-weight="600" fill="#0f2137" font-family="'IBM Plex Sans',system-ui,sans-serif">Perplexity</text>
+  <text x="84" y="222" text-anchor="middle" font-size="11" font-weight="600" fill="#0f2137" font-family="'IBM Plex Sans',system-ui,sans-serif">Claude</text>
+  <text x="44" y="92" text-anchor="middle" font-size="11" font-weight="600" fill="#0f2137" font-family="'IBM Plex Sans',system-ui,sans-serif">Siri</text>
+  <text class="cq a" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f2137" font-family="'IBM Plex Sans',system-ui,sans-serif"><tspan x="150" y="120">Will they pick</tspan><tspan x="150" y="137">your business?</tspan></text>
+  <text class="cq b" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f2137" font-family="'IBM Plex Sans',system-ui,sans-serif"><tspan x="150" y="120">Will AI</tspan><tspan x="150" y="137">recommend you?</tspan></text>
+  <text class="cq c" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f2137" font-family="'IBM Plex Sans',system-ui,sans-serif"><tspan x="150" y="120">Will they</tspan><tspan x="150" y="137">see you first?</tspan></text>
 </svg>
 <p class="gcap" style="max-width:20rem;margin:.7rem auto 0">Every AI is deciding who to recommend. <a href="#scanform">See if it's you. Free scan &#8593;</a></p>
 </div></div></div>
@@ -512,7 +512,7 @@ try {
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       mount.appendChild(renderer.domElement);
       const geo = new THREE.IcosahedronGeometry(1.3, 0);
-      const mat = new THREE.MeshBasicMaterial({ color: 0x1E8468, wireframe: true });
+      const mat = new THREE.MeshBasicMaterial({ color: 0x1d6ceb, wireframe: true });
       const mesh = new THREE.Mesh(geo, mat);
       scene.add(mesh);
       mount.classList.add('ready');
