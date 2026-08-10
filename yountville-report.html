@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The State of AI Visibility in Yountville: 26 Businesses Examined</title>
+<meta name="description" content="We scanned Yountville's restaurant row and tasting rooms, French Laundry included. 19% have no website, 33% of sites turned away our automated reader, 86% lack the schema machines need to verify them. Report No. 7.">
+<link rel="canonical" href="https://aoaudit.com/yountville-report.html">
+<link rel="alternate" hreflang="es" href="https://aoaudit.com/yountville-reporte.html">
+<link rel="alternate" hreflang="en" href="https://aoaudit.com/yountville-report.html">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The State of AI Visibility in Yountville: 26 Businesses Examined">
+<meta property="og:description" content="19% have no website. 33% of sites turned away our automated reader. Even the French Laundry carries zero structured data. Real scan data from Yountville, CA.">
+<meta property="og:url" content="https://aoaudit.com/yountville-report.html">
+<meta property="og:image" content="https://aoaudit.com/og-card2.png">
+<script type="application/ld+json">
+{ "@context": "https://schema.org", "@graph": [
+  { "@type": "Article",
+    "headline": "The State of AI Visibility in Yountville (2026): We Examined 26 Local Businesses",
+    "datePublished": "2026-08-09", "dateModified": "2026-08-09",
+    "author": { "@type": "Person", "name": "Alejandro Ojeda" },
+    "publisher": { "@id": "https://aoaudit.com/#org" },
+    "about": { "@id": "https://aoaudit.com/what-is-answer-optimization.html#ao" },
+    "spatialCoverage": { "@type": "City", "name": "Yountville, CA" },
+    "description": "Original research: 26 Yountville, California businesses examined for AI visibility — website presence, machine readability, structured data, AI crawler access — with aggregate findings and fixes." },
+  { "@type": "FAQPage", "mainEntity": [
+    { "@type": "Question", "name": "How AI-visible are Yountville businesses?",
+      "acceptedAnswer": { "@type": "Answer", "text": "In our study (The AO Audit, August 2026, 26 locally-owned Yountville businesses): 19% had no website at all; of those with websites, 33% turned away our automated reader entirely (broken or incomplete SSL certificates, or connections actively refused); and of the sites machines could read, 86% lacked LocalBusiness structured data, 64% had no AI-instructions file (llms.txt), and 64% published no visible prices. Roughly half of the businesses we examined cannot be read by machines at all." } },
+    { "@type": "Question", "name": "Why can't AI read the French Laundry's website?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The French Laundry's site loaded fine for our reader, but like Bouchon Bistro and Ad Hoc, it carries zero structured data of any kind, JSON-LD or otherwise. A human sees a beautiful page; a machine sees nothing it can verify as a real, addressable business. Meanwhile Ciccio, two doors down on the same street, carries real LocalBusiness schema. Fame and AI-readiness are unrelated." } },
+    { "@type": "Question", "name": "Why were Yountville's wineries unreachable to your scanner?",
+      "acceptedAnswer": { "@type": "Answer", "text": "All four tasting rooms in our sample, plus a wine retailer and a vineyard's coffee bar, share the same problem: a broken or incomplete SSL certificate chain. We confirmed this two independent ways, from two separate networks, after an early check nearly mistook a residential ISP quirk for the real finding. A human browser may still connect; a strict automated reader, the kind AI systems use to verify a business before naming it, is turned away. This is the third wine-country town in our series where every sampled tasting room failed to render, after St. Helena and Calistoga." } },
+    { "@type": "Question", "name": "Was my Yountville business one of the 26 examined?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The report publishes only aggregate statistics — no individual scores are published. If your Yountville business would like its own result (whether or not it was in the sample), the same scan is free at aoaudit.com and takes about 60 seconds, in English or Spanish." } }
+  ] }
+] }
+</script>
+<style>
+:root{--bg:#f7f9fc;--card:#fff;--ink:#0f2137;--dim:#5b6b7f;--green:#12459c;--orange:#f43d00;--orange-deep:#1a5fd0;--line:#e3eaf3}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;line-height:1.7;font-size:1.04rem}
+.band{height:.5rem;background:var(--green)} .strip{height:.18rem;background:var(--orange)}
+.wrap{max-width:44rem;margin:0 auto;padding:2.5rem 1.4rem 4rem}
+.kicker{color:var(--green);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.78rem;margin:0 0 .6rem}
+h1{font-size:clamp(1.7rem,4.5vw,2.5rem);line-height:1.15;margin:0 0 .6rem}
+h2{font-size:1.35rem;margin:2.2rem 0 .6rem}
+h3{font-size:1.08rem;margin:1.6rem 0 .3rem}
+.byline{color:var(--dim);font-size:.9rem;margin:0 0 1.8rem}
+.card{background:var(--card);border-left:4px solid var(--green);border-radius:0 10px 10px 0;padding:1rem 1.3rem;margin:1.4rem 0}
+.big{font-size:2.6rem;font-weight:800;color:var(--green);line-height:1.1}
+.statrow{display:flex;gap:1rem;flex-wrap:wrap;margin:1.4rem 0}
+.stat{flex:1 1 10rem;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:1rem 1.1rem;text-align:center}
+.stat .lbl{font-size:.85rem;color:var(--dim)}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;margin:1.2rem 0;background:var(--card);font-size:.95rem}
+th,td{border:1px solid var(--line);padding:.6rem .8rem;text-align:left;vertical-align:top}
+th{background:#e8f0fe}
+a{color:var(--orange-deep)} .cta{display:inline-block;background:var(--orange);color:#fff;font-weight:600;padding:.85rem 1.6rem;border-radius:8px;text-decoration:none;margin-top:.6rem}
+footer{border-top:1px solid var(--line);margin-top:3rem;padding-top:1.2rem;color:var(--dim);font-size:.85rem}
+</style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1034023492870678');fbq('track','PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1034023492870678&ev=PageView&noscript=1"/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+<div class="band"></div><div class="strip"></div>
+<nav style="position:sticky;top:0;z-index:50;background:#f7f9fc;border-bottom:1px solid #e3eaf3;display:flex;justify-content:space-between;align-items:center;padding:.7rem 1.4rem;font-family:'IBM Plex Sans',system-ui,sans-serif">
+  <a href="https://aoaudit.com/" style="font-weight:800;color:#0f2137;text-decoration:none;font-size:1.05rem">&#8592; The AO Audit</a>
+  <a href="https://aoaudit.com/#scanform" style="background:#f43d00;color:#fff;font-weight:600;padding:.5rem 1.1rem;border-radius:7px;text-decoration:none;font-size:.92rem">Scan my website &#8594;</a>
+</nav>
+<div class="wrap">
+<p class="kicker">Original research · Scan-the-Town Report No. 7 · <a href="yountville-reporte.html" style="color:inherit">en español</a></p>
+<h1>The State of AI Visibility in Yountville: 26 businesses examined</h1>
+<p class="byline">By Alejandro Ojeda · The AO Audit, Napa CA · Scans run August 9, 2026 · Aggregates only — no individual scores published</p>
+
+<div class="card"><p style="margin:0"><strong>The one-sentence finding:</strong> of 26 locally-owned Yountville businesses we examined — the French Laundry among them — <strong>19% have no website at all</strong>, another <strong>33% of the sites that exist turned away our automated reader entirely</strong>, and most of the rest are readable but <strong>unverifiable</strong> to machines. Roughly half of Yountville's business community is invisible to the systems that now answer "where should I eat in Napa Valley?" All of it is fixable.</p></div>
+
+<h2>The headline numbers</h2>
+<div class="statrow">
+  <div class="stat"><div class="big">19%</div><div class="lbl">no website at all<br>(5 of 26)</div></div>
+  <div class="stat"><div class="big">33%</div><div class="lbl">of websites blocked our automated reader (7 of 21)</div></div>
+  <div class="stat"><div class="big">86%</div><div class="lbl">of readable sites lack LocalBusiness schema (12 of 14)</div></div>
+  <div class="stat"><div class="big">64%</div><div class="lbl">show no visible prices (9 of 14)</div></div>
+</div>
+<div class="tablewrap"><table>
+<tr><th>Check (14 machine-readable sites)</th><th>Missing</th></tr>
+<tr><td>LocalBusiness-type structured data</td><td>86% (12 of 14)</td></tr>
+<tr><td>AI-instructions file (llms.txt)</td><td>64% (9 of 14)</td></tr>
+<tr><td>Visible prices a machine could quote</td><td>64% (9 of 14)</td></tr>
+<tr><td>Any JSON-LD structured data</td><td>64% (9 of 14)</td></tr>
+<tr><td>Meta description</td><td>57% (8 of 14)</td></tr>
+<tr><td>Sitemap.xml</td><td>36% (5 of 14)</td></tr>
+</table></div>
+<p>Method, briefly: 26 currently-operating, locally-owned Yountville businesses across restaurants, wineries, retail, inns, and trades — 21 with websites (scanned August 9, 2026 with our own automated checker) plus 5 established businesses for which repeated searching found no website at all. We publish aggregates only. <em>Honest limit: a block against our reader proves a site rejects automated visitors like ours; individual AI crawlers may be treated differently by security systems — we report what we measured, not more.</em> Yountville is tiny (population under 3,000), so several standard categories — auto repair, electricians, chiropractors — simply don't exist here as standalone local businesses; we didn't force substitutes.</p>
+
+<h2>Finding 1 — Yountville's tasting rooms have a bouncer problem, for the third town running</h2>
+<p>All four tasting rooms in our sample, plus a wine retailer and a vineyard's coffee bar, share one problem: a broken or incomplete SSL certificate chain. We caught this carefully — an early pass nearly mistook a residential ISP quirk for the real finding, until we confirmed the same certificate failure two independent ways, from two separate networks. It's real. A human browser may still connect; the automated reader that AI systems send to verify a business before naming it does not. This is the <strong>third consecutive wine-country town</strong> in our series with this exact pattern, after every sampled tasting room failed to render in St. Helena (4 of 4) and Calistoga (3 of 3). Three towns, independently, same problem. That's not bad luck — it's a category-wide gap.</p>
+
+<h2>Finding 2 — the French Laundry has zero structured data</h2>
+<p>Three Michelin stars. Zero JSON-LD. The French Laundry's site loads fine for a human and for our reader — but it carries no structured data of any kind, and neither do Bouchon Bistro or Ad Hoc, its siblings under the same restaurant group. A machine reading these pages can't verify what the restaurant serves, where it is, or that it's real in the way schema.org defines "real." Two doors down, <strong>Ciccio</strong> — family-owned, no Michelin stars — carries full LocalBusiness schema: address, reservations, the works. Fame doesn't correlate with AI-readiness. If anything, in this sample, it ran the other way.</p>
+
+<h2>Finding 3 — the bright spots (named with respect)</h2>
+<p>Two businesses carry proper LocalBusiness-type structured data: <strong>Ciccio</strong> and <strong>Bottega</strong>, both independent restaurants. Five carry an AI-instructions file (llms.txt): <strong>Ciccio, Alchemy Works, TINA Stephens, North Block Yountville, and Napa Valley Bike Tours &amp; Rentals</strong> — a spread across restaurant, retail, hospitality, and recreation, proving this isn't a category-specific fix. The standard is real and locally achievable. (We name only the leaders. Nobody gets called out here; every business in the sample can request its own private result, free.)</p>
+
+<h2>What this means if you own a business in Yountville</h2>
+<p>Between the no-website businesses and the blocked sites, <strong>roughly 5 in 10 of the Yountville businesses we examined can't be read by machines at all</strong> — the highest rate in our series so far. Yountville runs on visitors asking "where should I eat, where should I taste" before they ever arrive, and increasingly that question goes to an AI, not a guidebook. The fixes, ranked by impact: get a real website if you have none · repair the certificate chain so automated readers can connect · install LocalBusiness schema · publish your prices and real answers · keep your profiles agreeing everywhere. Every one is checkable, and the check is free:</p>
+<p><a class="cta" href="https://aoaudit.com/#scanform">Scan your Yountville business free — 60 seconds &#8594;</a></p>
+<p>Were you one of the 26? <a href="mailto:hello@aoaudit.com">Email us</a> and we'll share your individual result privately, free, no strings — <a href="napa.html">we're local</a>, English y <a href="es.html">español</a>.</p>
+
+<div class="card"><p style="margin:0"><strong>Honest limits:</strong> this is a 26-business sample of a town with far more businesses — a snapshot, not a census. Scores measure machine-readability, not business quality (the most-loved restaurant in our sample is also the least visible to machines — that's precisely the problem). And nobody can guarantee AI mentions; what's fixable is whether machines <em>can</em> read, verify, and quote you.</p></div>
+
+<h2>FAQ</h2>
+<h3>How AI-visible are Yountville businesses?</h3>
+<p>In our study (The AO Audit, August 2026, 26 locally-owned Yountville businesses): 19% had no website at all; of those with websites, 33% turned away our automated reader entirely (broken or incomplete SSL certificates, or connections actively refused); and of the sites machines could read, 86% lacked LocalBusiness structured data, 64% had no AI-instructions file (llms.txt), and 64% published no visible prices. Roughly half of the businesses we examined cannot be read by machines at all.</p>
+<h3>Why can't AI read the French Laundry's website?</h3>
+<p>The French Laundry's site loaded fine for our reader, but like Bouchon Bistro and Ad Hoc, it carries zero structured data of any kind, JSON-LD or otherwise. A human sees a beautiful page; a machine sees nothing it can verify as a real, addressable business. Meanwhile Ciccio, two doors down on the same street, carries real LocalBusiness schema. Fame and AI-readiness are unrelated.</p>
+<h3>Why were Yountville's wineries unreachable to your scanner?</h3>
+<p>All four tasting rooms in our sample, plus a wine retailer and a vineyard's coffee bar, share the same problem: a broken or incomplete SSL certificate chain. We confirmed this two independent ways, from two separate networks, after an early check nearly mistook a residential ISP quirk for the real finding. A human browser may still connect; a strict automated reader, the kind AI systems use to verify a business before naming it, is turned away. This is the third wine-country town in our series where every sampled tasting room failed to render, after St. Helena and Calistoga.</p>
+<h3>Was my Yountville business one of the 26 examined?</h3>
+<p>The report publishes only aggregate statistics — no individual scores are published. If your Yountville business would like its own result (whether or not it was in the sample), the same scan is free at aoaudit.com and takes about 60 seconds, in English or Spanish.</p>
+
+<footer>The AO Audit · Answer Optimization (AO) · Napa, CA · <a href="https://aoaudit.com/">aoaudit.com</a> · <a href="mailto:hello@aoaudit.com">hello@aoaudit.com</a> · En español: <a href="yountville-reporte.html">este reporte en español</a> · Report No. 1: <a href="napa-report.html">the State of AI Visibility in Napa</a> · Report No. 2: <a href="american-canyon-report.html">the State of AI Visibility in American Canyon</a> · Report No. 3: <a href="st-helena-report.html">the State of AI Visibility in St. Helena</a> · Report No. 4: <a href="fairfield-report.html">the State of AI Visibility in Fairfield</a> · Report No. 5: <a href="vacaville-report.html">the State of AI Visibility in Vacaville</a> · Report No. 6: <a href="calistoga-report.html">the State of AI Visibility in Calistoga</a> · Start here: <a href="what-is-answer-optimization.html">what is Answer Optimization?</a> · <a href="ai-visibility.html">check your AI visibility</a> · <a href="napa.html">our Napa service page</a>.</footer>
+</div>
+</body>
+</html>
