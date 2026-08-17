@@ -36,3 +36,4 @@ Versión en español / Spanish pages: landing https://aoaudit.com/es.html · pre
 - [The schema tool had a schema error](https://aoaudit.com/schema-error.html)
 - [We rebuilt our score to count nothing you tell us](https://aoaudit.com/score-you-cant-game.html)
 - [The schema warning we left on purpose](https://aoaudit.com/warning-on-purpose.html)
+- [We banned one sentence about Siri and it survived 31 days on our own site](https://aoaudit.com/siri-business-listing.html)

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Two Brains of Siri: We Banned One Sentence and It Survived 31 Days</title>
+<meta name="description" content="How does Siri choose businesses? Two systems, two free doors. We banned a wrong sentence about the Siri business listing on July 17, then found it still live on our own site 31 days later.">
+<link rel="canonical" href="https://aoaudit.com/siri-business-listing.html">
+<meta name="robots" content="index,follow">
+<link rel="alternate" hreflang="es" href="https://aoaudit.com/negocio-en-siri.html">
+<link rel="alternate" hreflang="en" href="https://aoaudit.com/siri-business-listing.html">
+<link rel="alternate" hreflang="x-default" href="https://aoaudit.com/siri-business-listing.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Two Brains of Siri: We Banned One Sentence and It Survived 31 Days">
+<meta property="og:description" content="We audited all 21 Siri mentions on our own site. One of them was a claim we banned a month earlier. Here is what Siri actually reads, in Apple's own words.">
+<meta property="og:url" content="https://aoaudit.com/siri-business-listing.html">
+<meta property="og:image" content="https://aoaudit.com/og-card2.png">
+<script type="application/ld+json">
+{ "@context": "https://schema.org", "@graph": [
+  { "@type": "Article",
+    "headline": "The Two Brains of Siri: We Banned One Sentence and It Survived 31 Days",
+    "datePublished": "2026-08-17", "dateModified": "2026-08-17",
+    "author": { "@type": "Person", "name": "Alejandro Ojeda" },
+    "publisher": { "@id": "https://aoaudit.com/#org" },
+    "about": { "@id": "https://aoaudit.com/what-is-answer-optimization.html#ao" },
+    "description": "An audit of all 21 Siri mentions across aoaudit.com found a claim we had banned 31 days earlier still live in our own scanner. What Siri actually reads for local businesses, in Apple's own words, and what changed underneath the answer." },
+  { "@type": "FAQPage", "mainEntity": [
+    { "@type": "Question", "name": "How does Siri choose businesses?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Two different systems do two different jobs. Local lookups like nearby coffee or open now read Apple's own business registry, which is why claiming your listing there matters. Broader questions get handed to a general AI model instead, which reads the open web rather than Apple's registry. Apple's 2023 announcement of Business Connect described it as a free tool letting businesses of all sizes claim their location place cards across Apple Maps, Messages, Wallet, Siri, and other apps." } },
+    { "@type": "Question", "name": "Is a Siri business listing free?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Apple has never charged to claim a location. The 2023 launch called Business Connect a free tool for businesses of all sizes. Apple is now folding it into a platform called Apple Business, and separately selling Maps ads, but the organic listing itself is still something you claim rather than buy. Apple's own note says businesses need to claim their location on Maps first before anything else." } },
+    { "@type": "Question", "name": "Is Apple the only source Siri checks for local businesses?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No, and we published that error ourselves before catching it. Apple's registry is the source behind Siri's local place lookups, but Siri also passes harder questions to a general AI model that reads the web. Anyone telling you one profile covers every Siri answer is oversimplifying. Two systems, two doors." } },
+    { "@type": "Question", "name": "Does ChatGPT read Bing to answer questions?",
+      "acceptedAnswer": { "@type": "Answer", "text": "OpenAI's developer documentation does not say so. It lists four crawlers of its own, including OAI-SearchBot, described as used to surface websites in search results in ChatGPT's search features. Bing appears nowhere in that document. Outside studies have observed heavy overlap between ChatGPT citations and Bing-indexed pages, but that is measurement by others, not something OpenAI states. The practical step is to let OAI-SearchBot reach your site." } }
+  ] }
+] }
+</script>
+<style>
+:root{--bg:#f7f9fc;--card:#fff;--ink:#0f2137;--dim:#5b6b7f;--green:#12459c;--orange:#f43d00;--orange-deep:#1a5fd0;--line:#e3eaf3}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;line-height:1.7;font-size:1.04rem}
+.band{height:.5rem;background:var(--green)} .strip{height:.18rem;background:var(--orange)}
+.wrap{max-width:44rem;margin:0 auto;padding:2.5rem 1.4rem 4rem}
+.kicker{color:var(--green);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.78rem;margin:0 0 .6rem}
+h1{font-size:clamp(1.7rem,4.5vw,2.5rem);line-height:1.15;margin:0 0 .6rem}
+h2{font-size:1.35rem;margin:2.2rem 0 .6rem}
+h3{font-size:1.08rem;margin:1.6rem 0 .3rem}
+.byline{color:var(--dim);font-size:.9rem;margin:0 0 1.8rem}
+.card{background:var(--card);border-left:4px solid var(--green);border-radius:0 10px 10px 0;padding:1rem 1.3rem;margin:1.4rem 0}
+table{border-collapse:collapse;width:100%;margin:1.4rem 0;font-size:.95rem}
+th,td{text-align:left;padding:.6rem .7rem;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--dim);font-size:.82rem;text-transform:uppercase;letter-spacing:.06em}
+pre{background:#0b1a2d;color:#dce7f5;border-radius:8px;padding:1.1rem 1.3rem;overflow-x:auto;font-family:"IBM Plex Mono",monospace;font-size:.82rem;line-height:1.6;white-space:pre-wrap}
+a{color:var(--orange-deep)} .cta{display:inline-block;background:var(--orange);color:#fff;font-weight:600;padding:.85rem 1.6rem;border-radius:8px;text-decoration:none;margin-top:.6rem}
+footer{border-top:1px solid var(--line);margin-top:3rem;padding-top:1.2rem;color:var(--dim);font-size:.85rem}
+</style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1034023492870678');fbq('track','PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1034023492870678&ev=PageView&noscript=1"/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+<div class="band"></div><div class="strip"></div>
+<nav style="position:sticky;top:0;z-index:50;background:#f7f9fc;border-bottom:1px solid #e3eaf3;display:flex;justify-content:space-between;align-items:center;padding:.7rem 1.4rem;font-family:'IBM Plex Sans',system-ui,sans-serif">
+  <a href="https://aoaudit.com/" style="font-weight:800;color:#0f2137;text-decoration:none;font-size:1.05rem">&#8592; The AO Audit</a>
+  <a href="https://aoaudit.com/#scanform" style="background:#f43d00;color:#fff;font-weight:600;padding:.5rem 1.1rem;border-radius:7px;text-decoration:none;font-size:.92rem">Scan my website &#8594;</a>
+</nav>
+<div class="wrap">
+<p class="kicker">We audited our own pages</p>
+<h1>We banned one sentence about Siri. It survived 31 days on our own site.</h1>
+<p class="byline">By Alejandro Ojeda · The AO Audit · August 17, 2026</p>
+
+<div class="card"><p style="margin:0">How does Siri choose businesses? Two systems handle two different jobs. Ask where the nearest taqueria is and Siri reads Apple's business registry, which is the free Siri business listing you claim yourself. Ask something broader and Siri hands the question to a general AI model that reads the open web instead. Two brains, two doors. On July 17 we banned ourselves from saying Apple was the only one. On August 17 we found that banned sentence still sitting on our own website.</p></div>
+
+<p>This is the work the industry calls AEO or GEO. We call it Answer Optimization (AO), and the reason we keep publishing our own mistakes is that a Siri business listing is the kind of thing everybody explains confidently and almost nobody checks. We got it wrong once, said so, and then failed to finish the fix.</p>
+
+<h2>What we banned, and what we found a month later</h2>
+
+<p>Back on July 17 we were reading Apple's documentation to double-check a line in our scanner. Our copy said Apple was the only source Siri checks for local businesses. Apple's own words did not support that. We wrote a rule for ourselves that day: never claim Apple is the only source. Then we went through the scanner, the playbook, the report generator and the email template and pulled the sentence out.</p>
+
+<p>Yesterday we went back and counted every place our site talks about Siri. Twenty-one mentions across fourteen files. Thirteen of those files were clean. One was not.</p>
+
+<p>The scanner asks people a question about claiming Bing Places and Apple Business. The helper text under the question was the corrected version. The fix text, the part we show you after you answer, was the old one. Here are both, exactly as they were live this morning:</p>
+
+<pre>Helper text:
+"Bing Places feeds Microsoft Copilot and Alexa; Apple Business is what
+Siri checks for local businesses (Siri's harder questions hand off to
+ChatGPT ...)"
+
+Fix text:
+"... and business.apple.com (the only data source Siri and Apple
+Intelligence check for local businesses)."</pre>
+
+<p>Forty words apart, in the same question, saying opposite things. One says Siri has two brains. The other says Apple is the only one. Our July cleanup caught the first sentence and walked right past the second, because we were searching for a phrase and this one was worded differently.</p>
+
+<p>We publish a tool that grades other people's claims for consistency. It could not catch its own. That is the honest version, and it is the reason this article exists.</p>
+
+<h2>How does Siri choose businesses, in Apple's words</h2>
+
+<p>Apple has been clear about this since the beginning, if you read the announcement rather than the blog posts about the announcement. When Apple introduced Business Connect on January 11, 2023, it described it as "a free tool that allows businesses of all sizes to claim their location place cards" appearing "across Apple Maps, Messages, Wallet, Siri, and other apps."</p>
+
+<p>Read that carefully. Siri is on the list of places your claimed listing shows up. Apple never said it was the only thing Siri consults. That inference was ours, and it was wrong.</p>
+
+<p>The second brain is the part most guides skip. When a question is broader than a place lookup, Siri passes it to a general AI model. That model does not read Apple's business registry. It reads the web, which means your website, your other listings, and whatever else the machines can find about you.</p>
+
+<table>
+<tr><th>The question</th><th>What answers it</th><th>The free door</th></tr>
+<tr><td>"Coffee near me", "is the barbershop open"</td><td>Apple's business registry, behind Maps and Siri</td><td>Claim your location at business.apple.com</td></tr>
+<tr><td>"Who should I hire to fix a slate roof in Napa"</td><td>A general AI model reading the open web</td><td>A readable website plus your other listings</td></tr>
+</table>
+
+<h2>Both doors moved while we were writing about them</h2>
+
+<p>Here is what makes this topic worth a whole article instead of a footnote. In the month between our correction and our audit, Apple changed the first door.</p>
+
+<p>Apple's newsroom post introducing Apple Business, updated March 24, 2026, says plainly that "Apple Business Essentials, Apple Business Manager, and Apple Business Connect will no longer be available once Apple Business launches." The name we have been telling people to search for is being retired into a single platform. The same post lists where business information appears now: Apple Maps, Mail, Wallet, Siri, Safari and Spotlight. It also notes that Maps ads are coming, and that businesses "will need to first claim their location on Maps" before any of that applies to them.</p>
+
+<p>So the claiming step survives the rename. Good. But if you wrote "Apple Business Connect" into a client checklist last year, that checklist has an expiration date.</p>
+
+<p>The second door is moving too. At its June developer conference Apple showed a rebuilt Siri, and reporting from TechCrunch on June 9, 2026 and others describes it as running on Google's Gemini, with more assistant choice coming to users. We have not found Apple's own press release confirming the model behind it, so treat the specific brand name as reporting rather than fact. The structural point is what matters and it does not depend on which company wins: the model behind door two keeps changing names, and you do not control any of them.</p>
+
+<p>Bet on the door, not the brain.</p>
+
+<h2>A second thing we had slightly wrong</h2>
+
+<p>While auditing, we checked our own shorthand that ChatGPT is "fed by Bing". We had been using it as a reason Bing Places matters.</p>
+
+<p>OpenAI's developer documentation, read today, lists four crawlers: GPTBot for training, ChatGPT-User for pages a user's question causes it to visit, OAI-AdsBot for ad safety, and OAI-SearchBot, which OpenAI says is "used to surface websites in search results in ChatGPT's search features." The word Bing does not appear anywhere in that document.</p>
+
+<p>Outside studies have measured heavy overlap between ChatGPT's citations and Bing-indexed pages, and that overlap is real enough to plan around. But measurement by other people is not the same as OpenAI telling you how it works, and we should not have written it as though it were. The version we can defend: OpenAI runs its own search crawler, so the concrete step is making sure OAI-SearchBot is not blocked in your robots.txt. Bing coverage is a sensible hedge on top of that, not the mechanism itself.</p>
+
+<div class="card"><p style="margin:0">What we changed today, in the same push that published this page: the scanner's fix text no longer calls Apple the only data source Siri checks, and no longer states the Bing connection as fact. If you run a scan now you get the corrected wording. The article and the fix shipped together, which is the only version of this story we would want to read.</p></div>
+
+<p>If you own a business and you want the short version: claim your location with Apple, claim Bing Places, and make sure your website is readable by machines. Those three take an afternoon and cost nothing. Everything else in AI visibility is built on top of them.</p>
+
+<p><a class="cta" href="https://aoaudit.com/#scanform">See which doors are open for your business, free, 60 seconds &#8594;</a></p>
+
+<h2>FAQ</h2>
+<h3>How does Siri choose businesses?</h3>
+<p>Two different systems do two different jobs. Local lookups like nearby coffee or open now read Apple's own business registry, which is why claiming your listing there matters. Broader questions get handed to a general AI model instead, which reads the open web rather than Apple's registry. Apple's 2023 announcement of Business Connect described it as a free tool letting businesses of all sizes claim their location place cards across Apple Maps, Messages, Wallet, Siri, and other apps.</p>
+<h3>Is a Siri business listing free?</h3>
+<p>Yes. Apple has never charged to claim a location. The 2023 launch called Business Connect a free tool for businesses of all sizes. Apple is now folding it into a platform called Apple Business, and separately selling Maps ads, but the organic listing itself is still something you claim rather than buy. Apple's own note says businesses need to claim their location on Maps first before anything else.</p>
+<h3>Is Apple the only source Siri checks for local businesses?</h3>
+<p>No, and we published that error ourselves before catching it. Apple's registry is the source behind Siri's local place lookups, but Siri also passes harder questions to a general AI model that reads the web. Anyone telling you one profile covers every Siri answer is oversimplifying. Two systems, two doors.</p>
+<h3>Does ChatGPT read Bing to answer questions?</h3>
+<p>OpenAI's developer documentation does not say so. It lists four crawlers of its own, including OAI-SearchBot, described as used to surface websites in search results in ChatGPT's search features. Bing appears nowhere in that document. Outside studies have observed heavy overlap between ChatGPT citations and Bing-indexed pages, but that is measurement by others, not something OpenAI states. The practical step is to let OAI-SearchBot reach your site.</p>
+
+<footer>The AO Audit · Answer Optimization (AO) · <a href="https://aoaudit.com/">aoaudit.com</a> · Start here: <a href="what-is-answer-optimization.html">what is Answer Optimization (AO)?</a> · Related: <a href="list-business-google-bing-yelp.html">list your business on Google, Bing and Yelp</a> · <a href="not-showing-on-google.html">why isn't my business showing up on Google?</a> · From our logs: <a href="self-audit.html">our own failing grade</a> · <a href="schema-error.html">the schema tool had a schema error</a> · <a href="warning-on-purpose.html">the schema warning we left on purpose</a> · <a href="score-you-cant-game.html">the score you can't game</a>.</footer>
+</div>
+</body>
+</html>
