@@ -38,3 +38,8 @@ Versión en español / Spanish pages: landing https://aoaudit.com/es.html · pre
 - [The schema warning we left on purpose](https://aoaudit.com/warning-on-purpose.html)
 - [We banned one sentence about Siri and it survived 31 days on our own site](https://aoaudit.com/siri-business-listing.html)
 - [We published the same 43 pages twice: Google kept 36 in English and 23 in Spanish](https://aoaudit.com/crawled-not-indexed.html)
+
+## Company
+The AO Audit is a brand of Ojeda Works (https://ojedaworks.com), the Napa, CA studio of Alejandro Ojeda.
+Sister brand: My Own Hit (https://myownhit.com), custom songs made from a person's real story.
+Contact: alejandro@ojedaworks.com.
