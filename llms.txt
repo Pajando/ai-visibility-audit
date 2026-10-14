@@ -39,6 +39,7 @@ Versión en español / Spanish pages: landing https://aoaudit.com/es.html · pre
 - [We banned one sentence about Siri and it survived 31 days on our own site](https://aoaudit.com/siri-business-listing.html)
 - [We published the same 43 pages twice: Google kept 36 in English and 23 in Spanish](https://aoaudit.com/crawled-not-indexed.html)
 - [We promised a one-week re-check. It took 54 days, and Google still hasn't read the promise](https://aoaudit.com/google-not-indexing-my-pages.html)
+- [We asked AI for Napa's best AI visibility audit twice, 36 days apart. It named 12 companies and never the same one twice](https://aoaudit.com/ai-recommendations-36-days.html)
 
 ## Company
 The AO Audit is a brand of Ojeda Works (https://ojedaworks.com), the Napa, CA studio of Alejandro Ojeda.
