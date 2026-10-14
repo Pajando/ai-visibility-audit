@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YG4SL7CCMS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-YG4SL7CCMS');
+</script>
+<title>We Promised a One-Week Re-Check. It Took 54 Days, and Google Still Hasn't Read the Promise.</title>
+<meta name="description" content="Google not indexing my pages: we re-ran a full Search Console sweep of our own site 54 days late. Spanish pages kept went from 23 to 27, our first English page got dropped, and the article that promised the re-check has never been crawled.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://aoaudit.com/google-not-indexing-my-pages.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="We Promised a One-Week Re-Check. It Took 54 Days, and Google Still Hasn't Read the Promise.">
+<meta property="og:description" content="Same 86 pages, 54 days later. Google kept 4 more Spanish pages, dropped its first English one, and never once crawled the article that made the promise.">
+<meta property="og:url" content="https://aoaudit.com/google-not-indexing-my-pages.html">
+<meta property="og:image" content="https://aoaudit.com/og-card.png">
+<script type="application/ld+json">
+{ "@context": "https://schema.org", "@graph": [
+  { "@type": "Article",
+    "headline": "We Promised a One-Week Re-Check. It Took 54 Days, and Google Still Hasn't Read the Promise.",
+    "datePublished": "2026-10-13", "dateModified": "2026-10-13",
+    "author": { "@type": "Person", "name": "Alejandro Ojeda" },
+    "publisher": { "@id": "https://aoaudit.com/#org" },
+    "about": { "@id": "https://aoaudit.com/what-is-answer-optimization.html#ao" },
+    "description": "A follow-up Search Console sweep of aoaudit.com on October 13, 2026, run 54 days after a promised one-week re-check. Of the same 86 pages, English indexed went from 36 to 38 and Spanish from 23 to 27. One English page was crawled and declined for the first time, and the August 20 article that promised the re-check has never been crawled." },
+  { "@type": "FAQPage", "mainEntity": [
+    { "@type": "Question", "name": "Why is Google not indexing my pages?",
+      "acceptedAnswer": { "@type": "Answer", "text": "First find out which kind of not indexed you have, because there are three and they need different fixes. Unknown to Google means it has never heard of the URL. Discovered - currently not indexed means it knows the URL and has not fetched it yet. Crawled - currently not indexed means it read the page and chose not to keep it. On our own site in October 2026, 12 pages were in the first two groups and 14 were in the third. Open Search Console, use URL Inspection on the page, and read the coverage line before changing anything." } },
+    { "@type": "Question", "name": "Can a page that was indexed get dropped later?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. One of our English pages was reported as indexed in every full sweep we ran from August 15 through September 7, 2026. On October 13 it read crawled - currently not indexed, and its last crawl date was still July 27. Google changed its decision without fetching the page again. Its last search impression was August 9. Indexed is a status you have to keep checking, not a box you tick once." } },
+    { "@type": "Question", "name": "Does Request Indexing in Search Console always work?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. Across our own runs it worked fast most of the time, often indexing a page within hours. But five pages we requested by August 22, 2026 had still never been crawled 52 days later. If a page shows no new crawl date a day after you request it, request it again. Do not assume the click went through." } },
+    { "@type": "Question", "name": "Do crawled - currently not indexed pages ever come back?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Some do. On August 15, 2026 we had 14 Spanish pages crawled and declined. By October 13, 6 of those 14 were indexed and 8 were still declined. Over the same stretch, 5 other Spanish pages and 1 English page moved into the declined group. It is a moving queue, not a final verdict." } } ] }
+] }
+</script>
+<style>
+:root{--bg:#f7f9fc;--card:#fff;--ink:#0f2137;--dim:#5b6b7f;--green:#12459c;--orange:#f43d00;--orange-deep:#1a5fd0;--line:#e3eaf3}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;line-height:1.7;font-size:1.04rem}
+.band{height:.5rem;background:var(--green)} .strip{height:.18rem;background:var(--orange)}
+.wrap{max-width:44rem;margin:0 auto;padding:2.5rem 1.4rem 4rem}
+.kicker{color:var(--green);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.78rem;margin:0 0 .6rem}
+h1{font-size:clamp(1.7rem,4.5vw,2.5rem);line-height:1.15;margin:0 0 .6rem}
+h2{font-size:1.35rem;margin:2.2rem 0 .6rem}
+h3{font-size:1.08rem;margin:1.6rem 0 .3rem}
+.byline{color:var(--dim);font-size:.9rem;margin:0 0 1.8rem}
+.card{background:var(--card);border-left:4px solid var(--green);border-radius:0 10px 10px 0;padding:1rem 1.3rem;margin:1.4rem 0}
+.num{color:var(--orange-deep);font-weight:700}
+table{border-collapse:collapse;width:100%;margin:1.4rem 0;font-size:.95rem}
+th,td{text-align:left;padding:.6rem .7rem;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--dim);font-size:.82rem;text-transform:uppercase;letter-spacing:.06em}
+td.n{font-variant-numeric:tabular-nums;font-weight:700}
+.tablewrap{overflow-x:auto}
+a{color:var(--orange-deep)} .cta{display:inline-block;background:var(--orange);color:#fff;font-weight:600;padding:.85rem 1.6rem;border-radius:8px;text-decoration:none;margin-top:.6rem}
+footer{border-top:1px solid var(--line);margin-top:3rem;padding-top:1.2rem;color:var(--dim);font-size:.85rem}
+</style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1034023492870678');fbq('track','PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1034023492870678&ev=PageView&noscript=1"/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+<div class="band"></div><div class="strip"></div>
+<nav style="position:sticky;top:0;z-index:50;background:#f7f9fc;border-bottom:1px solid #e3eaf3;display:flex;justify-content:space-between;align-items:center;padding:.7rem 1.4rem;font-family:'IBM Plex Sans',system-ui,sans-serif">
+  <a href="https://aoaudit.com/" style="font-weight:800;color:#0f2137;text-decoration:none;font-size:1.05rem">&#8592; The AO Audit</a>
+  <a href="https://aoaudit.com/#scanform" style="background:#f43d00;color:#fff;font-weight:600;padding:.5rem 1.1rem;border-radius:7px;text-decoration:none;font-size:.92rem">Scan my website &#8594;</a>
+</nav>
+<div class="wrap">
+<p class="kicker">We re-ran all 91 of our own URLs</p>
+<h1>We promised a one-week re-check. It took 54 days, and Google still hasn't read the promise.</h1>
+<p class="byline">By Alejandro Ojeda · The AO Audit · October 13, 2026 · Every number below came from Google's Search Console API this morning.</p>
+
+<p><em>This is a follow-up on Google not indexing my pages, meaning our pages, measured on our own site. Getting a page stored by Google is the floor under everything else, including the practice the industry calls AEO or GEO — we call it Answer Optimization (AO). A page Google never kept cannot be quoted by any AI answer built on top of it.</em></p>
+
+<p>On August 20 we published <a href="crawled-not-indexed.html">a report on our own indexing</a>. We have 43 English pages and 43 Spanish twins. Google had kept 36 English and 23 Spanish. The last line of that article said: we will re-run this exact sweep next week and publish whether the 12 moved.</p>
+
+<p>Next week was August 27. Today is October 13. That is <span class="num">54 days</span>. We missed our own deadline by 47 days. This morning we finally ran it.</p>
+
+<h2>Did the 12 Spanish pages move?</h2>
+
+<p>We can't tell you exactly, and that is the first thing that went wrong. The per-page list from August 20 lived in a temporary work folder that no longer exists. We kept the totals and threw away the names.</p>
+
+<p>What did survive is the list from our August 15 sweep, written into our log: 14 Spanish pages crawled and declined. Today, <span class="num">6 of those 14 are indexed</span>. The other 8 are still declined. So yes, things moved. Slowly, and only partway.</p>
+
+<h2>What does the same sweep show 54 days later?</h2>
+
+<p>Same 86 pages, same method, every URL inspected one at a time through Google's API.</p>
+
+<div class="tablewrap">
+<table>
+<thead><tr><th>Status</th><th>English Aug 20</th><th>English Oct 13</th><th>Spanish Aug 20</th><th>Spanish Oct 13</th></tr></thead>
+<tbody>
+<tr><td>Indexed</td><td class="n">36</td><td class="n">38</td><td class="n">23</td><td class="n">27</td></tr>
+<tr><td>Crawled, then declined</td><td class="n">0</td><td class="n">1</td><td class="n">12</td><td class="n">13</td></tr>
+<tr><td>Never crawled</td><td class="n">7</td><td class="n">4</td><td class="n">8</td><td class="n">3</td></tr>
+<tr><td><strong>Total</strong></td><td class="n">43</td><td class="n">43</td><td class="n">43</td><td class="n">43</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>Spanish gained four pages. English gained two. The language gap shrank from 13 pages to 11. Across the whole site, which now has 91 URLs, Google keeps 65.</p>
+
+<p>But look at the declined row. The Spanish number didn't fall. It rose by one, because some pages left the declined group and others walked in. Five Spanish pages that were not on our August 15 declined list are on it now. And the English column has its first 1.</p>
+
+<h2>Which English page did Google drop?</h2>
+
+<p>Our page about AI visibility. In our first three weeks of Search Console data, "ai visibility" was the single search phrase that showed our site most often. This page was built for it.</p>
+
+<p>Google reported it indexed in every full sweep we ran from August 15 through September 7. Today it reads <strong>crawled - currently not indexed</strong>. Here is the part that surprised us: its last crawl date is still <strong>July 27</strong>. Google didn't come back, read a new version, and judge it. It changed its mind about a copy it fetched 78 days ago.</p>
+
+<p>We checked that a second way. Search Console's performance data shows the page earned 94 search impressions between July 25 and August 9. Then nothing. Zero for over two months. So in practice it stopped showing up long before the label caught up.</p>
+
+<div class="card"><p style="margin:0">Indexed is not a box you tick once. Google re-decides, and it can drop a page without visiting it again. We only caught this because we looked.</p></div>
+
+<p>Why did it happen? We don't know. Our guess is that Google judged it too close to other pages on our own site that cover the same idea, since we have several. That is a guess, not something Google told us.</p>
+
+<h2>What else went wrong on our side?</h2>
+
+<p>The article that made the promise has never been crawled. Not once in 54 days. It's in our sitemap. It's linked from our homepage. Google lists it as discovered, and that's it. In August we wrote that a sitemap is a suggestion, not an instruction. Our own article proved it on itself.</p>
+
+<p>The two Siri articles we published on August 17 are in the same state. Discovered, never fetched, 57 days.</p>
+
+<p>And five pages we asked Google to index by August 22, using the Request Indexing button, have still never been crawled. That button has worked fast for us many times. Twice in August it indexed most of a batch within hours. These five clicks simply didn't take, and we didn't go back and check until today.</p>
+
+<h2>What got better?</h2>
+
+<p>In August we called out one article that had sat in our sitemap for 32 days without a single crawl. It's indexed now, crawled September 27. Patience does work on some pages. Just not on a schedule you get to pick.</p>
+
+<h2>What should you do if Google is not indexing your pages?</h2>
+
+<p>Check more than once. Most owners check a page the week it goes live, see it indexed, and never look again. We just watched a page that was indexed for weeks quietly fall out.</p>
+
+<p>Read which bucket each page is in. Never crawled means ask for indexing and link to it from pages Google already visits. Crawled and declined means the page has to be more worth keeping than what Google already holds, and that can include your own similar pages.</p>
+
+<p>After you click Request Indexing, look again the next day. If the last crawl date hasn't changed, click again. We assumed five clicks worked. They didn't.</p>
+
+<p>And write your follow-up dates down somewhere that doesn't disappear. Ours didn't make it.</p>
+
+<h2>Will we check again?</h2>
+
+<p>Yes, and this time with the full per-page list saved in our permanent log, not a scratch folder. We won't promise "next week" again. We'll publish the next sweep when we've run it, with the date on it.</p>
+
+<p><strong>Want to know if Google and AI engines can actually see your site?</strong> The scan is free, takes about a minute, and shows every check, including the ones you fail.</p>
+<p><a class="cta" href="https://aoaudit.com/">Scan my website →</a></p>
+
+<h2>FAQ</h2>
+<h3>Why is Google not indexing my pages?</h3>
+<p>First find out which kind of not indexed you have, because there are three and they need different fixes. Unknown to Google means it has never heard of the URL. Discovered - currently not indexed means it knows the URL and has not fetched it yet. Crawled - currently not indexed means it read the page and chose not to keep it. On our own site in October 2026, 12 pages were in the first two groups and 14 were in the third. Open Search Console, use URL Inspection on the page, and read the coverage line before changing anything.</p>
+<h3>Can a page that was indexed get dropped later?</h3>
+<p>Yes. One of our English pages was reported as indexed in every full sweep we ran from August 15 through September 7, 2026. On October 13 it read crawled - currently not indexed, and its last crawl date was still July 27. Google changed its decision without fetching the page again. Its last search impression was August 9. Indexed is a status you have to keep checking, not a box you tick once.</p>
+<h3>Does Request Indexing in Search Console always work?</h3>
+<p>No. Across our own runs it worked fast most of the time, often indexing a page within hours. But five pages we requested by August 22, 2026 had still never been crawled 52 days later. If a page shows no new crawl date a day after you request it, request it again. Do not assume the click went through.</p>
+<h3>Do crawled - currently not indexed pages ever come back?</h3>
+<p>Some do. On August 15, 2026 we had 14 Spanish pages crawled and declined. By October 13, 6 of those 14 were indexed and 8 were still declined. Over the same stretch, 5 other Spanish pages and 1 English page moved into the declined group. It is a moving queue, not a final verdict.</p>
+
+<footer>The AO Audit · Answer Optimization (AO) · <a href="https://aoaudit.com/">aoaudit.com</a> · Questions? <a href="mailto:alejandro@ojedaworks.com">alejandro@ojedaworks.com</a> · Start here: <a href="what-is-answer-optimization.html">what is Answer Optimization (AO)?</a> · Related: <a href="not-showing-on-google.html">why isn't my business showing up on Google?</a> · <a href="google-business-verification.html">how to get verified on Google Business Profile</a> · From our logs: <a href="self-audit.html">our own failing grade</a> · <a href="free-infrastructure.html">the night both free services died</a> · <a href="schema-error.html">the schema tool had a schema error</a> · <a href="warning-on-purpose.html">the schema warning we left on purpose</a> · <a href="score-you-cant-game.html">the score you can't game</a> · <a href="siri-business-listing.html">the two brains of Siri</a> · <a href="crawled-not-indexed.html">the same 43 pages, twice</a>.</footer>
+</div>
+</body>
+</html>
