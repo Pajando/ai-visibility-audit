@@ -71,12 +71,30 @@ const ENGINE_BOTS = {
 };
 function robotsBlocks(txt){
   const lines = txt.split(/\r?\n/).map(l => l.replace(/#.*$/,"").trim()).filter(Boolean);
-  const groups = {}; let current = [];
+  const groups = {}; let current = []; let expecting = false;
   lines.forEach(l => {
     const m = l.match(/^user-agent:\s*(.+)$/i);
-    if(m){ current = [m[1].toLowerCase().trim()]; current.forEach(a => groups[a] = groups[a] || []); return; }
+    if(m){
+      // Stacked agents share one rule block:
+      //   User-agent: GPTBot
+      //   User-agent: CCBot
+      //   Disallow: /
+      // Resetting `current` on every line dropped GPTBot's block silently.
+      if(!expecting) current = [];
+      const agent = m[1].toLowerCase().trim();
+      current.push(agent);
+      groups[agent] = groups[agent] || [];
+      expecting = true;
+      return;
+    }
     const d = l.match(/^disallow:\s*(.*)$/i);
-    if(d && current.length) current.forEach(a => groups[a].push(d[1].trim()));
+    if(d && current.length){
+      expecting = false;
+      current.forEach(a => groups[a].push(d[1].trim()));
+      return;
+    }
+    // any other directive also ends the user-agent run
+    if(/^(allow|crawl-delay|sitemap|host|noindex):/i.test(l)) expecting = false;
   });
   // training-class tokens: blocking these costs future model knowledge, NOT today's live answers
   const TRAINING_ONLY = new Set(["gptbot","claudebot","anthropic-ai","google-extended","ccbot","bytespider","meta-externalagent","applebot-extended"]);
@@ -175,10 +193,36 @@ async function runScan(rawUrl){
   upd(l, ld.length ? "ok" : "bad", ld.length ? `Schema found: ${types.slice(0,6).join(", ")}`
       : (microTypes.length || rdfa) ? "Only LEGACY schema (microdata/RDFa) — convert to JSON-LD" : "No JSON-LD schema found");
 
-  const hasOrg = types.some(t => /organization|localbusiness|store|restaurant|professionalservice|medicalbusiness|homeandconstructionbusiness|legalservice|dentist|physician|autorepair|realestateagent/i.test(String(t)));
+  // Organization + every schema.org subtype of it (LocalBusiness and its full tree included).
+  // Generated from schemaorg-current-https-types.csv on 2026-10-14. A hand-picked regex here
+  // missed AutomotiveBusiness/AutoDealer, so dealers with perfect identity schema failed.
+  const ORG_TYPES = new Set(("AccountingService AdultEntertainment Airline AmusementPark AnimalShelter ArchiveOrganization ArtGallery Attorney Audiology AutoBodyShop AutoDealer " +
+    "AutoPartsStore AutoRental AutoRepair AutoWash AutomatedTeller AutomotiveBusiness Bakery BankOrCreditUnion BarOrPub BeautySalon BedAndBreakfast " +
+    "BikeStore BookStore BowlingAlley Brewery CafeOrCoffeeShop Campground Casino ChildCare ClothingStore CollegeOrUniversity ComedyClub CommunityHealth " +
+    "ComputerStore Consortium ConvenienceStore Cooperative Corporation CovidTestingFacility DanceGroup DaySpa Dentist DepartmentStore Dermatology " +
+    "DiagnosticLab DietNutrition Distillery DryCleaningOrLaundry EducationalOrganization Electrician ElectronicsStore ElementarySchool Emergency " +
+    "EmergencyService EmploymentAgency EntertainmentBusiness ExerciseGym FastFoodRestaurant FinancialService FireStation Florist FoodEstablishment " +
+    "FundingAgency FundingScheme FurnitureStore GardenStore GasStation GeneralContractor Geriatric GolfCourse GovernmentOffice GovernmentOrganization " +
+    "GroceryStore Gynecologic HVACBusiness HairSalon HardwareStore HealthAndBeautyBusiness HealthClub HighSchool HobbyShop HomeAndConstructionBusiness " +
+    "HomeGoodsStore Hospital Hostel Hotel HousePainter IceCreamShop IndividualPhysician InsuranceAgency InternetCafe JewelryStore LegalService Library " +
+    "LibrarySystem LiquorStore LocalBusiness Locksmith LodgingBusiness MedicalBusiness MedicalClinic MedicalOrganization MensClothingStore MiddleSchool " +
+    "Midwifery MobilePhoneStore Motel MotorcycleDealer MotorcycleRepair MovieRentalStore MovieTheater MovingCompany MusicGroup MusicStore NGO NailSalon " +
+    "NewsMediaOrganization NightClub Notary Nursing Obstetric OfficeEquipmentStore Oncologic OnlineBusiness OnlineMarketplace OnlineStore Ophthalmology " +
+    "Optician Optometric Organization Otolaryngologic OutletStore PawnShop Pediatric PerformingGroup PetStore Pharmacy Physician PhysiciansOffice " +
+    "Physiotherapy PlasticSurgery Plumber Podiatric PoliceStation PoliticalParty PostOffice Preschool PrimaryCare ProfessionalService Project Psychiatric " +
+    "PublicHealth PublicSwimmingPool RadioStation RealEstateAgent RecyclingCenter ResearchOrganization ResearchProject Resort Restaurant RoofingContractor " +
+    "School SearchRescueOrganization SelfStorage ShoeStore ShoppingCenter SkiResort SportingGoodsStore SportsActivityLocation SportsClub " +
+    "SportsOrganization SportsTeam StadiumOrArena Store TattooParlor TelevisionStation TennisComplex TheaterGroup TireShop TouristInformationCenter " +
+    "ToyStore TravelAgency VacationRental VeterinaryCare WholesaleStore Winery WorkersUnion").toLowerCase().split(" "));
+  // "https://schema.org/AutoDealer" or "schema:AutoDealer" -> "autodealer"
+  const localName = t => String(t).split(/[\/#:]/).pop().toLowerCase();
+  const orgObj = ld.find(o => [].concat(o["@type"] || []).some(t => ORG_TYPES.has(localName(t))))
+    // custom or misspelled @type, but it still carries a business name + street address: that IS an identity card
+    || ld.find(o => o.name && o.address && !/^(webpage|website|breadcrumblist|faqpage|product|offer|event)$/i.test(localName([].concat(o["@type"]||[""])[0])));
+  const hasOrg = !!orgObj;
   const sameAs = ld.some(o => Array.isArray(o.sameAs) && o.sameAs.length >= 2);
   add("code", 6, "Organization / LocalBusiness identity schema", hasOrg,
-    hasOrg ? (sameAs ? "Identity schema with sameAs profile links — excellent" : "Identity schema found, but add a sameAs list of your profiles") : "Machines have no structured 'ID card' for your business",
+    hasOrg ? `${[].concat(orgObj["@type"]||"Business")[0]} identity schema found` + (sameAs ? " with sameAs profile links — excellent" : ", but add a sameAs list of your profiles") : "Machines have no structured 'ID card' for your business",
     "Add Organization or LocalBusiness JSON-LD with name, description, contact info, and a sameAs array linking every profile (Google, LinkedIn, socials, Yelp). Google's rule: structured data must match your visible page text — never mark up facts the page doesn't show.");
   log(hasOrg ? "ok" : "bad", hasOrg ? "Business identity schema present" : "No Organization/LocalBusiness schema");
 
@@ -289,6 +333,9 @@ async function runScan(rawUrl){
   add("content", 2, "Images described for machines (alt text)", imgs.length === 0 || noAlt <= imgs.length * 0.2,
     imgs.length === 0 ? "No images on the page — nothing to describe" :
       noAlt === 0 ? `All ${imgs.length} images have alt text` :
+      // passes up to 20% missing (weight 2: a few unlabeled images is a nudge, not a failure) —
+      // but say so, or a PASS card reading "invisible to AI" looks like a scanner bug
+      noAlt <= imgs.length * 0.2 ? `${imgs.length - noAlt} of ${imgs.length} images have alt text — passes (up to 20% missing allowed), but the other ${noAlt} are still invisible to AI and screen readers` :
       `${noAlt} of ${imgs.length} images have no alt text — invisible to AI and screen readers`,
     "Give every meaningful image a short, specific alt description. Machines can't see your photos — alt text is how they know what's there. For Google (their Essentials names alt text explicitly), accessibility law, and multimodal AI.");
 
@@ -309,9 +356,11 @@ async function runScan(rawUrl){
     fresh ? "Current-year or dated content detected" : "No visible dates or current-year references found",
     "Add visible published/updated dates and current-year references. AI engines prefer quoting provably-current content.");
 
-  const priceRe = /\$\s?\d|€\s?\d|£\s?\d|pricing|price list|our prices|rates\b/i;
+  // Left word boundaries are required: a bare `rates\b` also matches "United Arab EmiRATES",
+  // which appears in the embedded country list of many contact-form / phone-input widgets.
+  const priceRe = /\$\s?\d|€\s?\d|£\s?\d|\bpricing\b|\bprice list\b|\bour prices\b|\brates\b/i;
   const pricePage = pageDocs.find(p => priceRe.test(textOf(p.d)));
-  const price = !!pricePage || [...doc.querySelectorAll("a")].some(a => /pricing|prices|rates/i.test(a.getAttribute("href")||""));
+  const price = !!pricePage || [...doc.querySelectorAll("a")].some(a => /\bpricing\b|\bprices\b|\brates\b/i.test(a.getAttribute("href")||""));
   add("content", 5, "Pricing transparency", price,
     price ? (pricePage ? `Price information found on ${pathOf(pricePage.u)}` : "Pricing page linked from your homepage") : `No prices found on your homepage${interior.length ? " or " + interior.map(p=>pathOf(p.u)).join(", ") : ""}`,
     "Publish prices or honest ranges. “Contact us for pricing” means the AI quotes your competitor's transparent page instead — and the agent books them.");
