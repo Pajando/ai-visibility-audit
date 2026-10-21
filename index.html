@@ -14,19 +14,19 @@
 <title>The AO Audit: Answer Optimization Audit · Your AO Score</title>
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://aoaudit.com/">
-<meta name="description" content="Free Answer Optimization audit: we scan your site live and score your visibility to ChatGPT, Gemini, Perplexity and AI agents. Your AO Score in 60 seconds.">
+<meta name="description" content="Free Answer Optimization audit: we scan your site live and check how easily Google and AI tools like ChatGPT, Gemini and Perplexity can read it. Your AO Score in 60 seconds.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="The AO Audit">
 <meta property="og:locale" content="en_US">
 <meta property="og:title" content="The AO Audit: Answer Optimization Audit · What's Your AO Score?">
-<meta property="og:description" content="Free instant scan: enter your website and get your AO Score in about 60 seconds. It shows how visible your business is to ChatGPT, Gemini, Claude, Perplexity and AI agents, plus the exact fixes.">
+<meta property="og:description" content="Free instant scan: enter your website and get your AO Score in about 60 seconds. It checks how easily Google and AI tools like ChatGPT, Gemini, Claude and Perplexity can read your site, plus the exact fixes.">
 <meta property="og:url" content="https://aoaudit.com/">
 <meta property="og:image" content="https://aoaudit.com/og-card2.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="The AO Audit: Answer Optimization Audit">
-<meta name="twitter:description" content="Free instant scan: your AO Score in about 60 seconds. See how visible you are to ChatGPT, Gemini, Claude, Perplexity and AI agents.">
+<meta name="twitter:description" content="Free instant scan: your AO Score in about 60 seconds. See how easily Google and AI tools like ChatGPT, Gemini, Claude and Perplexity can read your site.">
 <meta name="twitter:image" content="https://aoaudit.com/og-card2.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -82,7 +82,7 @@
       "name": "The AO Audit",
       "url": "https://aoaudit.com/",
       "publisher": { "@id": "https://aoaudit.com/#org" },
-      "description": "The AO Audit (Answer Optimization) scans a business website live and scores how visible it is to AI engines (ChatGPT, Gemini, Perplexity, Google AI Mode) and AI agents, your AO Score, with a prioritized fix list." },
+      "description": "The AO Audit (Answer Optimization) scans a business website live and scores how easily machines can read it: search engines and AI tools such as ChatGPT, Gemini, Perplexity and Google AI Mode. The result is your AO Score, with a prioritized fix list." },
     { "@type": "WebApplication",
       "@id": "https://aoaudit.com/#scanner",
       "name": "The AO Audit free AI-visibility scanner",
@@ -302,6 +302,12 @@ p{max-width:65ch}
 .upsell h3{font-size:1.5rem;margin:0 0 .5rem}
 .upsell p{margin:0 auto 1.3rem;color:var(--dim)}
 
+.statsrc{margin:.6rem auto 0}
+.noscore-box{border-left:3px solid var(--blue);background:#e8f0fe;border-radius:0 10px 10px 0;padding:1.1rem 1.3rem;margin:1.2rem 0}
+.noscore-box p{margin:0;font-size:1.02rem}
+#results.noscore .scorecard,#results.noscore .findings,#results.noscore .fixes,#results.noscore .upsell,#results.noscore .rescan{display:none}
+.gateover.inline{position:static;padding:0;display:block}
+.gateover.inline .gate{margin:1.2rem 0 0;box-shadow:none;text-align:left}
 footer{padding:2.5rem 0 3.5rem;color:var(--dim);font-size:.84rem;border-top:1px solid var(--line)}
 </style>
 <link rel="alternate" hreflang="en" href="https://aoaudit.com/">
@@ -320,7 +326,7 @@ fbq('init','1034023492870678');fbq('track','PageView');
   <p style="text-align:right;margin:0 0 .5rem"><a href="es.html" style="display:inline-block;color:#12459c;text-decoration:none;font-weight:700;font-size:.9rem;border:1.5px solid #12459c;padding:.32rem .95rem;border-radius:20px">Español &#8594;</a></p>
   <div class="hero-cols"><div class="hero-left"><p class="eyebrow"><span id="three-accent" aria-hidden="true"></span>Free instant scan · AO = Answer Optimization · Updated July 2026</p>
   <h1>Free AI-visibility audit: see what AI <em>actually sees.</em></h1>
-  <p class="sub"><strong>The AO Audit is a free 60-second scan that shows local businesses exactly what AI engines can see, verify, and recommend about them. That means ChatGPT, Gemini, Perplexity and Google AI Mode.</strong> Enter your website, get your <strong>AO Score</strong> (0–100) and your fastest fixes. <strong><a href="what-is-answer-optimization.html" style="color:inherit">AO stands for Answer Optimization</a></strong>. Making your business the answer AI gives (the industry also calls it <strong>AEO</strong> or <strong>GEO</strong>). The goal, in three words: <strong>BE THE ANSWER</strong>. To your specific customer, at the exact moment they ask. A billion people now search with Google's AI Mode. ChatGPT recommends businesses by name and sends shoppers to their sites to buy. Agents call and book on customers' behalf. The scan runs live. It checks classic <strong>SEO</strong> fundamentals plus schema, AI-crawler access, content signals and agent-readiness.</p>
+  <p class="sub"><strong>The AO Audit is a free 60-second scan that shows local businesses exactly what AI engines can see, verify, and recommend about them. That means ChatGPT, Gemini, Perplexity and Google AI Mode.</strong> Enter your website, get your <strong>AO Score</strong> (0–100) and your biggest gaps. <strong><a href="what-is-answer-optimization.html" style="color:inherit">AO stands for Answer Optimization</a></strong>. Making your business the answer AI gives (the industry also calls it <strong>AEO</strong> or <strong>GEO</strong>). The goal, in three words: <strong>BE THE ANSWER</strong>. To your specific customer, at the exact moment they ask. A billion people now search with Google's AI Mode. ChatGPT recommends businesses by name and sends shoppers to their sites to buy. Agents call and book on customers' behalf. The scan runs live. It checks classic <strong>SEO</strong> fundamentals plus schema, AI-crawler access, content signals and agent-readiness.</p>
   <p class="stand">Most AI marketing runs on stats nobody checked. We checked ours, and published our own failing grade before we sold anyone anything.</p>
   <form class="urlbox" id="scanform">
     <input type="text" id="bizname" placeholder="Business name" autocomplete="organization"
@@ -334,7 +340,7 @@ fbq('init','1034023492870678');fbq('track','PageView');
   <div class="err" id="urlerr" aria-live="polite"></div>
   <p class="tiny">Live scan of your real site · 21 automated checks + 6 you confirm · Prioritized fix list</p>
   <p class="tiny" style="margin-top:.5rem">Not ready? <a href="sample-report.pdf" target="_blank" rel="noopener">See a real sample report first</a> (opens in a new tab). No email needed.</p></div><div class="hero-right"><div class="gauge">
-<svg viewBox="0 0 300 250" width="270" height="225" role="img" aria-label="The AI engines deciding who to recommend your business">
+<svg viewBox="0 0 300 250" width="270" height="225" role="img" aria-label="The AI engines reading local business websites. Can they read yours?">
   <circle cx="150" cy="125" r="92" fill="none" stroke="#e3eaf3" stroke-width="1.5"/>
   <circle cx="150" cy="125" r="62" fill="none" stroke="#dbe4f0" stroke-width="1.5"/>
   <circle cx="150" cy="125" r="32" fill="none" stroke="#dbe4f0" stroke-width="1.5"/>
@@ -352,19 +358,19 @@ fbq('init','1034023492870678');fbq('track','PageView');
   <text x="84" y="222" text-anchor="middle" font-size="11" font-weight="600" fill="#0f2137" font-family="'IBM Plex Sans',system-ui,sans-serif">Claude</text>
   <text x="44" y="92" text-anchor="middle" font-size="11" font-weight="600" fill="#0f2137" font-family="'IBM Plex Sans',system-ui,sans-serif">Siri</text>
   <text class="cq a" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f2137" font-family="'IBM Plex Sans',system-ui,sans-serif"><tspan x="150" y="120">Will they pick</tspan><tspan x="150" y="137">your business?</tspan></text>
-  <text class="cq b" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f2137" font-family="'IBM Plex Sans',system-ui,sans-serif"><tspan x="150" y="120">Will AI</tspan><tspan x="150" y="137">recommend you?</tspan></text>
+  <text class="cq b" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f2137" font-family="'IBM Plex Sans',system-ui,sans-serif"><tspan x="150" y="120">Can AI read</tspan><tspan x="150" y="137">your site?</tspan></text>
   <text class="cq c" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f2137" font-family="'IBM Plex Sans',system-ui,sans-serif"><tspan x="150" y="120">Will they</tspan><tspan x="150" y="137">see you first?</tspan></text>
 </svg>
-<p class="gcap" style="max-width:20rem;margin:.7rem auto 0">Every AI is deciding who to recommend. <a href="#scanform">See if it's you. Free scan &#8593;</a></p>
+<p class="gcap" style="max-width:20rem;margin:.7rem auto 0">Every AI has to read your site before it can mention you. <a href="#scanform">See if it can. Free scan &#8593;</a></p>
 </div></div></div>
 </div></header>
 
 <div class="stats wrap" style="padding:0">
-  <div class="stat"><b>1B+</b><span>monthly users on Google AI Mode</span></div>
-  <div class="stat"><b>3.2×</b><span>more AI citations for machine-readable sites (industry studies)</span></div>
-  <div class="stat"><b>9 in 10</b><span>websites still have no AI instructions file, so the field is wide open</span></div>
-  <div class="stat"><b>~87%</b><span>of ChatGPT's search citations trace to Bing's index, which most businesses never claim</span></div>
+  <div class="stat"><b>20%</b><span>52 of 257 businesses we checked in Napa and Solano County had no website.</span></div>
+  <div class="stat"><b>18%</b><span>Of the 205 that did, our reader couldn't open 37.</span></div>
+  <div class="stat"><b>~87%</b><span>of ChatGPT's search citations matched Bing's top results (Seer Interactive, Feb 2025)</span></div>
 </div>
+<p class="wrap tiny statsrc">Our own scans, July–Aug 2026. <a href="napa-ai-visibility-dataset.html">See all 7 town reports</a>.</p>
 
 <section id="how"><div class="wrap">
   <p class="kicker">Sixty seconds to the truth</p>
@@ -376,7 +382,7 @@ fbq('init','1034023492870678');fbq('track','PageView');
     <div class="stepc"><b class="n">2</b><h3>You confirm 6 things robots can't see</h3>
       <p>Your Google Business Profile, reviews, and two live ChatGPT tests. These are the checks that need a human. Not verified yet? <a href="google-business-verification.html">Here's how Google Business Profile verification works</a>. Ours verified instantly.</p></div>
     <div class="stepc"><b class="n">3</b><h3>Get your AO Score & fix list</h3>
-      <p>Your 0–100 AO Score with your gaps ranked by impact, so you know the exact next move.</p></div>
+      <p>Your 0–100 AO Score with your gaps in priority order, so you know the exact next move.</p></div>
   </div>
 </div></section>
 
@@ -397,6 +403,10 @@ fbq('init','1034023492870678');fbq('track','PageView');
   <div id="r-content">
   <p class="kicker">Your results</p>
   <h2 id="r-head">Your AO Score</h2>
+  <div class="noscore-box" id="r-noscore" hidden>
+    <p id="r-noscore-msg"></p>
+    <p class="tiny" style="margin:.6rem 0 0"><a href="#scanform" onclick="setTimeout(() => document.getElementById('url').focus(), 400)">Try the scan again</a></p>
+  </div>
   <div class="scorecard">
     <div class="ring" id="ring"><b id="r-score">0</b></div>
     <div>
@@ -424,7 +434,7 @@ fbq('init','1034023492870678');fbq('track','PageView');
     (posts, reviews, Q&amp;A), a monthly re-scan so you can watch it hold, and one improvement applied for
     you. $249/mo, no contract. Reply CARE for the founding rate ($149/mo, first 5 businesses), or <a href="https://buy.stripe.com/3cIeVedlYetkePX8kD9sk01"><strong>start AO Care now at $249/mo &rarr;</strong></a>.</p>
   </div>
-  <p class="tiny">Made fixes? <a href="#" id="reset">Re-scan your site</a>. Scores update in real time.</p>
+  <p class="tiny rescan">Made fixes? <a href="#" id="reset">Re-scan your site</a>. Scores update in real time.</p>
   </div>
   <div class="gateover" id="gate" hidden>
     <div class="gate">
@@ -510,7 +520,7 @@ fbq('init','1034023492870678');fbq('track','PageView');
   <p style="margin-top:1.2rem;opacity:.75"><a href="https://tools.launchllama.co?utm_source=badge&utm_medium=referral" target="_blank" rel="noopener noreferrer"><img src="https://tools.launchllama.co/featured-badge-white.png?v=2" alt="As seen on Launch Llama Newsletter" width="140" height="35" loading="lazy" style="width:140px;height:auto"></a></p>
 </div></footer>
 
-<script src="scanner.js" defer></script>
+<script src="scanner.js?v=20261020" defer></script>
 <script type="module">
 try {
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {

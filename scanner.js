@@ -131,11 +131,11 @@ async function runScan(rawUrl){
     const control = await relayFetch("https://example.com/");
     if(!control.ok){
       upd(l, "bad", "Our scanning service is briefly overloaded — this is on our side, not yours.");
-      log("warn", "Answer the quick questions below anyway: leave your email and we'll run your full scan ourselves and send your AO Score in the report.");
+      log("warn", "No score this time. Leave your email below and we'll run your scan ourselves.");
       return {fatal:"unreachable", relayDown:true, origin, url};
     }
-    upd(l, "bad", `Couldn't fetch ${url} — the site may be down, or it blocks automated readers entirely.`);
-    log("warn", "Ironically, that's itself a finding: if we can't read it, many AI crawlers can't either.");
+    upd(l, "bad", `Couldn't open ${url} this time. The site may be down for a moment, or it turns away automated readers like ours.`);
+    log("warn", "That doesn't mean AI can't read it. It means our scanner couldn't. No score this time.");
     return {fatal:"unreachable", origin, url};
   }
   upd(l, "ok", `Fetched ${url} (${Math.round(page.text.length/1024)} KB of HTML)`);
@@ -188,8 +188,8 @@ async function runScan(rawUrl){
   add("code", 7, "JSON-LD structured data present", ld.length > 0,
     ld.length ? `Found: ${types.slice(0,6).join(", ")}` : legacyNote,
     (microTypes.length || rdfa)
-      ? "Convert your existing legacy markup to JSON-LD — same facts, the format Google officially recommends (easier to maintain) and the one third-party AI tooling actually extracts. Validate free at validator.schema.org."
-      : "Add JSON-LD structured data. It's how you speak to machines in their native language — industry studies find sites with clean schema get cited up to 3.2× more.");
+      ? "Your business details are already in your site's code, but in an older format many AI tools skip (legacy microdata or RDFa). Switch them to the format Google recommends: same facts, easier to keep up to date, and the one outside AI tools actually pull (JSON-LD). Check it free at validator.schema.org."
+      : "Add a short code block that tells Google and AI tools your business name, address, hours and what you sell, so they don't have to guess (JSON-LD schema). Visitors never see it. Check it free at validator.schema.org.");
   upd(l, ld.length ? "ok" : "bad", ld.length ? `Schema found: ${types.slice(0,6).join(", ")}`
       : (microTypes.length || rdfa) ? "Only LEGACY schema (microdata/RDFa) — convert to JSON-LD" : "No JSON-LD schema found");
 
@@ -223,14 +223,14 @@ async function runScan(rawUrl){
   const sameAs = ld.some(o => Array.isArray(o.sameAs) && o.sameAs.length >= 2);
   add("code", 6, "Organization / LocalBusiness identity schema", hasOrg,
     hasOrg ? `${[].concat(orgObj["@type"]||"Business")[0]} identity schema found` + (sameAs ? " with sameAs profile links — excellent" : ", but add a sameAs list of your profiles") : "Machines have no structured 'ID card' for your business",
-    "Add Organization or LocalBusiness JSON-LD with name, description, contact info, and a sameAs array linking every profile (Google, LinkedIn, socials, Yelp). Google's rule: structured data must match your visible page text — never mark up facts the page doesn't show.");
+    "Give Google and AI tools a clear ID card for your business: your name, what you do, your phone, and links to your Google, Yelp and social pages (Organization or LocalBusiness JSON-LD with a sameAs list). Google's rule: this code must match what your page actually shows, so never add facts the page doesn't show.");
   log(hasOrg ? "ok" : "bad", hasOrg ? "Business identity schema present" : "No Organization/LocalBusiness schema");
 
   const hasFaq = pageDocs.some(p => extractJsonLd(p.d).some(o =>
     String(o["@type"]).toLowerCase().includes("faqpage")));
   add("code", 5, "FAQPage schema (highest-impact type for AI answers)", hasFaq,
     hasFaq ? "FAQ schema found — pre-chunked answers machines love" : "No FAQPage schema",
-    "Find the real questions your customers ask — Google's 'People also ask', your reviews, what people actually email and call about — then answer the top 10 on a FAQ page with FAQPage schema. The single highest-impact schema for AI answers.");
+    "Answer the questions customers already ask you (prices, hours, parking, walk-ins) on one page, so Google and AI tools can quote your answer instead of guessing (an FAQ page with FAQPage schema). Find the real questions in Google's 'People also ask', your reviews, and what people call and email about, then answer the top 10.");
   log(hasFaq ? "ok" : "warn", hasFaq ? "FAQPage schema present" : "No FAQPage schema found");
 
   l = log("run", `Checking ${origin}/robots.txt for AI-crawler blocks…`);
@@ -250,7 +250,7 @@ async function runScan(rawUrl){
       log("bad", `CRITICAL: robots.txt blocks ${classicBlocked.join(" and ")} by name — that removes you from ${classicBlocked.includes("googlebot") ? "Google Search AND its AI features" : ""}${classicBlocked.length === 2 ? " plus " : ""}${classicBlocked.includes("bingbot") ? "Bing, Copilot, and most of ChatGPT's search" : ""}. Fix this before anything else in this report.`);
     add("code", 6, "All major AI engines allowed to read your site", blocked.length === 0,
       blocked.length ? `robots.txt blocks: ${blocked.join(" · ")}` : `Open to all ${Object.keys(ENGINE_BOTS).length} AI ecosystems we check: ChatGPT, Claude, Gemini, Perplexity, Meta AI, Apple Intelligence, Alexa+, DuckDuckGo, and model-training crawlers`,
-      "Unblock the AI crawlers in robots.txt (GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot, Google-Extended, Meta-ExternalAgent, Applebot-Extended, Amazonbot and friends). Every blocked engine is an audience you can never appear in. (Precision note: Google-Extended governs Gemini apps and model training — Google Search\u2019s own AI answers ride the normal Googlebot.)");
+      "Your site is telling some AI tools to stay out, so they can't read your pages (a block in your robots.txt file). Remove the blocks for the AI readers you want: GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot, Google-Extended, Meta-ExternalAgent, Applebot-Extended, Amazonbot and the rest. Precision note: Google-Extended controls Gemini apps and model training; Google Search\u2019s own AI answers use the normal Googlebot.");
     upd(l, blocked.length ? "bad" : "ok", blocked.length ? `robots.txt blocks AI engines: ${blocked.join(", ")}` : `All ${Object.keys(ENGINE_BOTS).length} major AI ecosystems can read this site`);
   }
 
@@ -263,7 +263,7 @@ async function runScan(rawUrl){
     const hasLlms = llms.ok && llms.status < 400 && llms.text.trim().length > 20 && !/^\s*</.test(llms.text.trim());
     add("code", 3, "llms.txt present", hasLlms,
       hasLlms ? "Found — read by some AI agent tools (note: Google says its Search ignores llms.txt)" : "Not found — a 20-minute nice-to-have for AI agent tools; Google's Search ignores it either way",
-      "Add an llms.txt file — a short markdown index of your business for AI agent tools. Honest note: Google states its Search ignores llms.txt; this is for the other agents. 20 minutes, cheap insurance.");
+      "Add a short plain-text summary of your business and your key pages that some AI tools look for (an llms.txt file). Honest note: Google says its Search ignores llms.txt, so this is only for other AI tools. It takes about 20 minutes.");
     upd(l, hasLlms ? "ok" : "warn", hasLlms ? "llms.txt found" : "No llms.txt (minor)");
   }
 
@@ -276,7 +276,7 @@ async function runScan(rawUrl){
     const hasSm = sm.ok && sm.status < 400 && /<(urlset|sitemapindex)/i.test(sm.text);
     add("code", 3, "sitemap.xml present (feeds Google AND Bing→ChatGPT)", hasSm,
       hasSm ? "Sitemap found" : "No sitemap.xml found at the standard location",
-      "Add a sitemap.xml and submit it to Google Search Console AND Bing Webmaster Tools (bing.com/webmasters) — analyses find the large majority (~87% in one 2026 study) of ChatGPT search citations come from Bing's index, and most businesses never claim it. (Google notes small, well-linked sites may not strictly need one — the Bing submission is the prize most skip.)");
+      "Give Google and Bing a list of every page on your site so they don't miss any, and send it to both (a sitemap.xml submitted in Google Search Console and Bing Webmaster Tools at bing.com/webmasters). Bing matters for ChatGPT too: a Seer Interactive study (Feb 2025) found about 87% of ChatGPT's search citations matched Bing's top results. Google notes small, well-linked sites may not strictly need a sitemap; the Bing step is the one most businesses skip.");
     upd(l, hasSm ? "ok" : "warn", hasSm ? "sitemap.xml found" : "No sitemap.xml");
   }
 
@@ -286,14 +286,14 @@ async function runScan(rawUrl){
   add("code", 6, "Indexable — no noindex tag", !noindex,
     noindex ? "A noindex meta tag is telling EVERY search engine and AI to ignore this page" :
       (hasCanonical ? "No noindex; canonical URL set" : "No noindex (tip: add a canonical link tag)"),
-    "Remove the noindex meta tag — it tells every search engine and AI engine to skip the page entirely. Then set a canonical link tag so machines know the one true address of each page.");
+    "Your page is telling Google and every AI tool to skip it, so customers searching can't find it (a noindex tag). Remove it, then add a canonical tag so machines know the one true address of each page.");
   log(noindex ? "bad" : "ok", noindex ? "CRITICAL: noindex tag found — invisible to all engines" : "Indexable — no noindex tag");
 
   const snippetBlocked = /nosnippet/i.test(metaRobots) || /max-snippet\s*:\s*0(?!\d)/i.test(metaRobots);
   add("code", 4, "Snippet-eligible (AI Overviews kill switch off)", !snippetBlocked,
     snippetBlocked ? "A nosnippet or max-snippet:0 directive is set — by Google's own rules this makes the page INELIGIBLE for AI Overviews and AI Mode" :
       "No nosnippet/max-snippet restrictions — eligible for AI answers per Google's documentation",
-    "Remove nosnippet / max-snippet:0 from your robots meta tag. Google's documentation: a page must be eligible to show with a snippet to appear in AI Overviews or AI Mode.");
+    "Your page is set so Google can't show a preview of it, and that also keeps it out of Google's AI answers (nosnippet or max-snippet:0 in your robots meta tag). Remove it. Google's documentation: a page must be eligible to show with a snippet to appear in AI Overviews or AI Mode.");
   const dns = (htmlLower.match(/data-nosnippet/g) || []).length;
   if(dns) log("warn", `data-nosnippet found on ${dns} element${dns>1?"s":""} — that content is invisible to Google's AI answers (fine if intentional; costly if it wraps prices, hours, or your best answers)`);
   log(snippetBlocked ? "bad" : "ok", snippetBlocked ? "CRITICAL: snippet controls block AI Overviews eligibility" : "Snippet-eligible — no AI Overviews kill switch (Google)");
@@ -304,7 +304,7 @@ async function runScan(rawUrl){
     msBlocked ? "A noarchive tag is set — by Microsoft's rules this EXCLUDES your content from Copilot answers entirely (not even a link). Many older sites carry this tag innocently: for 20 years it just hid the 'Cached' link. Now it erases you from Microsoft's AI." :
       msLimited ? "A nocache tag limits Copilot to your URL, title and snippet only — partial visibility in Microsoft's AI answers" :
       "No noarchive/nocache restrictions — fully eligible for Copilot answers per Microsoft's rules",
-    "Remove the legacy noarchive meta tag (it once merely hid the 'Cached' link; today Microsoft's rules make it a total Copilot exclusion). This is for BING and COPILOT — the index that also feeds most of ChatGPT's search citations.");
+    "An old setting on your page keeps it out of Microsoft Copilot's answers (the noarchive meta tag). It used to only hide the 'Cached' link; under Microsoft's current rules it excludes your content from Copilot. Remove it. This one is for Bing and Copilot.");
   log(msBlocked ? "bad" : msLimited ? "warn" : "ok",
     msBlocked ? "CRITICAL: noarchive tag erases this site from Copilot (Microsoft)" :
     msLimited ? "nocache limits Copilot to snippet-only (Microsoft)" : "Copilot-eligible — no Microsoft AI kill switch");
@@ -312,7 +312,7 @@ async function runScan(rawUrl){
   const jsOnly = bodyText.length < 400;
   add("code", 6, "Content readable without JavaScript", !jsOnly,
     jsOnly ? `Only ${bodyText.length} characters of visible text in raw HTML — AI crawlers likely see a blank page` : `${Math.round(bodyText.length/100)/10}k characters of machine-readable text`,
-    "Your text must exist in the raw HTML (static pages or server-side rendering). Most AI crawlers don't run JavaScript — a JS-only site looks empty to them.");
+    "Your words only show up after the page runs extra code, and most AI readers don't run that code, so to them your site looks almost empty (JavaScript-only rendering). Put your text in the page itself (static pages or server-side rendering).");
   log(jsOnly ? "bad" : "ok", jsOnly ? "Very little text in raw HTML — likely JavaScript-only rendering" : "Real text present in raw HTML");
 
   /* CONTENT pillar */
@@ -321,12 +321,12 @@ async function runScan(rawUrl){
   const desc = (doc.querySelector('meta[name="description"]')||{content:""}).content || "";
   add("content", 4, "Title & meta description", title.length >= 15 && desc.length >= 60,
     `Title: ${title ? '"' + title.slice(0,60) + '"' : "missing"} · Description: ${desc ? desc.length + " chars" : "missing"}`,
-    "Write a specific title and 120–160 character meta description that state what you do, for whom, where — the first thing retrieval engines read. This is for EVERY engine: Google, Bing (→ChatGPT and Copilot), and the LLM crawlers all read it first.");
+    "Say what you do, for whom, and where in your page title and in the short summary under it in search results, because that's the first thing Google, Bing and AI tools read (the title tag and a 120–160 character meta description).");
 
   const h1s = [...doc.querySelectorAll("h1")].map(h => h.textContent.trim()).filter(Boolean);
   add("content", 3, "Clear H1 headline", h1s.length >= 1,
     h1s.length ? `H1: "${h1s[0].slice(0,70)}"` : "No H1 heading — the page never states its main topic in the strongest signal position",
-    "Add one H1 that says what you do, for whom, where — it's the heading search and AI engines weight most. For EVERY engine — and Google's Essentials names keywords in headings as a top-impact practice.");
+    "Put one big headline at the top of the page that says what you do and where, for example 'Family taqueria in downtown Napa' (one H1 heading). It's the clearest signal of what the page is about, for Google, Bing and AI tools alike.");
 
   const imgs = [...doc.querySelectorAll("img")];
   const noAlt = imgs.filter(im => !(im.getAttribute("alt")||"").trim()).length;
@@ -337,24 +337,24 @@ async function runScan(rawUrl){
       // but say so, or a PASS card reading "invisible to AI" looks like a scanner bug
       noAlt <= imgs.length * 0.2 ? `${imgs.length - noAlt} of ${imgs.length} images have alt text — passes (up to 20% missing allowed), but the other ${noAlt} are still invisible to AI and screen readers` :
       `${noAlt} of ${imgs.length} images have no alt text — invisible to AI and screen readers`,
-    "Give every meaningful image a short, specific alt description. Machines can't see your photos — alt text is how they know what's there. For Google (their Essentials names alt text explicitly), accessibility law, and multimodal AI.");
+    "Add a short description to each photo, because machines can't see pictures, only the words attached to them (alt text). Something like 'carne asada plate with rice and beans' works. It also helps customers who use screen readers, and Google's own basics name alt text explicitly.");
 
   const hasOg = !!doc.querySelector('meta[property^="og:"]');
   add("code", 2, "Open Graph tags (link previews & social signals)", hasOg,
     hasOg ? "Open Graph tags present" : "No Open Graph tags — links to your site show bare, title-less previews when shared",
-    "Add og:title, og:description, og:url and an og:image (1200×630). Every share of your link becomes a proper card instead of a bare URL. For link previews everywhere: Messages, WhatsApp, Slack, social — and the AI assistants that share links.");
+    "Make your link show a title, photo and description when someone texts or shares it, instead of a bare web address (Open Graph tags: og:title, og:description, og:url and a 1200×630 og:image). That works in Messages, WhatsApp, social apps and the AI assistants that share links.");
 
   const heads = pageDocs.flatMap(p => [...p.d.querySelectorAll("h1,h2,h3")].map(h => h.textContent.trim())).filter(Boolean);
   const qHeads = heads.filter(h => /\?|^(how|what|why|when|where|who|which|can|should|do|does|is|are)\b/i.test(h));
   add("content", 5, "Question-style headings (answer-ready structure)", qHeads.length >= 1,
     qHeads.length ? `${qHeads.length} question-style heading(s), e.g. "${qHeads[0].slice(0,60)}"` : `${heads.length} headings found, none phrased as customer questions`,
-    "Rephrase key headings as the real questions customers ask, and answer each completely in the first 40–80 words below it. AI engines quote answer-shaped chunks.");
+    "Turn your section headings into the questions customers really ask, and answer each one right below in a few plain sentences (question-style headings with answer-first paragraphs). AI tools tend to quote short, direct answers like that.");
 
   const year = new Date().getFullYear().toString();
   const fresh = htmlLower.includes(year) || doc.querySelector("time") !== null || ld.some(o => o.dateModified || o.datePublished);
   add("content", 4, "Freshness signals (dates, current year)", fresh,
     fresh ? "Current-year or dated content detected" : "No visible dates or current-year references found",
-    "Add visible published/updated dates and current-year references. AI engines prefer quoting provably-current content.");
+    "Show when your page was last updated and keep the info current, so customers and machines can tell it's still true (visible dates, plus dateModified in your schema).");
 
   // Left word boundaries are required: a bare `rates\b` also matches "United Arab EmiRATES",
   // which appears in the embedded country list of many contact-form / phone-input widgets.
@@ -363,7 +363,7 @@ async function runScan(rawUrl){
   const price = !!pricePage || [...doc.querySelectorAll("a")].some(a => /\bpricing\b|\bprices\b|\brates\b/i.test(a.getAttribute("href")||""));
   add("content", 5, "Pricing transparency", price,
     price ? (pricePage ? `Price information found on ${pathOf(pricePage.u)}` : "Pricing page linked from your homepage") : `No prices found on your homepage${interior.length ? " or " + interior.map(p=>pathOf(p.u)).join(", ") : ""}`,
-    "Publish prices or honest ranges. “Contact us for pricing” means the AI quotes your competitor's transparent page instead — and the agent books them.");
+    "Put your prices, or honest price ranges, on your site so customers and AI tools can answer “how much?” without calling (visible pricing). If your site only says “Contact us for pricing,” an AI answer has nothing from you to quote.");
   upd(l, "ok", "Content signals analyzed");
 
   /* ENTITY pillar */
@@ -372,13 +372,13 @@ async function runScan(rawUrl){
   const socials = [...new Set(links.map(h => (h.match(/(instagram|facebook|linkedin|youtube|tiktok|yelp|x)\.com/)||[])[1]).filter(Boolean))];
   add("entity", 5, "Linked profiles (socials, review sites)", socials.length >= 2,
     socials.length ? `Linked: ${socials.join(", ")}` : "No profile links found on the homepage",
-    "Link your Google, LinkedIn company page, social and review profiles from your site and list them in schema sameAs — LinkedIn is Microsoft-owned, ranks in Bing (which feeds ChatGPT and Copilot), and is how machines confirm all your profiles are one entity.");
+    "Link your Google, Yelp, Facebook, Instagram and LinkedIn pages from your site, so machines can tell they all belong to the same business (profile links, plus a sameAs list in your schema). LinkedIn is owned by Microsoft and shows up in Bing.");
 
   const tel = links.some(h => h.startsWith("tel:")) || ld.some(o => o.telephone) || /\(\d{3}\)\s?\d{3}[- ]\d{4}|\+\d{7,}/.test(bodyText);
   const mail = links.some(h => h.startsWith("mailto:")) || ld.some(o => o.email);
   add("entity", 4, "Machine-readable contact info", tel || mail,
     tel ? "Phone/contact detected" : mail ? "Clickable email contact detected" : "No clickable phone or email, and no contact info in your schema",
-    "Add a clickable tel: phone link (or mailto: email) and put contact details in your schema — agents verify businesses they can contact.");
+    "Make your phone number and email tappable, so customers can reach you in one tap and machines can confirm how to contact you (a tel: or mailto: link, plus contact details in your schema).");
   upd(l, "ok", "Entity signals checked");
 
   /* AGENTS pillar */
@@ -387,11 +387,11 @@ async function runScan(rawUrl){
   const bookish = links.some(h => /calendly|acuity|booksy|squareup|square\.site|setmore|appointlet|bookings?|schedule|checkout|cart|shop|store|buy|order|reserv/i.test(h)) || pageDocs.some(p => bookRe.test(textOf(p.d)));
   add("agents", 6, "Online booking / purchase path", bookish,
     bookish ? "Booking or purchase path detected" : "No booking link, cart, or ordering path found",
-    "Add a real booking link (Calendly or your industry's platform) or online checkout. Agents route to businesses whose calendars and carts they can act on.");
+    "Give customers a way to book or buy online, so they (or an AI assistant acting for them) can do it without calling (a booking link like Calendly or your industry's platform, or online checkout).");
 
   add("agents", 3, "Secure connection (https)", origin.startsWith("https"),
     origin.startsWith("https") ? "HTTPS in place" : "Site not served over HTTPS",
-    "Move your site to HTTPS — table stakes for both AI crawlers and human trust.");
+    "Make your site load securely so browsers don't warn customers away (move it to HTTPS).");
   upd(l, "ok", "Agent-readiness checked");
 
   const passed = auto.filter(a => a.pass).length;
@@ -403,22 +403,22 @@ async function runScan(rawUrl){
 const MQS = [
  {p:"entity", w:6, t:"Is your Google Business Profile claimed, 100% complete, and updated in the last 30 days?",
    h:"It feeds Google's AI answers directly; inactive profiles lose impressions.",
-   fix:"Claim and complete your Google Business Profile and post 1–2× per week — it feeds Gemini-powered answers directly. And get your primary category exactly right: local-ranking studies rate it the #1 positive factor, and the wrong one the #1 negative."},
+   fix:"Claim your free Google listing, fill in every field, and post 1–2 times a week, because it's what Google shows (and feeds its AI answers) when people look for you (Google Business Profile). Get your main category exactly right: local-ranking studies rate it the #1 positive factor, and the wrong one the #1 negative."},
  {p:"entity", w:5, t:"Have you received (and responded to) reviews in the last 30 days?",
    h:"Volume, recency, and responses are core AI trust signals.",
-   fix:"Set up a Google-review ask after every sale and respond to every review — recent, answered reviews are a core AI trust signal. (Ask on Google; Yelp prohibits soliciting reviews.) Local-ranking studies (Sterling Sky) find rankings dip after ~3 weeks without a fresh review, so build the habit, not a blitz."},
+   fix:"Ask every happy customer for a Google review and reply to every review, because recent, answered reviews are what new customers and machines use to decide if you're trustworthy (a review habit). Ask on Google; Yelp prohibits asking for reviews. Local-ranking research (Sterling Sky) finds rankings dip after about 3 weeks without a fresh review, so build the habit, not a blitz."},
  {p:"entity", w:5, t:"Have you claimed Bing Places AND Apple Business (formerly Business Connect)?",
    h:"Bing Places feeds Microsoft Copilot and Alexa; Apple's registry is what Siri reads for local place lookups (Siri hands harder questions to a general AI model that reads the open web instead).",
-   fix:"Claim both free profiles: Bing Places at bing.com/forbusiness (feeds Copilot and Alexa) and business.apple.com (the source behind Siri and Apple Intelligence local place lookups — never the only source Siri consults; broader questions go to a general AI model reading the web). Apple is folding Business Connect into a platform called Apple Business; the claiming step is unchanged."},
+   fix:"Claim your free Bing and Apple listings, so Copilot, Alexa and Siri have your right hours and address (Bing Places at bing.com/forbusiness and Apple Business at business.apple.com). Apple's listing is the source behind Siri and Apple Intelligence local place lookups, but never the only one: broader questions go to a general AI model reading the web. Apple is folding Business Connect into a platform called Apple Business; the claiming step is unchanged."},
  {p:"entity", w:4, t:"Is your business listed with current info on Yelp (or your industry's main review site)?",
    h:"Alexa+ pulls local business data primarily from Yelp; Perplexity uses it for local answers too.",
-   fix:"Claim your free Yelp listing at biz.yelp.com and keep hours/services current — it's the primary local data source for Alexa+ and a key one for Perplexity."},
+   fix:"Claim your free Yelp page and keep your hours and services current, because Alexa+ pulls local business info mainly from Yelp and Perplexity uses it too (your listing at biz.yelp.com)."},
  {p:"agents", w:6, t:"Live test: ask 2–3 AI assistants (ChatGPT, Gemini, Claude, Grok…) “What is [your business name]?” — do they answer accurately?",
    h:"Copy that prompt into a couple of them right now. Accurate = yes. Wrong or “I don't know” = no.",
-   fix:"The machines haven't formed an entity for you yet. Fix profiles, schema and consistency, then re-test monthly across ChatGPT, Gemini, Claude, Perplexity, Copilot and Grok."},
+   fix:"AI tools don't have a clear picture of your business yet, so they answer wrong or not at all when asked about you (no entity formed). Fix your profiles, schema and consistency, then re-test monthly across ChatGPT, Gemini, Claude, Perplexity, Copilot and Grok."},
  {p:"agents", w:5, t:"Live test: ask ChatGPT, Perplexity or Google AI Mode “best [your category] in [your area]” — are you mentioned?",
    h:"This is the money question your customers already ask, on every AI platform.",
-   fix:"You're losing the recommendation moment. Work the full system — entity, answer-first content, schema, reviews — and re-run monthly on each major engine."},
+   fix:"When customers ask AI for the best business like yours nearby, you're not in the answer yet (no AI mentions). Work the full system: business profiles, answer-first content, schema and reviews, then re-run this test monthly on each major engine."},
 ];
 const manswers = new Array(MQS.length).fill(null);
 
@@ -449,21 +449,56 @@ let scannedBiz = "";
 let scannedIndustry = "";
 let lastBlocked = [];
 let unlocked = false;
+let scanFailed = false; // true when runScan returned fatal "unreachable": no automated check ran, so NO score may be shown
+const NOSCORE_MSG = "We couldn't read your site this time. That doesn't mean AI can't \u2014 it means our scanner couldn't open it. Try again in a few minutes, or leave your email below and we'll run it for you.";
+function noScore(){
+  // never turn "we couldn't look" into a grade: a 0 here would be a false "invisible" verdict
+  return scanFailed || computeScore().max === 0;
+}
 function computeScore(){
   // AO Score counts ONLY verified automated checks — never self-reported answers,
   // and never penalizes a check we couldn't read (skips excluded from the denominator).
   let got = 0, max = 0;
   const per = {}; PILLARS.forEach(pl => per[pl.id] = {got:0, max:0, name:pl.name});
   auto.forEach(a => { if(a.skip) return; max += a.w; per[a.p].max += a.w; if(a.pass){ got += a.w; per[a.p].got += a.w; } });
-  return {score: max ? Math.round(got/max*100) : 0, per};
+  return {score: max ? Math.round(got/max*100) : 0, per, max};
 }
 function grade(s){
-  if(s >= 85) return ["Agent-ready","You're ahead of ~99% of businesses. Protect the lead — this landscape shifts quarterly."];
-  if(s >= 65) return ["Visible, with gaps","Machines can find you, but you're losing citations and agent-driven revenue at specific, fixable points."];
-  if(s >= 40) return ["Half-invisible","You exist to machines, but they can't confidently cite or transact with you. The fixes below change that fast."];
-  return ["Invisible to AI","Right now, AI engines can't see, verify, or recommend you — every AI answer in your category goes to someone else. The good news: everything below is fixable in weeks."];
+  if(s >= 85) return ["Agent-ready","You're in good shape. Re-check every few months; this changes fast."];
+  if(s >= 65) return ["Visible, with gaps","Machines can read most of your site. The fixes below close the gaps."];
+  if(s >= 40) return ["Half-readable","Machines can read parts of your site, but key details are hard for them to find. The fixes below show what's in the way."];
+  return ["Hard for machines to read","Google and AI have trouble reading your site right now. The fixes below are what's in the way."];
+}
+const gateDefaults = {};
+function setGateMode(noscore){
+  const h = document.querySelector("#gate h3"), p = document.querySelector("#gate .gate > p"), b = document.getElementById("gbtn");
+  if(!gateDefaults.h){ gateDefaults.h = h.textContent; gateDefaults.p = p.textContent; gateDefaults.b = b.textContent; }
+  h.textContent = noscore ? "Want us to run it for you?" : gateDefaults.h;
+  p.textContent = noscore ? "Leave your email and we'll open your site by hand and send you what we find." : gateDefaults.p;
+  b.textContent = noscore ? "Send it" : gateDefaults.b;
+  document.getElementById("gate").classList.toggle("inline", noscore);
+  document.getElementById("results").classList.toggle("noscore", noscore);
+}
+function showNoScore(locked){
+  setGateMode(true);
+  document.getElementById("r-head").textContent =
+    `We couldn't read ${scannedBiz || scannedUrl.replace(/^https?:\/\//,"") || "your site"} this time`;
+  const box = document.getElementById("r-noscore");
+  box.hidden = false;
+  document.getElementById("r-noscore-msg").textContent = locked ? NOSCORE_MSG
+    : "Got it. We'll open your site by hand and email you what we find. Nothing to do on your end.";
+  document.getElementById("results").style.display = "block";
+  const rc = document.getElementById("r-content");
+  rc.classList.remove("locked");
+  const gate = document.getElementById("gate");
+  if(locked){ gate.hidden = false; }
+  else { unlocked = true; gate.hidden = true; }
+  document.getElementById("results").scrollIntoView({behavior:"smooth"});
 }
 function showResults(locked){
+  if(noScore()){ showNoScore(locked); return; }
+  setGateMode(false);
+  document.getElementById("r-noscore").hidden = true;
   const {score, per} = computeScore();
   const [g, verdict] = grade(score);
   document.getElementById("r-head").textContent =
@@ -494,7 +529,7 @@ function showResults(locked){
   document.getElementById("r-fixes").innerHTML =
     missed.length === 0
     ? `<h3>No verified gaps found. Seriously impressive.</h3><p class="dim">Re-audit monthly — AI surfaces change fast.</p>`
-    : `<h3>Fix these first (highest impact)</h3>` + missed.map((q,n) =>
+    : `<h3>Fix these first (in priority order)</h3>` + missed.map((q,n) =>
       `<div class="fix"><b>${n+1}. ${q.t}${q.self?' <span style="font-weight:400;font-size:.72rem;color:var(--dim)">(self-reported \u2014 we verify this in your audit)</span>':""}</b><p>${q.fix}</p></div>`).join("");
   if(BUY_URL){ const b = document.getElementById("buybtn"); b.href = BUY_URL; b.hidden = false; }
   else { document.getElementById("buysoon").hidden = false; }
@@ -522,6 +557,7 @@ document.getElementById("scanform").addEventListener("submit", async e => {
   document.getElementById("gate").hidden = true;
   manswers.fill(null);
   unlocked = false;
+  scanFailed = false;
   document.getElementById("scanpanel").scrollIntoView({behavior:"smooth"});
   if(typeof gtag === "function") gtag("event", "scan_started", {});
   const res = await runScan(raw);
@@ -529,9 +565,13 @@ document.getElementById("scanform").addEventListener("submit", async e => {
   relayOutage = !!res.relayDown;
   if(res.fatal === "unreachable"){
     scannedUrl = res.url || raw;
+    scanFailed = true;
     document.getElementById("scantitle").textContent = relayOutage
       ? "Our scanner is briefly busy — we'll run your scan for you"
       : "We couldn't read your site";
+    // no automated check ran: skip the quiz and the score entirely, go straight to the message + email capture
+    showResults(true);
+    return;
   } else if(res.fatal){
     err.textContent = res.fatal;
     document.getElementById("scanpanel").style.display = "none";
@@ -555,14 +595,28 @@ document.getElementById("gateform").addEventListener("submit", e => {
   if(typeof fbq === "function") fbq("track", "Lead");
   const leadName = document.getElementById("g-name").value.trim();
   const btn = document.getElementById("gbtn");
-  btn.disabled = true; btn.textContent = "Unlocking…";
+  const ns = noScore();
+  btn.disabled = true; btn.textContent = ns ? "Sending…" : "Unlocking…";
   const {score, per} = computeScore();
-  const failed = auto.filter(a => !a.pass && !a.skip).map(a => a.label).join(" · ") || "none";
+  const failed = ns ? "not scanned (our scanner couldn't open the site)" : (auto.filter(a => !a.pass && !a.skip).map(a => a.label).join(" · ") || "none");
   const gname = leadName;
-  const [g] = grade(score);
-  const pillarsTxt = PILLARS.map(pl => `${pl.name} ${per[pl.id].max?Math.round(per[pl.id].got/per[pl.id].max*100):0}%`).join(" · ");
+  const g = ns ? "Not scored" : grade(score)[0];
+  const pillarsTxt = ns ? "not scanned" : PILLARS.map(pl => `${pl.name} ${per[pl.id].max?Math.round(per[pl.id].got/per[pl.id].max*100):0}%`).join(" · ");
   const wins = [...auto.filter(a => !a.pass && !a.skip).sort((a,b) => b.w - a.w)].slice(0,3);
-  const autoreply =
+  const site = scannedUrl.replace(/^https?:\/\//,"");
+  const autoreply = ns ?
+`Hi ${gname || "there"},
+
+Thanks for asking us to check ${scannedBiz || site} (${site}).
+
+Our scanner couldn't open your site this time. That doesn't mean AI can't read it. It means our scanner couldn't get in, so we didn't give you a score.
+
+We'll open your site by hand and email you what we find.
+
+Talk soon,
+Alejandro
+Be the Answer — aoaudit.com`
+  :
 `Hi ${gname || "there"},
 
 Here is your AO snapshot (Answer Optimization) for ${scannedBiz || scannedUrl.replace(/^https?:\/\//,"")} (${scannedUrl.replace(/^https?:\/\//,"")}):
@@ -570,7 +624,7 @@ Here is your AO snapshot (Answer Optimization) for ${scannedBiz || scannedUrl.re
 SCORE: ${score}/100 — ${g}
 PILLARS: ${pillarsTxt}
 
-Your 3 fastest wins:
+Your 3 biggest gaps:
 ${wins.length ? wins.map((f,n) => `${n+1}. ${f.fix}`).join("\n") : "Your verified on-page checks all pass \u2014 the full report focuses on the profile, review, and AI-mention items we confirm with you directly."}
 
 Your full illustrated AO Report — every finding explained, charts, and your prioritized 30-day fix plan — is being prepared now and will arrive in this inbox within 48 hours.
@@ -587,17 +641,21 @@ Be the Answer — aoaudit.com`;
       business: scannedBiz || "(not given)",
       website: scannedUrl,
       industry: scannedIndustry || "(not given)",
-      score: String(score),
+      score: ns ? "not scored" : String(score),
       grade: g,
+      scan_status: ns ? (relayOutage ? "relay_outage" : "site_unreachable") : "scanned",
       pillars: pillarsTxt,
       failed_checks: failed,
       next_action: relayOutage
         ? "RELAY OUTAGE during their scan — automated checks are missing. Run the full scan manually, then send their PDF report within 48 hours"
+        : ns
+        ? "SCANNER COULDN'T OPEN THEIR SITE (down, or it turns away automated readers). No score was shown. Run the scan manually, then email them what you find"
         : "Send their full PDF report within 48 hours",
       report_json: JSON.stringify({
         business: scannedBiz, site: scannedUrl.replace(/^https?:\/\//,"").replace(/\/$/,""),
-        name: gname, email, score, grade: g, relay_outage: relayOutage,
-        pillars: Object.fromEntries(PILLARS.map(pl =>
+        name: gname, email, score: ns ? null : score, grade: ns ? null : g, relay_outage: relayOutage,
+        scan_status: ns ? (relayOutage ? "relay_outage" : "site_unreachable") : "scanned",
+        pillars: ns ? null : Object.fromEntries(PILLARS.map(pl =>
           [pl.name, per[pl.id].max ? Math.round(per[pl.id].got/per[pl.id].max*100) : 0])),
         blocked: lastBlocked,
         findings: [
@@ -608,12 +666,14 @@ Be the Answer — aoaudit.com`;
         fixes: [...auto.filter(a => !a.pass && !a.skip).map(a => ({t:a.label, f:a.fix, w:a.w}))]
                .sort((a,b) => b.w - a.w).slice(0,5)
       }),
-      _subject: `AO Audit lead — ${scannedBiz || scannedUrl.replace(/^https?:\/\//,"")} scored ${score}`,
+      _subject: ns
+        ? `AO Audit lead — ${scannedBiz || site} — couldn't scan, run it manually`
+        : `AO Audit lead — ${scannedBiz || site} scored ${score}`,
       _template: "table",
       _autoresponse: autoreply
     })
   }).catch(()=>{}).finally(() => {
-    btn.disabled = false; btn.textContent = "Send it & unlock my report";
+    btn.disabled = false; btn.textContent = ns ? "Send it" : "Send it & unlock my report";
     showResults(false);
   });
 });
