@@ -228,7 +228,7 @@ async function runScan(rawUrl){
 
   const hasFaq = pageDocs.some(p => extractJsonLd(p.d).some(o =>
     String(o["@type"]).toLowerCase().includes("faqpage")));
-  add("code", 5, "FAQPage schema (highest-impact type for AI answers)", hasFaq,
+  add("code", 5, "FAQPage schema (answers in a format machines can read)", hasFaq,
     hasFaq ? "FAQ schema found — pre-chunked answers machines love" : "No FAQPage schema",
     "Answer the questions customers already ask you (prices, hours, parking, walk-ins) on one page, so Google and AI tools can quote your answer instead of guessing (an FAQ page with FAQPage schema). Find the real questions in Google's 'People also ask', your reviews, and what people call and email about, then answer the top 10.");
   log(hasFaq ? "ok" : "warn", hasFaq ? "FAQPage schema present" : "No FAQPage schema found");
@@ -335,8 +335,8 @@ async function runScan(rawUrl){
       noAlt === 0 ? `All ${imgs.length} images have alt text` :
       // passes up to 20% missing (weight 2: a few unlabeled images is a nudge, not a failure) —
       // but say so, or a PASS card reading "invisible to AI" looks like a scanner bug
-      noAlt <= imgs.length * 0.2 ? `${imgs.length - noAlt} of ${imgs.length} images have alt text — passes (up to 20% missing allowed), but the other ${noAlt} are still invisible to AI and screen readers` :
-      `${noAlt} of ${imgs.length} images have no alt text — invisible to AI and screen readers`,
+      noAlt <= imgs.length * 0.2 ? `${imgs.length - noAlt} of ${imgs.length} images have alt text — passes (up to 20% missing allowed), but the other ${noAlt} have no text description for AI tools or screen readers` :
+      `${noAlt} of ${imgs.length} images have no alt text, so AI tools and screen readers get no description of them`,
     "Add a short description to each photo, because machines can't see pictures, only the words attached to them (alt text). Something like 'carne asada plate with rice and beans' works. It also helps customers who use screen readers, and Google's own basics name alt text explicitly.");
 
   const hasOg = !!doc.querySelector('meta[property^="og:"]');
@@ -403,7 +403,7 @@ async function runScan(rawUrl){
 const MQS = [
  {p:"entity", w:6, t:"Is your Google Business Profile claimed, 100% complete, and updated in the last 30 days?",
    h:"It feeds Google's AI answers directly; inactive profiles lose impressions.",
-   fix:"Claim your free Google listing, fill in every field, and post 1–2 times a week, because it's what Google shows (and feeds its AI answers) when people look for you (Google Business Profile). Get your main category exactly right: local-ranking studies rate it the #1 positive factor, and the wrong one the #1 negative."},
+   fix:"Claim your free Google listing, fill in every field, and post 1–2 times a week, because it's what Google shows (and feeds its AI answers) when people look for you (Google Business Profile). Get your main category exactly right: Whitespark's 2026 Local Search Ranking Factors survey rates the primary category the #1 factor for the map results, and an incorrect one the #2 negative factor."},
  {p:"entity", w:5, t:"Have you received (and responded to) reviews in the last 30 days?",
    h:"Volume, recency, and responses are core AI trust signals.",
    fix:"Ask every happy customer for a Google review and reply to every review, because recent, answered reviews are what new customers and machines use to decide if you're trustworthy (a review habit). Ask on Google; Yelp prohibits asking for reviews. Local-ranking research (Sterling Sky) finds rankings dip after about 3 weeks without a fresh review, so build the habit, not a blitz."},

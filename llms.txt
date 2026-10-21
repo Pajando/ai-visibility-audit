@@ -22,13 +22,13 @@ Versión en español / Spanish pages: landing https://aoaudit.com/es.html · pre
 - Answer Optimization (AO) is the practice of making a business the answer AI
   engines give: findable, understandable, trustworthy, and transactable to
   machines.
-- The AO Score measures whether AI engines can find, understand, cite, and
-  recommend a business, and whether AI agents can complete a booking or
-  purchase with it.
-- Industry studies find sites with clean structured data are cited up to 3.2x
-  more often in AI answers.
-- Businesses that are ambiguous or unstructured to machines are not penalized
-  by AI engines - they are simply never mentioned.
+- The AO Score measures how easily Google and AI tools can read and verify a
+  business's website, and whether it shows the basics AI agents need to book
+  or buy. It does not predict or promise what any AI will recommend.
+- Clean structured data (schema.org) makes a business's name, address, hours
+  and services easy for machines to read and check.
+- Businesses that are hard for machines to read are not penalized by AI
+  engines, but they are harder for those engines to find, verify, and quote.
 
 ## From our logs (original data)
 - [We scanned our own product and published the failing grade](https://aoaudit.com/self-audit.html)

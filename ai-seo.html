@@ -27,7 +27,7 @@
 { "@context": "https://schema.org", "@graph": [
   { "@type": "Article",
     "headline": "AI SEO: How to Show Up in ChatGPT, Gemini and Perplexity — from real scan logs",
-    "datePublished": "2026-07-20", "dateModified": "2026-07-20",
+    "datePublished": "2026-07-20", "dateModified": "2026-10-20",
     "author": { "@type": "Person", "name": "Alejandro Ojeda" },
     "publisher": { "@id": "https://aoaudit.com/#org" },
     "description": "Where ChatGPT, Gemini and Perplexity actually get their answers, the machine-readability failures most common in real business scans, and the fix order that works." },
@@ -102,10 +102,10 @@ fbq('init','1034023492870678');fbq('track','PageView');
 <p>These come from scanning real local-business websites, not from theory:</p>
 
 <h3>1. No AI instructions at all</h3>
-<p>Industry-wide, <strong>9 in 10 websites still have no AI instructions file</strong> &mdash; no llms.txt, no explicit crawler policy. Our scans match that: the single most common result is a site that has simply never told AI engines anything. The field is wide open, which is exactly why moving early works.</p>
+<p><strong>112 of the 168 readable sites we scanned in Napa and Solano County had no llms.txt file (67%).</strong> (<a href="napa-ai-visibility-dataset.html">Our own scans, July&ndash;Aug 2026</a>). Two out of three had never given AI tools that short map of the business. It takes minutes to add, and most of the local sites we checked still haven't done it.</p>
 
 <h3>2. The site looks fine to humans and reads blank to bots</h3>
-<p>The most expensive failure we find. Some site builders render everything with JavaScript in a way that leaves a crawler a nearly empty page &mdash; we've scanned a business whose homepage served bots a few hundred characters of nothing. The owner had no idea; the site looked great in a browser. Machine-readable sites earn <strong>3.2&times; more AI citations</strong> in the industry studies we track, and this failure is why: an engine can't cite what it can't read.</p>
+<p>The most expensive failure we find. Some site builders render everything with JavaScript in a way that leaves a crawler a nearly empty page &mdash; we've scanned a business whose homepage served bots a few hundred characters of nothing. The owner had no idea; the site looked great in a browser. This is the one to fix first, because an engine can't cite what it can't read.</p>
 
 <h3>3. Schema markup missing or broken</h3>
 <p>Structured data is how you state your name, services, prices, and hours in the format engines parse directly. Most local sites have none. Some have it and it's broken &mdash; <a href="schema-error.html">including, at one point, ours</a>. Valid schema is the cheapest authority signal available.</p>
