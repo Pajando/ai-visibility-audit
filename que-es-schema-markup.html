@@ -11,39 +11,91 @@
   gtag('js', new Date());
   gtag('config', 'G-YG4SL7CCMS');
 </script>
-<title>¿Qué es Schema Markup? Y Cómo Hacer tu Sitio Amigable para IA</title>
-<meta name="description" content="Schema markup son datos estructurados que le dicen a las máquinas qué es tu negocio. Aquí está la diferencia entre LocalBusiness y Organization que casi nadie explica, con ejemplos reales.">
+<title>Qué es schema markup (datos estructurados): lo que dice Google en español</title>
+<meta name="description" content="Qué son los datos estructurados o schema markup, lo que dice Google en español sobre JSON-LD y LocalBusiness, el error de escribir los días en español, y cuántos negocios de Napa y Solano no los tienen.">
 <link rel="canonical" href="https://aoaudit.com/que-es-schema-markup.html">
-<meta name="robots" content="index,follow">
 <link rel="alternate" hreflang="en" href="https://aoaudit.com/ai-friendly-website.html">
 <link rel="alternate" hreflang="es" href="https://aoaudit.com/que-es-schema-markup.html">
 <link rel="alternate" hreflang="x-default" href="https://aoaudit.com/ai-friendly-website.html">
+<meta name="robots" content="index,follow">
 <meta property="og:type" content="article">
-<meta property="og:title" content="¿Qué es Schema Markup? Y Cómo Hacer tu Sitio Amigable para IA">
-<meta property="og:description" content="Datos estructurados explicados con ejemplos reales — incluida la diferencia entre LocalBusiness y Organization que casi ninguna guía menciona.">
+<meta property="og:locale" content="es_US">
+<meta property="og:title" content="Qué es schema markup (datos estructurados): lo que dice Google en español">
+<meta property="og:description" content="Los datos estructurados explicados con las palabras de Google en español, un ejemplo para un negocio latino y el error de los días en español.">
 <meta property="og:url" content="https://aoaudit.com/que-es-schema-markup.html">
 <meta property="og:image" content="https://aoaudit.com/og-card2.png">
+<meta property="article:published_time" content="2026-08-06">
+<meta property="article:modified_time" content="2026-10-23">
 <script type="application/ld+json">
-{ "@context": "https://schema.org", "@graph": [
-  { "@type": "Article",
-    "headline": "¿Qué es Schema Markup? Y Cómo Hacer tu Sitio Amigable para IA",
-    "datePublished": "2026-08-06", "dateModified": "2026-08-06",
-    "author": { "@type": "Person", "name": "Alejandro Ojeda" },
-    "publisher": { "@id": "https://aoaudit.com/#org" },
-    "about": { "@id": "https://aoaudit.com/what-is-answer-optimization.html#ao" },
-    "inLanguage": "es",
-    "description": "Qué es el schema markup (datos estructurados), por qué el tipo LocalBusiness no siempre es el correcto, y cómo revisar si los rastreadores de IA pueden acceder a tu sitio — con el robots.txt real de este sitio como ejemplo." },
-  { "@type": "FAQPage", "mainEntity": [
-    { "@type": "Question", "name": "¿Qué es schema markup?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Un bloque de código, normalmente JSON-LD, colocado en la sección head de una página, que indica los datos de tu negocio en un formato que las máquinas leen directamente en vez de adivinar a partir de párrafos de texto — tu nombre, dirección, teléfono, horario y categoría." } },
-    { "@type": "Question", "name": "¿Cuál es la diferencia entre datos estructurados LocalBusiness y Organization?",
-      "acceptedAnswer": { "@type": "Answer", "text": "LocalBusiness es el tipo correcto solo cuando existe una presencia física o de área de servicio real — un local, una oficina, un radio de entrega. Un negocio puramente en línea no tiene eso, y forzar LocalBusiness ahí es técnicamente incorrecto, no solo innecesario. Este mismo sitio es el ejemplo: The AO Audit opera completamente remoto, sin ubicación que un cliente visite, así que usa el tipo Organization en vez de LocalBusiness — y esa es la decisión correcta, no un error." } },
-    { "@type": "Question", "name": "¿Cómo sé si los rastreadores de IA pueden acceder a mi sitio web?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Abre tusitio.com/robots.txt en un navegador. Si está vacío o no existe, los rastreadores tienen acceso por defecto. Si lista reglas, revisa específicamente si GPTBot, ClaudeBot, PerplexityBot y Google-Extended están bloqueados — algunos constructores de sitios web y plugins de seguridad los bloquean sin avisar. Un AO Audit gratuito revisa esto automáticamente, junto con el schema y la legibilidad del contenido, en unos 60 segundos." } },
-    { "@type": "Question", "name": "¿Necesito un desarrollador para agregar datos estructurados?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Para la mayoría de los sitios de negocios pequeños, no. Es un bloque de código que se pega directamente en el HTML de la página — copiar, ajustar los datos reales, y pegar. La parte que sí requiere cuidado es elegir el tipo correcto (LocalBusiness, Organization, ProfessionalService, etc.) según lo que el negocio realmente es." } }
-  ] }
-] }
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "inLanguage": "es",
+   "headline": "¿Qué es schema markup? Los datos estructurados, explicados con las palabras de Google",
+   "datePublished": "2026-08-06",
+   "dateModified": "2026-10-23",
+   "author": {
+    "@type": "Person",
+    "name": "Alejandro Ojeda"
+   },
+   "publisher": {
+    "@id": "https://aoaudit.com/#org"
+   },
+   "about": {
+    "@id": "https://aoaudit.com/what-is-answer-optimization.html#ao"
+   },
+   "description": "Guía de datos estructurados (schema markup) para negocios locales, con citas textuales de Google Search Central en español sobre JSON-LD, LocalBusiness, contenido visible y funciones de IA, un ejemplo inventado para un negocio que atiende en español, y datos de nuestros escaneos en Fairfield, Vacaville y Yountville."
+  },
+  {
+   "@type": "FAQPage",
+   "inLanguage": "es",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "¿Qué es schema markup?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Es otro nombre para los datos estructurados: un bloque de código en tu página que le dice a una máquina qué es tu negocio, dónde está y cuándo abre. Google los define como un formato estandarizado para proporcionar información sobre una página y clasificar su contenido. El vocabulario viene de schema.org."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "¿Qué formato recomienda Google?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Google dice que, en la mayoría de los casos, recomienda JSON-LD, porque es más fácil de implementar y mantener. Si usas Wix, WordPress o Shopify, puede que tu plataforma tenga una opción o un complemento para agregarlos."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "¿Puedo escribir los datos estructurados en español?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Tu nombre, tu dirección y tu descripción sí. Pero los tipos (como Restaurant), los nombres de los campos y los días del horario (Monday, Tuesday) van en inglés, como en el vocabulario de schema.org y en los ejemplos de Google. Google acepta Monday o https://schema.org/Monday; «Lunes» no es uno de esos valores, así que tu horario no se lee como horario."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "¿Necesito datos estructurados especiales para la IA de Google?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "No. Google dice que no hay datos estructurados especiales de schema.org que debas agregar para su Visión general creada por IA o su Modo IA. Lo que pide es que los datos estructurados que tengas coincidan con el texto visible en la página."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "¿Los datos estructurados me garantizan salir en Google?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "No. Google dice que no garantiza que se muestren tus datos estructurados en los resultados de la búsqueda, aunque tu página esté marcada correctamente. Sirven para que tus datos se lean bien, no para comprar un lugar."
+     }
+    }
+   ]
+  }
+ ]
+}
 </script>
 <style>
 :root{--bg:#f7f9fc;--card:#fff;--ink:#0f2137;--dim:#5b6b7f;--green:#12459c;--orange:#f43d00;--orange-deep:#1a5fd0;--line:#e3eaf3}
@@ -56,9 +108,14 @@ h2{font-size:1.35rem;margin:2.2rem 0 .6rem}
 h3{font-size:1.08rem;margin:1.6rem 0 .3rem}
 .byline{color:var(--dim);font-size:.9rem;margin:0 0 1.8rem}
 .card{background:var(--card);border-left:4px solid var(--green);border-radius:0 10px 10px 0;padding:1rem 1.3rem;margin:1.4rem 0}
-pre{background:#0b1a2d;color:#dce7f5;border-radius:8px;padding:1.1rem 1.3rem;overflow-x:auto;font-family:"IBM Plex Mono",monospace;font-size:.82rem;line-height:1.6}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;margin:1.2rem 0;background:var(--card);font-size:.95rem}
+th,td{border:1px solid var(--line);padding:.6rem .8rem;text-align:left;vertical-align:top}
+th{background:#e8f0fe}
 a{color:var(--orange-deep)} .cta{display:inline-block;background:var(--orange);color:#fff;font-weight:600;padding:.85rem 1.6rem;border-radius:8px;text-decoration:none;margin-top:.6rem}
 footer{border-top:1px solid var(--line);margin-top:3rem;padding-top:1.2rem;color:var(--dim);font-size:.85rem}
+.src{font-size:.88rem;color:var(--dim)} blockquote{margin:1rem 0;padding:.2rem 0 .2rem 1rem;border-left:3px solid var(--line);color:var(--ink)} blockquote p{margin:.3rem 0} .check{list-style:none;padding-left:0} .check li{padding:.25rem 0 .25rem 1.8rem;position:relative} .check li:before{content:'';position:absolute;left:0;top:.55rem;width:1rem;height:1rem;border:2px solid var(--green);border-radius:3px} .made-up{font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+code{background:#e8f0fe;padding:.1rem .35rem;border-radius:4px;font-size:.9em} pre{background:#fff;border:1px solid var(--line);border-radius:8px;padding:1rem;overflow-x:auto;font-size:.85rem;line-height:1.5}
 </style>
 <!-- Meta Pixel Code -->
 <script>
@@ -72,73 +129,110 @@ fbq('init','1034023492870678');fbq('track','PageView');
 <div class="band"></div><div class="strip"></div>
 <nav style="position:sticky;top:0;z-index:50;background:#f7f9fc;border-bottom:1px solid #e3eaf3;display:flex;justify-content:space-between;align-items:center;padding:.7rem 1.4rem;font-family:'IBM Plex Sans',system-ui,sans-serif">
   <a href="https://aoaudit.com/es.html" style="font-weight:800;color:#0f2137;text-decoration:none;font-size:1.05rem">&#8592; The AO Audit</a>
-  <a href="https://aoaudit.com/es.html#scanform" style="background:#f43d00;color:#fff;font-weight:600;padding:.5rem 1.1rem;border-radius:7px;text-decoration:none;font-size:.92rem">Escanear mi sitio &#8594;</a>
+  <a href="https://aoaudit.com/es.html" style="background:#f43d00;color:#fff;font-weight:600;padding:.5rem 1.1rem;border-radius:7px;text-decoration:none;font-size:.92rem">Escaneo gratis &#8594;</a>
 </nav>
 <div class="wrap">
-<p class="kicker">Tres cosas, no una sensación</p>
-<h1>¿Qué es schema markup, y cómo hace tu sitio amigable para IA?</h1>
-<p class="byline">Por Alejandro Ojeda · The AO Audit · 6 de agosto de 2026</p>
+<p class="kicker">Guía en español · <a href="ai-friendly-website.html" style="color:inherit">in English</a></p>
+<h1>¿Qué es schema markup? Los datos estructurados, explicados con las palabras de Google</h1>
+<p class="byline">Por Alejandro Ojeda · The AO Audit, Napa · Publicado el 6 de agosto de 2026 · Actualizado el 23 de octubre de 2026</p>
 
-<div class="card"><p style="margin:0">Schema markup son datos estructurados: un bloque de código, normalmente JSON-LD, que le dice a una máquina exactamente qué es tu negocio, dónde está y qué ofrece — sin que tenga que adivinar leyendo párrafos. Es una de tres cosas que hacen amigable un sitio para IA. Las otras dos: que los rastreadores de IA puedan realmente entrar, y que el contenido mismo sea legible sin adivinar — precios reales, horario real, preguntas frecuentes reales.</p></div>
+<div class="card"><p style="margin:0">Tu sitio dice que abres a las 8. Pero ese dato está en una foto del letrero, o perdido en un párrafo. Una persona lo encuentra. Una máquina tiene que adivinar. Los datos estructurados, que mucha gente llama <em>schema markup</em>, son la forma de decírselo sin que adivine. Google los define así en español: «Los datos estructurados son un formato estandarizado para proporcionar información sobre una página y clasificar su contenido». (<a href="https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data?hl=es-419" target="_blank" rel="noopener">Google Search Central</a>). Aquí está qué son, qué dice Google y cómo se ven para un negocio que atiende en español.</p></div>
 
-<p>La mayoría de las guías sobre esto se detienen en "agrega schema markup" y ya. Es un consejo incompleto, porque se salta un detalle que sí importa: no todos los negocios deberían usar el mismo tipo de schema, y usar el incorrecto es su propio pequeño problema de credibilidad.</p>
+<h2>Qué son, en palabras simples</h2>
+<p>Es un bloque de código escondido en tu página. La persona no lo ve. Google sí lo lee, y otros programas también pueden leerlo. Dice cosas como: este negocio se llama así, es un restaurante, está en esta dirección, abre a esta hora. Google dice para qué lo usa: «Google usa los datos estructurados que encuentra en la Web para comprender el contenido de la página» (<a href="https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data?hl=es-419" target="_blank" rel="noopener">fuente</a>). El vocabulario viene de schema.org. Por eso le dicen «schema».</p>
 
-<h2>Lo que encontramos al escanear 257 negocios</h2>
-<div class="card"><p style="margin:0"><strong>98 de los 137 sitios legibles no tenían datos estructurados de tipo LocalBusiness. Es el 72%.</strong> Y 46 de esos 137 no tenían ningún JSON-LD, de ningún tipo.</p></div>
-<p>O sea que la mayoría de los negocios que escaneamos le pide a la máquina que adivine qué son y dónde están. Casi ninguno eligió mal el tipo de schema a propósito. Nadie se los explicó.</p>
-<p>Los números vienen de nuestros propios escaneos en Napa, American Canyon, St. Helena, Calistoga, Fairfield, Vacaville y Yountville, entre el 26 y el 29 de julio de 2026. Publicamos solo agregados, nunca el puntaje de un negocio identificable. El desglose completo está en <a href="calistoga-reporte.html">el reporte de Calistoga</a>.</p>
-<h2>La diferencia que casi nadie explica: LocalBusiness contra Organization</h2>
-<p>Un ejemplo mínimo de datos estructurados, para un negocio con local físico real:</p>
-<pre>{
+<h2>Lo que Google dice, punto por punto</h2>
+<div class="tablewrap"><table>
+<tr><th>Tema</th><th>Lo que dice Google</th></tr>
+<tr><td>Qué formato usar</td><td>«En general, recomendamos usar un formato que sea más fácil de implementar y mantener (en la mayoría de los casos, es JSON-LD).» (<a href="https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data?hl=es-419" target="_blank" rel="noopener">fuente</a>)</td></tr>
+<tr><td>Si usas Wix, WordPress o Shopify</td><td>Google dice que «es posible que tu CMS tenga una página de parámetros de configuración de motor de búsqueda o que puedas instalar un complemento que te permita especificar datos estructurados.» (<a href="https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data?hl=es-419" target="_blank" rel="noopener">fuente</a>)</td></tr>
+<tr><td>Lo que no se vale</td><td>«No marques contenido que no sea visible para los lectores de la página.» (<a href="https://developers.google.com/search/docs/appearance/structured-data/sd-policies?hl=es-419" target="_blank" rel="noopener">fuente</a>)</td></tr>
+<tr><td>Si te garantiza algo</td><td>«Importante: Google no garantiza que se muestren tus datos estructurados en los resultados de la búsqueda, incluso si tu página está marcada correctamente según la prueba de resultados enriquecidos.» (<a href="https://developers.google.com/search/docs/appearance/structured-data/sd-policies?hl=es-419" target="_blank" rel="noopener">fuente</a>)</td></tr>
+<tr><td>Para la IA de Google</td><td>«Tampoco hay datos estructurados especiales de schema.org que debas agregar.» Y pide: «Asegurarse de que los datos estructurados coincidan con el texto visible en la página». (<a href="https://developers.google.com/search/docs/appearance/ai-features?hl=es-419" target="_blank" rel="noopener">fuente</a>)</td></tr>
+</table></div>
+<p>Mi opinión: los datos estructurados no son un truco para subir. Son una forma de que tus datos se lean sin errores. Y solo sirven si dicen lo mismo que tu página.</p>
+
+<h2>LocalBusiness: el tipo para un negocio con local o zona</h2>
+<p>Para negocios locales, Google usa el tipo <code>LocalBusiness</code>. Dice qué es obligatorio: <code>address</code>, que «Corresponde a la ubicación física de la empresa», y <code>name</code>, que «Corresponde al nombre de la empresa». Y da este consejo: «Usa el subtipo más específico posible de LocalBusiness; por ejemplo, Restaurant, DaySpa, HealthClub, etc.» (<a href="https://developers.google.com/search/docs/appearance/structured-data/local-business?hl=es-419" target="_blank" rel="noopener">fuente</a>)</p>
+<p>Fíjate en algo: los tipos van en inglés. Es <code>Restaurant</code>, no «Restaurante». <code>AutoRepair</code>, no «Taller». Los nombres del vocabulario de schema.org se escriben en inglés aunque tu sitio esté en español. Tu nombre, tu dirección y tu descripción sí van como son.</p>
+<p>¿Y si no tienes local? Nosotros, por ejemplo, trabajamos a distancia y nadie nos visita. Por eso nuestro propio sitio usa <code>Organization</code>, no <code>LocalBusiness</code>. Mi opinión: no pongas una dirección de local que no existe solo para usar LocalBusiness.</p>
+
+<h2>Un error fácil en sitios en español: los días</h2>
+<p>En el código, los días van en inglés. Google, en su ejemplo, escribe los días así: <code>"Monday"</code>, <code>"Tuesday"</code>, <code>"Wednesday"</code> (<a href="https://developers.google.com/search/docs/appearance/structured-data/local-business?hl=es-419" target="_blank" rel="noopener">fuente</a>). Google acepta la dirección de schema.org o el nombre corto en inglés: «También admitimos nombres cortos sin el prefijo de la URL (por ejemplo, Monday).» (<a href="https://developers.google.com/search/docs/appearance/structured-data/local-business?hl=es-419" target="_blank" rel="noopener">fuente</a>). «Lunes» o «Lu-Sa» no están en esa lista, así que ese horario no se lee como horario. La página se ve bien en español y el dato llega roto. Una versión anterior de esta misma página tenía ese error en su ejemplo. Lo corregimos.</p>
+
+<h2>Un ejemplo para un negocio que atiende en español</h2>
+<p class="made-up">Ejemplo inventado (no es un negocio real)</p>
+<pre>&lt;script type="application/ld+json"&gt;
+{
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "Panadería Ejemplo",
+  "@type": "Restaurant",
+  "name": "Taquería Ejemplo",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "Calle Principal 123",
-    "addressLocality": "Napa",
-    "addressRegion": "CA"
+    "streetAddress": "123 Calle Ejemplo",
+    "addressLocality": "Vacaville",
+    "addressRegion": "CA",
+    "postalCode": "95688",
+    "addressCountry": "US"
   },
   "telephone": "+1-707-555-0100",
-  "openingHours": "Lu-Sa 07:00-16:00"
-}</pre>
-<p><strong>LocalBusiness</strong> es el tipo correcto solo cuando existe una presencia física o de área de servicio real — un local, una oficina, un radio de entrega. Un negocio puramente en línea no tiene eso, y forzar LocalBusiness ahí es técnicamente incorrecto, no solo innecesario. Este mismo sitio es el ejemplo: The AO Audit opera completamente remoto — los escaneos y reportes, todo — sin ninguna ubicación que un cliente visite, así que su propio schema usa <strong>Organization</strong>, no LocalBusiness. Esa es la decisión correcta, no un hueco en la configuración.</p>
+  "servesCuisine": "Mexicana",
+  "knowsLanguage": ["es", "en"],
+  "openingHoursSpecification": [{
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    "opens": "08:00",
+    "closes": "20:00"
+  }]
+}
+&lt;/script&gt;</pre>
+<p>Tres cosas sobre el ejemplo:</p>
+<ul>
+<li>El tipo, los nombres de los campos y los días van en inglés. El nombre del negocio y la comida van como son.</li>
+<li><code>knowsLanguage</code> es una propiedad de schema.org para los idiomas que maneja una organización. Google no la pone en su lista de LocalBusiness, así que no sabemos si Google la usa. Si la pones, tu página tiene que decir en texto visible que atienden en español. Si no, rompes la regla de no marcar lo que no se ve.</li>
+<li>Cada dato del código (horario, teléfono, dirección) tiene que estar igual en tu página y en tu perfil de Google.</li>
+</ul>
+<p>Para revisar tu código, Google pide usar su herramienta: «Valida tu código con la Prueba de resultados enriquecidos y corrige cualquier error crítico.» (<a href="https://developers.google.com/search/docs/appearance/structured-data/local-business?hl=es-419" target="_blank" rel="noopener">fuente</a>). La herramienta está en <a href="https://search.google.com/test/rich-results?hl=es-419" target="_blank" rel="noopener">search.google.com/test/rich-results</a>.</p>
 
-<h2>La otra mitad: ¿pueden los rastreadores de IA llegar hasta ti?</h2>
-<p>El schema no sirve de nada si los rastreadores que lo leerían están bloqueados. Abre <code>tusitio.com/robots.txt</code> en un navegador — si está vacío o no existe, todo está permitido por defecto, lo cual está bien. Si lista reglas, revisa específicamente GPTBot, ClaudeBot, PerplexityBot y Google-Extended; algunos constructores de sitios y plugins de seguridad los bloquean por defecto sin mencionarlo nunca. Como referencia, aquí está el robots.txt real de este sitio, sin editar:</p>
-<pre>User-agent: GPTBot
-Allow: /
+<h2>Lo que encontramos en tres pueblos</h2>
+<div class="tablewrap"><table>
+<tr><th>Pueblo</th><th>Sitios legibles sin datos de negocio local</th></tr>
+<tr><td>Yountville</td><td>12 de 14 (86%)</td></tr>
+<tr><td>Vacaville</td><td>26 de 33 (79%)</td></tr>
+<tr><td>Fairfield</td><td>20 de 31 (65%)</td></tr>
+</table></div>
+<p>En Vacaville, 19 de los 33 sitios legibles sí tenían algún bloque de datos estructurados, pero solo 7 tenían un tipo de negocio local, como LocalBusiness o un subtipo. Mi opinión: muchos sitios tienen el «tubo» que pone su plataforma, pero nadie le puso adentro los datos del negocio.</p>
+<p class="src">Nuestros propios escaneos, entre el 26 de julio y el 15 de agosto de 2026. Solo publicamos totales, nunca el resultado malo de un negocio con nombre. Detalle en los reportes de <a href="yountville-reporte.html">Yountville</a>, <a href="vacaville-reporte.html">Vacaville</a> y <a href="fairfield-reporte.html">Fairfield</a>.</p>
 
-User-agent: ClaudeBot
-Allow: /
+<h2>Lista para revisar</h2>
+<ul class="check">
+<li>Abrí el código de mi página (clic derecho, «Ver código fuente») y busqué <code>application/ld+json</code>.</li>
+<li>Si lo tengo, el tipo es el más específico que me queda (Restaurant, HairSalon, AutoRepair…), en inglés.</li>
+<li>Los días del horario están en inglés: Monday, Tuesday…</li>
+<li>Nombre, dirección, teléfono y horario del código son iguales a los de mi página y mi perfil de Google.</li>
+<li>No marqué nada que no se vea en la página.</li>
+<li>Si no tengo local, no inventé una dirección.</li>
+<li>Pasé mi página por la Prueba de resultados enriquecidos y no hay errores críticos.</li>
+<li>Si uso Wix, WordPress o Shopify, revisé si mi plataforma ya pone estos datos.</li>
+</ul>
 
-User-agent: PerplexityBot
-Allow: /
+<p><a class="cta" href="https://aoaudit.com/es.html">¿Google tiene que adivinar qué eres y dónde estás? Revísalo gratis &#8594;</a></p>
 
-User-agent: Google-Extended
-Allow: /
+<div class="card"><p style="margin:0">Los datos estructurados no garantizan nada. Google lo dice con todas sus letras. Lo que hacen es que tus datos lleguen a la máquina sin adivinar. Si alguien te vende un schema que, según él, te pone primero, te está vendiendo algo que Google mismo dice que no garantiza.</p></div>
 
-User-agent: *
-Allow: /
-
-Sitemap: https://aoaudit.com/sitemap.xml</pre>
-<p>Cada rastreador de IA nombrado explícitamente, cada uno permitido, más un comodín que cubre todo lo demás. Nada exótico — el archivo completo son nueve líneas haciendo un trabajo real.</p>
-
-<p>Acertar en estas dos cosas — ser alcanzable, y ser legible en un formato estructurado — es la mayor parte de lo que "amigable para IA" significa en la práctica. No hay garantía de que un motor de IA específico cite una página específica en un día específico; lo que estos arreglos controlan es si eso es siquiera posible.</p>
-
-<p><a class="cta" href="https://aoaudit.com/es.html#scanform">Revisa ambas cosas en tu propio sitio — AO Audit gratis, 60 segundos &#8594;</a></p>
-
-<h2>Preguntas frecuentes</h2>
+<h2 id="faq">Preguntas frecuentes</h2>
 <h3>¿Qué es schema markup?</h3>
-<p>Un bloque de código, normalmente JSON-LD, colocado en la sección head de una página, que indica los datos de tu negocio en un formato que las máquinas leen directamente en vez de adivinar a partir de párrafos de texto — tu nombre, dirección, teléfono, horario y categoría.</p>
-<h3>¿Cuál es la diferencia entre datos estructurados LocalBusiness y Organization?</h3>
-<p>LocalBusiness es el tipo correcto solo cuando existe una presencia física o de área de servicio real — un local, una oficina, un radio de entrega. Un negocio puramente en línea no tiene eso, y forzar LocalBusiness ahí es técnicamente incorrecto, no solo innecesario. Este mismo sitio es el ejemplo: The AO Audit opera completamente remoto, sin ubicación que un cliente visite, así que usa el tipo Organization en vez de LocalBusiness — y esa es la decisión correcta, no un error.</p>
-<h3>¿Cómo sé si los rastreadores de IA pueden acceder a mi sitio web?</h3>
-<p>Abre tusitio.com/robots.txt en un navegador. Si está vacío o no existe, los rastreadores tienen acceso por defecto. Si lista reglas, revisa específicamente si GPTBot, ClaudeBot, PerplexityBot y Google-Extended están bloqueados — algunos constructores de sitios web y plugins de seguridad los bloquean sin avisar. Un AO Audit gratuito revisa esto automáticamente, junto con el schema y la legibilidad del contenido, en unos 60 segundos.</p>
-<h3>¿Necesito un desarrollador para agregar datos estructurados?</h3>
-<p>Para la mayoría de los sitios de negocios pequeños, no. Es un bloque de código que se pega directamente en el HTML de la página — copiar, ajustar los datos reales, y pegar. La parte que sí requiere cuidado es elegir el tipo correcto (LocalBusiness, Organization, ProfessionalService, etc.) según lo que el negocio realmente es.</p>
+<p>Es otro nombre para los datos estructurados: un bloque de código en tu página que le dice a una máquina qué es tu negocio, dónde está y cuándo abre. Google los define como un formato estandarizado para proporcionar información sobre una página y clasificar su contenido. El vocabulario viene de schema.org.</p>
+<h3>¿Qué formato recomienda Google?</h3>
+<p>Google dice que, en la mayoría de los casos, recomienda JSON-LD, porque es más fácil de implementar y mantener. Si usas Wix, WordPress o Shopify, puede que tu plataforma tenga una opción o un complemento para agregarlos.</p>
+<h3>¿Puedo escribir los datos estructurados en español?</h3>
+<p>Tu nombre, tu dirección y tu descripción sí. Pero los tipos (como Restaurant), los nombres de los campos y los días del horario (Monday, Tuesday) van en inglés, como en el vocabulario de schema.org y en los ejemplos de Google. Google acepta Monday o https://schema.org/Monday; «Lunes» no es uno de esos valores, así que tu horario no se lee como horario.</p>
+<h3>¿Necesito datos estructurados especiales para la IA de Google?</h3>
+<p>No. Google dice que no hay datos estructurados especiales de schema.org que debas agregar para su Visión general creada por IA o su Modo IA. Lo que pide es que los datos estructurados que tengas coincidan con el texto visible en la página.</p>
+<h3>¿Los datos estructurados me garantizan salir en Google?</h3>
+<p>No. Google dice que no garantiza que se muestren tus datos estructurados en los resultados de la búsqueda, aunque tu página esté marcada correctamente. Sirven para que tus datos se lean bien, no para comprar un lugar.</p>
 
-<footer>The AO Audit · Optimización de Respuestas (AO) · <a href="https://aoaudit.com/es.html">aoaudit.com/es</a> · Empieza aquí: <a href="seo-para-ia.html">¿qué es el SEO para IA?</a> · Relacionado: <a href="archivo-llms-txt.html">llms.txt, explicado con un ejemplo real</a> · <a href="https://aoaudit.com/es.html">Sé la respuesta</a>.</footer>
+<footer>The AO Audit · Optimización de Respuestas (AO) · <a href="https://aoaudit.com/es.html">aoaudit.com/es</a> · In English: <a href="ai-friendly-website.html">What makes a website AI-friendly?</a> · Relacionado: <a href="seo-para-ia.html">¿qué es el SEO para IA?</a> · <a href="archivo-llms-txt.html">el archivo llms.txt</a> · <a href="como-aparecer-en-chatgpt.html">cómo aparecer en ChatGPT</a> · <a href="error-de-schema.html">la herramienta de schema tenía un error de schema</a> · <a href="vacaville-reporte.html">el reporte de Vacaville</a>.</footer>
 </div>
 </body>
 </html>
