@@ -11,25 +11,25 @@
   gtag('js', new Date());
   gtag('config', 'G-YG4SL7CCMS');
 </script>
-<title>The Schema Tool Had a Schema Error — What Google Search Console Caught on Our Own Site | The AO Audit</title>
-<meta name="description" content="Google flagged invalid schema markup on the site that audits schema. The exact error, the one-field fix — answer engine optimization (AEO) practiced honestly.">
+<title>Product Schema Error in Search Console? It Happened to Us Too | The AO Audit</title>
+<meta name="description" content="Search Console flagged an invalid Product schema item on our own site. The exact error, the one-field fix, and how to check yours. Answer engine optimization (AEO), practiced honestly.">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://aoaudit.com/schema-error.html">
 <link rel="alternate" hreflang="es" href="https://aoaudit.com/error-de-schema.html">
 <link rel="alternate" hreflang="en" href="https://aoaudit.com/schema-error.html">
 <link rel="alternate" hreflang="x-default" href="https://aoaudit.com/schema-error.html">
 <meta property="og:type" content="article">
-<meta property="og:title" content="The Schema Tool Had a Schema Error — What Google Caught on Our Own Site">
-<meta property="og:description" content="Google Search Console flagged an invalid Product schema on aoaudit.com — the site that audits schema. The error, the one-field fix, published in full.">
+<meta property="og:title" content="Product Schema Error in Search Console? It Happened to Us Too">
+<meta property="og:description" content="Google Search Console flagged an invalid Product schema on aoaudit.com, the site that audits schema. The error, the one-field fix, published in full.">
 <meta property="og:url" content="https://aoaudit.com/schema-error.html">
 <meta property="og:image" content="https://aoaudit.com/og-card2.png">
 <script type="application/ld+json">
 { "@context": "https://schema.org", "@type": "Article",
-  "headline": "The Schema Tool Had a Schema Error — What Google Search Console Caught on Our Own Site",
+  "headline": "Product Schema Error in Search Console? It Happened to Us Too",
   "datePublished": "2026-07-19", "dateModified": "2026-07-19",
   "author": { "@type": "Person", "name": "Alejandro Ojeda" },
   "publisher": { "@id": "https://aoaudit.com/#org" },
-  "description": "Google Search Console flagged an invalid Product schema item on aoaudit.com — the very site that audits schema. The exact error, the one-field fix, and why we published it." }
+  "description": "Google Search Console flagged an invalid Product schema item on aoaudit.com, the very site that audits schema. The exact error, the one-field fix, and why we published it." }
 </script>
 <style>
 :root{--bg:#f7f9fc;--card:#fff;--ink:#0f2137;--dim:#5b6b7f;--green:#12459c;--orange:#f43d00;--orange-deep:#1a5fd0;--line:#e3eaf3}
@@ -63,17 +63,17 @@ fbq('init','1034023492870678');fbq('track','PageView');
 </nav>
 <div class="wrap">
 <p class="kicker">The AO Audit · Published July 19, 2026</p>
-<h1>The Schema Tool Had a Schema Error</h1>
-<p class="byline">By Alejandro Ojeda · Be the Answer · Screenshotted straight from our own Google Search Console.</p>
+<h1>Product Schema Error in Search Console? It Happened to Us Too</h1>
+<p class="byline">By Alejandro Ojeda · Be the Answer · Copied straight from our own Google Search Console.</p>
 
-<p><em>Schema markup is the backbone of <strong>answer engine optimization (AEO)</strong> — what we call <strong>Answer Optimization (AO)</strong>. Which makes this story extra embarrassing, and extra useful.</em></p>
+<p><em>We call this work <strong>Answer Optimization (AO)</strong>; others say <strong>answer engine optimization (AEO)</strong>. Google says its AI features need <a href="https://developers.google.com/search/docs/appearance/ai-features">no special schema</a>. But clean schema still counts for product results in Search, and an error on the site that checks schema is embarrassing. And useful.</em></p>
 
-<p>We built <a href="https://aoaudit.com/">The AO Audit</a> to check, among other things, whether a website's structured data — its schema — is clean. So there is exactly one screen we did not expect to see red: our own Google Search Console, flagging <span class="num">1 invalid item</span> on the schema of aoaudit.com. The tool that grades schema had a schema error. Here's the whole thing.</p>
+<p>We built <a href="https://aoaudit.com/">The AO Audit</a> to check, among other things, whether a website's structured data (its schema) is clean. So there is exactly one screen we did not expect to see red: our own Google Search Console, flagging <span class="num">1 invalid item</span> on the schema of aoaudit.com. The tool that grades schema had a schema error. Here's the whole thing.</p>
 
 <h2>What exactly did Google flag?</h2>
-<p>Under Search Console's Enhancements, the "Merchant listings" report showed <strong>1 invalid item detected</strong>. The item was our Product schema — the structured data describing the $39 playbook. Google reads a Product with a price and tries to make it eligible for shopping surfaces, and shopping surfaces have a hard requirement: a product needs an <code>image</code>. Ours didn't have one. One missing field, one red error.</p>
+<p>Under Search Console's Enhancements, the "Merchant listings" report showed <strong>1 invalid item detected</strong>. The item was our Product schema, the structured data describing the $39 playbook. <a href="https://developers.google.com/search/docs/appearance/structured-data/merchant-listing">Google's merchant listing rules</a> list <code>image</code> as a required field for a product. Ours didn't have one. One missing field, one red error.</p>
 
-<div class="card"><p style="margin:0">The honest part: this had been live for days. Our page was indexed and fine, our AI-visibility was unaffected — a missing product image doesn't hurt any of that. But it was a real, valid error sitting in the console of a company that sells "clean schema, zero errors." That's not a thing you leave red.</p></div>
+<div class="card"><p style="margin:0">The honest part: this had been live for days. Our page was still indexed. But it was a real error sitting in the console of a company that checks other people's schema. That's not a thing you leave red.</p></div>
 
 <h2>What was the fix?</h2>
 <p>Adding the one required field, plus the return policy Google recommends for products (we genuinely offer a 30-day refund, so it's true to state it):</p>
@@ -87,15 +87,15 @@ fbq('init','1034023492870678');fbq('track','PageView');
     "applicableCountry": "US",
     "returnPolicyCategory": ".../MerchantReturnFiniteReturnWindow",
     "merchantReturnDays": 30 } }</pre>
-<p>Total fix time: about three minutes. Google re-reads the page on its next crawl (we requested indexing to speed that up), and the red clears.</p>
+<p>Total fix time: about three minutes. Google re-reads the page on its next crawl (we requested indexing to speed that up), and the error should clear once Google re-checks it.</p>
 
 <h2>Why publish this instead of quietly patching it?</h2>
-<p>Because "we check your schema" means nothing from a company that won't show you its own. The error is the credential. Anyone can claim their structured data is perfect; we can show you the exact moment ours wasn't, name the missing field, and show the fix — which is worth more than a claim of perfection, because you can check every word of it. And there's a lesson in it for you: <strong>a missing product image is one of the most common schema errors on real business sites</strong>, and it silently keeps you out of Google's free shopping listings. If you sell anything, check your Product schema for an <code>image</code> field today.</p>
+<p>Because "we check your schema" means nothing from a company that won't show you its own. The error is the credential. Anyone can claim their structured data is perfect; we can show you the exact moment ours wasn't, name the missing field, and show the fix. That's worth more than a claim of perfection, because you can check every word of it. And there's a lesson in it for you: Google says you "must include the required properties for your content to be eligible for display as a rich result," and <code>image</code> is one of them. If you sell anything, check your Product schema for an <code>image</code> field today.</p>
 
-<p><strong>Want to see what the machines flag on your site?</strong> The scan is free, takes about a minute, and shows every issue — including the ones we'd rather you didn't have.</p>
+<p><strong>Want to see what the machines flag on your site?</strong> The scan is free, takes about a minute, and shows every issue it finds, including the ones we'd rather you didn't have.</p>
 <p><a class="cta" href="https://aoaudit.com/#scanform">Scan my website &#8594;</a></p>
 
-<footer>The AO Audit · Answer Optimization (AO) · <a href="https://aoaudit.com/">aoaudit.com</a> · Start here: <a href="what-is-answer-optimization.html">what is Answer Optimization (AO)?</a> · More from our logs: <a href="self-audit.html">we published our own failing grade</a> · <a href="free-infrastructure.html">the night both free services died</a> · <a href="warning-on-purpose.html">the schema warning we left on purpose</a>.</footer>
+<footer>The AO Audit · Answer Optimization (AO) · <a href="https://aoaudit.com/">aoaudit.com</a> · Start here: <a href="what-is-answer-optimization.html">what is Answer Optimization (AO)?</a> · More from our logs: <a href="self-audit.html">we graded our own site in public</a> · <a href="free-infrastructure.html">the night both free services died</a> · <a href="warning-on-purpose.html">the schema warning we left on purpose</a>.</footer>
 </div>
 </body>
 </html>
