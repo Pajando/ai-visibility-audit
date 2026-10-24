@@ -11,34 +11,75 @@
   gtag('js', new Date());
   gtag('config', 'G-YG4SL7CCMS');
 </script>
-<title>We Promised a One-Week Re-Check. It Took 54 Days, and Google Still Hasn't Read the Promise.</title>
-<meta name="description" content="Google not indexing my pages: we re-ran a full Search Console sweep of our own site 54 days late. Spanish pages kept went from 23 to 27, our first English page got dropped, and the article that promised the re-check has never been crawled.">
+<title>Google Not Indexing My Pages? What 54 Days of Our Own Search Console Log Shows</title>
+<meta name="description" content="Google not indexing my pages: our own Search Console log, 54 days later. 4 more Spanish pages kept, 1 English page dropped, and what to check on yours.">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://aoaudit.com/google-not-indexing-my-pages.html">
 <meta property="og:type" content="article">
-<meta property="og:title" content="We Promised a One-Week Re-Check. It Took 54 Days, and Google Still Hasn't Read the Promise.">
-<meta property="og:description" content="Same 86 pages, 54 days later. Google kept 4 more Spanish pages, dropped its first English one, and never once crawled the article that made the promise.">
+<meta property="og:title" content="Google Not Indexing My Pages? What 54 Days of Our Own Search Console Log Shows">
+<meta property="og:description" content="Google not indexing my pages: our own Search Console log, 54 days later. 4 more Spanish pages kept, 1 English page dropped, and what to check on yours.">
 <meta property="og:url" content="https://aoaudit.com/google-not-indexing-my-pages.html">
 <meta property="og:image" content="https://aoaudit.com/og-card.png">
 <script type="application/ld+json">
-{ "@context": "https://schema.org", "@graph": [
-  { "@type": "Article",
-    "headline": "We Promised a One-Week Re-Check. It Took 54 Days, and Google Still Hasn't Read the Promise.",
-    "datePublished": "2026-10-13", "dateModified": "2026-10-13",
-    "author": { "@type": "Person", "name": "Alejandro Ojeda" },
-    "publisher": { "@id": "https://aoaudit.com/#org" },
-    "about": { "@id": "https://aoaudit.com/what-is-answer-optimization.html#ao" },
-    "description": "A follow-up Search Console sweep of aoaudit.com on October 13, 2026, run 54 days after a promised one-week re-check. Of the same 86 pages, English indexed went from 36 to 38 and Spanish from 23 to 27. One English page was crawled and declined for the first time, and the August 20 article that promised the re-check has never been crawled." },
-  { "@type": "FAQPage", "mainEntity": [
-    { "@type": "Question", "name": "Why is Google not indexing my pages?",
-      "acceptedAnswer": { "@type": "Answer", "text": "First find out which kind of not indexed you have, because there are three and they need different fixes. Unknown to Google means it has never heard of the URL. Discovered - currently not indexed means it knows the URL and has not fetched it yet. Crawled - currently not indexed means it read the page and chose not to keep it. On our own site in October 2026, 12 pages were in the first two groups and 14 were in the third. Open Search Console, use URL Inspection on the page, and read the coverage line before changing anything." } },
-    { "@type": "Question", "name": "Can a page that was indexed get dropped later?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Yes. One of our English pages was reported as indexed in every full sweep we ran from August 15 through September 7, 2026. On October 13 it read crawled - currently not indexed, and its last crawl date was still July 27. Google changed its decision without fetching the page again. Its last search impression was August 9. Indexed is a status you have to keep checking, not a box you tick once." } },
-    { "@type": "Question", "name": "Does Request Indexing in Search Console always work?",
-      "acceptedAnswer": { "@type": "Answer", "text": "No. Across our own runs it worked fast most of the time, often indexing a page within hours. But five pages we requested by August 22, 2026 had still never been crawled 52 days later. If a page shows no new crawl date a day after you request it, request it again. Do not assume the click went through." } },
-    { "@type": "Question", "name": "Do crawled - currently not indexed pages ever come back?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Some do. On August 15, 2026 we had 14 Spanish pages crawled and declined. By October 13, 6 of those 14 were indexed and 8 were still declined. Over the same stretch, 5 other Spanish pages and 1 English page moved into the declined group. It is a moving queue, not a final verdict." } } ] }
-] }
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "headline": "Google Not Indexing My Pages? What 54 Days of Our Own Search Console Log Shows",
+   "datePublished": "2026-10-13",
+   "dateModified": "2026-10-23",
+   "author": {
+    "@type": "Person",
+    "name": "Alejandro Ojeda"
+   },
+   "publisher": {
+    "@id": "https://aoaudit.com/#org"
+   },
+   "about": {
+    "@id": "https://aoaudit.com/what-is-answer-optimization.html#ao"
+   },
+   "description": "Google not indexing my pages: our own Search Console log, 54 days later. 4 more Spanish pages kept, 1 English page dropped, and what to check on yours."
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Why is Google not indexing my pages?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "First find out which kind of not indexed you have. Three kinds are common, and they need different fixes. Unknown to Google means it has never heard of the URL. Discovered - currently not indexed means Google found the URL but has not crawled it yet. Crawled - currently not indexed means Google crawled the page and did not index it. On October 13, 2026, of our 91 URLs, 12 were in the first two groups and 14 were in the third. Open Search Console, use URL Inspection on the page, and read the coverage line before changing anything."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Can a page that was indexed get dropped later?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes. One of our English pages was reported as indexed in every full sweep we ran from August 15 through September 7, 2026. On October 13 it read crawled - currently not indexed, and its last crawl date was still July 27. Search Console showed no newer crawl, so Google appears to have changed its decision without fetching the page again. Its last search impression was August 9. Indexed is a status you have to keep checking, not a box you tick once."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Does Request Indexing in Search Console always work?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "No. Google says a request \"does not guarantee that inclusion in search results will happen instantly or even at all.\" On our own site it often worked within hours. But five pages we requested by August 22, 2026 had still never been crawled 52 days later. Google also says requesting the same URL again \"won't get it crawled any faster.\" My take: check a few days later, and if there is still no crawl date, link the page from pages Google already visits."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Do crawled - currently not indexed pages ever come back?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Some do. On August 15, 2026 we had 14 Spanish pages crawled and declined. By October 13, 6 of those 14 were indexed and 8 were still declined. Over the same stretch, 5 other Spanish pages and 1 English page moved into the declined group. It is a moving queue, not a final verdict."
+     }
+    }
+   ]
+  }
+ ]
+}
 </script>
 <style>
 :root{--bg:#f7f9fc;--card:#fff;--ink:#0f2137;--dim:#5b6b7f;--green:#12459c;--orange:#f43d00;--orange-deep:#1a5fd0;--line:#e3eaf3}
@@ -75,11 +116,11 @@ fbq('init','1034023492870678');fbq('track','PageView');
   <a href="https://aoaudit.com/#scanform" style="background:#f43d00;color:#fff;font-weight:600;padding:.5rem 1.1rem;border-radius:7px;text-decoration:none;font-size:.92rem">Scan my website &#8594;</a>
 </nav>
 <div class="wrap">
-<p class="kicker">We re-ran all 91 of our own URLs</p>
-<h1>We promised a one-week re-check. It took 54 days, and Google still hasn't read the promise.</h1>
-<p class="byline">By Alejandro Ojeda · The AO Audit · October 13, 2026 · Every number below came from Google's Search Console API this morning.</p>
+<p class="kicker">Our own Search Console log, page by page</p>
+<h1>Google not indexing your pages? Customers can't find a page Google won't keep. Ours got dropped too.</h1>
+<p class="byline">By Alejandro Ojeda · The AO Audit · October 13, 2026 · Numbers come from Google Search Console (URL Inspection and Performance data) and our own sweep log.</p>
 
-<p><em>This is a follow-up on Google not indexing my pages, meaning our pages, measured on our own site. Getting a page stored by Google is the floor under everything else, including the practice the industry calls AEO or GEO — we call it Answer Optimization (AO). A page Google never kept cannot be quoted by any AI answer built on top of it.</em></p>
+<p><em>If Google is not indexing your pages, people searching Google can't land on them. This is our own case, measured on our own site. Google also says that to show up as a link in its AI Overviews or AI Mode, "a page must be indexed and eligible to be shown in Google Search with a snippet" (<a href="https://developers.google.com/search/docs/appearance/ai-features">Google</a>). So getting indexed comes first.</em></p>
 
 <p>On August 20 we published <a href="crawled-not-indexed.html">a report on our own indexing</a>. We have 43 English pages and 43 Spanish twins. Google had kept 36 English and 23 Spanish. The last line of that article said: we will re-run this exact sweep next week and publish whether the 12 moved.</p>
 
@@ -107,7 +148,7 @@ fbq('init','1034023492870678');fbq('track','PageView');
 </table>
 </div>
 
-<p>Spanish gained four pages. English gained two. The language gap shrank from 13 pages to 11. Across the whole site, which now has 91 URLs, Google keeps 65.</p>
+<p>Spanish gained four pages. English gained two. The language gap shrank from 13 pages to 11. Our whole site now has 91 URLs: these 86 plus 5 others. Google keeps 65 of the 91, and all 65 are in the table above. None of the other 5 is indexed yet.</p>
 
 <p>But look at the declined row. The Spanish number didn't fall. It rose by one, because some pages left the declined group and others walked in. Five Spanish pages that were not on our August 15 declined list are on it now. And the English column has its first 1.</p>
 
@@ -115,17 +156,17 @@ fbq('init','1034023492870678');fbq('track','PageView');
 
 <p>Our page about AI visibility. In our first three weeks of Search Console data, "ai visibility" was the single search phrase that showed our site most often. This page was built for it.</p>
 
-<p>Google reported it indexed in every full sweep we ran from August 15 through September 7. Today it reads <strong>crawled - currently not indexed</strong>. Here is the part that surprised us: its last crawl date is still <strong>July 27</strong>. Google didn't come back, read a new version, and judge it. It changed its mind about a copy it fetched 78 days ago.</p>
+<p>Google reported it indexed in every full sweep we ran from August 15 through September 7. Today it reads <strong>crawled - currently not indexed</strong>. The part that surprised us: its last crawl date is still <strong>July 27</strong>. Search Console shows no newer visit. So as far as we can see, Google changed its mind about a copy it fetched 78 days ago.</p>
 
 <p>We checked that a second way. Search Console's performance data shows the page earned 94 search impressions between July 25 and August 9. Then nothing. Zero for over two months. So in practice it stopped showing up long before the label caught up.</p>
 
 <div class="card"><p style="margin:0">Indexed is not a box you tick once. Google re-decides, and it can drop a page without visiting it again. We only caught this because we looked.</p></div>
 
-<p>Why did it happen? We don't know. Our guess is that Google judged it too close to other pages on our own site that cover the same idea, since we have several. That is a guess, not something Google told us.</p>
+<p>Why did it happen? We don't know, and Google didn't say. My take: Google judged it too close to other pages on our own site that cover the same idea. We have several. That is a guess.</p>
 
 <h2>What else went wrong on our side?</h2>
 
-<p>The article that made the promise has never been crawled. Not once in 54 days. It's in our sitemap. It's linked from our homepage. Google lists it as discovered, and that's it. In August we wrote that a sitemap is a suggestion, not an instruction. Our own article proved it on itself.</p>
+<p>The article that made the promise has never been crawled. Not once in 54 days. It's in our sitemap. It's linked from our homepage. Google lists it as discovered, and that's it. Google's own help says a sitemap "doesn't guarantee that all the items in your sitemap will be crawled and indexed" (<a href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview">Google</a>). Our own article proved it on itself.</p>
 
 <p>The two Siri articles we published on August 17 are in the same state. Discovered, never fetched, 57 days.</p>
 
@@ -137,11 +178,11 @@ fbq('init','1034023492870678');fbq('track','PageView');
 
 <h2>What should you do if Google is not indexing your pages?</h2>
 
-<p>Check more than once. Most owners check a page the week it goes live, see it indexed, and never look again. We just watched a page that was indexed for weeks quietly fall out.</p>
+<p>Check more than once. It's easy to check a page the week it goes live, see it indexed, and never look again. We just watched a page that was indexed for weeks quietly fall out.</p>
 
-<p>Read which bucket each page is in. Never crawled means ask for indexing and link to it from pages Google already visits. Crawled and declined means the page has to be more worth keeping than what Google already holds, and that can include your own similar pages.</p>
+<p>Read which bucket each page is in. Google's <a href="https://support.google.com/webmasters/answer/7440203">page indexing help</a> explains each one. Never crawled: request indexing once, and link to the page from pages Google already visits. Crawled and declined: Google says the page "may or may not be indexed in the future; no need to resubmit this URL for crawling." My take: the page has to be more worth keeping than what Google already holds, and that includes your own similar pages.</p>
 
-<p>After you click Request Indexing, look again the next day. If the last crawl date hasn't changed, click again. We assumed five clicks worked. They didn't.</p>
+<p>After you click Request Indexing, look again a few days later. Don't keep clicking. Google says asking again for the same URL "won't get it crawled any faster" (<a href="https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl">Google</a>). My take: if a week goes by with no crawl date, make sure the page is linked from pages Google already visits. We assumed our five requests worked and never checked. Those five pages were never crawled.</p>
 
 <p>And write your follow-up dates down somewhere that doesn't disappear. Ours didn't make it.</p>
 
@@ -149,16 +190,16 @@ fbq('init','1034023492870678');fbq('track','PageView');
 
 <p>Yes, and this time with the full per-page list saved in our permanent log, not a scratch folder. We won't promise "next week" again. We'll publish the next sweep when we've run it, with the date on it.</p>
 
-<p><strong>Want to know if Google and AI engines can actually see your site?</strong> The scan is free, takes about a minute, and shows every check, including the ones you fail.</p>
-<p><a class="cta" href="https://aoaudit.com/">Scan my website →</a></p>
+<p><strong>Worried something on your own site is keeping Google out?</strong> The free scan checks things like noindex tags, your robots.txt and your sitemap in about a minute. It shows every check, including the ones you fail. It can't see what Google has indexed. Only your Search Console can show that.</p>
+<p><a class="cta" href="https://aoaudit.com/#scanform">Find out if your website is keeping Google out. Free, about a minute &#8594;</a></p>
 
 <h2>FAQ</h2>
 <h3>Why is Google not indexing my pages?</h3>
-<p>First find out which kind of not indexed you have, because there are three and they need different fixes. Unknown to Google means it has never heard of the URL. Discovered - currently not indexed means it knows the URL and has not fetched it yet. Crawled - currently not indexed means it read the page and chose not to keep it. On our own site in October 2026, 12 pages were in the first two groups and 14 were in the third. Open Search Console, use URL Inspection on the page, and read the coverage line before changing anything.</p>
+<p>First find out which kind of not indexed you have. Three kinds are common, and they need different fixes. Unknown to Google means it has never heard of the URL. Discovered - currently not indexed means Google found the URL but has not crawled it yet. Crawled - currently not indexed means Google crawled the page and did not index it. On October 13, 2026, of our 91 URLs, 12 were in the first two groups and 14 were in the third. Open Search Console, use URL Inspection on the page, and read the coverage line before changing anything.</p>
 <h3>Can a page that was indexed get dropped later?</h3>
-<p>Yes. One of our English pages was reported as indexed in every full sweep we ran from August 15 through September 7, 2026. On October 13 it read crawled - currently not indexed, and its last crawl date was still July 27. Google changed its decision without fetching the page again. Its last search impression was August 9. Indexed is a status you have to keep checking, not a box you tick once.</p>
+<p>Yes. One of our English pages was reported as indexed in every full sweep we ran from August 15 through September 7, 2026. On October 13 it read crawled - currently not indexed, and its last crawl date was still July 27. Search Console showed no newer crawl, so Google appears to have changed its decision without fetching the page again. Its last search impression was August 9. Indexed is a status you have to keep checking, not a box you tick once.</p>
 <h3>Does Request Indexing in Search Console always work?</h3>
-<p>No. Across our own runs it worked fast most of the time, often indexing a page within hours. But five pages we requested by August 22, 2026 had still never been crawled 52 days later. If a page shows no new crawl date a day after you request it, request it again. Do not assume the click went through.</p>
+<p>No. Google says a request "does not guarantee that inclusion in search results will happen instantly or even at all." On our own site it often worked within hours. But five pages we requested by August 22, 2026 had still never been crawled 52 days later. Google also says requesting the same URL again "won't get it crawled any faster." My take: check a few days later, and if there is still no crawl date, link the page from pages Google already visits.</p>
 <h3>Do crawled - currently not indexed pages ever come back?</h3>
 <p>Some do. On August 15, 2026 we had 14 Spanish pages crawled and declined. By October 13, 6 of those 14 were indexed and 8 were still declined. Over the same stretch, 5 other Spanish pages and 1 English page moved into the declined group. It is a moving queue, not a final verdict.</p>
 
