@@ -190,6 +190,7 @@ a{color:var(--orange-deep)}
 .tilt{transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s;transform-style:preserve-3d;will-change:transform}
 .tilt.pre{transform:perspective(900px) rotateX(14deg) translateY(28px) scale(.94);opacity:.001}
 .tilt.in{opacity:1}
+@media(max-width:840px){.has3d .hero-right{display:flex;margin-top:.4rem}.has3d #ao3d{max-width:22rem;min-width:0}}
 @media(prefers-reduced-motion:reduce){.tilt,.tilt.pre{transform:none!important;opacity:1!important;transition:none}}
 
 .gauge svg{max-width:100%;height:auto}
@@ -573,11 +574,11 @@ try {
 // Loads after the page is interactive; pauses off-screen; one still frame for reduced motion.
 const mount = document.getElementById('ao3d');
 const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-function start(){ if (getComputedStyle(mount.parentElement).display === 'none') return; /* phones: the site hides this column, so skip the download */ import('https://esm.sh/three@0.160.0').then((THREE) => {
+function start(){ import('https://esm.sh/three@0.160.0').then((THREE) => {
   let renderer;
   try { renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'low-power' }); } catch (e) { return; }
   if (!renderer.getContext()) return;
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, innerWidth < 840 ? 1.5 : 1.75));
   mount.appendChild(renderer.domElement);
   document.documentElement.classList.add('has3d');
 
