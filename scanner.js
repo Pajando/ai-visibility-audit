@@ -247,7 +247,7 @@ async function runScan(rawUrl){
     const classicBlocked = ["googlebot","bingbot"].filter(b =>
       new RegExp("user-agent:\\s*" + b + "[\\s\\S]{0,80}?disallow:\\s*/\\s*($|\\n)", "i").test(robots.text));
     if(classicBlocked.length)
-      log("bad", `CRITICAL: robots.txt blocks ${classicBlocked.join(" and ")} by name — that removes you from ${classicBlocked.includes("googlebot") ? "Google Search AND its AI features" : ""}${classicBlocked.length === 2 ? " plus " : ""}${classicBlocked.includes("bingbot") ? "Bing, Copilot, and most of ChatGPT's search" : ""}. Fix this before anything else in this report.`);
+      log("bad", `CRITICAL: robots.txt blocks ${classicBlocked.join(" and ")} by name — that removes you from ${classicBlocked.includes("googlebot") ? "Google Search AND its AI features" : ""}${classicBlocked.length === 2 ? " plus " : ""}${classicBlocked.includes("bingbot") ? "Bing and Copilot, and from the Bing results ChatGPT search often draws on" : ""}. Fix this before anything else in this report.`);
     add("code", 6, "All major AI engines allowed to read your site", blocked.length === 0,
       blocked.length ? `robots.txt blocks: ${blocked.join(" · ")}` : `Open to all ${Object.keys(ENGINE_BOTS).length} AI ecosystems we check: ChatGPT, Claude, Gemini, Perplexity, Meta AI, Apple Intelligence, Alexa+, DuckDuckGo, and model-training crawlers`,
       "Your site is telling some AI tools to stay out, so they can't read your pages (a block in your robots.txt file). Remove the blocks for the AI readers you want: GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot, Google-Extended, Meta-ExternalAgent, Applebot-Extended, Amazonbot and the rest. Precision note: Google-Extended controls Gemini apps and model training; Google Search\u2019s own AI answers use the normal Googlebot.");
@@ -262,8 +262,8 @@ async function runScan(rawUrl){
   } else {
     const hasLlms = llms.ok && llms.status < 400 && llms.text.trim().length > 20 && !/^\s*</.test(llms.text.trim());
     add("code", 3, "llms.txt present", hasLlms,
-      hasLlms ? "Found — read by some AI agent tools (note: Google says its Search ignores llms.txt)" : "Not found — a 20-minute nice-to-have for AI agent tools; Google's Search ignores it either way",
-      "Add a short plain-text summary of your business and your key pages that some AI tools look for (an llms.txt file). Honest note: Google says its Search ignores llms.txt, so this is only for other AI tools. It takes about 20 minutes.");
+      hasLlms ? "Found — read by some AI agent tools (note: Google says its AI features don't need any special AI text file)" : "Not found — a 20-minute nice-to-have for AI agent tools; Google says its AI features don't need one",
+      "Add a short plain-text summary of your business and your key pages that some AI tools look for (an llms.txt file). Honest note: Google says you don't need special AI text files for its AI features, so this is only for other AI tools. It takes about 20 minutes.");
     upd(l, hasLlms ? "ok" : "warn", hasLlms ? "llms.txt found" : "No llms.txt (minor)");
   }
 
