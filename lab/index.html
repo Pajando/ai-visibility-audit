@@ -45,6 +45,7 @@ body { margin: 0; overflow: hidden; background: var(--bg); color: var(--ink); fo
 .card ul { margin: 0 0 12px; padding: 0; list-style: none; display: grid; gap: 5px; }
 .card li { font-size: 14px; display: flex; gap: 8px; align-items: baseline; }
 .card li::before { content: ""; width: 7px; height: 7px; border-radius: 2px; background: var(--c, var(--accent)); flex: none; transform: translateY(-1px); }
+.card .newtab { font-size: 12.5px; color: var(--muted); margin-left: 8px; }
 .card a.go { display: inline-flex; text-decoration: none; font: 700 15px var(--body); color: var(--cta-ink); background: var(--cta); padding: 10px 16px; border-radius: 12px; }
 .about { pointer-events: auto; position: fixed; left: max(16px, env(safe-area-inset-left, 0px)); bottom: calc(76px + env(safe-area-inset-bottom, 0px)); max-width: min(380px, calc(100% - 32px)); max-height: 55vh; overflow: auto; background: var(--panel); color: var(--ink); border-radius: 14px; padding: 8px 14px; box-shadow: 0 6px 24px rgba(0,0,0,.18); font-size: 14px; line-height: 1.45; }
 .about summary { cursor: pointer; font-weight: 600; }
@@ -59,8 +60,8 @@ body { margin: 0; overflow: hidden; background: var(--bg); color: var(--ink); fo
 <canvas id="scene" tabindex="0" aria-label="3D lab showing what the AO Audit scan checks. Use the arrow keys or WASD to walk, tap the floor, or press Next stop."></canvas>
 <div class="ui">
   <div class="top">
-    <div class="chip"><h1>The <b>AO Audit</b> Lab</h1><p>What the free scan checks, one stop at a time · <a href="https://aoaudit.com/">aoaudit.com</a></p></div>
-    <div class="acts"><button type="button" id="next">Next stop</button><a href="https://aoaudit.com/#scanform">Scan my site</a></div>
+    <div class="chip"><h1>The <b>AO Audit</b> Lab</h1><p>What the free scan checks, one stop at a time · <a href="https://aoaudit.com/" target="_blank" rel="noopener">aoaudit.com</a></p></div>
+    <div class="acts"><button type="button" id="next">Next stop</button><a href="https://aoaudit.com/#scanform" target="_blank" rel="noopener">Scan my site ↗</a></div>
   </div>
   <details class="about" id="about">
     <summary>What is this?</summary>
@@ -73,9 +74,9 @@ body { margin: 0; overflow: hidden; background: var(--bg); color: var(--ink); fo
       <li><b>Can they check you are real?</b>: Machines trust a business they can connect to other places: your social profiles, review sites, a phone number or email they can read.</li>
       <li><b>Can an AI agent finish the job?</b>: More AI tools now try to take the next step for a customer. The scan checks for a clear path to book or buy, plus the small files some AI tools look for.</li>
       <li><b>Six things a robot can&#x27;t see</b>: Some things the scan can&#x27;t check from your website. After it runs, you confirm 6 of them yourself: your Google Business Profile, your reviews, and two live ChatGPT tests.</li>
-      <li><b>Get your AO Score</b>: That&#x27;s the whole lab. The real scan runs on your real website in about 60 seconds and it&#x27;s free. <a href="https://aoaudit.com/#scanform">Scan my website →</a></li>
+      <li><b>Get your AO Score</b>: That&#x27;s the whole lab. The real scan runs on your real website in about 60 seconds and it&#x27;s free. <a href="https://aoaudit.com/#scanform" target="_blank" rel="noopener">Scan my website →</a></li>
     </ol>
-    <p><a href="https://aoaudit.com/">Back to aoaudit.com</a></p>
+    <p><a href="https://aoaudit.com/" target="_blank" rel="noopener">Back to aoaudit.com</a></p>
   </details>
   <div class="bottom">
     <div class="hint" id="hint"><kbd>W A S D</kbd> or arrows to walk · tap the floor to walk there · <b>Next stop</b> for the tour</div>
@@ -84,9 +85,9 @@ body { margin: 0; overflow: hidden; background: var(--bg); color: var(--ink); fo
       <h2 id="cName"></h2>
       <p class="desc" id="cDesc"></p>
       <ul id="cFacts"></ul>
-      <a class="go" id="cLink" href="#">Open</a>
+      <a class="go" id="cLink" href="#" target="_blank" rel="noopener">Open</a> <span class="newtab" id="cNote" hidden>Opens in a new tab</span>
     </div>
-    <div class="fallback" id="fallback" hidden><p>This browser can't show the 3D lab. Everything in it is listed under "What is this?", or go straight to <a href="https://aoaudit.com/#scanform">Scan my site</a>.</p></div>
+    <div class="fallback" id="fallback" hidden><p>This browser can't show the 3D lab. Everything in it is listed under "What is this?", or go straight to <a href="https://aoaudit.com/#scanform" target="_blank" rel="noopener">Scan my site</a>.</p></div>
   </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>

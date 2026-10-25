@@ -113,7 +113,8 @@
       document.getElementById('cDesc').textContent = s.desc;
       document.getElementById('cFacts').innerHTML = (s.facts || []).map((f) => '<li>' + f.replace(/&/g, '&amp;').replace(/</g, '&lt;') + '</li>').join('');
       const a = document.getElementById('cLink');
-      if (s.link) { a.hidden = false; a.href = s.link; a.textContent = s.linkText; } else a.hidden = true;
+      const note = document.getElementById('cNote');
+      if (s.link) { a.hidden = false; a.href = s.link; a.textContent = s.linkText.replace(/ →$/, '') + ' ↗'; a.target = '_blank'; a.rel = 'noopener'; if (note) note.hidden = false; } else { a.hidden = true; if (note) note.hidden = true; }
       card.hidden = false; hint.hidden = true;
       if (nextBtn) nextBtn.textContent = i === stations.length - 1 ? 'Start over' : 'Next stop';
     }
