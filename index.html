@@ -179,6 +179,19 @@ a{color:var(--orange-deep)}
 .hero-left{flex:1 1 32rem;min-width:0}
 .hero-right{flex:0 1 20rem;display:flex;justify-content:center}
 .gauge{text-align:center}
+/* 3D hero (2026-10-24): the scan as a 3D scene. Words stay HTML; the radar SVG is the fallback. */
+#ao3d{display:none;width:100%;aspect-ratio:1/1;max-width:32rem;position:relative}
+#ao3d canvas{width:100%!important;height:100%!important;display:block}
+.has3d .hero-right{flex:1 1 26rem;flex-direction:column;align-items:center;align-self:flex-start;margin-top:2.5rem}
+.has3d #ao3d{display:block;align-self:stretch;margin-inline:auto;min-width:16rem}
+.has3d .gauge svg{display:none}
+.has3d .gauge .gcap{margin-top:.2rem}
+.hero{position:relative;overflow:hidden}
+.tilt{transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s;transform-style:preserve-3d;will-change:transform}
+.tilt.pre{transform:perspective(900px) rotateX(14deg) translateY(28px) scale(.94);opacity:.001}
+.tilt.in{opacity:1}
+@media(prefers-reduced-motion:reduce){.tilt,.tilt.pre{transform:none!important;opacity:1!important;transition:none}}
+
 .gauge svg{max-width:100%;height:auto}
 .gpills{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center;margin:.7rem 0 0}
 .gpills span{font-size:.72rem;color:var(--teal,#12459c);border:1px solid var(--line,#e3eaf3);border-radius:20px;padding:.2rem .65rem;background:#fff}
@@ -339,7 +352,7 @@ fbq('init','1034023492870678');fbq('track','PageView');
   </form>
   <div class="err" id="urlerr" aria-live="polite"></div>
   <p class="tiny">Live scan of your real site · 21 automated checks + 6 you confirm · Prioritized fix list</p>
-  <p class="tiny" style="margin-top:.5rem">Not ready? <a href="sample-report.pdf" target="_blank" rel="noopener">See a real sample report first</a> (opens in a new tab). No email needed.</p></div><div class="hero-right"><div class="gauge">
+  <p class="tiny" style="margin-top:.5rem">Not ready? <a href="sample-report.pdf" target="_blank" rel="noopener">See a real sample report first</a> (opens in a new tab). No email needed.</p></div><div class="hero-right"><div id="ao3d" aria-hidden="true"></div><div class="gauge">
 <svg viewBox="0 0 300 250" width="270" height="225" role="img" aria-label="The AI engines reading local business websites. Can they read yours?">
   <circle cx="150" cy="125" r="92" fill="none" stroke="#e3eaf3" stroke-width="1.5"/>
   <circle cx="150" cy="125" r="62" fill="none" stroke="#dbe4f0" stroke-width="1.5"/>
@@ -553,6 +566,133 @@ try {
   }
 } catch (err) {
   console.error('three.js accent failed to load', err);
+}
+</script>
+<script type="module">
+// 3D hero: your site as a stack of page sections, a scan beam reading it, AI engines circling.
+// Loads after the page is interactive; pauses off-screen; one still frame for reduced motion.
+const mount = document.getElementById('ao3d');
+const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function start(){ if (getComputedStyle(mount.parentElement).display === 'none') return; /* phones: the site hides this column, so skip the download */ import('https://esm.sh/three@0.160.0').then((THREE) => {
+  let renderer;
+  try { renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'low-power' }); } catch (e) { return; }
+  if (!renderer.getContext()) return;
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
+  mount.appendChild(renderer.domElement);
+  document.documentElement.classList.add('has3d');
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(36, 1, 0.1, 100);
+  scene.add(new THREE.HemisphereLight(0xffffff, 0xc9d6ea, 1.1));
+  const key = new THREE.DirectionalLight(0xffffff, 1.4); key.position.set(4, 8, 6); scene.add(key);
+
+  const BLUE = 0x12459c, BLUE2 = 0x1a5fd0, ORANGE = 0xf43d00, LINE = 0xc9d6ea;
+  const site = new THREE.Group(); scene.add(site);
+
+  // five page sections, top to bottom
+  const slabs = [];
+  const W = 3.2, D = 2.2, T = 0.16, GAP = 0.62;
+  for (let i = 0; i < 5; i++) {
+    const g = new THREE.Group(); g.position.y = 1.3 - i * GAP; site.add(g);
+    const body = new THREE.Mesh(new THREE.BoxGeometry(W, T, D), new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.35, metalness: 0.05, transparent: true, opacity: 0.94 }));
+    g.add(body);
+    const edge = new THREE.LineSegments(new THREE.EdgesGeometry(body.geometry), new THREE.LineBasicMaterial({ color: BLUE }));
+    g.add(edge);
+    // "content" on each section: a heading bar + text lines + one block
+    const bar = (w, x, z, c, h) => { const m = new THREE.Mesh(new THREE.BoxGeometry(w, h || 0.03, 0.14), new THREE.MeshStandardMaterial({ color: c })); m.position.set(x, T / 2 + (h || 0.03) / 2, z); g.add(m); return m; };
+    bar(i === 0 ? 2.6 : 1.4, i === 0 ? 0 : -0.75, -0.7, i === 0 ? BLUE : 0x0f2137, i === 0 ? 0.06 : 0.04);
+    for (let l = 0; l < 3; l++) bar(1.5 - l * 0.25, -0.6 - l * 0.12, -0.3 + l * 0.28, LINE);
+    const blk = new THREE.Mesh(new THREE.BoxGeometry(0.8, 0.22, 0.8), new THREE.MeshStandardMaterial({ color: i % 2 ? 0xe8eef8 : 0xdbe6f7 }));
+    blk.position.set(0.9, T / 2 + 0.11, 0.15); g.add(blk);
+    slabs.push({ g, edge, glow: 0 });
+  }
+
+  // scan beam: a thin glowing plane sweeping through the sections
+  const beam = new THREE.Group(); site.add(beam);
+  const sheet = new THREE.Mesh(new THREE.PlaneGeometry(W + 0.9, D + 0.9), new THREE.MeshBasicMaterial({ color: BLUE2, transparent: true, opacity: 0.16, side: THREE.DoubleSide, depthWrite: false }));
+  sheet.rotation.x = -Math.PI / 2; beam.add(sheet);
+  const rim = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.PlaneGeometry(W + 0.9, D + 0.9)), new THREE.LineBasicMaterial({ color: BLUE2 }));
+  rim.rotation.x = -Math.PI / 2; beam.add(rim);
+
+  // AI engines: five orange nodes circling, each with a thread to the site
+  const nodes = [];
+  for (let i = 0; i < 5; i++) {
+    const n = new THREE.Mesh(new THREE.SphereGeometry(0.13, 20, 14), new THREE.MeshStandardMaterial({ color: ORANGE, emissive: ORANGE, emissiveIntensity: 0.35 }));
+    scene.add(n);
+    const geo = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(), new THREE.Vector3()]);
+    const line = new THREE.Line(geo, new THREE.LineBasicMaterial({ color: ORANGE, transparent: true, opacity: 0.35 }));
+    scene.add(line);
+    nodes.push({ n, line, a: i / 5 * Math.PI * 2, r: 3.15 + (i % 2) * 0.35, y: 0.9 - i * 0.42 });
+  }
+  const ring = new THREE.Mesh(new THREE.TorusGeometry(3.3, 0.008, 6, 120), new THREE.MeshBasicMaterial({ color: LINE }));
+  ring.rotation.x = Math.PI / 2; ring.position.y = 0.1; scene.add(ring);
+
+  // floor grid
+  const grid = new THREE.GridHelper(14, 28, 0xdbe4f0, 0xe9eff7); grid.position.y = -1.75; scene.add(grid);
+  scene.fog = new THREE.Fog(0xffffff, 9, 17);
+
+  // size
+  function size() { const r = mount.getBoundingClientRect(); const s = Math.max(1, Math.round(r.width)); renderer.setSize(s, s, false); camera.aspect = 1; camera.updateProjectionMatrix(); }
+  new ResizeObserver(size).observe(mount); size();
+
+  // input: mouse parallax + scroll turn
+  let mx = 0, my = 0, sc = 0;
+  addEventListener('pointermove', (e) => { mx = e.clientX / innerWidth - 0.5; my = e.clientY / innerHeight - 0.5; }, { passive: true });
+  const hero = document.querySelector('.hero');
+  addEventListener('scroll', () => { const h = hero.offsetHeight || 1; sc = Math.min(1, Math.max(0, scrollY / h)); }, { passive: true });
+
+  let visible = true;
+  new IntersectionObserver((es) => { visible = es[0].isIntersecting; if (visible && !reduce) loop(); }).observe(mount);
+
+  const clock = new THREE.Clock(); let t = 0, running = false, cmx = 0, cmy = 0;
+  function draw(dt) {
+    t += dt;
+    cmx += (mx - cmx) * 0.05; cmy += (my - cmy) * 0.05;
+    const turn = 0.55 + sc * 1.1 + t * 0.06;
+    camera.position.set(Math.sin(turn) * 8.0 + cmx * 1.4, 3.3 - sc * 1.1 - cmy * 1.1, Math.cos(turn) * 8.0);
+    camera.lookAt(0, -0.2, 0);
+    // beam goes top to bottom and back
+    const by = 1.55 - (0.5 - 0.5 * Math.cos(t * 0.9)) * 3.05;
+    beam.position.y = by;
+    slabs.forEach((s) => {
+      const d = Math.abs(s.g.position.y - by);
+      if (d < 0.12) s.glow = 1;
+      s.glow = Math.max(0, s.glow - dt * 0.8);
+      s.edge.material.color.setHex(BLUE).lerp(new THREE.Color(ORANGE), s.glow);
+      s.g.position.x = Math.sin(t * 0.7 + s.g.position.y * 2) * 0.03;
+    });
+    nodes.forEach((o, i) => {
+      const a = o.a + t * (0.22 + i * 0.015);
+      o.n.position.set(Math.cos(a) * o.r, o.y + Math.sin(t * 1.3 + i) * 0.12, Math.sin(a) * o.r);
+      const p = o.line.geometry.attributes.position;
+      p.setXYZ(0, o.n.position.x, o.n.position.y, o.n.position.z);
+      p.setXYZ(1, 0, by, 0); p.needsUpdate = true;
+      o.line.material.opacity = 0.18 + 0.25 * (0.5 + 0.5 * Math.sin(t * 2 + i * 1.7));
+    });
+    renderer.render(scene, camera);
+  }
+  function loop() {
+    if (running) return; running = true;
+    (function f() { if (!visible) { running = false; return; } draw(Math.min(clock.getDelta(), 0.05)); requestAnimationFrame(f); })();
+  }
+  if (reduce) { t = 2.2; draw(0); } else loop();
+}).catch((e) => console.error('3D hero failed to load', e)); }
+
+if (mount) {
+  const go = () => ('requestIdleCallback' in window ? requestIdleCallback(start, { timeout: 1500 }) : setTimeout(start, 300));
+  if (document.readyState === 'complete') go(); else addEventListener('load', go, { once: true });
+}
+
+// Sections rise in with a slight 3D tilt (only ones below the fold; everything is visible without JS)
+if (!reduce && 'IntersectionObserver' in window) {
+  const els = [...document.querySelectorAll('.stat, .stepc')];
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.remove('pre'); e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
+  els.forEach((el, i) => { el.classList.add('tilt'); if (el.getBoundingClientRect().top > innerHeight) { el.classList.add('pre'); el.style.transitionDelay = (i % 3) * 80 + 'ms'; } io.observe(el); });
+  // hover tilt on pointer devices
+  if (matchMedia('(hover: hover)').matches) els.forEach((el) => {
+    el.addEventListener('pointermove', (e) => { const r = el.getBoundingClientRect(); const x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5; el.style.transitionDelay = '0ms'; el.style.transform = `perspective(900px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg) translateZ(6px)`; });
+    el.addEventListener('pointerleave', () => { el.style.transform = ''; });
+  });
 }
 </script>
 </body>
