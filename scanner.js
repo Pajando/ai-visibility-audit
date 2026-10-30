@@ -679,3 +679,16 @@ Be the Answer — aoaudit.com`;
 });
 
 document.getElementById("reset").addEventListener("click", e => { e.preventDefault(); location.href = "#"; location.reload(); });
+
+/* ---------- start a scan from a link (ojedaworks.com sends ?scan=website.com&biz=Name) ---------- */
+(function () {
+  const qp = new URLSearchParams(location.search);
+  const site = (qp.get("scan") || "").trim().slice(0, 200);
+  if (!site || !site.includes(".")) return;
+  document.getElementById("url").value = site;
+  document.getElementById("bizname").value = (qp.get("biz") || "").trim().slice(0, 120);
+  history.replaceState(null, "", location.pathname + "#scanform");   // keep the address bar clean
+  if (typeof gtag === "function") gtag("event", "scan_from_link", { source: qp.get("from") || "" });
+  const form = document.getElementById("scanform");
+  setTimeout(() => (form.requestSubmit ? form.requestSubmit() : form.dispatchEvent(new Event("submit", { cancelable: true }))), 300);
+})();
